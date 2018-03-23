@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface MapFootView : UIView
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *changeButton;
 
 @end

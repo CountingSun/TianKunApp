@@ -9,13 +9,16 @@
 #import "MapFootView.h"
 
 @implementation MapFootView
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    
+    _editButton.layer.masksToBounds = YES;
+    _editButton.layer.cornerRadius = 15;
+    _editButton.qmui_borderWidth = 1;
+    _editButton.qmui_borderColor = COLOR_TEXT_ORANGE;
+    
+    [_changeButton setBackgroundColor:COLOR_TEXT_ORANGE];
+    
 }
-*/
 
 @end

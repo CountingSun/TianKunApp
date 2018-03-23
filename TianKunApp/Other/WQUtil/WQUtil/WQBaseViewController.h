@@ -6,9 +6,9 @@
 //  Copyright © 2017年 swq. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "QMUICommonViewController.h"
 
-@interface WQBaseViewController : UIViewController
+@interface WQBaseViewController : QMUICommonViewController
 /**
  是否隐藏导航栏
  */
@@ -42,5 +42,28 @@
 -(void)showSuccessWithStatus:(NSString *)status;
 
 -(void)dismiss;
+
+
+/**
+ 显示加载等待动画
+ */
+- (void)showLoadingView;
+
+
+/**
+ 显示加载等待动画
+
+ @param frame 动画位置
+ */
+- (void)showLoadingViewWithFrame:(CGRect)frame;
+
+
+/**
+ 隐藏加载动画
+ */
+- (void)hideLoadingView;
+- (void)showGetDataFailViewWithReloadBlock:(dispatch_block_t)reloadBlock;
+- (void)showGetDataNullWithReloadBlock:(dispatch_block_t)reloadBlock;
+
 
 @end

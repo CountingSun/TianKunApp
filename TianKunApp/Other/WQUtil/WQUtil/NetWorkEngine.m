@@ -50,7 +50,7 @@
             default:
                 break;
         }
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"netWorkChangeEventNotification" object:@(status)];
+        [[NSNotificationCenter defaultCenter]postNotificationName:NET_WORK_STATES_NOTIFICATION_KEY object:@(status)];
     }];
     [manager.reachabilityManager startMonitoring];
 
@@ -84,6 +84,7 @@
     _succeedBlock = succed;
     _errorBlock = errorBlock;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    
     manager.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
     [manager GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if (_succeedBlock) {

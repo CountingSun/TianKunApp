@@ -7,12 +7,34 @@
 //
 
 #import "HomeViewController.h"
+#import "SearchViewController.h"
+#import "UISearchBar+PlaceHolder.h"
+#import "SDCycleScrollView.h"
+#import "HomeClassTableViewCell.h"
+#import "MenuInfo.h"
+#import "HomeInfoTableViewCell.h"
+#import "HomeBrandTableViewCell.h"
+#import "EasyTableViewCell.h"
+#import "HomeViewModel.h"
+#import "HomeGuessTableViewCell.h"
+#import "HomeListTableViewCell.h"
+#import "FileNoticceViewController.h"
+#import "PublicViewController.h"
+#import "InvitationViewController.h"
+#import "JobViewController.h"
+#import "InteractionViewController.h"
+#import "EducationViewController.h"
 
-@interface HomeViewController ()<QMUISearchControllerDelegate,UITableViewDelegate,UITableViewDataSource>
+#import "ConstructionViewController.h"
+
+@interface HomeViewController ()<QMUISearchControllerDelegate,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,SDCycleScrollViewDelegate,HomeClassTableViewCellDelegate>
 
 @property (nonatomic ,strong) UIView *barView;
 @property (nonatomic ,strong) QMUISearchController *searchBarController;
 @property (weak, nonatomic) IBOutlet WQTableView *tableView;
+@property (nonatomic ,strong) SDCycleScrollView *headView;
+@property (nonatomic ,strong) NSMutableArray *arrData;
+
 
 @end
 
@@ -37,7 +59,16 @@
 - (void)setupUI{
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    
+    _tableView.tableHeaderView = self.headView;
+    _tableView.estimatedRowHeight = 80;
+    _tableView.rowHeight = UITableViewAutomaticDimension;
+    [_tableView registerNib:[UINib nibWithNibName:@"HomeClassTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeClassTableViewCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"HomeInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeInfoTableViewCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"HomeBrandTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeBrandTableViewCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"EasyTableViewCell" bundle:nil] forCellReuseIdentifier:@"EasyTableViewCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"HomeGuessTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeGuessTableViewCell"];
+    [_tableView registerNib:[UINib nibWithNibName:@"HomeListTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeListTableViewCell"];
+
 }
 - (void)setUpNav {
     
@@ -45,17 +76,25 @@
     _barView.backgroundColor = UIColorClear;
     [self.view addSubview:_barView];
     
-    QMUITextField *searchBar = [[QMUITextField alloc]init];
-    searchBar.layer.cornerRadius = 15;
-    searchBar.layer.borderWidth = 0.5;
-    searchBar.layer.borderColor = UIColorWhite.CGColor;
-    searchBar.placeholderColor = UIColorWhite;
-    searchBar.textColor = UIColorWhite;
-    searchBar.tintColor = UIColorWhite;
-    searchBar.placeholder = @"请输入想要搜索的内容";
-    searchBar.textInsets = UIEdgeInsetsMake(0, 20, 0, 20);
-    searchBar.backgroundColor = UIColorClear;
-    searchBar.font = [UIFont systemFontOfSize:14];
+    UISearchBar *searchBar = [[UISearchBar alloc]init];
+    searchBar.delegate = self;
+    searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    // 文字居左
+    [searchBar changeLeftPlaceholder:@"请输入想要搜索的内容"];
+    // 设置文本框背景
+    [searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"矩形1"] forState:(UIControlStateNormal)];
+    // 设置文本框圆角
+    UITextField *searchField = [searchBar valueForKey:@"_searchField"];
+    searchField.layer.cornerRadius = 15;
+    searchField.layer.masksToBounds = YES;
+    // 设置文本框默认字体颜色
+    [searchField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [searchField setValue:[UIFont boldSystemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
+    // 设置搜索图标
+    UIImage *iconImage = [UIImage imageNamed:@"home_search"];
+    [searchBar setImage:iconImage forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+    [searchBar sizeToFit];
+
     [_barView addSubview:searchBar];
     CGFloat width = 240 * SCREENSCAL;
     if (IS_58INCH_SCREEN) {
@@ -98,15 +137,78 @@
         make.centerY.equalTo(searchBar);
     }];
 }
+- (SDCycleScrollView *)headView{
+    if (!_headView) {
+        _headView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/2) delegate:self placeholderImage:[UIImage imageNamed:@"default_image_21@2x"]];
+        [_headView setImageURLStringsGroup:@[@"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=253568843,526167858&fm=27&gp=0.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521461712420&di=46910b9e6a1a56a549e02470ac5b37e6&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201511%2F22%2F20151122131622_XYkMd.jpeg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521461712420&di=e2c5b119c9b1db78da4cf9472d36142c&imgtype=0&src=http%3A%2F%2Fimg0w.pconline.com.cn%2Fpconline%2F1606%2F15%2Fspcgroup%2Fwidth_640-qua_30%2F8023441_20140213174329_MQ2iZ.jpeg"]];
+    }
+    return _headView;
+}
 #pragma mark - UITableViewDelegate&&UITableViewDataSource
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+    
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    if (section == 0) {
+        return 1;
+    }
+    if (section == 1) {
+        return 2;
+    }
+    if (section == 2) {
+        return 1;
+    }
+    return self.arrData.count+1;
 }
 
-// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
-// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        HomeClassTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeClassTableViewCell" forIndexPath:indexPath];
+        cell.delegate = self;
+        return cell;
+        
+    }
+    
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            HomeInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeInfoTableViewCell" forIndexPath:indexPath];
+            return cell;
+
+        }else{
+            HomeBrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBrandTableViewCell" forIndexPath:indexPath];
+            return cell;
+
+        }
+        
+
+    }
+    
+    if (indexPath.section == 2) {
+        EasyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EasyTableViewCell" forIndexPath:indexPath];
+        cell.arrMenu = [HomeViewModel arrEasyMenu];
+        return cell;
+
+    }
+    
+    if (indexPath.section == 3) {
+        if (indexPath.row == 0) {
+            HomeGuessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeGuessTableViewCell" forIndexPath:indexPath];
+
+            return cell;
+        }else{
+            HomeListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeListTableViewCell" forIndexPath:indexPath];
+            return cell;
+
+        }
+    }
     return [UITableViewCell new];
 }
 
@@ -137,6 +239,16 @@
     _searchBarController.searchResultsDelegate = self;
     //    [self.titleView addSubview:_searchBarController.searchBar];
 }
+#pragma mark - SearchBar Delegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    
+    SearchViewController *vc = [SearchViewController new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:NO];
+    
+    return NO;
+}
+
 #pragma mark - QMUISearchControllerDelegate
 
 /**
@@ -162,7 +274,135 @@
         [QMUIHelper renderStatusBarStyleDark];
     }
 }
+#pragma mark - SDCycleScrollViewDelegate
+/** 点击图片回调 */
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    
+}
 
+/** 图片滚动回调 */
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
+    
+}
+#pragma makr - top view
+- (void)didSelectCellWithMenuInfo:(MenuInfo *)menuInfo{
+    
+//    if ([UserInfoEngine isLogin]) {
+//    }
+    switch (menuInfo.menuID) {
+        case 0:
+        {
+            ConstructionViewController *vc = [[ConstructionViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+        case 1:{
+            ConstructionViewController *vc = [[ConstructionViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+        case 2:{
+            FileNoticceViewController *vc = [[FileNoticceViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+        case 3:{
+            PublicViewController *vc = [[PublicViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+
+            
+        }
+            break;
+        case 4:{
+            
+            InvitationViewController *vc = [[InvitationViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.viewTitle = @"招标信息";
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+        case 5:{
+            
+            InvitationViewController *vc = [[InvitationViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.viewTitle = @"中标信息";
+
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+            break;
+        case 6:{
+            
+            JobViewController *vc = [[JobViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.viewTitle = @"企业招聘";
+            
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+        case 7:{
+            JobViewController *vc = [[JobViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.viewTitle = @"人才求职";
+            
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+        case 8:{
+            InteractionViewController *vc = [[InteractionViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 9:{
+            
+            EducationViewController *vc = [[EducationViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            }
+            break;
+        default:
+            break;
+    }
+}
+- (NSMutableArray *)arrData{
+    if (!_arrData) {
+        _arrData = [NSMutableArray array];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+        [_arrData addObject:@""];
+
+    }
+    return _arrData;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

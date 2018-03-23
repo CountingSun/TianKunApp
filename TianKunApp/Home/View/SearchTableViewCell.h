@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchTableViewCell : UITableViewCell
+@property (nonatomic, strong) UILabel *titleLab;
+@property (nonatomic, strong) UIImageView *liShiImg;
+@property (nonatomic, strong) UIButton *deleBtn;
+
+@property (nonatomic, strong) NSDictionary *dataDic;
 
 @end

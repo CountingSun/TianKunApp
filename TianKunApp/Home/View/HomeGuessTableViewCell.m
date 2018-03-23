@@ -12,7 +12,14 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    _lineView.backgroundColor = COLOR_THEME;
+    [_reloadButton setTitleColor:COLOR_TEXT_LIGHT forState:0];
+    [_reloadButton setSpacingBetweenImageAndTitle:5];
+    [_reloadButton setImagePosition:QMUIButtonImagePositionLeft];
+    [_reloadButton setImage:[UIImage imageNamed:@"刷新"] forState:0];
+    
+}
+- (IBAction)reloadButtonClickEvent:(id)sender {
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

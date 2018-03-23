@@ -7,7 +7,10 @@
 //
 
 #import "WQBaseViewController.h"
+typedef void(^SelectAptitudeSucceedBlock)(NSString *areaCode);
 
 @interface AptitudeSelectViewController : WQBaseViewController
+@property (nonatomic,copy) SelectAptitudeSucceedBlock succeedBlock;
+-(instancetype)initWithSelectSucceedBlock:(SelectAptitudeSucceedBlock)succeedBlock;
 
 @end

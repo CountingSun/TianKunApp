@@ -10,4 +10,7 @@
 
 @interface UserCenterViewModel : NSObject
 
++ (NSMutableArray *)arrMenu;
++ (NSMutableArray *)arrSetMenu;
+
 @end

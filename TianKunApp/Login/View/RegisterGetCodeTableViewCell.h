@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface RegisterGetCodeTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet QMUITextField *textField;
+@property (weak, nonatomic) IBOutlet UIButton *dynamicButton;
+@property (nonatomic, copy) void(^textBlock)(NSString *text);
+//@property (nonatomic, copy) dispatch_block_t buttonClick;
+
+
 
 @end

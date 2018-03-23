@@ -74,8 +74,8 @@
     if(!_composeButton){
         _composeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_composeButton addTarget:self action:@selector(composeBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_composeButton setImage:[UIImage imageNamed:@"TabBar2_40x40_"] forState:UIControlStateNormal];
-        [_composeButton setImage:[UIImage imageNamed:@"TabBar2_40x40_"] forState:UIControlStateHighlighted];
+        [_composeButton setImage:[UIImage imageNamed:@"发布"] forState:UIControlStateNormal];
+        [_composeButton setImage:[UIImage imageNamed:@"发布"] forState:UIControlStateHighlighted];
         [_composeButton sizeToFit];
     }
     return _composeButton;

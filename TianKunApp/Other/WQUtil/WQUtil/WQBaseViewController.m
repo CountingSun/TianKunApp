@@ -8,9 +8,12 @@
 
 #import "WQBaseViewController.h"
 #import "SVProgressHUD.h"
+#import "LoadingView.h"
+
 
 @interface WQBaseViewController ()<UINavigationControllerDelegate>
-
+@property (nonatomic ,strong) LoadingView *loadingView;
+@property (nonatomic, copy) dispatch_block_t reloadBlock;
 @end
 @implementation WQBaseViewController
 
@@ -31,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = COLOR_VIEW_BACK;
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
     {
         [self setEdgesForExtendedLayout:UIRectEdgeNone];
@@ -64,15 +67,56 @@
     [SVProgressHUD dismiss];
     
 }
+- (void)showTipsWithText:(NSString *)text{
+    QMUITips *tips = [[QMUITips alloc]initWithView:self.view];
+    
+    [tips showInfo:text hideAfterDelay:2];
+    
+}
 
 -(void)viewWillDisappear:(BOOL)animated{
     
     [super viewWillDisappear:animated];
     [SVProgressHUD dismiss];
 }
--(void)dealloc{
-    
-    WQLog(@"dealloc");
-    
+- (void)showLoadingView{
+    if (!_loadingView) {
+        _loadingView = [[LoadingView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) loadingText:@"加载中..."];
+    }
+    [self.view addSubview:_loadingView];
 }
+- (void)showLoadingViewWithFrame:(CGRect)frame{
+    if (!_loadingView) {
+        _loadingView = [[LoadingView alloc]initWithFrame:frame loadingText:@"加载中..."];
+    }
+    [self.view addSubview:_loadingView];
+}
+- (void)hideLoadingView{
+    if (_loadingView) {
+        [_loadingView removeFromSuperview];
+    }
+    
+
+}
+
+- (void)showGetDataFailViewWithReloadBlock:(dispatch_block_t)reloadBlock{
+    _reloadBlock = reloadBlock;
+    
+    [self showEmptyViewWithImage:[UIImage imageNamed:@"AppIcon"] text:@"网络连接失败" detailText:@"" buttonTitle:@"从新加载" buttonAction:@selector(reloData)];
+}
+-(void)reloData{
+    
+    if (_reloadBlock) {
+        _reloadBlock();
+    }
+}
+- (void)showGetDataNullWithReloadBlock:(dispatch_block_t)reloadBlock{
+    _reloadBlock = reloadBlock;
+
+    [self showEmptyViewWithImage:[UIImage imageNamed:@"AppIcon"] text:@"暂无数据" detailText:@"" buttonTitle:@"从新加载" buttonAction:@selector(reloData)];
+
+}
+
+//- (void)
+
 @end

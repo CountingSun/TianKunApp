@@ -10,4 +10,5 @@
 
 @interface JobViewController : WQBaseViewController
 
+@property (nonatomic, copy) NSString *viewTitle   ;
 @end

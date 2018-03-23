@@ -11,8 +11,8 @@
 #import "WQTabBar.h"
 #import "AddViewController.h"
 
-@interface WQTabBarViewController ()
-
+@interface WQTabBarViewController ()<UITabBarControllerDelegate>
+@property (nonatomic ,assign) NSInteger index;
 @end
 
 @implementation WQTabBarViewController
@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.delegate = self;
     // 自定义TabBar
     WQTabBar *tabBar = [[WQTabBar alloc] init];
     
@@ -37,13 +38,20 @@
     [self setValue:tabBar forKey:@"tabBar"];
     
     [self addChildViewController];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
+    
 }
-
+- (void)loginSucceed{
+    if (_index == 3) {
+        self.selectedIndex = 3;
+    }
+    
+}
 - (void)addChildViewController {
-    [self addChildViewControllerWithClassName:@"HomeViewController" title:@"首页" imageName:@"TabBar0_45x45_" selectedImage:@"TabBar0Sel_45x45_"];
-    [self addChildViewControllerWithClassName:@"LookScheduleViewController" title:@"查档" imageName:@"TabBar1_45x45_" selectedImage:@"TabBar1Sel_45x45_"];
-    [self addChildViewControllerWithClassName:@"CircleViewController" title:@"朋友圈" imageName:@"TabBar3_45x45_" selectedImage:@"TabBar3Sel_45x45_"];
-    [self addChildViewControllerWithClassName:@"UserCenterViewController" title:@"我的" imageName:@"TabBar4_45x45_" selectedImage:@"TabBar4Sel_45x45_"];
+    [self addChildViewControllerWithClassName:@"HomeViewController" title:@"首页" imageName:@"首页" selectedImage:@"首页-点击"];
+    [self addChildViewControllerWithClassName:@"FindViewController" title:@"发现" imageName:@"发现" selectedImage:@"发现-点击"];
+    [self addChildViewControllerWithClassName:@"MessageViewController" title:@"消息" imageName:@"消息" selectedImage:@"消息-点击"];
+    [self addChildViewControllerWithClassName:@"UserCenterViewController" title:@"我的" imageName:@"我的" selectedImage:@"我的-点击"];
 }
 
 - (void)addChildViewControllerWithClassName:(NSString *)className title:(NSString *)title imageName:(NSString *)imageName  selectedImage:(NSString *)selectedImage{
@@ -55,8 +63,8 @@
     vController.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0,0, 0);
     
     
-    [vController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor grayColor] } forState:UIControlStateNormal];
-    [vController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : [WQAppInfo themColor] } forState:UIControlStateSelected];
+    [vController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : COLOR_TEXT_GENGRAL } forState:UIControlStateNormal];
+    [vController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : COLOR_THEME } forState:UIControlStateSelected];
 
     WQNavigationViewController *navController = [[WQNavigationViewController alloc] initWithRootViewController:vController];
     
@@ -66,6 +74,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+
+    _index = [tabBarController.viewControllers indexOfObject:viewController];
+    
+    if (_index == 3) {
+        if ([UserInfoEngine isLogin]) {
+            return YES;
+        }else{
+            return NO;
+        }
+    }
+    return YES;
+    
 }
 
 /*

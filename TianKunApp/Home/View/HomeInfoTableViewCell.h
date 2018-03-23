@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeInfoTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *choicenessLabel;
+@property (weak, nonatomic) IBOutlet UILabel *choicenessDetailLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *attentionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *attentionDetailLabel;
 @end

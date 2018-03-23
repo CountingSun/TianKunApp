@@ -12,6 +12,20 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+/**
+ 网络状态 暂未用到
+ */
+@property (nonatomic,assign) NetworkReachabilityStatus netWorkStates;
++(instancetype)sharedAppDelegate;
+
+
+
+/**
+ 获取window根目录
+
+ @return <#return value description#>
+ */
+-(void)setRootController;
 
 @end
 

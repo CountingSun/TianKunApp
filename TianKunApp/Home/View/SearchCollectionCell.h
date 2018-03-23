@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchCollectionCell : UICollectionViewCell
+@property (nonatomic, strong) UILabel *titleLab;
+
+@property (nonatomic, strong) NSDictionary *dataDic;
 
 @end

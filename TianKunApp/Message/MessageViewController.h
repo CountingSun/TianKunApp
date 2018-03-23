@@ -6,8 +6,8 @@
 //  Copyright © 2018年 天堃. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "WQBaseViewController.h"
 
-@interface MessageViewController : BaseViewController
+@interface MessageViewController : WQBaseViewController
 
 @end

@@ -22,10 +22,13 @@
 //新浪微博SDK头文件
 #import "WeiboSDK.h"
 //新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
+//百度地图
+#import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 
 
 @interface AppDelegate ()
 @property (nonatomic,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,strong) BMKMapManager *mapManager;
 
 @end
 
@@ -40,6 +43,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self setSDImage];
     [self configureShare];
+    [self configureBaiduMap];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -151,7 +155,15 @@
     //(注意：每一个case对应一个break不要忘记填写，不然很可能有不必要的错误，新浪微博的外部库如果不要客户端分享或者不需要加关注微博的功能可以不添加，否则要添加，QQ，微信，google＋这些外部库文件必须要加)
 
 }
+- (void)configureBaiduMap{
+    _mapManager = [[BMKMapManager alloc]init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"WcKHtS5ZNEUxD73CjpCyIFlVunIehuzt"  generalDelegate:nil];
+    if (!ret) {
+        NSLog(@"manager start failed!");
+    }
 
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

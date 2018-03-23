@@ -9,5 +9,5 @@
 #import "WQBaseViewController.h"
 
 @interface InvitationViewController : WQBaseViewController
-
+@property (nonatomic, copy) NSString *viewTitle;
 @end

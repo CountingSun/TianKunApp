@@ -21,23 +21,28 @@
         
         UIView *bgView2 = [UIView new];
         [bgView addSubview:bgView2];
-        
-        bgView2.sd_layout
-        .centerXEqualToView(bgView)
-        .centerYEqualToView(bgView)
-        .widthIs(204)
-        .heightIs(218);
+        [bgView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(bgView);
+            make.centerY.equalTo(bgView);
+            make.width.offset(204);
+            make.height.offset(218);
+            
+            
+        }];
+
         
         UIImageView *BGImageView = [UIImageView new];
-//        UIImage *BGImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imageName ofType:@"png"]];
         UIImage *BGImage = [UIImage imageNamed:imageName];
         BGImageView.image = BGImage;
         [bgView2 addSubview:BGImageView];
-        
-        BGImageView.sd_layout
-        .centerXEqualToView(bgView2)
-        .widthIs(130)
-        .heightIs(80);
+        [BGImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(bgView2);
+            make.width.offset(130);
+            make.height.offset(80);
+            
+            
+        }];
+
         
         UILabel *messageLabel = [UILabel new];
         messageLabel.text = message;
@@ -48,12 +53,16 @@
         messageLabel.numberOfLines = 0;
 //        [messageLabel sizeToFit];
         [bgView2 addSubview:messageLabel];
-        
-        messageLabel.sd_layout
-        .topSpaceToView(BGImageView,0)
-        .centerXEqualToView(bgView2)
-        .widthIs(message.length*18)
-        .heightIs(55);
+        [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(BGImageView);
+            make.centerX.equalTo(bgView2);
+            make.width.offset(message.length*18);
+            make.height.offset(55);
+            
+            
+            
+        }];
+
         
         
         self.backgroundView = bgView;

@@ -9,5 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface EasyTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet QMUIButton *gsQueryButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *zzQueryButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *peopleQueryButton;
 
+@property (weak, nonatomic) IBOutlet QMUIButton *projectQueryButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *cxQueryButton;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+
+@property (nonatomic ,strong) NSMutableArray *arrMenu;
 @end

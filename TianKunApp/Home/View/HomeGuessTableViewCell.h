@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeGuessTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet QMUIButton *reloadButton;
 
 @end

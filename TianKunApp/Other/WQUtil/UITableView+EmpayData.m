@@ -20,12 +20,15 @@
         
         UIView *bgView2 = [UIView new];
         [bgView addSubview:bgView2];
+        [bgView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(bgView);
+            make.centerY.equalTo(bgView);
+            make.width.offset(204);
+            make.height.offset(218);
+
+
+        }];
         
-        bgView2.sd_layout
-        .centerXEqualToView(bgView)
-        .centerYEqualToView(bgView)
-        .widthIs(204)
-        .heightIs(218);
         
         UIImageView *BGImageView = [UIImageView new];
 //        UIImage *BGImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imageName ofType:@"png"]];
@@ -33,10 +36,14 @@
         BGImageView.image = BGImage;
         [bgView2 addSubview:BGImageView];
         
-        BGImageView.sd_layout
-        .centerXEqualToView(bgView2)
-        .widthIs(120)
-        .heightIs(80);
+        [BGImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(bgView2);
+            make.width.offset(120);
+            make.height.offset(80);
+
+            
+        }];
+        
         
         UILabel *messageLabel = [UILabel new];
         messageLabel.text = message;
@@ -47,12 +54,15 @@
         messageLabel.numberOfLines = 0;
 //        [messageLabel sizeToFit];
         [bgView2 addSubview:messageLabel];
-        
-        messageLabel.sd_layout
-        .topSpaceToView(BGImageView,0)
-        .centerXEqualToView(bgView2)
-        .widthIs(message.length*18)
-        .heightIs(55);
+        [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(BGImageView);
+            make.centerX.equalTo(bgView2);
+            make.width.offset(message.length*18);
+            make.height.offset(55);
+            
+            
+            
+        }];
         
         self.backgroundView = bgView;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -71,22 +81,25 @@
         
         UIView *bgView2 = [UIView new];
         [bgView addSubview:bgView2];
-        
-        bgView2.sd_layout
-        .centerXEqualToView(bgView)
-        .centerYEqualToView(bgView)
-        .widthIs(204)
-        .heightIs(218);
+        [bgView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(bgView);
+            make.centerY.equalTo(bgView);
+            make.width.offset(204);
+            make.height.offset(218);
+        }];
+
         
         UIImageView *BGImageView = [UIImageView new];
         UIImage *BGImage = [UIImage imageNamed:imageName];
         BGImageView.image = BGImage;
         [bgView2 addSubview:BGImageView];
-        
-        BGImageView.sd_layout
-        .centerXEqualToView(bgView2)
-        .widthIs(widthIs)
-        .heightIs(heightIs);
+        [BGImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(bgView2);
+            make.width.offset(widthIs);
+            make.height.offset(heightIs);
+            
+            
+        }];
         
         UILabel *messageLabel = [UILabel new];
         messageLabel.text = message;
@@ -95,12 +108,16 @@
         messageLabel.textAlignment = NSTextAlignmentCenter;
         messageLabel.numberOfLines = 0;
         [bgView2 addSubview:messageLabel];
-        
-        messageLabel.sd_layout
-        .topSpaceToView(BGImageView,0)
-        .centerXEqualToView(bgView2)
-        .widthIs(message.length*18)
-        .heightIs(55);
+        [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(BGImageView);
+            make.centerX.equalTo(bgView2);
+            make.width.offset(message.length*18);
+            make.height.offset(55);
+            
+            
+            
+        }];
+
         
         self.backgroundView = bgView;
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -146,7 +163,18 @@
         messageLabel.numberOfLines = 0;
         messageLabel.font = [UIFont systemFontOfSize:14];
         [bgView addSubview:messageLabel];
-        messageLabel.sd_layout.centerXEqualToView(bgView).centerYIs(kScreeHeight/2+offset).widthIs(200).heightIs(30);
+        [messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(bgView);
+            make.width.offset(200);
+            make.height.offset(30);
+            make.centerX.offset(SCREEN_WIDTH/2+offset);
+            
+            
+            
+            
+        }];
+
+//        messageLabel.sd_layout.centerXEqualToView(bgView).centerYIs(kScreeHeight/2+offset).widthIs(200).heightIs(30);
         
         self.backgroundView = bgView;
         

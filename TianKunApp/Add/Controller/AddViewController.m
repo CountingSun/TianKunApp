@@ -10,6 +10,7 @@
 #import "POP.h"
 #import "MenuInfo.h"
 #import "ComposeButton.h"
+#import "PublicEnterpriseViewController.h"
 
 @interface AddViewController ()
 @property (nonatomic,strong) NSArray *arrMenu;
@@ -29,14 +30,26 @@
     [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self showAnimationWithButton:obj index:idx];
     }];
-    
-    
-    
-    
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self hiddenAnimationWithButton:obj index:idx];
+    }];
+
+}
+
 - (void)showAnimationWithButton:(UIButton *)button index:(NSInteger)index{
     POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
     animation.toValue = [NSValue valueWithCGPoint:CGPointMake(button.center.x, button.center.y  -350)];
+    animation.springBounciness = 10;
+    animation.springSpeed = 12;
+    animation.beginTime = CACurrentMediaTime() + (CGFloat)index * 0.025;
+    [button pop_addAnimation:animation forKey:nil];
+}
+- (void)hiddenAnimationWithButton:(UIButton *)button index:(NSInteger)index{
+    POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(button.center.x, button.center.y  +350)];
     animation.springBounciness = 10;
     animation.springSpeed = 12;
     animation.beginTime = CACurrentMediaTime() + (CGFloat)index * 0.025;
@@ -80,15 +93,17 @@
         button.frame = CGRectMake(i*itemW, SCREEN_HEIGHT - itemH -60 +350, itemW, itemH);
         [_buttonsArray addObject:button];
         [self.view addSubview:button];
+        button.tag = menuInfo.menuID;
+        [button addTarget:self action:@selector(childButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 -(void)childButtonClick:(UIButton *)button{
     
     switch (button.tag) {
-        case 1:
+        case 0:
         {
-//            PublicCircleViewController *vc = [[PublicCircleViewController alloc]init];
-//            [self presentViewController:vc animated:YES completion:nil];
+            PublicEnterpriseViewController *vc = [[PublicEnterpriseViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
             
             
         }

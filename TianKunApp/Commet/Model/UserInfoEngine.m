@@ -9,6 +9,7 @@
 #import "UserInfoEngine.h"
 #import "WQPigeonhole.h"
 #import "UserInfo.h"
+#import "LoginViewController.h"
 
 @implementation UserInfoEngine
 
@@ -24,10 +25,38 @@
 }
 +(BOOL)isLogin{
 
-    if ([UserInfoEngine getUserInfo].user_id) {
+    if ([UserInfoEngine getUserInfo].userID) {
         return YES;
+    }else{
+        UIViewController *showVC = [self topViewController];
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[LoginViewController new]];
+
+        [showVC presentViewController:nav animated:YES completion:^{
+            
+        }];
+        
+        
+        return NO;
     }
-    return NO;
-    
 }
++ (UIViewController *)topViewController {
+    UIViewController *resultVC;
+    resultVC = [self _topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (resultVC.presentedViewController) {
+        resultVC = [self _topViewController:resultVC.presentedViewController];
+    }
+    return resultVC;
+}
+
++ (UIViewController *)_topViewController:(UIViewController *)vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self _topViewController:[(UINavigationController *)vc topViewController]];
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        return [self _topViewController:[(UITabBarController *)vc selectedViewController]];
+    } else {
+        return vc;
+    }
+    return nil;
+}
+
 @end

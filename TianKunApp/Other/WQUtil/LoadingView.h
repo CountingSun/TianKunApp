@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface LoadingView : UIView
+@property (nonatomic, strong) UIImageView *AnimationImageView;
 
+@property (nonatomic, copy) NSString *loadingText;
+
+- (instancetype)initWithFrame:(CGRect)frame loadingText:(NSString *)loadingText;
 @end

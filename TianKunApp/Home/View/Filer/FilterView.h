@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface FilterView : UIView
+- (void)showFilterView;
+- (void)hiddenFilterView;
+- (BOOL)isShow;
+- (BOOL)isShowWithAction;
+- (void)reloadWithKey:(NSString *)key;
 
 @end

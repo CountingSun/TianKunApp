@@ -10,4 +10,17 @@
 
 @interface HomeViewModel : NSObject
 
+/**
+ 返回首页最上面的view的数组
+
+ @return <#return value description#>
+ */
++ (NSMutableArray *)arrMenu;
+/**
+ 便民服务view的数组
+ 
+ @return <#return value description#>
+ */
++ (NSMutableArray *)arrEasyMenu;
+
 @end

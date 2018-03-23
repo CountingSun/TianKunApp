@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ConstructionSearchSelectTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet QMUIButton *firsetButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *secondButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *thirdButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *fourButton;
 
 @end

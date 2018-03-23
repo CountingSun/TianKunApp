@@ -10,7 +10,6 @@
 #ifndef WQUtil_h
 #define WQUtil_h
 
-#import "WQTabBarController.h"
 #import "WQAppInfo.h"
 #import "WQFile.h"
 #import "WQPigeonhole.h"

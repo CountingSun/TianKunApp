@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationBar.barTintColor = [WQAppInfo themColor];
+    self.navigationBar.barTintColor = COLOR_WHITE;
     //导航栏标题文字属性
     NSMutableDictionary *textAttributesDict = [NSMutableDictionary dictionary];
     // 文字颜色
@@ -33,12 +33,12 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
-    NSString *title = @"返回";
+    NSString *title = @"";
     if (self.viewControllers.count > 0) {
         if(self.viewControllers.count == 1) {
             title = self.childViewControllers[0].title;
         }
-        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" imageName:@"navigationbar_back_withtext" target:self action:@selector(back)];
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" imageName:@"返回" target:self action:@selector(back)];
     }
     [super pushViewController:viewController animated:animated];
 }

@@ -12,9 +12,27 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
-}
+    [_actionButton setImage:[UIImage imageNamed:@"眼睛"] forState:UIControlStateNormal];
+    [_actionButton setImage:[UIImage imageNamed:@"眼睛"] forState:UIControlStateSelected];
+    
 
+    [_texeField addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
+}
+- (void)setIndexPath:(NSIndexPath *)indexPath{
+    _indexPath = indexPath;
+}
+- (IBAction)buttonClickEvent:(UIButton *)sender {
+    sender.selected  =! sender.selected;
+    if (_delegate) {
+        [_delegate clickSecureButton:sender indexPath:_indexPath];
+    }
+}
+-(void)textChange{
+    if (_textBlock) {
+        _textBlock(_texeField.text);
+    }
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

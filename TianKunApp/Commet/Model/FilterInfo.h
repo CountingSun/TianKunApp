@@ -10,4 +10,8 @@
 
 @interface FilterInfo : NSObject
 
+@property (nonatomic, copy) NSString *propertyName;
+@property (nonatomic, copy) NSString *propertyID;
+
+
 @end

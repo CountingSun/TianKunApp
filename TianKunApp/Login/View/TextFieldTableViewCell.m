@@ -12,7 +12,13 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    [_textField addTarget:self action:@selector(textChange) forControlEvents:UIControlEventEditingChanged];
+}
+-(void)textChange{
+    if (_textBlock) {
+        _textBlock(_textField.text);
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

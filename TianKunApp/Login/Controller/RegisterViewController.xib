@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController">
             <connections>
+                <outlet property="footView" destination="oDe-Gv-ceA" id="81q-dK-fEc"/>
+                <outlet property="headView" destination="kV0-uh-VNc" id="C2D-9S-8bM"/>
+                <outlet property="loginButton" destination="40H-x5-ALU" id="BqN-8x-5hd"/>
+                <outlet property="tableView" destination="QxU-wD-44W" id="59i-uM-alr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +22,98 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QxU-wD-44W">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="QxU-wD-44W" secondAttribute="trailing" id="6MJ-Rx-HbE"/>
+                <constraint firstAttribute="bottom" secondItem="QxU-wD-44W" secondAttribute="bottom" id="Sgq-f9-i0V"/>
+                <constraint firstItem="QxU-wD-44W" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="eSJ-yu-ODL"/>
+                <constraint firstItem="QxU-wD-44W" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zRJ-PX-af3"/>
+            </constraints>
+            <point key="canvasLocation" x="69" y="-193"/>
+        </view>
+        <view contentMode="scaleToFill" id="kV0-uh-VNc">
+            <rect key="frame" x="0.0" y="0.0" width="440" height="236"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LOGO" translatesAutoresizingMaskIntoConstraints="NO" id="08R-PU-8lz">
+                    <rect key="frame" x="177.5" y="75.5" width="85" height="85"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="85" id="la3-wu-UVI"/>
+                        <constraint firstAttribute="height" constant="85" id="nQy-3V-UuI"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="op9-v2-S8F">
+                    <rect key="frame" x="10" y="20" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="AMa-r0-y8e"/>
+                        <constraint firstAttribute="width" constant="30" id="Nap-l3-cge"/>
+                    </constraints>
+                    <state key="normal" image="close"/>
+                    <connections>
+                        <action selector="closeButtonClickEvent:" destination="-1" eventType="touchUpInside" id="Wf6-Hy-lLE"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40H-x5-ALU">
+                    <rect key="frame" x="371" y="20" width="50" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="7rn-6R-mET"/>
+                        <constraint firstAttribute="height" constant="30" id="sK6-S3-AkD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="登录"/>
+                    <connections>
+                        <action selector="loginButtonClickEvent:" destination="-1" eventType="touchUpInside" id="VJE-t1-NZk"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="40H-x5-ALU" secondAttribute="trailing" constant="19" id="9Ef-dF-2Gb"/>
+                <constraint firstItem="08R-PU-8lz" firstAttribute="centerY" secondItem="kV0-uh-VNc" secondAttribute="centerY" id="XzR-0z-VhP"/>
+                <constraint firstItem="08R-PU-8lz" firstAttribute="centerX" secondItem="kV0-uh-VNc" secondAttribute="centerX" id="fbO-fG-KKv"/>
+                <constraint firstItem="op9-v2-S8F" firstAttribute="leading" secondItem="kV0-uh-VNc" secondAttribute="leading" constant="10" id="hmw-QX-Gky"/>
+                <constraint firstItem="40H-x5-ALU" firstAttribute="top" secondItem="kV0-uh-VNc" secondAttribute="top" constant="20" id="iKP-NR-cDK"/>
+                <constraint firstItem="op9-v2-S8F" firstAttribute="top" secondItem="kV0-uh-VNc" secondAttribute="top" constant="20" id="vdY-o7-Tbk"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="68" y="-894"/>
+        </view>
+        <view contentMode="scaleToFill" id="oDe-Gv-ceA">
+            <rect key="frame" x="0.0" y="0.0" width="353" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akP-B3-gCo">
+                    <rect key="frame" x="10" y="30" width="333" height="40"/>
+                    <color key="backgroundColor" red="0.9906974435" green="0.32919713849999999" blue="0.13164272900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="WvH-JZ-N8u"/>
+                    </constraints>
+                    <state key="normal" title="注册">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="registerButtonClickEvent:" destination="-1" eventType="touchUpInside" id="xzL-y9-Voe"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="akP-B3-gCo" secondAttribute="trailing" constant="10" id="GvL-br-ReR"/>
+                <constraint firstItem="akP-B3-gCo" firstAttribute="top" secondItem="oDe-Gv-ceA" secondAttribute="top" constant="30" id="NyL-cj-bae"/>
+                <constraint firstItem="akP-B3-gCo" firstAttribute="leading" secondItem="oDe-Gv-ceA" secondAttribute="leading" constant="10" id="YSM-ie-TJ2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="58" y="394"/>
         </view>
     </objects>
+    <resources>
+        <image name="LOGO" width="99" height="99"/>
+        <image name="close" width="11" height="11"/>
+    </resources>
 </document>
