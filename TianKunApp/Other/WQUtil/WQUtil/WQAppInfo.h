@@ -45,8 +45,8 @@
 #pragma mark - ----------------------- APP信息 -----------------------
 //主题色
 #define COLOR_THEME UIColorFromHexadecimal(0x4694fa)
-//橘色
-#define COLOR_TEXT_ORANGE [UIColor colorWithRed:250/255.0 green:85/255.0 blue:56/255.0 alpha:1]
+//主题色 因为一些原因 这个原来的橘色不要了变成主题色 懒得一一去改这个了  所以这个也是主题色
+#define COLOR_TEXT_ORANGE UIColorFromHexadecimal(0x4694fa)
 
 //用于重要文字信息，页内标题信息
 #define COLOR_TEXT_BLACK UIColorFromHexadecimal(0x333333)

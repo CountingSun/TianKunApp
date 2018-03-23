@@ -214,6 +214,42 @@
 		5F3AB5352064857D00850BA7 /* UserCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AB4722064857D00850BA7 /* UserCenterViewController.xib */; };
 		5F3AB5362064857D00850BA7 /* UserCenterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AB4752064857D00850BA7 /* UserCenterViewModel.m */; };
 		5F3AB5372064857D00850BA7 /* 样式.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AB4762064857D00850BA7 /* 样式.gif */; };
+		5FDC71A22064A0B3009EA1E3 /* IndustryInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71A02064A0B3009EA1E3 /* IndustryInformationViewController.m */; };
+		5FDC71A32064A0B3009EA1E3 /* IndustryInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71A12064A0B3009EA1E3 /* IndustryInformationViewController.xib */; };
+		5FDC71A62064A0E6009EA1E3 /* IndustryInformationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71A52064A0E6009EA1E3 /* IndustryInformationListViewController.m */; };
+		5FDC71AA2064A23A009EA1E3 /* FindImageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71A82064A23A009EA1E3 /* FindImageListViewController.m */; };
+		5FDC71AB2064A23A009EA1E3 /* FindImageListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71A92064A23A009EA1E3 /* FindImageListViewController.xib */; };
+		5FDC71AF2064A244009EA1E3 /* FindeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71AD2064A244009EA1E3 /* FindeListViewController.m */; };
+		5FDC71B02064A244009EA1E3 /* FindeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71AE2064A244009EA1E3 /* FindeListViewController.xib */; };
+		5FDC71B42064A328009EA1E3 /* FindListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71B22064A328009EA1E3 /* FindListTableViewCell.m */; };
+		5FDC71B52064A328009EA1E3 /* FindListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71B32064A328009EA1E3 /* FindListTableViewCell.xib */; };
+		5FDC71B92064A337009EA1E3 /* FindImageListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71B72064A337009EA1E3 /* FindImageListTableViewCell.m */; };
+		5FDC71BA2064A337009EA1E3 /* FindImageListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71B82064A337009EA1E3 /* FindImageListTableViewCell.xib */; };
+		5FDC71BE2064B16D009EA1E3 /* MessageSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71BC2064B16D009EA1E3 /* MessageSetViewController.m */; };
+		5FDC71BF2064B16D009EA1E3 /* MessageSetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71BD2064B16D009EA1E3 /* MessageSetViewController.xib */; };
+		5FDC71C42064B1D0009EA1E3 /* MessageSetTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71C22064B1D0009EA1E3 /* MessageSetTableViewCell.m */; };
+		5FDC71C52064B1D0009EA1E3 /* MessageSetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71C32064B1D0009EA1E3 /* MessageSetTableViewCell.xib */; };
+		5FDC71C92064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71C72064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m */; };
+		5FDC71CA2064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71C82064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib */; };
+		5FDC71CE2064D45C009EA1E3 /* QMUIConfigurationTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71CD2064D45B009EA1E3 /* QMUIConfigurationTemplate.m */; };
+		5FDC71D22064DA34009EA1E3 /* HelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71D02064DA34009EA1E3 /* HelpViewController.m */; };
+		5FDC71D32064DA34009EA1E3 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71D12064DA34009EA1E3 /* HelpViewController.xib */; };
+		5FDC71DA2064DCF8009EA1E3 /* WebLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71D82064DCF7009EA1E3 /* WebLinkViewController.m */; };
+		5FDC71DD2064DD98009EA1E3 /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71DC2064DD98009EA1E3 /* UIBarButtonItem+Extension.m */; };
+		5FDC71E22064DF04009EA1E3 /* FadebackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71E02064DF04009EA1E3 /* FadebackViewController.m */; };
+		5FDC71E32064DF04009EA1E3 /* FadebackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71E12064DF04009EA1E3 /* FadebackViewController.xib */; };
+		5FDC71E72064E203009EA1E3 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71E52064E203009EA1E3 /* AboutUsViewController.m */; };
+		5FDC71E82064E203009EA1E3 /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71E62064E203009EA1E3 /* AboutUsViewController.xib */; };
+		5FDC71EC2064E4EC009EA1E3 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71EA2064E4EC009EA1E3 /* ChangePasswordViewController.m */; };
+		5FDC71ED2064E4EC009EA1E3 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71EB2064E4EC009EA1E3 /* ChangePasswordViewController.xib */; };
+		5FDC71F02064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71EF2064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m */; };
+		5FDC71F42064F084009EA1E3 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71F22064F084009EA1E3 /* HistoryViewController.m */; };
+		5FDC71F52064F084009EA1E3 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71F32064F084009EA1E3 /* HistoryViewController.xib */; };
+		5FDC71F92064F36A009EA1E3 /* HistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71F72064F36A009EA1E3 /* HistoryTableViewCell.m */; };
+		5FDC71FA2064F36A009EA1E3 /* HistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71F82064F36A009EA1E3 /* HistoryTableViewCell.xib */; };
+		5FDC71FD2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FC2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m */; };
+		5FDC720020651512009EA1E3 /* HistoryBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */; };
+		5FDC720220651544009EA1E3 /* HistoryBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC720120651544009EA1E3 /* HistoryBottomView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -557,6 +593,63 @@
 		5F3AB4752064857D00850BA7 /* UserCenterViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterViewModel.m; sourceTree = "<group>"; };
 		5F3AB4762064857D00850BA7 /* 样式.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "样式.gif"; sourceTree = "<group>"; };
 		5FB31095205F4EB100186A56 /* TianKunApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TianKunApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FDC719F2064A0B3009EA1E3 /* IndustryInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndustryInformationViewController.h; sourceTree = "<group>"; };
+		5FDC71A02064A0B3009EA1E3 /* IndustryInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndustryInformationViewController.m; sourceTree = "<group>"; };
+		5FDC71A12064A0B3009EA1E3 /* IndustryInformationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndustryInformationViewController.xib; sourceTree = "<group>"; };
+		5FDC71A42064A0E6009EA1E3 /* IndustryInformationListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndustryInformationListViewController.h; sourceTree = "<group>"; };
+		5FDC71A52064A0E6009EA1E3 /* IndustryInformationListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndustryInformationListViewController.m; sourceTree = "<group>"; };
+		5FDC71A72064A23A009EA1E3 /* FindImageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindImageListViewController.h; sourceTree = "<group>"; };
+		5FDC71A82064A23A009EA1E3 /* FindImageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindImageListViewController.m; sourceTree = "<group>"; };
+		5FDC71A92064A23A009EA1E3 /* FindImageListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindImageListViewController.xib; sourceTree = "<group>"; };
+		5FDC71AC2064A244009EA1E3 /* FindeListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindeListViewController.h; sourceTree = "<group>"; };
+		5FDC71AD2064A244009EA1E3 /* FindeListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindeListViewController.m; sourceTree = "<group>"; };
+		5FDC71AE2064A244009EA1E3 /* FindeListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindeListViewController.xib; sourceTree = "<group>"; };
+		5FDC71B12064A328009EA1E3 /* FindListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindListTableViewCell.h; sourceTree = "<group>"; };
+		5FDC71B22064A328009EA1E3 /* FindListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindListTableViewCell.m; sourceTree = "<group>"; };
+		5FDC71B32064A328009EA1E3 /* FindListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindListTableViewCell.xib; sourceTree = "<group>"; };
+		5FDC71B62064A337009EA1E3 /* FindImageListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindImageListTableViewCell.h; sourceTree = "<group>"; };
+		5FDC71B72064A337009EA1E3 /* FindImageListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindImageListTableViewCell.m; sourceTree = "<group>"; };
+		5FDC71B82064A337009EA1E3 /* FindImageListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindImageListTableViewCell.xib; sourceTree = "<group>"; };
+		5FDC71BB2064B16D009EA1E3 /* MessageSetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageSetViewController.h; sourceTree = "<group>"; };
+		5FDC71BC2064B16D009EA1E3 /* MessageSetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageSetViewController.m; sourceTree = "<group>"; };
+		5FDC71BD2064B16D009EA1E3 /* MessageSetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSetViewController.xib; sourceTree = "<group>"; };
+		5FDC71C12064B1D0009EA1E3 /* MessageSetTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageSetTableViewCell.h; sourceTree = "<group>"; };
+		5FDC71C22064B1D0009EA1E3 /* MessageSetTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageSetTableViewCell.m; sourceTree = "<group>"; };
+		5FDC71C32064B1D0009EA1E3 /* MessageSetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSetTableViewCell.xib; sourceTree = "<group>"; };
+		5FDC71C62064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageSetVoiceTableViewCell.h; sourceTree = "<group>"; };
+		5FDC71C72064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageSetVoiceTableViewCell.m; sourceTree = "<group>"; };
+		5FDC71C82064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSetVoiceTableViewCell.xib; sourceTree = "<group>"; };
+		5FDC71CC2064D45B009EA1E3 /* QMUIConfigurationTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMUIConfigurationTemplate.h; sourceTree = "<group>"; };
+		5FDC71CD2064D45B009EA1E3 /* QMUIConfigurationTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMUIConfigurationTemplate.m; sourceTree = "<group>"; };
+		5FDC71CF2064DA34009EA1E3 /* HelpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
+		5FDC71D02064DA34009EA1E3 /* HelpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelpViewController.m; sourceTree = "<group>"; };
+		5FDC71D12064DA34009EA1E3 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
+		5FDC71D82064DCF7009EA1E3 /* WebLinkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebLinkViewController.m; sourceTree = "<group>"; };
+		5FDC71D92064DCF7009EA1E3 /* WebLinkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebLinkViewController.h; sourceTree = "<group>"; };
+		5FDC71DB2064DD97009EA1E3 /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
+		5FDC71DC2064DD98009EA1E3 /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
+		5FDC71DF2064DF04009EA1E3 /* FadebackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FadebackViewController.h; sourceTree = "<group>"; };
+		5FDC71E02064DF04009EA1E3 /* FadebackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FadebackViewController.m; sourceTree = "<group>"; };
+		5FDC71E12064DF04009EA1E3 /* FadebackViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FadebackViewController.xib; sourceTree = "<group>"; };
+		5FDC71E42064E203009EA1E3 /* AboutUsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		5FDC71E52064E203009EA1E3 /* AboutUsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		5FDC71E62064E203009EA1E3 /* AboutUsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
+		5FDC71E92064E4EC009EA1E3 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		5FDC71EA2064E4EC009EA1E3 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		5FDC71EB2064E4EC009EA1E3 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
+		5FDC71EE2064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AddTapGestureRecognizer.h"; sourceTree = "<group>"; };
+		5FDC71EF2064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AddTapGestureRecognizer.m"; sourceTree = "<group>"; };
+		5FDC71F12064F084009EA1E3 /* HistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		5FDC71F22064F084009EA1E3 /* HistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		5FDC71F32064F084009EA1E3 /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
+		5FDC71F62064F36A009EA1E3 /* HistoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewCell.h; sourceTree = "<group>"; };
+		5FDC71F72064F36A009EA1E3 /* HistoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewCell.m; sourceTree = "<group>"; };
+		5FDC71F82064F36A009EA1E3 /* HistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryTableViewCell.xib; sourceTree = "<group>"; };
+		5FDC71FB2064F5E7009EA1E3 /* HistoryTableViewHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewHeaderView.h; sourceTree = "<group>"; };
+		5FDC71FC2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewHeaderView.m; sourceTree = "<group>"; };
+		5FDC71FE20651512009EA1E3 /* HistoryBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryBottomView.h; sourceTree = "<group>"; };
+		5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryBottomView.m; sourceTree = "<group>"; };
+		5FDC720120651544009EA1E3 /* HistoryBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryBottomView.xib; sourceTree = "<group>"; };
 		D7032CC2C7009A5C1E84BAE5 /* Pods-TianKunApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TianKunApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TianKunApp/Pods-TianKunApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -789,6 +882,7 @@
 		5F3AB30B2064857D00850BA7 /* Commet */ = {
 			isa = PBXGroup;
 			children = (
+				5FDC71D42064DC8B009EA1E3 /* Controller */,
 				5F3AB30C2064857D00850BA7 /* Model */,
 				5F3AB3172064857D00850BA7 /* View */,
 			);
@@ -837,6 +931,12 @@
 				5F3AB31C2064857D00850BA7 /* FindViewController.h */,
 				5F3AB31D2064857D00850BA7 /* FindViewController.m */,
 				5F3AB31E2064857D00850BA7 /* FindViewController.xib */,
+				5FDC71A72064A23A009EA1E3 /* FindImageListViewController.h */,
+				5FDC71A82064A23A009EA1E3 /* FindImageListViewController.m */,
+				5FDC71A92064A23A009EA1E3 /* FindImageListViewController.xib */,
+				5FDC71AC2064A244009EA1E3 /* FindeListViewController.h */,
+				5FDC71AD2064A244009EA1E3 /* FindeListViewController.m */,
+				5FDC71AE2064A244009EA1E3 /* FindeListViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -854,6 +954,12 @@
 				5F3AB3212064857D00850BA7 /* FindTableViewCell.h */,
 				5F3AB3222064857D00850BA7 /* FindTableViewCell.m */,
 				5F3AB3232064857D00850BA7 /* FindTableViewCell.xib */,
+				5FDC71B12064A328009EA1E3 /* FindListTableViewCell.h */,
+				5FDC71B22064A328009EA1E3 /* FindListTableViewCell.m */,
+				5FDC71B32064A328009EA1E3 /* FindListTableViewCell.xib */,
+				5FDC71B62064A337009EA1E3 /* FindImageListTableViewCell.h */,
+				5FDC71B72064A337009EA1E3 /* FindImageListTableViewCell.m */,
+				5FDC71B82064A337009EA1E3 /* FindImageListTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -871,6 +977,7 @@
 		5F3AB3252064857D00850BA7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5FDC719E2064A086009EA1E3 /* 行业信息 */,
 				5F3AB3262064857D00850BA7 /* AptitudeSelectViewController.h */,
 				5F3AB3272064857D00850BA7 /* AptitudeSelectViewController.m */,
 				5F3AB3282064857D00850BA7 /* ConstructionSearchViewController.h */,
@@ -1085,6 +1192,7 @@
 		5F3AB3A72064857D00850BA7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				5FDC71CB2064D45B009EA1E3 /* QMUIConfigurationTemplate */,
 				5F3AB3A22064857D00850BA7 /* main.m */,
 				5F3AB4762064857D00850BA7 /* 样式.gif */,
 				5F3AB3042064857D00850BA7 /* AppDelegate.h */,
@@ -1388,6 +1496,8 @@
 				5F3AB4642064857D00850BA7 /* WQUploadVido.h */,
 				5F3AB4652064857D00850BA7 /* WQUploadVido.m */,
 				5F3AB4662064857D00850BA7 /* WQUtil.h */,
+				5FDC71EE2064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.h */,
+				5FDC71EF2064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m */,
 			);
 			path = WQUtil;
 			sourceTree = "<group>";
@@ -1395,6 +1505,7 @@
 		5F3AB46B2064857D00850BA7 /* UserCenter */ = {
 			isa = PBXGroup;
 			children = (
+				5FDC71C02064B1B0009EA1E3 /* View */,
 				5F3AB46C2064857D00850BA7 /* Controller */,
 				5F3AB4732064857D00850BA7 /* Model */,
 			);
@@ -1404,12 +1515,13 @@
 		5F3AB46C2064857D00850BA7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5F3AB46D2064857D00850BA7 /* SetViewController.h */,
-				5F3AB46E2064857D00850BA7 /* SetViewController.m */,
-				5F3AB46F2064857D00850BA7 /* SetViewController.xib */,
+				5FDC71DE2064DEDE009EA1E3 /* Set */,
 				5F3AB4702064857D00850BA7 /* UserCenterViewController.h */,
 				5F3AB4712064857D00850BA7 /* UserCenterViewController.m */,
 				5F3AB4722064857D00850BA7 /* UserCenterViewController.xib */,
+				5FDC71F12064F084009EA1E3 /* HistoryViewController.h */,
+				5FDC71F22064F084009EA1E3 /* HistoryViewController.m */,
+				5FDC71F32064F084009EA1E3 /* HistoryViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1440,6 +1552,85 @@
 				5FB31095205F4EB100186A56 /* TianKunApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5FDC719E2064A086009EA1E3 /* 行业信息 */ = {
+			isa = PBXGroup;
+			children = (
+				5FDC719F2064A0B3009EA1E3 /* IndustryInformationViewController.h */,
+				5FDC71A02064A0B3009EA1E3 /* IndustryInformationViewController.m */,
+				5FDC71A12064A0B3009EA1E3 /* IndustryInformationViewController.xib */,
+				5FDC71A42064A0E6009EA1E3 /* IndustryInformationListViewController.h */,
+				5FDC71A52064A0E6009EA1E3 /* IndustryInformationListViewController.m */,
+			);
+			path = "行业信息";
+			sourceTree = "<group>";
+		};
+		5FDC71C02064B1B0009EA1E3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5FDC71C12064B1D0009EA1E3 /* MessageSetTableViewCell.h */,
+				5FDC71C22064B1D0009EA1E3 /* MessageSetTableViewCell.m */,
+				5FDC71C32064B1D0009EA1E3 /* MessageSetTableViewCell.xib */,
+				5FDC71C62064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.h */,
+				5FDC71C72064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m */,
+				5FDC71C82064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib */,
+				5FDC71F62064F36A009EA1E3 /* HistoryTableViewCell.h */,
+				5FDC71F72064F36A009EA1E3 /* HistoryTableViewCell.m */,
+				5FDC71F82064F36A009EA1E3 /* HistoryTableViewCell.xib */,
+				5FDC71FB2064F5E7009EA1E3 /* HistoryTableViewHeaderView.h */,
+				5FDC71FC2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m */,
+				5FDC71FE20651512009EA1E3 /* HistoryBottomView.h */,
+				5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */,
+				5FDC720120651544009EA1E3 /* HistoryBottomView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5FDC71CB2064D45B009EA1E3 /* QMUIConfigurationTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				5FDC71CC2064D45B009EA1E3 /* QMUIConfigurationTemplate.h */,
+				5FDC71CD2064D45B009EA1E3 /* QMUIConfigurationTemplate.m */,
+			);
+			name = QMUIConfigurationTemplate;
+			path = Pods/QMUIKit/QMUIConfigurationTemplate;
+			sourceTree = SOURCE_ROOT;
+		};
+		5FDC71D42064DC8B009EA1E3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5FDC71DB2064DD97009EA1E3 /* UIBarButtonItem+Extension.h */,
+				5FDC71DC2064DD98009EA1E3 /* UIBarButtonItem+Extension.m */,
+				5FDC71D92064DCF7009EA1E3 /* WebLinkViewController.h */,
+				5FDC71D82064DCF7009EA1E3 /* WebLinkViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5FDC71DE2064DEDE009EA1E3 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				5FDC71BB2064B16D009EA1E3 /* MessageSetViewController.h */,
+				5FDC71BC2064B16D009EA1E3 /* MessageSetViewController.m */,
+				5FDC71BD2064B16D009EA1E3 /* MessageSetViewController.xib */,
+				5FDC71CF2064DA34009EA1E3 /* HelpViewController.h */,
+				5FDC71D02064DA34009EA1E3 /* HelpViewController.m */,
+				5FDC71D12064DA34009EA1E3 /* HelpViewController.xib */,
+				5F3AB46D2064857D00850BA7 /* SetViewController.h */,
+				5F3AB46E2064857D00850BA7 /* SetViewController.m */,
+				5F3AB46F2064857D00850BA7 /* SetViewController.xib */,
+				5FDC71DF2064DF04009EA1E3 /* FadebackViewController.h */,
+				5FDC71E02064DF04009EA1E3 /* FadebackViewController.m */,
+				5FDC71E12064DF04009EA1E3 /* FadebackViewController.xib */,
+				5FDC71E42064E203009EA1E3 /* AboutUsViewController.h */,
+				5FDC71E52064E203009EA1E3 /* AboutUsViewController.m */,
+				5FDC71E62064E203009EA1E3 /* AboutUsViewController.xib */,
+				5FDC71E92064E4EC009EA1E3 /* ChangePasswordViewController.h */,
+				5FDC71EA2064E4EC009EA1E3 /* ChangePasswordViewController.m */,
+				5FDC71EB2064E4EC009EA1E3 /* ChangePasswordViewController.xib */,
+			);
+			path = Set;
 			sourceTree = "<group>";
 		};
 		D5B514B14937161F2745AB4A /* Pods */ = {
@@ -1532,34 +1723,45 @@
 				5F3AB4812064857D00850BA7 /* Main.storyboard in Resources */,
 				5F3AB4B02064857D00850BA7 /* EducationTableViewCell.xib in Resources */,
 				5F3AB4AE2064857D00850BA7 /* EasyTableViewCell.xib in Resources */,
+				5FDC71D32064DA34009EA1E3 /* HelpViewController.xib in Resources */,
 				5F3AB50D2064857D00850BA7 /* SuPhoto_circle@2x.png in Resources */,
 				5F3AB5092064857D00850BA7 /* SuPhotoPreviewer.xib in Resources */,
+				5FDC71FA2064F36A009EA1E3 /* HistoryTableViewCell.xib in Resources */,
 				5F3AB5172064857D00850BA7 /* SuPhotoBrowserCell.xib in Resources */,
 				5F3AB4CD2064857D00850BA7 /* RegisterViewController.xib in Resources */,
+				5FDC720220651544009EA1E3 /* HistoryBottomView.xib in Resources */,
 				5F3AB4992064857D00850BA7 /* InteractionListViewController.xib in Resources */,
 				5F3AB4D32064857D00850BA7 /* TextFieldTableViewCell.xib in Resources */,
 				5F3AB50B2064857D00850BA7 /* SuBack@2x.png in Resources */,
 				5F3AB4BA2064857D00850BA7 /* HomeClassTableViewCell.xib in Resources */,
 				5F3AB47B2064857D00850BA7 /* PublicEnterpriseViewController.xib in Resources */,
+				5FDC71E32064DF04009EA1E3 /* FadebackViewController.xib in Resources */,
+				5FDC71CA2064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib in Resources */,
 				5F3AB4CB2064857D00850BA7 /* LoginViewController.xib in Resources */,
 				5F3AB4BC2064857D00850BA7 /* HomeGuessTableViewCell.xib in Resources */,
 				5F0410BC20648CDF0098234C /* ShareSDK.bundle in Resources */,
+				5FDC71AB2064A23A009EA1E3 /* FindImageListViewController.xib in Resources */,
 				5F3AB50C2064857D00850BA7 /* SuBack@3x.png in Resources */,
 				5F3AB4C92064857D00850BA7 /* DynamicLoginViewController.xib in Resources */,
+				5FDC71C52064B1D0009EA1E3 /* MessageSetTableViewCell.xib in Resources */,
 				5F3AB48E2064857D00850BA7 /* ConstructionSearchViewController.xib in Resources */,
 				5F3AB4C72064857D00850BA7 /* Info.plist in Resources */,
 				5F3AB4C62064857D00850BA7 /* TInvitationlistableViewCell.xib in Resources */,
 				5F3AB4C02064857D00850BA7 /* HomeListTableViewCell.xib in Resources */,
 				5F3AB4A22064857D00850BA7 /* EducationViewController.xib in Resources */,
 				5F3AB4D62064857D00850BA7 /* MessageViewController.xib in Resources */,
+				5FDC71A32064A0B3009EA1E3 /* IndustryInformationViewController.xib in Resources */,
+				5FDC71BF2064B16D009EA1E3 /* MessageSetViewController.xib in Resources */,
 				5F3AB4F42064857D00850BA7 /* CorePagesView.xib in Resources */,
 				5F3AB4A82064857D00850BA7 /* ConstructionSearchSelectTableViewCell.xib in Resources */,
+				5FDC71ED2064E4EC009EA1E3 /* ChangePasswordViewController.xib in Resources */,
 				5F3AB47D2064857D00850BA7 /* MapFootView.xib in Resources */,
 				5F3AB4782064857D00850BA7 /* AddViewController.xib in Resources */,
 				5F3AB4AC2064857D00850BA7 /* ConstructionSearchTextTableViewCell.xib in Resources */,
 				5F3AB4942064857D00850BA7 /* InvitationViewController.xib in Resources */,
 				5F3AB50E2064857D00850BA7 /* SuPhoto_selected@2x.png in Resources */,
 				5F3AB4AA2064857D00850BA7 /* ConstructionSearchTableViewCell.xib in Resources */,
+				5FDC71E82064E203009EA1E3 /* AboutUsViewController.xib in Resources */,
 				5F3AB4B82064857D00850BA7 /* HomeClassCollectionViewCell.xib in Resources */,
 				5F0410BB20648CDF0098234C /* README.txt in Resources */,
 				5F0410B920648CDF0098234C /* WeiboSDK.bundle in Resources */,
@@ -1567,7 +1769,9 @@
 				5F3AB4A02064857D00850BA7 /* DetailListViewController.xib in Resources */,
 				5F3AB5352064857D00850BA7 /* UserCenterViewController.xib in Resources */,
 				5F3AB4962064857D00850BA7 /* JobViewController.xib in Resources */,
+				5FDC71B52064A328009EA1E3 /* FindListTableViewCell.xib in Resources */,
 				5F3AB5372064857D00850BA7 /* 样式.gif in Resources */,
+				5FDC71BA2064A337009EA1E3 /* FindImageListTableViewCell.xib in Resources */,
 				5F3AB4BE2064857D00850BA7 /* HomeInfoTableViewCell.xib in Resources */,
 				5F3AB2CD206484F500850BA7 /* mapapi.bundle in Resources */,
 				5F3AB5332064857D00850BA7 /* SetViewController.xib in Resources */,
@@ -1582,9 +1786,11 @@
 				5F3AB5152064857D00850BA7 /* SuPhotoAblumCell.xib in Resources */,
 				5F0410AB20648CDF0098234C /* ShareSDKConfigFile.bundle in Resources */,
 				5F3AB4892064857D00850BA7 /* FindViewController.xib in Resources */,
+				5FDC71F52064F084009EA1E3 /* HistoryViewController.xib in Resources */,
 				5F3AB4B42064857D00850BA7 /* HomeBrandCollectionViewCell.xib in Resources */,
 				5F3AB4D12064857D00850BA7 /* RegisterGetCodeTableViewCell.xib in Resources */,
 				5F3AB49B2064857D00850BA7 /* InteractionViewController.xib in Resources */,
+				5FDC71B02064A244009EA1E3 /* FindeListViewController.xib in Resources */,
 				5F3AB4922064857D00850BA7 /* InvitationlistViewController.xib in Resources */,
 				5F3AB4902064857D00850BA7 /* HomeViewController.xib in Resources */,
 			);
@@ -1656,6 +1862,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F3AB4A92064857D00850BA7 /* ConstructionSearchTableViewCell.m in Sources */,
+				5FDC71A62064A0E6009EA1E3 /* IndustryInformationListViewController.m in Sources */,
+				5FDC71CE2064D45C009EA1E3 /* QMUIConfigurationTemplate.m in Sources */,
 				5F3AB4CC2064857D00850BA7 /* RegisterViewController.m in Sources */,
 				5F3AB4772064857D00850BA7 /* AddViewController.m in Sources */,
 				5F3AB49F2064857D00850BA7 /* DetailListViewController.m in Sources */,
@@ -1663,6 +1871,7 @@
 				5F3AB4CA2064857D00850BA7 /* LoginViewController.m in Sources */,
 				5F3AB5302064857D00850BA7 /* XHStarRateView.m in Sources */,
 				5F3AB5272064857D00850BA7 /* WQLabel.m in Sources */,
+				5FDC71F42064F084009EA1E3 /* HistoryViewController.m in Sources */,
 				5F3AB4D52064857D00850BA7 /* MessageViewController.m in Sources */,
 				5F3AB5282064857D00850BA7 /* WQModelLog.m in Sources */,
 				5F3AB5102064857D00850BA7 /* SuPhotoPicker.m in Sources */,
@@ -1675,19 +1884,23 @@
 				5F3AB4F82064857D00850BA7 /* FSLoopScrollView.m in Sources */,
 				5F3AB4972064857D00850BA7 /* SearchViewController.m in Sources */,
 				5F3AB5362064857D00850BA7 /* UserCenterViewModel.m in Sources */,
+				5FDC71BE2064B16D009EA1E3 /* MessageSetViewController.m in Sources */,
 				5F3AB5042064857D00850BA7 /* SuPhotoAblumList.m in Sources */,
 				5F3AB4AD2064857D00850BA7 /* EasyTableViewCell.m in Sources */,
 				5F3AB4FF2064857D00850BA7 /* UIButton+SU.m in Sources */,
 				5F3AB4A12064857D00850BA7 /* EducationViewController.m in Sources */,
 				5F3AB4C32064857D00850BA7 /* SearchCollectionCell.m in Sources */,
 				5F3AB4852064857D00850BA7 /* UserInfo.m in Sources */,
+				5FDC71DA2064DCF8009EA1E3 /* WebLinkViewController.m in Sources */,
 				5F3AB4C82064857D00850BA7 /* DynamicLoginViewController.m in Sources */,
 				5F3AB4872064857D00850BA7 /* ComposeButton.m in Sources */,
 				5F3AB5002064857D00850BA7 /* UIImage+SU.m in Sources */,
 				5F3AB51C2064857D00850BA7 /* GCDTimer.m in Sources */,
 				5F3AB5162064857D00850BA7 /* SuPhotoBrowserCell.m in Sources */,
 				5F3AB4C52064857D00850BA7 /* TInvitationlistableViewCell.m in Sources */,
+				5FDC71D22064DA34009EA1E3 /* HelpViewController.m in Sources */,
 				5F3AB4882064857D00850BA7 /* FindViewController.m in Sources */,
+				5FDC71C92064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m in Sources */,
 				5F3AB52E2064857D00850BA7 /* WQUploadSingleImage.m in Sources */,
 				5F3AB5032064857D00850BA7 /* UIView+SuLine.m in Sources */,
 				5F3AB4F02064857D00850BA7 /* WQTabBarViewController.m in Sources */,
@@ -1695,11 +1908,15 @@
 				5F3AB5052064857D00850BA7 /* SuPhotoBaseController.m in Sources */,
 				5F3AB4F22064857D00850BA7 /* CorePagesViewConfig.m in Sources */,
 				5F3AB5322064857D00850BA7 /* SetViewController.m in Sources */,
+				5FDC71E72064E203009EA1E3 /* AboutUsViewController.m in Sources */,
+				5FDC71E22064DF04009EA1E3 /* FadebackViewController.m in Sources */,
 				5F3AB4D22064857D00850BA7 /* TextFieldTableViewCell.m in Sources */,
 				5F3AB5222064857D00850BA7 /* WQAppInfo.m in Sources */,
+				5FDC71AF2064A244009EA1E3 /* FindeListViewController.m in Sources */,
 				5F3AB47C2064857D00850BA7 /* MapFootView.m in Sources */,
 				5F3AB4FC2064857D00850BA7 /* LoadingView.m in Sources */,
 				5F3AB4A42064857D00850BA7 /* FileNoticceViewController.m in Sources */,
+				5FDC71A22064A0B3009EA1E3 /* IndustryInformationViewController.m in Sources */,
 				5F3AB5312064857D00850BA7 /* ZWVerticalAlignLabel.m in Sources */,
 				5F3AB4D42064857D00850BA7 /* main.m in Sources */,
 				5F3AB5112064857D00850BA7 /* SuMessageTool.m in Sources */,
@@ -1712,12 +1929,14 @@
 				5F3AB4F92064857D00850BA7 /* NSTimer+FSLoop.m in Sources */,
 				5F3AB4C12064857D00850BA7 /* InteractionListTableViewCell.m in Sources */,
 				5F3AB4ED2064857D00850BA7 /* UIBarButtonItem+Addition.m in Sources */,
+				5FDC71AA2064A23A009EA1E3 /* FindImageListViewController.m in Sources */,
 				5F3AB49C2064857D00850BA7 /* PublicViewController.m in Sources */,
 				5F3AB51F2064857D00850BA7 /* RefreshManager.m in Sources */,
 				5F3AB4D72064857D00850BA7 /* AppShared.m in Sources */,
 				5F3AB4982064857D00850BA7 /* InteractionListViewController.m in Sources */,
 				5F3AB4792064857D00850BA7 /* MapViewController.m in Sources */,
 				5F3AB48F2064857D00850BA7 /* HomeViewController.m in Sources */,
+				5FDC71DD2064DD98009EA1E3 /* UIBarButtonItem+Extension.m in Sources */,
 				5F3AB4B92064857D00850BA7 /* HomeClassTableViewCell.m in Sources */,
 				5F3AB4FB2064857D00850BA7 /* FSSegmentTitleView.m in Sources */,
 				5F3AB52C2064857D00850BA7 /* WQTextView.m in Sources */,
@@ -1725,11 +1944,15 @@
 				5F3AB50A2064857D00850BA7 /* SuAblumInfo.m in Sources */,
 				5F3AB4CE2064857D00850BA7 /* LoginTextTableViewCell.m in Sources */,
 				5F3AB4F12064857D00850BA7 /* CAAnimation+PagesViewBarShake.m in Sources */,
+				5FDC71B92064A337009EA1E3 /* FindImageListTableViewCell.m in Sources */,
+				5FDC720020651512009EA1E3 /* HistoryBottomView.m in Sources */,
 				5F3AB5232064857D00850BA7 /* WQAuthorizationjudge.m in Sources */,
 				5F3AB4832064857D00850BA7 /* FilterInfo.m in Sources */,
+				5FDC71F92064F36A009EA1E3 /* HistoryTableViewCell.m in Sources */,
 				5F3AB4AF2064857D00850BA7 /* EducationTableViewCell.m in Sources */,
 				5F3AB5212064857D00850BA7 /* WQAlertController.m in Sources */,
 				5F3AB5252064857D00850BA7 /* WQButton.m in Sources */,
+				5FDC71EC2064E4EC009EA1E3 /* ChangePasswordViewController.m in Sources */,
 				5F3AB4AB2064857D00850BA7 /* ConstructionSearchTextTableViewCell.m in Sources */,
 				5F3AB47E2064857D00850BA7 /* AppDelegate.mm in Sources */,
 				5F3AB4912064857D00850BA7 /* InvitationlistViewController.m in Sources */,
@@ -1741,9 +1964,11 @@
 				5F3AB52D2064857D00850BA7 /* WQTools.m in Sources */,
 				5F3AB48D2064857D00850BA7 /* ConstructionSearchViewController.m in Sources */,
 				5F3AB4FA2064857D00850BA7 /* FSPageContentView.m in Sources */,
+				5FDC71B42064A328009EA1E3 /* FindListTableViewCell.m in Sources */,
 				5F3AB4BF2064857D00850BA7 /* HomeListTableViewCell.m in Sources */,
 				5F3AB4EF2064857D00850BA7 /* WQTabBar.m in Sources */,
 				5F3AB4842064857D00850BA7 /* MenuInfo.m in Sources */,
+				5FDC71F02064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m in Sources */,
 				5F3AB4862064857D00850BA7 /* UserInfoEngine.m in Sources */,
 				5F3AB4C42064857D00850BA7 /* SearchTableViewCell.m in Sources */,
 				5F3AB5192064857D00850BA7 /* UISearchBar+PlaceHolder.m in Sources */,
@@ -1760,9 +1985,11 @@
 				5F3AB4F72064857D00850BA7 /* CorePagesBarView.m in Sources */,
 				5F3AB48C2064857D00850BA7 /* AptitudeSelectViewController.m in Sources */,
 				5F3AB4BB2064857D00850BA7 /* HomeGuessTableViewCell.m in Sources */,
+				5FDC71C42064B1D0009EA1E3 /* MessageSetTableViewCell.m in Sources */,
 				5F3AB5022064857D00850BA7 /* UIView+SuAnimation.m in Sources */,
 				5F3AB5202064857D00850BA7 /* UIView+Extension.m in Sources */,
 				5F3AB4822064857D00850BA7 /* CompanyInfo.m in Sources */,
+				5FDC71FD2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m in Sources */,
 				5F3AB52A2064857D00850BA7 /* WQTableView.m in Sources */,
 				5F3AB4F62064857D00850BA7 /* CorePagesBarBtn.m in Sources */,
 				5F3AB4A32064857D00850BA7 /* FileNoticceListViewController.m in Sources */,

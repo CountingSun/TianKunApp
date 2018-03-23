@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+@class QMUIAlertAction;
 
-typedef void(^sureBlock)(UIAlertAction * action);
-typedef void(^cancelBlock)(UIAlertAction * action);
+typedef void(^sureBlock)(QMUIAlertAction * action);
+typedef void(^cancelBlock)(QMUIAlertAction * action);
 
 @interface WQAlertController : NSObject
 

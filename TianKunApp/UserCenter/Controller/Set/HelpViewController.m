@@ -1,25 +1,26 @@
 //
-//  SetViewController.m
+//  HelpViewController.m
 //  TianKunApp
 //
-//  Created by 天堃 on 2018/3/22.
+//  Created by 天堃 on 2018/3/23.
 //  Copyright © 2018年 天堃. All rights reserved.
 //
 
-#import "SetViewController.h"
+#import "HelpViewController.h"
 #import "MenuInfo.h"
 #import "UserCenterViewModel.h"
-#import "AppDelegate.h"
+#import "WebLinkViewController.h"
+#import "FadebackViewController.h"
 
-@interface SetViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HelpViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *footView;
+@property (weak, nonatomic) IBOutlet UIButton *fadebackButton;
 @property (nonatomic ,strong) NSMutableArray *arrMenu;
-@property (weak, nonatomic) IBOutlet UIButton *loginoutButton;
 
 @end
 
-@implementation SetViewController
+@implementation HelpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,16 +28,16 @@
 
 }
 - (void)setupUI{
-    
-    _arrMenu = [UserCenterViewModel arrMenu];
+    [self.titleView setTitle:@"帮助与反馈"];
+    _arrMenu = [UserCenterViewModel arrSetHelpMenu];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.rowHeight = 45;
+    
     _tableView.tableFooterView = self.footView;
-
-    [_loginoutButton setBackgroundColor:COLOR_TEXT_ORANGE];
-    _loginoutButton.layer.masksToBounds = YES;
-    _loginoutButton.layer.cornerRadius = 20;
+    [_fadebackButton setBackgroundColor:COLOR_TEXT_ORANGE];
+    _fadebackButton.layer.masksToBounds = YES;
+    _fadebackButton.layer.cornerRadius = 20;
     
     [self.tableView reloadData];
     
@@ -54,6 +55,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
         cell.textLabel.textColor = COLOR_TEXT_BLACK;
         cell.textLabel.font = [UIFont systemFontOfSize:14];
+        cell.selectionStyle = 0;
         
         
         
@@ -65,24 +67,19 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-}
-- (IBAction)loginoutButtonClickEvent:(id)sender {
-    
-    [WQAlertController showAlertControllerWithTitle:@"提示" message:@"您确定要退出登录吗？" sureButtonTitle:@"确定" cancelTitle:@"取消" sureBlock:^(UIAlertAction *action) {
-        [UserInfoEngine setUserInfo:nil];
-        [[AppDelegate sharedAppDelegate] setRootController];
-
-    } cancelBlock:^(UIAlertAction *action) {
+    MenuInfo *menuInfo = _arrMenu[indexPath.row];
+    WebLinkViewController *viewController = [[WebLinkViewController alloc]initWithTitle:menuInfo.menuName urlString:@"http://cpc.people.com.cn/" goBackBlock:^{
         
     }];
+    [self.navigationController pushViewController:viewController animated:YES];
     
-    
+}
+- (IBAction)fadebackButtonClickEvent:(id)sender {
+    [self.navigationController pushViewController:[FadebackViewController new] animated:YES];
     
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

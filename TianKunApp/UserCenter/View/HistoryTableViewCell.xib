@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="117" id="KGk-i7-Jjw" customClass="HistoryTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="356" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ose-mY-UYu">
+                        <rect key="frame" x="15" y="10" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="6LI-o2-9LX"/>
+                            <constraint firstAttribute="height" constant="80" id="SpO-Lt-JQN"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存储时使用writeToFile: atomically:方法。 其中atomically表示是否需要先写入一个辅助文件，再把辅助文件拷贝到目标文件地址。 这是更安全的写入文件方法，一般都写YES。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13W-39-1kD">
+                        <rect key="frame" x="100" y="10" width="241" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="BIu-uH-GJI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaa-Xv-gQt">
+                        <rect key="frame" x="306.5" y="70" width="34.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="3CY-dO-ghX"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="Nae-9b-sOH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23424人阅读" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhs-hX-W7z">
+                        <rect key="frame" x="100" y="70" width="80" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="I7Q-8H-d9W"/>
+                            <constraint firstAttribute="height" constant="20" id="t0H-Bb-txh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="13W-39-1kD" secondAttribute="trailing" constant="15" id="5MM-er-Koe"/>
+                    <constraint firstAttribute="trailing" secondItem="qaa-Xv-gQt" secondAttribute="trailing" constant="15" id="92S-G1-Nck"/>
+                    <constraint firstItem="ose-mY-UYu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="NCT-fN-NY2"/>
+                    <constraint firstItem="ose-mY-UYu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="e35-XG-7dU"/>
+                    <constraint firstItem="13W-39-1kD" firstAttribute="leading" secondItem="ose-mY-UYu" secondAttribute="trailing" constant="5" id="f7c-Y7-hOP"/>
+                    <constraint firstItem="vhs-hX-W7z" firstAttribute="leading" secondItem="ose-mY-UYu" secondAttribute="trailing" constant="5" id="jei-p9-0Tw"/>
+                    <constraint firstAttribute="bottom" secondItem="vhs-hX-W7z" secondAttribute="bottom" constant="10" id="nUf-Ce-XPY"/>
+                    <constraint firstAttribute="bottom" secondItem="qaa-Xv-gQt" secondAttribute="bottom" constant="10" id="wyo-Yv-Kwz"/>
+                    <constraint firstItem="13W-39-1kD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="z6I-f5-IJU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="nimLabel" destination="vhs-hX-W7z" id="t6R-yD-mlA"/>
+                <outlet property="timeLabel" destination="qaa-Xv-gQt" id="6Ms-VR-h6t"/>
+                <outlet property="titleImageView" destination="ose-mY-UYu" id="HeH-kb-tI8"/>
+                <outlet property="titleLabel" destination="13W-39-1kD" id="71D-zg-brZ"/>
+            </connections>
+            <point key="canvasLocation" x="52" y="90"/>
+        </tableViewCell>
+    </objects>
+</document>

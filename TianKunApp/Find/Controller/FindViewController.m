@@ -9,6 +9,8 @@
 #import "FindViewController.h"
 #import "FindTableViewCell.h"
 #import "MenuInfo.h"
+#import "FindeListViewController.h"
+#import "FindImageListViewController.h"
 
 
 @interface FindViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -68,6 +70,28 @@
     }
     return _arrMenu;
     
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MenuInfo *menuInfo = self.arrMenu[indexPath.row];
+    switch (menuInfo.menuID) {
+        case 0:
+            {
+                FindeListViewController *vc = [[FindeListViewController alloc]initWithViewTitle:menuInfo.menuName];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            break;
+            
+        default:{
+            FindImageListViewController *vc = [[FindImageListViewController alloc]initWithViewTitle:menuInfo.menuName];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+    }
+    
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -51,5 +51,24 @@
     return arr;
 
 }
++ (NSMutableArray *)arrSetHelpMenu{
+    NSMutableArray *arr = [NSMutableArray array];
+    
+    MenuInfo *menuInof0 = [[MenuInfo alloc]initWithMenuName:@"建筑一秘是干什么的？" menuIcon:@"" menuID:0];
+    [arr addObject:menuInof0];
+    
+    MenuInfo *menuInof1 = [[MenuInfo alloc]initWithMenuName:@"成为会员有什么好处？" menuIcon:@"" menuID:1];
+    [arr addObject:menuInof1];
+    MenuInfo *menuInof2 = [[MenuInfo alloc]initWithMenuName:@"积分该怎么用？" menuIcon:@"" menuID:2];
+    [arr addObject:menuInof2];
+    
+    MenuInfo *menuInof3 = [[MenuInfo alloc]initWithMenuName:@"如何赚取积分" menuIcon:@"" menuID:3];
+    [arr addObject:menuInof3];
+    
+    
+    
+    return arr;
+
+}
 
 @end

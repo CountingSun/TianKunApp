@@ -38,7 +38,7 @@
     [self setValue:tabBar forKey:@"tabBar"];
     
     [self addChildViewController];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
     
 }
 - (void)loginSucceed{

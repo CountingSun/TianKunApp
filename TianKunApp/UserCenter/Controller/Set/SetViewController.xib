@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SetViewController">
+            <connections>
+                <outlet property="footView" destination="N7D-PO-JyP" id="lWJ-CA-g1b"/>
+                <outlet property="loginoutButton" destination="BUe-dd-OeH" id="NhP-uU-hpJ"/>
+                <outlet property="tableView" destination="yUB-wr-cvC" id="X5S-cE-Oc6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="yUB-wr-cvC">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yUB-wr-cvC" secondAttribute="trailing" id="1ao-D6-ToO"/>
+                <constraint firstAttribute="bottom" secondItem="yUB-wr-cvC" secondAttribute="bottom" id="Ld3-ZD-dUD"/>
+                <constraint firstItem="yUB-wr-cvC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qm0-Xp-EzW"/>
+                <constraint firstItem="yUB-wr-cvC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tov-2a-Hqu"/>
+            </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="N7D-PO-JyP">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="185"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUe-dd-OeH">
+                    <rect key="frame" x="10" y="30" width="355" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="sOH-Ik-gFn"/>
+                    </constraints>
+                    <state key="normal" title="退出登录"/>
+                    <connections>
+                        <action selector="loginoutButtonClickEvent:" destination="-1" eventType="touchUpInside" id="fIl-FQ-RGI"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="BUe-dd-OeH" firstAttribute="top" secondItem="N7D-PO-JyP" secondAttribute="top" constant="30" id="6x4-Ab-2fi"/>
+                <constraint firstAttribute="trailing" secondItem="BUe-dd-OeH" secondAttribute="trailing" constant="10" id="F6K-Pk-exl"/>
+                <constraint firstItem="BUe-dd-OeH" firstAttribute="leading" secondItem="N7D-PO-JyP" secondAttribute="leading" constant="10" id="OdL-zr-Vrc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="34.5" y="-917.5"/>
+        </view>
+    </objects>
+</document>

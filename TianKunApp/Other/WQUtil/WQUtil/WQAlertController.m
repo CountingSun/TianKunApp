@@ -16,24 +16,47 @@
                         cancelTitle:(NSString *)cancelTitle
                           sureBlock:(sureBlock)sureBlock
                         cancelBlock:(cancelBlock)cancelBlock{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *setAction = [UIAlertAction actionWithTitle:sureButtonTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    
+    QMUIAlertController *alertController = [[QMUIAlertController alloc]initWithTitle:title message:message preferredStyle:QMUIAlertControllerStyleAlert];
+    
+    QMUIAlertAction *setAction = [QMUIAlertAction actionWithTitle:sureButtonTitle style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
         sureBlock(action);
     }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    
+    
+    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:cancelTitle style:QMUIAlertActionStyleCancel handler:^(QMUIAlertAction * action) {
         cancelBlock(action);
 
     }];
+    
     [alertController addAction:setAction];
     [alertController addAction:cancelAction];
     
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:^{
-        
-    }];
+    
+    [alertController showWithAnimated:YES];
     
 
     
+}
++ (UIViewController *)topViewController {
+    UIViewController *resultVC;
+    resultVC = [self _topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
+    while (resultVC.presentedViewController) {
+        resultVC = [self _topViewController:resultVC.presentedViewController];
+    }
+    return resultVC;
+}
+
++ (UIViewController *)_topViewController:(UIViewController *)vc {
+    if ([vc isKindOfClass:[UINavigationController class]]) {
+        return [self _topViewController:[(UINavigationController *)vc topViewController]];
+    } else if ([vc isKindOfClass:[UITabBarController class]]) {
+        return [self _topViewController:[(UITabBarController *)vc selectedViewController]];
+    } else {
+        return vc;
+    }
+    return nil;
 }
 
 @end
