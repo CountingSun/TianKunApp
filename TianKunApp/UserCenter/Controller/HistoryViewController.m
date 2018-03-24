@@ -47,7 +47,7 @@
         for (NSInteger i = 0; i< 30; i++) {
             NSMutableArray *arrOne = [NSMutableArray array];
             for (NSInteger j = 0; j<20; j++) {
-                MenuInfo *menuInfo = [[MenuInfo alloc]initWithMenuName:[NSString stringWithFormat:@"section%@  row%@",@(i),@(j)] menuIcon:@"" menuID:0];
+                MenuInfo *menuInfo = [[MenuInfo alloc]initWithMenuName:[NSString stringWithFormat:@"section%@  row%@",@(i),@(j)] menuIcon:@"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=777343979,2436872658&fm=27&gp=0.jpg" menuID:0];
                 
                 [arrOne addObject:menuInfo];
             }
@@ -83,33 +83,64 @@
 - (void)allSelectButtonClick{
     
     _historyBottomView.selectButton.selected =! _historyBottomView.selectButton.selected;
+    if (_historyBottomView.selectButton.selected) {
+        [_arrData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger section, BOOL * _Nonnull stop) {
+            NSMutableArray *arr = obj;
+            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger row, BOOL * _Nonnull stop) {
+                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES scrollPosition:UITableViewScrollPositionNone];
+                
+                
+            }];
+            
+        }];
+
+    }else{
+        [_arrData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger section, BOOL * _Nonnull stop) {
+            NSMutableArray *arr = obj;
+            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger row, BOOL * _Nonnull stop) {
+                [_tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES];
+                
+                
+            }];
+            
+        }];
+
+    }
+    
+    
 }
 - (void)unUseButtonClick{
     
 }
 - (void)clearnSelectButtonClick{
+    NSArray<NSIndexPath *> *arrRows =   [_tableView indexPathsForSelectedRows];
     
+    [arrRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        MenuInfo *menuInfo = _arrData[obj.section][obj.row];
+        menuInfo.menuID = 1;
+    }];
+    TICK
+    [self disposeArr];
+    TOCK
+    [UIView transitionWithView:self.tableView
+                      duration: 0.35f
+                       options: UIViewAnimationOptionTransitionCrossDissolve
+                    animations: ^(void)
+     {
+         [self.tableView reloadData];
+     }
+                    completion: ^(BOOL isFinished)
+     {
+         
+     }];
+    
+
+
 }
 
 - (void)editButtonEvent{
     
     if (_tableView.editing) {
-        NSArray<NSIndexPath *> *arrRows =   [_tableView indexPathsForSelectedRows];
-        
-        [arrRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            MenuInfo *menuInfo = _arrData[obj.section][obj.row];
-            menuInfo.menuID = 1;
-        }];
-        TICK
-        [self disposeArr];
-        TOCK
-        
-        [_tableView reloadData];
-        
-        
-        
-        
-        
         [_tableView setEditing:NO animated:YES];
         [_editButton setImage:[UIImage imageNamed:@"删除"] forState:0];
         [_editButton setTitle:@"" forState:0];
@@ -130,7 +161,6 @@
             [self.view layoutIfNeeded];
 
         }];
-
         [_editButton setImage:nil forState:0];
         [_editButton setTitle:@"取消" forState:0];
 
@@ -226,8 +256,9 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HistoryTableViewCell" owner:nil options:nil] firstObject];
     }
     MenuInfo *menInfo =self.arrData[indexPath.section][indexPath.row];
-
     cell.titleLabel.text = menInfo.menuName;
+    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:menInfo.menuIcon] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_11]];
+
     return cell;
     
 }

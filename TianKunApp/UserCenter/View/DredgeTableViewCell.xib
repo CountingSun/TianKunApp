@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="DredgeTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kSq-fo-Mbr">
+                        <rect key="frame" x="15" y="7" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="iXv-x2-7KP"/>
+                            <constraint firstAttribute="height" constant="30" id="lXA-CX-RnB"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="选择-未选" translatesAutoresizingMaskIntoConstraints="NO" id="ZNk-EJ-KOZ">
+                        <rect key="frame" x="285" y="12" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="ITe-b1-5Ed"/>
+                            <constraint firstAttribute="width" constant="20" id="g2V-3W-MOS"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="支付宝" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsH-EP-clW">
+                        <rect key="frame" x="92" y="11" width="97" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ZNk-EJ-KOZ" secondAttribute="trailing" constant="15" id="1HZ-h0-9jT"/>
+                    <constraint firstItem="kSq-fo-Mbr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="FUf-XE-1gv"/>
+                    <constraint firstItem="ZNk-EJ-KOZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lev-TH-ZYH"/>
+                    <constraint firstItem="kSq-fo-Mbr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Pta-9i-EjO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="iamgeView" destination="ZNk-EJ-KOZ" id="Wxd-om-iQn"/>
+                <outlet property="iconImageView" destination="kSq-fo-Mbr" id="dNE-1T-HRR"/>
+                <outlet property="label" destination="HsH-EP-clW" id="yTP-1G-zdF"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="选择-未选" width="18" height="18"/>
+    </resources>
+</document>

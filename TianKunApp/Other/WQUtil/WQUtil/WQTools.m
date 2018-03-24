@@ -145,7 +145,7 @@
 
 {
     
-    [[SDImageCache sharedImageCache] clearDisk];
+    [[SDImageCache sharedImageCache] clearDiskOnCompletion:nil];
     
     [[SDImageCache sharedImageCache] clearMemory];//可有可无
     

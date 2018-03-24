@@ -34,12 +34,12 @@
                     <state key="normal" title="删除"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OyU-Z6-rEA" customClass="QMUIButton">
-                    <rect key="frame" x="0.0" y="0.0" width="60" height="50"/>
+                    <rect key="frame" x="10" y="0.0" width="80" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="wJe-X9-PYR"/>
+                        <constraint firstAttribute="width" constant="80" id="wJe-X9-PYR"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="全选" image="未选中">
+                    <state key="normal" title="取消全选" image="未选中">
                         <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
@@ -50,7 +50,7 @@
                 <constraint firstItem="QJu-8W-C6I" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="I6k-iB-AHB"/>
                 <constraint firstAttribute="bottom" secondItem="OyU-Z6-rEA" secondAttribute="bottom" id="K7e-2J-6kt"/>
                 <constraint firstItem="OyU-Z6-rEA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OYT-dW-nKy"/>
-                <constraint firstItem="OyU-Z6-rEA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Stl-tM-Rff"/>
+                <constraint firstItem="OyU-Z6-rEA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="Stl-tM-Rff"/>
                 <constraint firstAttribute="bottom" secondItem="1lw-Gm-0jp" secondAttribute="bottom" id="cJ8-WC-cFw"/>
                 <constraint firstItem="QJu-8W-C6I" firstAttribute="leading" secondItem="1lw-Gm-0jp" secondAttribute="trailing" constant="1" id="e0b-lS-02D"/>
                 <constraint firstAttribute="trailing" secondItem="QJu-8W-C6I" secondAttribute="trailing" id="z5i-wv-d0D"/>

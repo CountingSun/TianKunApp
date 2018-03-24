@@ -15,7 +15,8 @@
     _titleLabel.textColor = COLOR_TEXT_BLACK;
     _nimLabel.textColor = COLOR_TEXT_LIGHT;
     _timeLabel.textColor = COLOR_TEXT_LIGHT;
-    
+    self.multipleSelectionBackgroundView = [UIView new];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

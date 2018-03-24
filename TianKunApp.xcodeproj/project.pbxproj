@@ -250,6 +250,55 @@
 		5FDC71FD2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FC2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m */; };
 		5FDC720020651512009EA1E3 /* HistoryBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */; };
 		5FDC720220651544009EA1E3 /* HistoryBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC720120651544009EA1E3 /* HistoryBottomView.xib */; };
+		5FFCC6CF2065DEC10047E9F7 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6CD2065DEC10047E9F7 /* CollectionViewController.m */; };
+		5FFCC6D02065DEC20047E9F7 /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6CE2065DEC10047E9F7 /* CollectionViewController.xib */; };
+		5FFCC6D42065E6AA0047E9F7 /* MyVIPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6D22065E6AA0047E9F7 /* MyVIPViewController.m */; };
+		5FFCC6D52065E6AA0047E9F7 /* MyVIPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6D32065E6AA0047E9F7 /* MyVIPViewController.xib */; };
+		5FFCC6D92065E9B50047E9F7 /* DetailRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6D72065E9B50047E9F7 /* DetailRecordViewController.m */; };
+		5FFCC6DA2065E9B50047E9F7 /* DetailRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6D82065E9B50047E9F7 /* DetailRecordViewController.xib */; };
+		5FFCC6DE2065EA5D0047E9F7 /* MyRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6DC2065EA5D0047E9F7 /* MyRecordTableViewCell.m */; };
+		5FFCC6DF2065EA5D0047E9F7 /* MyRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6DD2065EA5D0047E9F7 /* MyRecordTableViewCell.xib */; };
+		5FFCC6E32065FD000047E9F7 /* VipItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6E12065FD000047E9F7 /* VipItemCollectionViewCell.m */; };
+		5FFCC6E42065FD000047E9F7 /* VipItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6E22065FD000047E9F7 /* VipItemCollectionViewCell.xib */; };
+		5FFCC6E8206620A80047E9F7 /* UserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6E6206620A80047E9F7 /* UserInfoViewController.m */; };
+		5FFCC6E9206620A80047E9F7 /* UserInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6E7206620A80047E9F7 /* UserInfoViewController.xib */; };
+		5FFCC6EE206622DA0047E9F7 /* DredgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6EC206622DA0047E9F7 /* DredgeViewController.m */; };
+		5FFCC6EF206622DA0047E9F7 /* DredgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6ED206622DA0047E9F7 /* DredgeViewController.xib */; };
+		5FFCC6F320662EDF0047E9F7 /* DredgeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6F120662EDF0047E9F7 /* DredgeTableViewCell.m */; };
+		5FFCC6F420662EDF0047E9F7 /* DredgeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6F220662EDF0047E9F7 /* DredgeTableViewCell.xib */; };
+		5FFCC6F82066372B0047E9F7 /* VIPUploadInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6F62066372B0047E9F7 /* VIPUploadInfoViewController.m */; };
+		5FFCC6F92066372B0047E9F7 /* VIPUploadInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6F72066372B0047E9F7 /* VIPUploadInfoViewController.xib */; };
+		5FFCC74220663CBB0047E9F7 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6FD20663CBB0047E9F7 /* DACircularProgressView.m */; };
+		5FFCC74320663CBB0047E9F7 /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6FF20663CBB0047E9F7 /* DALabeledCircularProgressView.m */; };
+		5FFCC74420663CBB0047E9F7 /* FLAnimatedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC70220663CBB0047E9F7 /* FLAnimatedImage.m */; };
+		5FFCC74520663CBB0047E9F7 /* FLAnimatedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC70420663CBB0047E9F7 /* FLAnimatedImageView.m */; };
+		5FFCC74620663CBB0047E9F7 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC70620663CBB0047E9F7 /* MBProgressHUD.bundle */; };
+		5FFCC74720663CBB0047E9F7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC70820663CBB0047E9F7 /* MBProgressHUD.m */; };
+		5FFCC78520663CCA0047E9F7 /* MBProgressHUD+PYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC76620663CCA0047E9F7 /* MBProgressHUD+PYExtension.m */; };
+		5FFCC78620663CCA0047E9F7 /* UIView+PYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC76820663CCA0047E9F7 /* UIView+PYExtension.m */; };
+		5FFCC78720663CCA0047E9F7 /* PYPhotosNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC76B20663CCA0047E9F7 /* PYPhotosNavigationController.m */; };
+		5FFCC78820663CCA0047E9F7 /* PYPhotosPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC76D20663CCA0047E9F7 /* PYPhotosPreviewController.m */; };
+		5FFCC78920663CCA0047E9F7 /* PYPhotosReaderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC76F20663CCA0047E9F7 /* PYPhotosReaderController.m */; };
+		5FFCC78A20663CCA0047E9F7 /* PYPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC77120663CCA0047E9F7 /* PYPhotosViewController.m */; };
+		5FFCC78B20663CCA0047E9F7 /* PYPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC77420663CCA0047E9F7 /* PYPhoto.m */; };
+		5FFCC78C20663CCA0047E9F7 /* PYPhotoBrowserConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC77720663CCA0047E9F7 /* PYPhotoBrowserConst.m */; };
+		5FFCC78D20663CCA0047E9F7 /* PYProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC77920663CCA0047E9F7 /* PYProgressView.m */; };
+		5FFCC78E20663CCA0047E9F7 /* PYPhotosView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC77B20663CCA0047E9F7 /* PYPhotosView.bundle */; };
+		5FFCC78F20663CCA0047E9F7 /* PYPhotoBrowseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC77E20663CCA0047E9F7 /* PYPhotoBrowseView.m */; };
+		5FFCC79020663CCA0047E9F7 /* PYPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC78020663CCA0047E9F7 /* PYPhotoCell.m */; };
+		5FFCC79120663CCA0047E9F7 /* PYPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC78220663CCA0047E9F7 /* PYPhotosView.m */; };
+		5FFCC79220663CCA0047E9F7 /* PYPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC78420663CCA0047E9F7 /* PYPhotoView.m */; };
+		5FFCC7C120663E3E0047E9F7 /* FLAnimatedImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC79920663E3E0047E9F7 /* FLAnimatedImageView+WebCache.m */; };
+		5FFCC7D8206649C10047E9F7 /* MyPublickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC7D6206649C10047E9F7 /* MyPublickViewController.m */; };
+		5FFCC7D9206649C10047E9F7 /* MyPublickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC7D7206649C10047E9F7 /* MyPublickViewController.xib */; };
+		5FFCC7DD20664F660047E9F7 /* UserInfoEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC7DB20664F660047E9F7 /* UserInfoEditTableViewCell.m */; };
+		5FFCC7DE20664F660047E9F7 /* UserInfoEditTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC7DC20664F660047E9F7 /* UserInfoEditTableViewCell.xib */; };
+		5FFCC7E2206657100047E9F7 /* UserInfoHeadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC7E0206657100047E9F7 /* UserInfoHeadTableViewCell.m */; };
+		5FFCC7E3206657100047E9F7 /* UserInfoHeadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC7E1206657100047E9F7 /* UserInfoHeadTableViewCell.xib */; };
+		5FFCC7E7206659010047E9F7 /* UserInfoPhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC7E5206659010047E9F7 /* UserInfoPhotoTableViewCell.m */; };
+		5FFCC7E8206659010047E9F7 /* UserInfoPhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC7E6206659010047E9F7 /* UserInfoPhotoTableViewCell.xib */; };
+		5FFCC7EC2066613F0047E9F7 /* BusinessLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC7EA2066613F0047E9F7 /* BusinessLicenseViewController.m */; };
+		5FFCC7ED2066613F0047E9F7 /* BusinessLicenseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC7EB2066613F0047E9F7 /* BusinessLicenseViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -650,6 +699,89 @@
 		5FDC71FE20651512009EA1E3 /* HistoryBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryBottomView.h; sourceTree = "<group>"; };
 		5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryBottomView.m; sourceTree = "<group>"; };
 		5FDC720120651544009EA1E3 /* HistoryBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryBottomView.xib; sourceTree = "<group>"; };
+		5FFCC6CC2065DEC10047E9F7 /* CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		5FFCC6CD2065DEC10047E9F7 /* CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
+		5FFCC6CE2065DEC10047E9F7 /* CollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
+		5FFCC6D12065E6AA0047E9F7 /* MyVIPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyVIPViewController.h; sourceTree = "<group>"; };
+		5FFCC6D22065E6AA0047E9F7 /* MyVIPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyVIPViewController.m; sourceTree = "<group>"; };
+		5FFCC6D32065E6AA0047E9F7 /* MyVIPViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyVIPViewController.xib; sourceTree = "<group>"; };
+		5FFCC6D62065E9B50047E9F7 /* DetailRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailRecordViewController.h; sourceTree = "<group>"; };
+		5FFCC6D72065E9B50047E9F7 /* DetailRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailRecordViewController.m; sourceTree = "<group>"; };
+		5FFCC6D82065E9B50047E9F7 /* DetailRecordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailRecordViewController.xib; sourceTree = "<group>"; };
+		5FFCC6DB2065EA5D0047E9F7 /* MyRecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRecordTableViewCell.h; sourceTree = "<group>"; };
+		5FFCC6DC2065EA5D0047E9F7 /* MyRecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyRecordTableViewCell.m; sourceTree = "<group>"; };
+		5FFCC6DD2065EA5D0047E9F7 /* MyRecordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyRecordTableViewCell.xib; sourceTree = "<group>"; };
+		5FFCC6E02065FD000047E9F7 /* VipItemCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VipItemCollectionViewCell.h; sourceTree = "<group>"; };
+		5FFCC6E12065FD000047E9F7 /* VipItemCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VipItemCollectionViewCell.m; sourceTree = "<group>"; };
+		5FFCC6E22065FD000047E9F7 /* VipItemCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VipItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		5FFCC6E5206620A80047E9F7 /* UserInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoViewController.h; sourceTree = "<group>"; };
+		5FFCC6E6206620A80047E9F7 /* UserInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoViewController.m; sourceTree = "<group>"; };
+		5FFCC6E7206620A80047E9F7 /* UserInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserInfoViewController.xib; sourceTree = "<group>"; };
+		5FFCC6EB206622DA0047E9F7 /* DredgeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DredgeViewController.h; sourceTree = "<group>"; };
+		5FFCC6EC206622DA0047E9F7 /* DredgeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DredgeViewController.m; sourceTree = "<group>"; };
+		5FFCC6ED206622DA0047E9F7 /* DredgeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DredgeViewController.xib; sourceTree = "<group>"; };
+		5FFCC6F020662EDF0047E9F7 /* DredgeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DredgeTableViewCell.h; sourceTree = "<group>"; };
+		5FFCC6F120662EDF0047E9F7 /* DredgeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DredgeTableViewCell.m; sourceTree = "<group>"; };
+		5FFCC6F220662EDF0047E9F7 /* DredgeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DredgeTableViewCell.xib; sourceTree = "<group>"; };
+		5FFCC6F52066372B0047E9F7 /* VIPUploadInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VIPUploadInfoViewController.h; sourceTree = "<group>"; };
+		5FFCC6F62066372B0047E9F7 /* VIPUploadInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VIPUploadInfoViewController.m; sourceTree = "<group>"; };
+		5FFCC6F72066372B0047E9F7 /* VIPUploadInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VIPUploadInfoViewController.xib; sourceTree = "<group>"; };
+		5FFCC6FC20663CBB0047E9F7 /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		5FFCC6FD20663CBB0047E9F7 /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
+		5FFCC6FE20663CBB0047E9F7 /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
+		5FFCC6FF20663CBB0047E9F7 /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
+		5FFCC70120663CBB0047E9F7 /* FLAnimatedImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImage.h; sourceTree = "<group>"; };
+		5FFCC70220663CBB0047E9F7 /* FLAnimatedImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImage.m; sourceTree = "<group>"; };
+		5FFCC70320663CBB0047E9F7 /* FLAnimatedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAnimatedImageView.h; sourceTree = "<group>"; };
+		5FFCC70420663CBB0047E9F7 /* FLAnimatedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAnimatedImageView.m; sourceTree = "<group>"; };
+		5FFCC70620663CBB0047E9F7 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
+		5FFCC70720663CBB0047E9F7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		5FFCC70820663CBB0047E9F7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		5FFCC76520663CCA0047E9F7 /* MBProgressHUD+PYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+PYExtension.h"; sourceTree = "<group>"; };
+		5FFCC76620663CCA0047E9F7 /* MBProgressHUD+PYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+PYExtension.m"; sourceTree = "<group>"; };
+		5FFCC76720663CCA0047E9F7 /* UIView+PYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PYExtension.h"; sourceTree = "<group>"; };
+		5FFCC76820663CCA0047E9F7 /* UIView+PYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PYExtension.m"; sourceTree = "<group>"; };
+		5FFCC76A20663CCA0047E9F7 /* PYPhotosNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotosNavigationController.h; sourceTree = "<group>"; };
+		5FFCC76B20663CCA0047E9F7 /* PYPhotosNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotosNavigationController.m; sourceTree = "<group>"; };
+		5FFCC76C20663CCA0047E9F7 /* PYPhotosPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotosPreviewController.h; sourceTree = "<group>"; };
+		5FFCC76D20663CCA0047E9F7 /* PYPhotosPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotosPreviewController.m; sourceTree = "<group>"; };
+		5FFCC76E20663CCA0047E9F7 /* PYPhotosReaderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotosReaderController.h; sourceTree = "<group>"; };
+		5FFCC76F20663CCA0047E9F7 /* PYPhotosReaderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotosReaderController.m; sourceTree = "<group>"; };
+		5FFCC77020663CCA0047E9F7 /* PYPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotosViewController.h; sourceTree = "<group>"; };
+		5FFCC77120663CCA0047E9F7 /* PYPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotosViewController.m; sourceTree = "<group>"; };
+		5FFCC77320663CCA0047E9F7 /* PYPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhoto.h; sourceTree = "<group>"; };
+		5FFCC77420663CCA0047E9F7 /* PYPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhoto.m; sourceTree = "<group>"; };
+		5FFCC77620663CCA0047E9F7 /* PYPhotoBrowserConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotoBrowserConst.h; sourceTree = "<group>"; };
+		5FFCC77720663CCA0047E9F7 /* PYPhotoBrowserConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotoBrowserConst.m; sourceTree = "<group>"; };
+		5FFCC77820663CCA0047E9F7 /* PYProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYProgressView.h; sourceTree = "<group>"; };
+		5FFCC77920663CCA0047E9F7 /* PYProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYProgressView.m; sourceTree = "<group>"; };
+		5FFCC77A20663CCA0047E9F7 /* PYPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotoBrowser.h; sourceTree = "<group>"; };
+		5FFCC77B20663CCA0047E9F7 /* PYPhotosView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PYPhotosView.bundle; sourceTree = "<group>"; };
+		5FFCC77D20663CCA0047E9F7 /* PYPhotoBrowseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotoBrowseView.h; sourceTree = "<group>"; };
+		5FFCC77E20663CCA0047E9F7 /* PYPhotoBrowseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotoBrowseView.m; sourceTree = "<group>"; };
+		5FFCC77F20663CCA0047E9F7 /* PYPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotoCell.h; sourceTree = "<group>"; };
+		5FFCC78020663CCA0047E9F7 /* PYPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotoCell.m; sourceTree = "<group>"; };
+		5FFCC78120663CCA0047E9F7 /* PYPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotosView.h; sourceTree = "<group>"; };
+		5FFCC78220663CCA0047E9F7 /* PYPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotosView.m; sourceTree = "<group>"; };
+		5FFCC78320663CCA0047E9F7 /* PYPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PYPhotoView.h; sourceTree = "<group>"; };
+		5FFCC78420663CCA0047E9F7 /* PYPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PYPhotoView.m; sourceTree = "<group>"; };
+		5FFCC79820663E3E0047E9F7 /* FLAnimatedImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FLAnimatedImageView+WebCache.h"; sourceTree = "<group>"; };
+		5FFCC79920663E3E0047E9F7 /* FLAnimatedImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FLAnimatedImageView+WebCache.m"; sourceTree = "<group>"; };
+		5FFCC7D5206649C10047E9F7 /* MyPublickViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPublickViewController.h; sourceTree = "<group>"; };
+		5FFCC7D6206649C10047E9F7 /* MyPublickViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPublickViewController.m; sourceTree = "<group>"; };
+		5FFCC7D7206649C10047E9F7 /* MyPublickViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPublickViewController.xib; sourceTree = "<group>"; };
+		5FFCC7DA20664F660047E9F7 /* UserInfoEditTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoEditTableViewCell.h; sourceTree = "<group>"; };
+		5FFCC7DB20664F660047E9F7 /* UserInfoEditTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoEditTableViewCell.m; sourceTree = "<group>"; };
+		5FFCC7DC20664F660047E9F7 /* UserInfoEditTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserInfoEditTableViewCell.xib; sourceTree = "<group>"; };
+		5FFCC7DF206657100047E9F7 /* UserInfoHeadTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoHeadTableViewCell.h; sourceTree = "<group>"; };
+		5FFCC7E0206657100047E9F7 /* UserInfoHeadTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoHeadTableViewCell.m; sourceTree = "<group>"; };
+		5FFCC7E1206657100047E9F7 /* UserInfoHeadTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserInfoHeadTableViewCell.xib; sourceTree = "<group>"; };
+		5FFCC7E4206659010047E9F7 /* UserInfoPhotoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoPhotoTableViewCell.h; sourceTree = "<group>"; };
+		5FFCC7E5206659010047E9F7 /* UserInfoPhotoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserInfoPhotoTableViewCell.m; sourceTree = "<group>"; };
+		5FFCC7E6206659010047E9F7 /* UserInfoPhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserInfoPhotoTableViewCell.xib; sourceTree = "<group>"; };
+		5FFCC7E92066613F0047E9F7 /* BusinessLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessLicenseViewController.h; sourceTree = "<group>"; };
+		5FFCC7EA2066613F0047E9F7 /* BusinessLicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessLicenseViewController.m; sourceTree = "<group>"; };
+		5FFCC7EB2066613F0047E9F7 /* BusinessLicenseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessLicenseViewController.xib; sourceTree = "<group>"; };
 		D7032CC2C7009A5C1E84BAE5 /* Pods-TianKunApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TianKunApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TianKunApp/Pods-TianKunApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1204,6 +1336,8 @@
 				5F3AB3A92064857D00850BA7 /* AppShared.h */,
 				5F3AB3AA2064857D00850BA7 /* AppShared.m */,
 				5F3AB3AB2064857D00850BA7 /* PrefixHeader.pch */,
+				5FFCC76320663CCA0047E9F7 /* PYPhotoBrowser */,
+				5FFCC6FA20663CBB0047E9F7 /* Dependency */,
 				5F3AB3D32064857D00850BA7 /* WQUtil */,
 			);
 			path = Other;
@@ -1515,6 +1649,7 @@
 		5F3AB46C2064857D00850BA7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5FFCC6EA206622A60047E9F7 /* Vip */,
 				5FDC71DE2064DEDE009EA1E3 /* Set */,
 				5F3AB4702064857D00850BA7 /* UserCenterViewController.h */,
 				5F3AB4712064857D00850BA7 /* UserCenterViewController.m */,
@@ -1522,6 +1657,21 @@
 				5FDC71F12064F084009EA1E3 /* HistoryViewController.h */,
 				5FDC71F22064F084009EA1E3 /* HistoryViewController.m */,
 				5FDC71F32064F084009EA1E3 /* HistoryViewController.xib */,
+				5FFCC6CC2065DEC10047E9F7 /* CollectionViewController.h */,
+				5FFCC6CD2065DEC10047E9F7 /* CollectionViewController.m */,
+				5FFCC6CE2065DEC10047E9F7 /* CollectionViewController.xib */,
+				5FFCC6D62065E9B50047E9F7 /* DetailRecordViewController.h */,
+				5FFCC6D72065E9B50047E9F7 /* DetailRecordViewController.m */,
+				5FFCC6D82065E9B50047E9F7 /* DetailRecordViewController.xib */,
+				5FFCC6E5206620A80047E9F7 /* UserInfoViewController.h */,
+				5FFCC6E6206620A80047E9F7 /* UserInfoViewController.m */,
+				5FFCC6E7206620A80047E9F7 /* UserInfoViewController.xib */,
+				5FFCC7D5206649C10047E9F7 /* MyPublickViewController.h */,
+				5FFCC7D6206649C10047E9F7 /* MyPublickViewController.m */,
+				5FFCC7D7206649C10047E9F7 /* MyPublickViewController.xib */,
+				5FFCC7E92066613F0047E9F7 /* BusinessLicenseViewController.h */,
+				5FFCC7EA2066613F0047E9F7 /* BusinessLicenseViewController.m */,
+				5FFCC7EB2066613F0047E9F7 /* BusinessLicenseViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1583,6 +1733,24 @@
 				5FDC71FE20651512009EA1E3 /* HistoryBottomView.h */,
 				5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */,
 				5FDC720120651544009EA1E3 /* HistoryBottomView.xib */,
+				5FFCC6DB2065EA5D0047E9F7 /* MyRecordTableViewCell.h */,
+				5FFCC6DC2065EA5D0047E9F7 /* MyRecordTableViewCell.m */,
+				5FFCC6DD2065EA5D0047E9F7 /* MyRecordTableViewCell.xib */,
+				5FFCC6E02065FD000047E9F7 /* VipItemCollectionViewCell.h */,
+				5FFCC6E12065FD000047E9F7 /* VipItemCollectionViewCell.m */,
+				5FFCC6E22065FD000047E9F7 /* VipItemCollectionViewCell.xib */,
+				5FFCC6F020662EDF0047E9F7 /* DredgeTableViewCell.h */,
+				5FFCC6F120662EDF0047E9F7 /* DredgeTableViewCell.m */,
+				5FFCC6F220662EDF0047E9F7 /* DredgeTableViewCell.xib */,
+				5FFCC7DA20664F660047E9F7 /* UserInfoEditTableViewCell.h */,
+				5FFCC7DB20664F660047E9F7 /* UserInfoEditTableViewCell.m */,
+				5FFCC7DC20664F660047E9F7 /* UserInfoEditTableViewCell.xib */,
+				5FFCC7DF206657100047E9F7 /* UserInfoHeadTableViewCell.h */,
+				5FFCC7E0206657100047E9F7 /* UserInfoHeadTableViewCell.m */,
+				5FFCC7E1206657100047E9F7 /* UserInfoHeadTableViewCell.xib */,
+				5FFCC7E4206659010047E9F7 /* UserInfoPhotoTableViewCell.h */,
+				5FFCC7E5206659010047E9F7 /* UserInfoPhotoTableViewCell.m */,
+				5FFCC7E6206659010047E9F7 /* UserInfoPhotoTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1631,6 +1799,150 @@
 				5FDC71EB2064E4EC009EA1E3 /* ChangePasswordViewController.xib */,
 			);
 			path = Set;
+			sourceTree = "<group>";
+		};
+		5FFCC6EA206622A60047E9F7 /* Vip */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC6D12065E6AA0047E9F7 /* MyVIPViewController.h */,
+				5FFCC6D22065E6AA0047E9F7 /* MyVIPViewController.m */,
+				5FFCC6D32065E6AA0047E9F7 /* MyVIPViewController.xib */,
+				5FFCC6EB206622DA0047E9F7 /* DredgeViewController.h */,
+				5FFCC6EC206622DA0047E9F7 /* DredgeViewController.m */,
+				5FFCC6ED206622DA0047E9F7 /* DredgeViewController.xib */,
+				5FFCC6F52066372B0047E9F7 /* VIPUploadInfoViewController.h */,
+				5FFCC6F62066372B0047E9F7 /* VIPUploadInfoViewController.m */,
+				5FFCC6F72066372B0047E9F7 /* VIPUploadInfoViewController.xib */,
+			);
+			path = Vip;
+			sourceTree = "<group>";
+		};
+		5FFCC6FA20663CBB0047E9F7 /* Dependency */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC79720663E3E0047E9F7 /* FLAnimatedImage */,
+				5FFCC6FB20663CBB0047E9F7 /* DACircularProgress */,
+				5FFCC70020663CBB0047E9F7 /* FLAnimatedImage */,
+				5FFCC70520663CBB0047E9F7 /* MBProgressHUD */,
+			);
+			path = Dependency;
+			sourceTree = "<group>";
+		};
+		5FFCC6FB20663CBB0047E9F7 /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC6FC20663CBB0047E9F7 /* DACircularProgressView.h */,
+				5FFCC6FD20663CBB0047E9F7 /* DACircularProgressView.m */,
+				5FFCC6FE20663CBB0047E9F7 /* DALabeledCircularProgressView.h */,
+				5FFCC6FF20663CBB0047E9F7 /* DALabeledCircularProgressView.m */,
+			);
+			path = DACircularProgress;
+			sourceTree = "<group>";
+		};
+		5FFCC70020663CBB0047E9F7 /* FLAnimatedImage */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC70120663CBB0047E9F7 /* FLAnimatedImage.h */,
+				5FFCC70220663CBB0047E9F7 /* FLAnimatedImage.m */,
+				5FFCC70320663CBB0047E9F7 /* FLAnimatedImageView.h */,
+				5FFCC70420663CBB0047E9F7 /* FLAnimatedImageView.m */,
+			);
+			path = FLAnimatedImage;
+			sourceTree = "<group>";
+		};
+		5FFCC70520663CBB0047E9F7 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC70620663CBB0047E9F7 /* MBProgressHUD.bundle */,
+				5FFCC70720663CBB0047E9F7 /* MBProgressHUD.h */,
+				5FFCC70820663CBB0047E9F7 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		5FFCC76320663CCA0047E9F7 /* PYPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC76420663CCA0047E9F7 /* Category */,
+				5FFCC76920663CCA0047E9F7 /* Controller */,
+				5FFCC77220663CCA0047E9F7 /* Model */,
+				5FFCC77520663CCA0047E9F7 /* Other */,
+				5FFCC77A20663CCA0047E9F7 /* PYPhotoBrowser.h */,
+				5FFCC77B20663CCA0047E9F7 /* PYPhotosView.bundle */,
+				5FFCC77C20663CCA0047E9F7 /* View */,
+			);
+			path = PYPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		5FFCC76420663CCA0047E9F7 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC76520663CCA0047E9F7 /* MBProgressHUD+PYExtension.h */,
+				5FFCC76620663CCA0047E9F7 /* MBProgressHUD+PYExtension.m */,
+				5FFCC76720663CCA0047E9F7 /* UIView+PYExtension.h */,
+				5FFCC76820663CCA0047E9F7 /* UIView+PYExtension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		5FFCC76920663CCA0047E9F7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC76A20663CCA0047E9F7 /* PYPhotosNavigationController.h */,
+				5FFCC76B20663CCA0047E9F7 /* PYPhotosNavigationController.m */,
+				5FFCC76C20663CCA0047E9F7 /* PYPhotosPreviewController.h */,
+				5FFCC76D20663CCA0047E9F7 /* PYPhotosPreviewController.m */,
+				5FFCC76E20663CCA0047E9F7 /* PYPhotosReaderController.h */,
+				5FFCC76F20663CCA0047E9F7 /* PYPhotosReaderController.m */,
+				5FFCC77020663CCA0047E9F7 /* PYPhotosViewController.h */,
+				5FFCC77120663CCA0047E9F7 /* PYPhotosViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5FFCC77220663CCA0047E9F7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC77320663CCA0047E9F7 /* PYPhoto.h */,
+				5FFCC77420663CCA0047E9F7 /* PYPhoto.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5FFCC77520663CCA0047E9F7 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC77620663CCA0047E9F7 /* PYPhotoBrowserConst.h */,
+				5FFCC77720663CCA0047E9F7 /* PYPhotoBrowserConst.m */,
+				5FFCC77820663CCA0047E9F7 /* PYProgressView.h */,
+				5FFCC77920663CCA0047E9F7 /* PYProgressView.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		5FFCC77C20663CCA0047E9F7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC77D20663CCA0047E9F7 /* PYPhotoBrowseView.h */,
+				5FFCC77E20663CCA0047E9F7 /* PYPhotoBrowseView.m */,
+				5FFCC77F20663CCA0047E9F7 /* PYPhotoCell.h */,
+				5FFCC78020663CCA0047E9F7 /* PYPhotoCell.m */,
+				5FFCC78120663CCA0047E9F7 /* PYPhotosView.h */,
+				5FFCC78220663CCA0047E9F7 /* PYPhotosView.m */,
+				5FFCC78320663CCA0047E9F7 /* PYPhotoView.h */,
+				5FFCC78420663CCA0047E9F7 /* PYPhotoView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5FFCC79720663E3E0047E9F7 /* FLAnimatedImage */ = {
+			isa = PBXGroup;
+			children = (
+				5FFCC79820663E3E0047E9F7 /* FLAnimatedImageView+WebCache.h */,
+				5FFCC79920663E3E0047E9F7 /* FLAnimatedImageView+WebCache.m */,
+			);
+			name = FLAnimatedImage;
+			path = SDWebImage/FLAnimatedImage;
 			sourceTree = "<group>";
 		};
 		D5B514B14937161F2745AB4A /* Pods */ = {
@@ -1720,26 +2032,33 @@
 			files = (
 				5F3AB4C22064857D00850BA7 /* InteractionListTableViewCell.xib in Resources */,
 				5F3AB48B2064857D00850BA7 /* FindTableViewCell.xib in Resources */,
+				5FFCC74620663CBB0047E9F7 /* MBProgressHUD.bundle in Resources */,
+				5FFCC7E8206659010047E9F7 /* UserInfoPhotoTableViewCell.xib in Resources */,
 				5F3AB4812064857D00850BA7 /* Main.storyboard in Resources */,
+				5FFCC6E42065FD000047E9F7 /* VipItemCollectionViewCell.xib in Resources */,
 				5F3AB4B02064857D00850BA7 /* EducationTableViewCell.xib in Resources */,
 				5F3AB4AE2064857D00850BA7 /* EasyTableViewCell.xib in Resources */,
 				5FDC71D32064DA34009EA1E3 /* HelpViewController.xib in Resources */,
 				5F3AB50D2064857D00850BA7 /* SuPhoto_circle@2x.png in Resources */,
 				5F3AB5092064857D00850BA7 /* SuPhotoPreviewer.xib in Resources */,
 				5FDC71FA2064F36A009EA1E3 /* HistoryTableViewCell.xib in Resources */,
+				5FFCC6D52065E6AA0047E9F7 /* MyVIPViewController.xib in Resources */,
 				5F3AB5172064857D00850BA7 /* SuPhotoBrowserCell.xib in Resources */,
 				5F3AB4CD2064857D00850BA7 /* RegisterViewController.xib in Resources */,
 				5FDC720220651544009EA1E3 /* HistoryBottomView.xib in Resources */,
 				5F3AB4992064857D00850BA7 /* InteractionListViewController.xib in Resources */,
 				5F3AB4D32064857D00850BA7 /* TextFieldTableViewCell.xib in Resources */,
 				5F3AB50B2064857D00850BA7 /* SuBack@2x.png in Resources */,
+				5FFCC7ED2066613F0047E9F7 /* BusinessLicenseViewController.xib in Resources */,
 				5F3AB4BA2064857D00850BA7 /* HomeClassTableViewCell.xib in Resources */,
+				5FFCC6D02065DEC20047E9F7 /* CollectionViewController.xib in Resources */,
 				5F3AB47B2064857D00850BA7 /* PublicEnterpriseViewController.xib in Resources */,
 				5FDC71E32064DF04009EA1E3 /* FadebackViewController.xib in Resources */,
 				5FDC71CA2064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib in Resources */,
 				5F3AB4CB2064857D00850BA7 /* LoginViewController.xib in Resources */,
 				5F3AB4BC2064857D00850BA7 /* HomeGuessTableViewCell.xib in Resources */,
 				5F0410BC20648CDF0098234C /* ShareSDK.bundle in Resources */,
+				5FFCC7DE20664F660047E9F7 /* UserInfoEditTableViewCell.xib in Resources */,
 				5FDC71AB2064A23A009EA1E3 /* FindImageListViewController.xib in Resources */,
 				5F3AB50C2064857D00850BA7 /* SuBack@3x.png in Resources */,
 				5F3AB4C92064857D00850BA7 /* DynamicLoginViewController.xib in Resources */,
@@ -1749,11 +2068,14 @@
 				5F3AB4C62064857D00850BA7 /* TInvitationlistableViewCell.xib in Resources */,
 				5F3AB4C02064857D00850BA7 /* HomeListTableViewCell.xib in Resources */,
 				5F3AB4A22064857D00850BA7 /* EducationViewController.xib in Resources */,
+				5FFCC7E3206657100047E9F7 /* UserInfoHeadTableViewCell.xib in Resources */,
 				5F3AB4D62064857D00850BA7 /* MessageViewController.xib in Resources */,
 				5FDC71A32064A0B3009EA1E3 /* IndustryInformationViewController.xib in Resources */,
+				5FFCC6F420662EDF0047E9F7 /* DredgeTableViewCell.xib in Resources */,
 				5FDC71BF2064B16D009EA1E3 /* MessageSetViewController.xib in Resources */,
 				5F3AB4F42064857D00850BA7 /* CorePagesView.xib in Resources */,
 				5F3AB4A82064857D00850BA7 /* ConstructionSearchSelectTableViewCell.xib in Resources */,
+				5FFCC6E9206620A80047E9F7 /* UserInfoViewController.xib in Resources */,
 				5FDC71ED2064E4EC009EA1E3 /* ChangePasswordViewController.xib in Resources */,
 				5F3AB47D2064857D00850BA7 /* MapFootView.xib in Resources */,
 				5F3AB4782064857D00850BA7 /* AddViewController.xib in Resources */,
@@ -1773,8 +2095,11 @@
 				5F3AB5372064857D00850BA7 /* 样式.gif in Resources */,
 				5FDC71BA2064A337009EA1E3 /* FindImageListTableViewCell.xib in Resources */,
 				5F3AB4BE2064857D00850BA7 /* HomeInfoTableViewCell.xib in Resources */,
+				5FFCC7D9206649C10047E9F7 /* MyPublickViewController.xib in Resources */,
 				5F3AB2CD206484F500850BA7 /* mapapi.bundle in Resources */,
+				5FFCC78E20663CCA0047E9F7 /* PYPhotosView.bundle in Resources */,
 				5F3AB5332064857D00850BA7 /* SetViewController.xib in Resources */,
+				5FFCC6EF206622DA0047E9F7 /* DredgeViewController.xib in Resources */,
 				5F3AB47F2064857D00850BA7 /* Assets.xcassets in Resources */,
 				5F3AB4CF2064857D00850BA7 /* LoginTextTableViewCell.xib in Resources */,
 				5F3AB50F2064857D00850BA7 /* SuPhoto_unselected@2x.png in Resources */,
@@ -1782,6 +2107,8 @@
 				5F3AB5072064857D00850BA7 /* SuPhotoBrowser.xib in Resources */,
 				5F3AB4A52064857D00850BA7 /* FileNoticceViewController.xib in Resources */,
 				5F3AB4B62064857D00850BA7 /* HomeBrandTableViewCell.xib in Resources */,
+				5FFCC6DA2065E9B50047E9F7 /* DetailRecordViewController.xib in Resources */,
+				5FFCC6DF2065EA5D0047E9F7 /* MyRecordTableViewCell.xib in Resources */,
 				5F0410B720648CDF0098234C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				5F3AB5152064857D00850BA7 /* SuPhotoAblumCell.xib in Resources */,
 				5F0410AB20648CDF0098234C /* ShareSDKConfigFile.bundle in Resources */,
@@ -1793,6 +2120,7 @@
 				5FDC71B02064A244009EA1E3 /* FindeListViewController.xib in Resources */,
 				5F3AB4922064857D00850BA7 /* InvitationlistViewController.xib in Resources */,
 				5F3AB4902064857D00850BA7 /* HomeViewController.xib in Resources */,
+				5FFCC6F92066372B0047E9F7 /* VIPUploadInfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1871,6 +2199,8 @@
 				5F3AB4CA2064857D00850BA7 /* LoginViewController.m in Sources */,
 				5F3AB5302064857D00850BA7 /* XHStarRateView.m in Sources */,
 				5F3AB5272064857D00850BA7 /* WQLabel.m in Sources */,
+				5FFCC78A20663CCA0047E9F7 /* PYPhotosViewController.m in Sources */,
+				5FFCC78D20663CCA0047E9F7 /* PYProgressView.m in Sources */,
 				5FDC71F42064F084009EA1E3 /* HistoryViewController.m in Sources */,
 				5F3AB4D52064857D00850BA7 /* MessageViewController.m in Sources */,
 				5F3AB5282064857D00850BA7 /* WQModelLog.m in Sources */,
@@ -1888,6 +2218,7 @@
 				5F3AB5042064857D00850BA7 /* SuPhotoAblumList.m in Sources */,
 				5F3AB4AD2064857D00850BA7 /* EasyTableViewCell.m in Sources */,
 				5F3AB4FF2064857D00850BA7 /* UIButton+SU.m in Sources */,
+				5FFCC6F82066372B0047E9F7 /* VIPUploadInfoViewController.m in Sources */,
 				5F3AB4A12064857D00850BA7 /* EducationViewController.m in Sources */,
 				5F3AB4C32064857D00850BA7 /* SearchCollectionCell.m in Sources */,
 				5F3AB4852064857D00850BA7 /* UserInfo.m in Sources */,
@@ -1898,14 +2229,17 @@
 				5F3AB51C2064857D00850BA7 /* GCDTimer.m in Sources */,
 				5F3AB5162064857D00850BA7 /* SuPhotoBrowserCell.m in Sources */,
 				5F3AB4C52064857D00850BA7 /* TInvitationlistableViewCell.m in Sources */,
+				5FFCC7DD20664F660047E9F7 /* UserInfoEditTableViewCell.m in Sources */,
 				5FDC71D22064DA34009EA1E3 /* HelpViewController.m in Sources */,
 				5F3AB4882064857D00850BA7 /* FindViewController.m in Sources */,
 				5FDC71C92064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m in Sources */,
 				5F3AB52E2064857D00850BA7 /* WQUploadSingleImage.m in Sources */,
 				5F3AB5032064857D00850BA7 /* UIView+SuLine.m in Sources */,
 				5F3AB4F02064857D00850BA7 /* WQTabBarViewController.m in Sources */,
+				5FFCC78920663CCA0047E9F7 /* PYPhotosReaderController.m in Sources */,
 				5F3AB4EE2064857D00850BA7 /* WQNavigationViewController.m in Sources */,
 				5F3AB5052064857D00850BA7 /* SuPhotoBaseController.m in Sources */,
+				5FFCC6D92065E9B50047E9F7 /* DetailRecordViewController.m in Sources */,
 				5F3AB4F22064857D00850BA7 /* CorePagesViewConfig.m in Sources */,
 				5F3AB5322064857D00850BA7 /* SetViewController.m in Sources */,
 				5FDC71E72064E203009EA1E3 /* AboutUsViewController.m in Sources */,
@@ -1922,26 +2256,37 @@
 				5F3AB5112064857D00850BA7 /* SuMessageTool.m in Sources */,
 				5F3AB5062064857D00850BA7 /* SuPhotoBrowser.m in Sources */,
 				5F3AB4D02064857D00850BA7 /* RegisterGetCodeTableViewCell.m in Sources */,
+				5FFCC7EC2066613F0047E9F7 /* BusinessLicenseViewController.m in Sources */,
+				5FFCC78B20663CCA0047E9F7 /* PYPhoto.m in Sources */,
 				5F3AB4B22064857D00850BA7 /* FilterView.m in Sources */,
 				5F3AB51D2064857D00850BA7 /* NetWorkEngine.m in Sources */,
+				5FFCC74520663CBB0047E9F7 /* FLAnimatedImageView.m in Sources */,
 				5F3AB51E2064857D00850BA7 /* NSString+WQString.m in Sources */,
 				5F3AB4B52064857D00850BA7 /* HomeBrandTableViewCell.m in Sources */,
+				5FFCC6CF2065DEC10047E9F7 /* CollectionViewController.m in Sources */,
 				5F3AB4F92064857D00850BA7 /* NSTimer+FSLoop.m in Sources */,
+				5FFCC78C20663CCA0047E9F7 /* PYPhotoBrowserConst.m in Sources */,
 				5F3AB4C12064857D00850BA7 /* InteractionListTableViewCell.m in Sources */,
 				5F3AB4ED2064857D00850BA7 /* UIBarButtonItem+Addition.m in Sources */,
+				5FFCC78520663CCA0047E9F7 /* MBProgressHUD+PYExtension.m in Sources */,
 				5FDC71AA2064A23A009EA1E3 /* FindImageListViewController.m in Sources */,
+				5FFCC79020663CCA0047E9F7 /* PYPhotoCell.m in Sources */,
 				5F3AB49C2064857D00850BA7 /* PublicViewController.m in Sources */,
 				5F3AB51F2064857D00850BA7 /* RefreshManager.m in Sources */,
 				5F3AB4D72064857D00850BA7 /* AppShared.m in Sources */,
+				5FFCC6E32065FD000047E9F7 /* VipItemCollectionViewCell.m in Sources */,
 				5F3AB4982064857D00850BA7 /* InteractionListViewController.m in Sources */,
 				5F3AB4792064857D00850BA7 /* MapViewController.m in Sources */,
+				5FFCC7E7206659010047E9F7 /* UserInfoPhotoTableViewCell.m in Sources */,
 				5F3AB48F2064857D00850BA7 /* HomeViewController.m in Sources */,
 				5FDC71DD2064DD98009EA1E3 /* UIBarButtonItem+Extension.m in Sources */,
 				5F3AB4B92064857D00850BA7 /* HomeClassTableViewCell.m in Sources */,
+				5FFCC7C120663E3E0047E9F7 /* FLAnimatedImageView+WebCache.m in Sources */,
 				5F3AB4FB2064857D00850BA7 /* FSSegmentTitleView.m in Sources */,
 				5F3AB52C2064857D00850BA7 /* WQTextView.m in Sources */,
 				5F3AB4BD2064857D00850BA7 /* HomeInfoTableViewCell.m in Sources */,
 				5F3AB50A2064857D00850BA7 /* SuAblumInfo.m in Sources */,
+				5FFCC74220663CBB0047E9F7 /* DACircularProgressView.m in Sources */,
 				5F3AB4CE2064857D00850BA7 /* LoginTextTableViewCell.m in Sources */,
 				5F3AB4F12064857D00850BA7 /* CAAnimation+PagesViewBarShake.m in Sources */,
 				5FDC71B92064A337009EA1E3 /* FindImageListTableViewCell.m in Sources */,
@@ -1952,12 +2297,15 @@
 				5F3AB4AF2064857D00850BA7 /* EducationTableViewCell.m in Sources */,
 				5F3AB5212064857D00850BA7 /* WQAlertController.m in Sources */,
 				5F3AB5252064857D00850BA7 /* WQButton.m in Sources */,
+				5FFCC6F320662EDF0047E9F7 /* DredgeTableViewCell.m in Sources */,
 				5FDC71EC2064E4EC009EA1E3 /* ChangePasswordViewController.m in Sources */,
 				5F3AB4AB2064857D00850BA7 /* ConstructionSearchTextTableViewCell.m in Sources */,
 				5F3AB47E2064857D00850BA7 /* AppDelegate.mm in Sources */,
 				5F3AB4912064857D00850BA7 /* InvitationlistViewController.m in Sources */,
 				5F3AB4A72064857D00850BA7 /* ConstructionSearchSelectTableViewCell.m in Sources */,
 				5F3AB4FD2064857D00850BA7 /* NullSafe.m in Sources */,
+				5FFCC7D8206649C10047E9F7 /* MyPublickViewController.m in Sources */,
+				5FFCC78720663CCA0047E9F7 /* PYPhotosNavigationController.m in Sources */,
 				5F3AB4FE2064857D00850BA7 /* NSString+SU.m in Sources */,
 				5F3AB47A2064857D00850BA7 /* PublicEnterpriseViewController.m in Sources */,
 				5F3AB5292064857D00850BA7 /* WQPigeonhole.m in Sources */,
@@ -1965,21 +2313,29 @@
 				5F3AB48D2064857D00850BA7 /* ConstructionSearchViewController.m in Sources */,
 				5F3AB4FA2064857D00850BA7 /* FSPageContentView.m in Sources */,
 				5FDC71B42064A328009EA1E3 /* FindListTableViewCell.m in Sources */,
+				5FFCC78F20663CCA0047E9F7 /* PYPhotoBrowseView.m in Sources */,
 				5F3AB4BF2064857D00850BA7 /* HomeListTableViewCell.m in Sources */,
+				5FFCC6EE206622DA0047E9F7 /* DredgeViewController.m in Sources */,
+				5FFCC78620663CCA0047E9F7 /* UIView+PYExtension.m in Sources */,
 				5F3AB4EF2064857D00850BA7 /* WQTabBar.m in Sources */,
 				5F3AB4842064857D00850BA7 /* MenuInfo.m in Sources */,
 				5FDC71F02064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m in Sources */,
+				5FFCC78820663CCA0047E9F7 /* PYPhotosPreviewController.m in Sources */,
 				5F3AB4862064857D00850BA7 /* UserInfoEngine.m in Sources */,
 				5F3AB4C42064857D00850BA7 /* SearchTableViewCell.m in Sources */,
+				5FFCC79220663CCA0047E9F7 /* PYPhotoView.m in Sources */,
 				5F3AB5192064857D00850BA7 /* UISearchBar+PlaceHolder.m in Sources */,
+				5FFCC6D42065E6AA0047E9F7 /* MyVIPViewController.m in Sources */,
 				5F3AB4B72064857D00850BA7 /* HomeClassCollectionViewCell.m in Sources */,
 				5F3AB4B32064857D00850BA7 /* HomeBrandCollectionViewCell.m in Sources */,
 				5F3AB5242064857D00850BA7 /* WQBaseViewController.m in Sources */,
 				5F3AB5132064857D00850BA7 /* SuPhotoManager.m in Sources */,
 				5F3AB5142064857D00850BA7 /* SuPhotoAblumCell.m in Sources */,
+				5FFCC74720663CBB0047E9F7 /* MBProgressHUD.m in Sources */,
 				5F3AB49E2064857D00850BA7 /* ConstructionViewController.m in Sources */,
 				5F3AB4B12064857D00850BA7 /* FilterTableView.m in Sources */,
 				5F3AB4932064857D00850BA7 /* InvitationViewController.m in Sources */,
+				5FFCC6DE2065EA5D0047E9F7 /* MyRecordTableViewCell.m in Sources */,
 				5F3AB4952064857D00850BA7 /* JobViewController.m in Sources */,
 				5F3AB5122064857D00850BA7 /* SuPhotoCenter.m in Sources */,
 				5F3AB4F72064857D00850BA7 /* CorePagesBarView.m in Sources */,
@@ -1995,12 +2351,17 @@
 				5F3AB4A32064857D00850BA7 /* FileNoticceListViewController.m in Sources */,
 				5F3AB4F32064857D00850BA7 /* CorePagesView.m in Sources */,
 				5F3AB5012064857D00850BA7 /* UIView+SU.m in Sources */,
+				5FFCC6E8206620A80047E9F7 /* UserInfoViewController.m in Sources */,
 				5F3AB49A2064857D00850BA7 /* InteractionViewController.m in Sources */,
 				5F3AB5262064857D00850BA7 /* WQFile.m in Sources */,
 				5F3AB5182064857D00850BA7 /* UICollectionView+EmpayData.m in Sources */,
 				5F3AB51A2064857D00850BA7 /* UITableView+EmpayData.m in Sources */,
+				5FFCC74420663CBB0047E9F7 /* FLAnimatedImage.m in Sources */,
 				5F3AB5342064857D00850BA7 /* UserCenterViewController.m in Sources */,
+				5FFCC7E2206657100047E9F7 /* UserInfoHeadTableViewCell.m in Sources */,
 				5F3AB52B2064857D00850BA7 /* WQTextField.m in Sources */,
+				5FFCC79120663CCA0047E9F7 /* PYPhotosView.m in Sources */,
+				5FFCC74320663CBB0047E9F7 /* DALabeledCircularProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

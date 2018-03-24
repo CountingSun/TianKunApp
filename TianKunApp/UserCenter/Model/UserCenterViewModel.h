@@ -13,5 +13,6 @@
 + (NSMutableArray *)arrMenu;
 + (NSMutableArray *)arrSetMenu;
 + (NSMutableArray *)arrSetHelpMenu;
++ (NSMutableArray *)arrVipMenu;
 
 @end

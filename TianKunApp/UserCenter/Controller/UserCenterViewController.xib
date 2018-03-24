@@ -28,9 +28,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s6O-C9-Ku8">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="s6O-C9-Ku8">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -78,6 +78,9 @@
                             <state key="normal" title="我的VIP" image="我的VIP">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="vipButtobClick:" destination="-1" eventType="touchUpInside" id="Xvg-9k-lnd"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGx-Qs-B2s" customClass="QMUIButton">
                             <rect key="frame" x="94" y="0.0" width="94" height="112"/>
@@ -85,6 +88,9 @@
                             <state key="normal" title="明细记录" image="明细记录">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="recordButtobClick:" destination="-1" eventType="touchUpInside" id="5wv-my-W7H"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nr1-0N-f8I" customClass="QMUIButton">
                             <rect key="frame" x="282" y="0.0" width="93" height="112"/>
@@ -92,6 +98,9 @@
                             <state key="normal" title="我的发布" image="我的发布">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="publishButtonClick:" destination="-1" eventType="touchUpInside" id="Wtn-8Q-oPd"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NbG-eC-sKR" customClass="QMUIButton">
                             <rect key="frame" x="188" y="0.0" width="94" height="112"/>
@@ -99,6 +108,9 @@
                             <state key="normal" title="积分商城" image="积分商城">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="pointButtonClick:" destination="-1" eventType="touchUpInside" id="LNo-gw-Ta9"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -154,7 +166,7 @@
     <resources>
         <image name="我的VIP" width="39" height="39"/>
         <image name="我的发布" width="39" height="39"/>
-        <image name="明细记录" width="16" height="16"/>
+        <image name="明细记录" width="39" height="40"/>
         <image name="积分商城" width="39" height="39"/>
     </resources>
 </document>

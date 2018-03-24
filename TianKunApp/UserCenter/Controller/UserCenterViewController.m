@@ -11,6 +11,12 @@
 #import "MenuInfo.h"
 #import "SetViewController.h"
 #import "HistoryViewController.h"
+#import "CollectionViewController.h"
+#import "DetailRecordViewController.h"
+#import "MyVIPViewController.h"
+#import "MyPublickViewController.h"
+#import "UserInfoViewController.h"
+#import "UIView+AddTapGestureRecognizer.h"
 
 @interface UserCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -54,6 +60,12 @@
     _headImageView.layer.masksToBounds = YES;
     _headImageView.layer.cornerRadius = _headImageView.qmui_width/2;
     [self.tableView reloadData];
+    _headImageView.userInteractionEnabled = YES;
+    [_headImageView addTapGestureRecognizerWithActionBlock:^{
+        UserInfoViewController *infoViewController = [[UserInfoViewController alloc]init];
+        infoViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:infoViewController animated:YES];
+    }];
     
     [_vipButton setImagePosition:QMUIButtonImagePositionTop];
     [_vipButton setSpacingBetweenImageAndTitle:5];
@@ -100,6 +112,10 @@
         case 0:
             {
                 
+                CollectionViewController *viewController = [[CollectionViewController alloc]init];
+                viewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:viewController animated:YES];
+
             }
             break;
         case 1:{
@@ -124,6 +140,29 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+- (IBAction)vipButtobClick:(id)sender {
+    MyVIPViewController *viewController = [[MyVIPViewController alloc]init];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
+
+}
+- (IBAction)recordButtobClick:(id)sender {
+    DetailRecordViewController *viewController = [[DetailRecordViewController alloc]init];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
+
+}
+- (IBAction)pointButtonClick:(id)sender {
+    
+}
+- (IBAction)publishButtonClick:(id)sender {
+    
+    
+    MyPublickViewController *viewController = [[MyPublickViewController alloc]init];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
+
 }
 
 /*
