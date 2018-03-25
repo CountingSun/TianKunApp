@@ -61,7 +61,7 @@
     MenuInfo *menu1 = [[MenuInfo alloc]initWithMenuName:@"找人才" menuIcon:@"找人才" menuID:1];
     MenuInfo *menu2 = [[MenuInfo alloc]initWithMenuName:@"找工作" menuIcon:@"找工作" menuID:2];
     MenuInfo *menu3 = [[MenuInfo alloc]initWithMenuName:@"活动交流" menuIcon:@"活动交流" menuID:3];
-    MenuInfo *menu4 = [[MenuInfo alloc]initWithMenuName:@"商务合作" menuIcon:@"商务合作" menuID:4];
+    MenuInfo *menu4 = [[MenuInfo alloc]initWithMenuName:@"商务合作" menuIcon:@"商务合作1" menuID:4];
 
     _arrMenu = [NSArray arrayWithObjects:menu0,menu1,menu2,menu3,menu4, nil];
     

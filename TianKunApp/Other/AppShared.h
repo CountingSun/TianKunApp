@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface AppShared : NSObject
++(void)shared;
 
 @end

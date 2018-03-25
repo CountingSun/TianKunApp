@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="KGk-i7-Jjw" customClass="RemindMessageHeadTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="328" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="328" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张小虎" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGZ-It-4xX">
+                        <rect key="frame" x="80" y="10" width="233" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="p9M-e6-Q7A"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="YpF-OZ-8K0">
+                        <rect key="frame" x="15" y="10" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="E9d-2y-hVG"/>
+                            <constraint firstAttribute="width" constant="60" id="PeA-mO-gtw"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机械工程师，二级建造师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNU-8m-gwa">
+                        <rect key="frame" x="80" y="40" width="233" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="fWZ-bZ-wls"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KGZ-It-4xX" firstAttribute="leading" secondItem="YpF-OZ-8K0" secondAttribute="trailing" constant="5" id="2of-9y-Exv"/>
+                    <constraint firstItem="KGZ-It-4xX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="4cE-Kx-JPO"/>
+                    <constraint firstAttribute="bottom" secondItem="YpF-OZ-8K0" secondAttribute="bottom" constant="10" id="B3l-59-CVS"/>
+                    <constraint firstItem="tNU-8m-gwa" firstAttribute="top" secondItem="KGZ-It-4xX" secondAttribute="bottom" id="BLF-dJ-myd"/>
+                    <constraint firstAttribute="trailing" secondItem="KGZ-It-4xX" secondAttribute="trailing" constant="15" id="LBk-jg-Pw7"/>
+                    <constraint firstItem="YpF-OZ-8K0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OxH-HS-6ND"/>
+                    <constraint firstItem="tNU-8m-gwa" firstAttribute="leading" secondItem="YpF-OZ-8K0" secondAttribute="trailing" constant="5" id="PBR-3L-wZl"/>
+                    <constraint firstItem="YpF-OZ-8K0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fzF-CE-Z73"/>
+                    <constraint firstAttribute="trailing" secondItem="tNU-8m-gwa" secondAttribute="trailing" constant="15" id="qt5-mk-DlU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="detailLabel" destination="tNU-8m-gwa" id="3c2-hY-eLV"/>
+                <outlet property="headImageView" destination="YpF-OZ-8K0" id="drX-E4-ksT"/>
+                <outlet property="nameLabel" destination="KGZ-It-4xX" id="IWM-CO-YkL"/>
+            </connections>
+            <point key="canvasLocation" x="38" y="87"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="头像" width="65" height="65"/>
+    </resources>
+</document>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleDetailViewController">
+            <connections>
+                <outlet property="aboutView" destination="mBY-CJ-bIN" id="7Jk-bf-U8a"/>
+                <outlet property="leaveView" destination="wCt-gC-viD" id="kdO-i4-0hy"/>
+                <outlet property="lookMoreButton" destination="fsY-0L-2V2" id="22M-TO-3gy"/>
+                <outlet property="lookMoreView" destination="xZ3-ii-VOF" id="bKy-S7-vMI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </view>
+        <view contentMode="scaleToFill" id="wCt-gC-viD">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="精选留言" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJz-7n-FSV">
+                    <rect key="frame" x="153" y="10" width="69.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIv-Pl-Sr2" customClass="QMUIButton">
+                    <rect key="frame" x="285" y="10" width="90" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="On0-RH-Qtr"/>
+                        <constraint firstAttribute="height" constant="30" id="PHR-Tl-9vt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="写留言">
+                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="gIv-Pl-Sr2" firstAttribute="trailing" secondItem="wCt-gC-viD" secondAttribute="trailing" id="Bmx-u6-hrY"/>
+                <constraint firstItem="eJz-7n-FSV" firstAttribute="centerX" secondItem="wCt-gC-viD" secondAttribute="centerX" id="CRk-Ko-Oyy"/>
+                <constraint firstItem="eJz-7n-FSV" firstAttribute="centerY" secondItem="wCt-gC-viD" secondAttribute="centerY" id="FNQ-xg-fXu"/>
+                <constraint firstItem="gIv-Pl-Sr2" firstAttribute="top" secondItem="wCt-gC-viD" secondAttribute="top" constant="10" id="REF-Ci-fiU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="42.5" y="-993"/>
+        </view>
+        <view contentMode="scaleToFill" id="xZ3-ii-VOF">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nt4-J4-oiY">
+                    <rect key="frame" x="0.0" y="40" width="375" height="10"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="10" id="Hap-Zp-cxJ"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsY-0L-2V2" customClass="QMUIButton">
+                    <rect key="frame" x="137" y="0.0" width="100" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="zET-38-sDg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="查看更多" image="三角下">
+                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="lookMoreButtonClick:" destination="-1" eventType="touchUpInside" id="X6C-Tg-ps2"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Nt4-J4-oiY" firstAttribute="bottom" secondItem="xZ3-ii-VOF" secondAttribute="bottom" id="2dF-fO-AIt"/>
+                <constraint firstItem="fsY-0L-2V2" firstAttribute="centerX" secondItem="xZ3-ii-VOF" secondAttribute="centerX" id="87f-IA-QBY"/>
+                <constraint firstItem="Nt4-J4-oiY" firstAttribute="top" secondItem="fsY-0L-2V2" secondAttribute="bottom" id="GXs-0l-DGx"/>
+                <constraint firstAttribute="trailing" secondItem="Nt4-J4-oiY" secondAttribute="trailing" id="agJ-ow-Kbr"/>
+                <constraint firstItem="Nt4-J4-oiY" firstAttribute="leading" secondItem="xZ3-ii-VOF" secondAttribute="leading" id="smb-iA-dm2"/>
+                <constraint firstItem="fsY-0L-2V2" firstAttribute="top" secondItem="xZ3-ii-VOF" secondAttribute="top" id="v9T-wV-cFt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="480.5" y="-1213"/>
+        </view>
+        <view contentMode="scaleToFill" id="mBY-CJ-bIN">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vip" translatesAutoresizingMaskIntoConstraints="NO" id="Ewo-EG-ua3">
+                    <rect key="frame" x="0.0" y="19" width="375" height="2"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="pRr-lo-JH4"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="相关推荐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hap-zk-nxS">
+                    <rect key="frame" x="153" y="0.0" width="69.5" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Ewo-EG-ua3" firstAttribute="centerX" secondItem="mBY-CJ-bIN" secondAttribute="centerX" id="81B-Gc-YSR"/>
+                <constraint firstItem="Hap-zk-nxS" firstAttribute="top" secondItem="mBY-CJ-bIN" secondAttribute="top" id="Jdk-b8-yi2"/>
+                <constraint firstItem="Ewo-EG-ua3" firstAttribute="width" secondItem="mBY-CJ-bIN" secondAttribute="width" id="O6y-sV-Hzr"/>
+                <constraint firstAttribute="bottom" secondItem="Hap-zk-nxS" secondAttribute="bottom" id="gVa-cX-9Q1"/>
+                <constraint firstItem="Ewo-EG-ua3" firstAttribute="centerY" secondItem="mBY-CJ-bIN" secondAttribute="centerY" id="uBI-KX-RW0"/>
+                <constraint firstItem="Hap-zk-nxS" firstAttribute="centerX" secondItem="mBY-CJ-bIN" secondAttribute="centerX" id="vaH-Zs-TYi"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="477.5" y="-1100"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="vip" width="246" height="1"/>
+        <image name="三角下" width="25" height="25"/>
+    </resources>
+</document>

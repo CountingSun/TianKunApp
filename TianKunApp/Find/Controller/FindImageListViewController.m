@@ -8,6 +8,7 @@
 
 #import "FindImageListViewController.h"
 #import "FindImageListTableViewCell.h"
+#import "CompanyDetailViewController.h"
 
 @interface FindImageListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -104,7 +105,9 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    CompanyDetailViewController *viewController = [[CompanyDetailViewController alloc]init];
+    [self.navigationController pushViewController:viewController animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {

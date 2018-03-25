@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.titleView setTitle:_viewTitle];
+    [self.titleView setTitle:@"招聘"];
 //    QMUIEmptyView *emptyView = [[QMUIEmptyView alloc]initWithFrame:CGRectMake(0, CGRectGetHeight(_firstButton.frame), SCREEN_WIDTH, SCREEN_HEIGHT-CGRectGetHeight(_firstButton.frame))];
 //    emptyView.imageView.image = [UIImage imageNamed:@"钉钉"];
 //    emptyView.textLabel.text = @"11111";
@@ -38,9 +38,6 @@
 }
 
 #pragma makr- button click
-- (void)aaa{
-    
-}
 - (IBAction)firstButtonClick:(id)sender {
     if (_currectType == 1) {
         [self.filterView hiddenFilterView];

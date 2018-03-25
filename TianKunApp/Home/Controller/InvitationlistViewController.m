@@ -8,6 +8,7 @@
 
 #import "InvitationlistViewController.h"
 #import "TInvitationlistableViewCell.h"
+#import "WebLinkViewController.h"
 
 @interface InvitationlistViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -85,7 +86,9 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    WebLinkViewController *vc = [[WebLinkViewController alloc]initWithTitle:@"招标详情" urlString:@"https://pro.modao.cc/app/DpDdMFXGMMkB2xq526dh168252BwrwS#screen=sA3F747E9811520211547458"];
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

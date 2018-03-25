@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompanyDetailViewController">
+            <connections>
+                <outlet property="collectButton" destination="e1D-pZ-jzR" id="bxj-6A-uRc"/>
+                <outlet property="headView" destination="VLH-YW-uYe" id="YVz-Cu-cPd"/>
+                <outlet property="rightBarButtonView" destination="P3r-8j-OS7" id="dYA-cz-PP8"/>
+                <outlet property="shareButton" destination="R1u-WO-pQ3" id="PH8-Lt-kXd"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </view>
+        <view contentMode="scaleToFill" id="VLH-YW-uYe">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="河南省中原银行河南省中原银行河南省中原银行河南省中原银行河南省中原银行河南省中原银行" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j07-QP-IQH">
+                    <rect key="frame" x="15" y="10" width="350" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="IoM-3i-ENC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布时间：2小时前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub9-dg-V1u">
+                    <rect key="frame" x="15" y="70" width="105.5" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="OcC-uh-fCM"/>
+                        <constraint firstAttribute="height" constant="20" id="tYS-mt-fIY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有6人阅读" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXV-bt-awf">
+                    <rect key="frame" x="291" y="70" width="69" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="X7O-LD-EKW"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="rMH-zM-p53"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lx0-FF-aON">
+                    <rect key="frame" x="0.0" y="99" width="375" height="1"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="KRf-cV-m7G"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="j07-QP-IQH" secondAttribute="trailing" constant="10" id="4kL-kK-mRA"/>
+                <constraint firstItem="j07-QP-IQH" firstAttribute="top" secondItem="VLH-YW-uYe" secondAttribute="top" constant="10" id="5fx-6q-feh"/>
+                <constraint firstItem="j07-QP-IQH" firstAttribute="leading" secondItem="VLH-YW-uYe" secondAttribute="leading" constant="15" id="Fxi-rY-nEP"/>
+                <constraint firstAttribute="bottom" secondItem="GXV-bt-awf" secondAttribute="bottom" constant="10" id="I5h-N5-N0B"/>
+                <constraint firstAttribute="trailing" secondItem="lx0-FF-aON" secondAttribute="trailing" id="TFu-4G-IEN"/>
+                <constraint firstItem="lx0-FF-aON" firstAttribute="leading" secondItem="VLH-YW-uYe" secondAttribute="leading" id="UmD-If-3B8"/>
+                <constraint firstAttribute="bottom" secondItem="lx0-FF-aON" secondAttribute="bottom" id="bCU-WH-iZV"/>
+                <constraint firstItem="Ub9-dg-V1u" firstAttribute="leading" secondItem="VLH-YW-uYe" secondAttribute="leading" constant="15" id="hyl-Yf-8jr"/>
+                <constraint firstAttribute="trailing" secondItem="GXV-bt-awf" secondAttribute="trailing" constant="15" id="oRQ-Cy-pvC"/>
+                <constraint firstAttribute="bottom" secondItem="Ub9-dg-V1u" secondAttribute="bottom" constant="10" id="z4S-2t-b9A"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="41.5" y="-960"/>
+        </view>
+        <view contentMode="scaleToFill" id="P3r-8j-OS7">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1D-pZ-jzR" customClass="QMUIButton">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="收藏-1"/>
+                    <connections>
+                        <action selector="collectButtonClick:" destination="-1" eventType="touchUpInside" id="UGg-eM-1RT"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1u-WO-pQ3" customClass="QMUIButton">
+                    <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="分享"/>
+                    <connections>
+                        <action selector="shareButtonClick:" destination="-1" eventType="touchUpInside" id="CcY-XH-aOh"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="R1u-WO-pQ3" firstAttribute="leading" secondItem="e1D-pZ-jzR" secondAttribute="trailing" id="70v-wu-0PB"/>
+                <constraint firstAttribute="bottom" secondItem="R1u-WO-pQ3" secondAttribute="bottom" id="DvG-fj-8r8"/>
+                <constraint firstAttribute="trailing" secondItem="R1u-WO-pQ3" secondAttribute="trailing" id="M6e-Ev-yo1"/>
+                <constraint firstItem="R1u-WO-pQ3" firstAttribute="top" secondItem="P3r-8j-OS7" secondAttribute="top" id="Nfb-GG-QeE"/>
+                <constraint firstItem="R1u-WO-pQ3" firstAttribute="width" secondItem="P3r-8j-OS7" secondAttribute="width" multiplier="1/2" id="SIG-O3-2BW"/>
+                <constraint firstItem="e1D-pZ-jzR" firstAttribute="leading" secondItem="P3r-8j-OS7" secondAttribute="leading" id="fWB-6f-zGe"/>
+                <constraint firstItem="e1D-pZ-jzR" firstAttribute="top" secondItem="P3r-8j-OS7" secondAttribute="top" id="qNX-ZA-3t7"/>
+                <constraint firstAttribute="bottom" secondItem="e1D-pZ-jzR" secondAttribute="bottom" id="qo9-5R-I5m"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="599" y="-1248"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="分享" width="20" height="20"/>
+        <image name="收藏-1" width="20" height="20"/>
+    </resources>
+</document>

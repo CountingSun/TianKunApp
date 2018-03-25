@@ -8,6 +8,7 @@
 
 #import "PublicViewController.h"
 #import "HomeListTableViewCell.h"
+#import "ArticleDetailViewController.h"
 
 @interface PublicViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -89,6 +90,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    ArticleDetailViewController *vc = [[ArticleDetailViewController alloc]init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

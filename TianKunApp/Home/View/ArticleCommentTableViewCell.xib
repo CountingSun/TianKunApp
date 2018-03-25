@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="146" id="KGk-i7-Jjw" customClass="ArticleCommentTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="371" height="146"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="371" height="145.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="fLp-EH-mWY">
+                        <rect key="frame" x="10" y="10" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="nni-GL-Wzd"/>
+                            <constraint firstAttribute="height" constant="60" id="oSF-Z1-YGx"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="猪刚鬣" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w05-Kn-rFY">
+                        <rect key="frame" x="75" y="10" width="286" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="1OX-JC-rqh"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020-09-6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMa-1V-bvK">
+                        <rect key="frame" x="75" y="40" width="286" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="ww1-1B-hvT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kom-nR-vIi">
+                        <rect key="frame" x="75" y="80" width="286" height="55.5"/>
+                        <string key="text">文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊文章写得不错啊</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="kom-nR-vIi" secondAttribute="bottom" constant="10" id="7pv-9K-XVI"/>
+                    <constraint firstItem="EMa-1V-bvK" firstAttribute="leading" secondItem="fLp-EH-mWY" secondAttribute="trailing" constant="5" id="FBY-6E-HOw"/>
+                    <constraint firstAttribute="trailing" secondItem="kom-nR-vIi" secondAttribute="trailing" constant="10" id="H08-kI-e0G"/>
+                    <constraint firstItem="EMa-1V-bvK" firstAttribute="top" secondItem="w05-Kn-rFY" secondAttribute="bottom" id="JAl-qp-cir"/>
+                    <constraint firstItem="kom-nR-vIi" firstAttribute="top" secondItem="EMa-1V-bvK" secondAttribute="bottom" constant="10" id="Pjl-Qu-q2x"/>
+                    <constraint firstAttribute="trailing" secondItem="w05-Kn-rFY" secondAttribute="trailing" constant="10" id="WJ6-x8-Utw"/>
+                    <constraint firstAttribute="trailing" secondItem="EMa-1V-bvK" secondAttribute="trailing" constant="10" id="YV9-uG-fW0"/>
+                    <constraint firstItem="fLp-EH-mWY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="q2g-Ca-wXb"/>
+                    <constraint firstItem="w05-Kn-rFY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="qWX-ZB-cZu"/>
+                    <constraint firstItem="kom-nR-vIi" firstAttribute="leading" secondItem="fLp-EH-mWY" secondAttribute="leading" constant="65" id="sXh-8K-wY6"/>
+                    <constraint firstItem="fLp-EH-mWY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="tUj-uv-KKs"/>
+                    <constraint firstItem="w05-Kn-rFY" firstAttribute="leading" secondItem="fLp-EH-mWY" secondAttribute="trailing" constant="5" id="toR-5I-mm7"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="contentLbel" destination="kom-nR-vIi" id="VeO-P8-7MN"/>
+                <outlet property="headImageView" destination="fLp-EH-mWY" id="uDK-Y1-7FW"/>
+                <outlet property="naemLabel" destination="w05-Kn-rFY" id="6ne-VS-8H2"/>
+                <outlet property="timeLabel" destination="EMa-1V-bvK" id="siC-Dk-CaN"/>
+            </connections>
+            <point key="canvasLocation" x="59.5" y="105"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="头像" width="65" height="65"/>
+    </resources>
+</document>

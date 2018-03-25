@@ -8,6 +8,7 @@
 
 #import "FindeListViewController.h"
 #import "FindListTableViewCell.h"
+#import "CompanyDetailViewController.h"
 
 @interface FindeListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -81,8 +82,18 @@
     }
     return _tableView;
 }
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 5;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _arrData.count;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
 }
 
 
@@ -100,7 +111,8 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    CompanyDetailViewController *viewController = [[CompanyDetailViewController alloc]init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,6 +11,7 @@
 #import "MenuInfo.h"
 #import "FindeListViewController.h"
 #import "FindImageListViewController.h"
+#import "CooperationViewController.h"
 
 
 @interface FindViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -80,6 +81,13 @@
                 vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
             }
+            break;
+        case 5:{
+            CooperationViewController *vc = [[CooperationViewController alloc]init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
             break;
             
         default:{

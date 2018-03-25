@@ -48,15 +48,15 @@
 //主题色 因为一些原因 这个原来的橘色不要了变成主题色 懒得一一去改这个了  所以这个也是主题色
 #define COLOR_TEXT_ORANGE UIColorFromHexadecimal(0x4694fa)
 
-//用于重要文字信息，页内标题信息
+///用于重要文字信息，页内标题信息
 #define COLOR_TEXT_BLACK UIColorFromHexadecimal(0x333333)
-//用于普通段落信息，引导词
+///用于普通段落信息，引导词
 #define COLOR_TEXT_GENGRAL UIColorFromHexadecimal(0x666666)
- //用于辅助，次要的文字信息普通按钮描边
+ ///用于辅助，次要的文字信息普通按钮描边
 #define COLOR_TEXT_LIGHT UIColorFromHexadecimal(0x999999)
-//用于分割线
+///用于分割线
 #define COLOR_VIEW_SEGMENTATION UIColorFromHexadecimal(0xeaeaea)
-// view背景色
+/// view背景色
 #define COLOR_VIEW_BACK UIColorFromHexadecimal(0xf5f5f5)
 
 #define COLOR_VIEW_BACK UIColorFromHexadecimal(0xf5f5f5)
