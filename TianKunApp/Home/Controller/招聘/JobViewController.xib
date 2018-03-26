@@ -94,20 +94,12 @@
                         <constraint firstItem="iLc-d5-FEN" firstAttribute="top" secondItem="2KQ-WG-CUz" secondAttribute="top" constant="5" id="wK2-2t-qfG"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jkM-lC-TLh">
-                    <rect key="frame" x="0.0" y="45" width="375" height="622"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="jkM-lC-TLh" firstAttribute="top" secondItem="2KQ-WG-CUz" secondAttribute="bottom" id="09h-E4-XyE"/>
-                <constraint firstItem="jkM-lC-TLh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Pc-2m-muk"/>
                 <constraint firstItem="2KQ-WG-CUz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Lfl-Aq-JrZ"/>
                 <constraint firstAttribute="trailing" secondItem="2KQ-WG-CUz" secondAttribute="trailing" id="YbY-i4-DMO"/>
-                <constraint firstAttribute="trailing" secondItem="jkM-lC-TLh" secondAttribute="trailing" id="o0o-fi-322"/>
                 <constraint firstItem="2KQ-WG-CUz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="o1v-BG-FFb"/>
-                <constraint firstAttribute="bottom" secondItem="jkM-lC-TLh" secondAttribute="bottom" id="sdw-26-2CH"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>

@@ -16,7 +16,7 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapSel)];
     [self addGestureRecognizer:tap];
-    
+    tap.delegate = self;
     objc_setAssociatedObject(self, @"ASSOCIATIONTapGestureRecognizer", block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
     
@@ -29,4 +29,5 @@
     }
     
 }
+
 @end

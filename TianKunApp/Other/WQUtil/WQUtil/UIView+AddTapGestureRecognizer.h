@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (AddTapGestureRecognizer)
+
+@interface UIView (AddTapGestureRecognizer)<UIGestureRecognizerDelegate>
 
 /**
  为view添加单击手势
@@ -16,5 +17,6 @@
  @param block <#block description#>
  */
 - (void)addTapGestureRecognizerWithActionBlock:(dispatch_block_t)block;
+
 
 @end

@@ -24,6 +24,7 @@
 #import "JobViewController.h"
 #import "InteractionViewController.h"
 #import "EducationViewController.h"
+#import "FindJobViewController.h"
 
 #import "ConstructionViewController.h"
 
@@ -350,9 +351,8 @@
         }
             break;
         case 7:{
-            JobViewController *vc = [[JobViewController alloc]init];
+            FindJobViewController *vc = [[FindJobViewController alloc]init];
             vc.hidesBottomBarWhenPushed = YES;
-            vc.viewTitle = @"人才求职";
             
             [self.navigationController pushViewController:vc animated:YES];
 

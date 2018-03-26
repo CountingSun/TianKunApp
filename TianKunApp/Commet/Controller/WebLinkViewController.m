@@ -48,17 +48,10 @@
    self.webView.scrollView.showsVerticalScrollIndicator=NO;
    self.webView.navigationDelegate=self;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
-//    [self.webView addObserver:self
-//                 forKeyPath:NSStringFromSelector(@selector(estimatedProgress))
-//                    options:0
-//                    context:nil];
-
    [self.view addSubview:self.webView];
-//    if ([self.navigationItem.title isEqualToString:LocaStr(@"私人订制")]||[self.title isEqualToString:LocaStr(@"方糖老师")]) {
-//        self.webView.frame = CGRectMake(0, 0, WIDTH, HEIGHT-64-40);
-//    }
-//    [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
 
+    [self showLoadingView];
+    
 
 }
 -(UIProgressView *)progressView{
@@ -139,62 +132,29 @@
 }
 
 #pragma mark --- webkit delegate
-/*! @abstract Invoked when a main frame navigation starts.
- @param webView The web view invoking the delegate method.
- @param navigation The navigation.
- */
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-    self.progressView.hidden = NO;
-    [self showWithStatus:@""];
-
-}
-
-/*! @abstract Invoked when a server redirect is received for the main
- frame.
- @param webView The web view invoking the delegate method.
- @param navigation The navigation.
- */
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(null_unspecified WKNavigation *)navigation{
-
-}
-
-/*! @abstract Invoked when an error occurs while starting to load data for
- the main frame.
- @param webView The web view invoking the delegate method.
- @param navigation The navigation.
- @param error The error that occurred.
- */
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    [self dismiss];
+    [self hideLoadingView];
+    [self showGetDataNullWithReloadBlock:^{
+        [self showLoadingView];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+        
+    }];
 
 }
 
-/*! @abstract Invoked when content starts arriving for the main frame.
- @param webView The web view invoking the delegate method.
- @param navigation The navigation.
- */
-- (void)webView:(WKWebView *)webView didCommitNavigation:(null_unspecified WKNavigation *)navigation{
-
-}
-
-/*! @abstract Invoked when a main frame navigation completes.
- @param webView The web view invoking the delegate method.
- @param navigation The navigation.
- */
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
-    [self dismiss];
+    [self hideLoadingView];
 
     
 }
 
-/*! @abstract Invoked when an error occurs during a committed main frame
- navigation.
- @param webView The web view invoking the delegate method.
- @param navigation The navigation.
- @param error The error that occurred.
- */
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
-    [self dismiss];
+    [self hideLoadingView];
+    [self showGetDataNullWithReloadBlock:^{
+        [self showLoadingView];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+        
+    }];
 
 }
 
@@ -202,17 +162,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

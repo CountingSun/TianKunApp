@@ -249,6 +249,31 @@
 		5F3AB5352064857D00850BA7 /* UserCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AB4722064857D00850BA7 /* UserCenterViewController.xib */; };
 		5F3AB5362064857D00850BA7 /* UserCenterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3AB4752064857D00850BA7 /* UserCenterViewModel.m */; };
 		5F3AB5372064857D00850BA7 /* 样式.gif in Resources */ = {isa = PBXBuildFile; fileRef = 5F3AB4762064857D00850BA7 /* 样式.gif */; };
+		5F3E9DB52068790100263A45 /* WriteArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DB32068790100263A45 /* WriteArticleViewController.m */; };
+		5F3E9DB62068790100263A45 /* WriteArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DB42068790100263A45 /* WriteArticleViewController.xib */; };
+		5F3E9DBA206886C800263A45 /* JobViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DB8206886C800263A45 /* JobViewTableViewCell.m */; };
+		5F3E9DBB206886C800263A45 /* JobViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DB9206886C800263A45 /* JobViewTableViewCell.xib */; };
+		5F3E9DBF20689A0500263A45 /* JobDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DBD20689A0500263A45 /* JobDetailViewController.m */; };
+		5F3E9DC020689A0500263A45 /* JobDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DBE20689A0500263A45 /* JobDetailViewController.xib */; };
+		5F3E9DC420689C2800263A45 /* JobDetailDescribeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DC220689C2800263A45 /* JobDetailDescribeTableViewCell.m */; };
+		5F3E9DC520689C2800263A45 /* JobDetailDescribeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DC320689C2800263A45 /* JobDetailDescribeTableViewCell.xib */; };
+		5F3E9DC920689C5C00263A45 /* JobDetailCompanyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DC720689C5C00263A45 /* JobDetailCompanyTableViewCell.m */; };
+		5F3E9DCA20689C5C00263A45 /* JobDetailCompanyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DC820689C5C00263A45 /* JobDetailCompanyTableViewCell.xib */; };
+		5F3E9DCE20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DCC20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.m */; };
+		5F3E9DCF20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DCD20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.xib */; };
+		5F3E9DD32068C64900263A45 /* FindJobTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DD12068C64900263A45 /* FindJobTableViewCell.m */; };
+		5F3E9DD42068C64900263A45 /* FindJobTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DD22068C64900263A45 /* FindJobTableViewCell.xib */; };
+		5F3E9DD82068CE8F00263A45 /* FindJodDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DD62068CE8F00263A45 /* FindJodDetailViewController.m */; };
+		5F3E9DD92068CE8F00263A45 /* FindJodDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DD72068CE8F00263A45 /* FindJodDetailViewController.xib */; };
+		5F3E9DDD2068CEEF00263A45 /* FindJobDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DDB2068CEEF00263A45 /* FindJobDetailTableViewCell.m */; };
+		5F3E9DDE2068CEEF00263A45 /* FindJobDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DDC2068CEEF00263A45 /* FindJobDetailTableViewCell.xib */; };
+		5F3E9DE22068D5C200263A45 /* InteractionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DE02068D5C200263A45 /* InteractionDetailViewController.m */; };
+		5F3E9DE32068D5C200263A45 /* InteractionDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DE12068D5C200263A45 /* InteractionDetailViewController.xib */; };
+		5F3E9DE72068D8EC00263A45 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DE52068D8EC00263A45 /* CommentTableViewCell.m */; };
+		5F3E9DE82068D8EC00263A45 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DE62068D8EC00263A45 /* CommentTableViewCell.xib */; };
+		5F3E9DEB2068DF3400263A45 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DE92068DF3400263A45 /* CommentViewController.m */; };
+		5F3E9DEE2068E6E400263A45 /* CommentKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DED2068E6E400263A45 /* CommentKeyboardView.m */; };
+		5F3E9DF02068E74100263A45 /* CommentKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DEF2068E74100263A45 /* CommentKeyboardView.xib */; };
 		5FDC71A22064A0B3009EA1E3 /* IndustryInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71A02064A0B3009EA1E3 /* IndustryInformationViewController.m */; };
 		5FDC71A32064A0B3009EA1E3 /* IndustryInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC71A12064A0B3009EA1E3 /* IndustryInformationViewController.xib */; };
 		5FDC71A62064A0E6009EA1E3 /* IndustryInformationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71A52064A0E6009EA1E3 /* IndustryInformationListViewController.m */; };
@@ -732,6 +757,44 @@
 		5F3AB4742064857D00850BA7 /* UserCenterViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserCenterViewModel.h; sourceTree = "<group>"; };
 		5F3AB4752064857D00850BA7 /* UserCenterViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserCenterViewModel.m; sourceTree = "<group>"; };
 		5F3AB4762064857D00850BA7 /* 样式.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "样式.gif"; sourceTree = "<group>"; };
+		5F3E9DB22068790100263A45 /* WriteArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WriteArticleViewController.h; sourceTree = "<group>"; };
+		5F3E9DB32068790100263A45 /* WriteArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WriteArticleViewController.m; sourceTree = "<group>"; };
+		5F3E9DB42068790100263A45 /* WriteArticleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WriteArticleViewController.xib; sourceTree = "<group>"; };
+		5F3E9DB7206886C800263A45 /* JobViewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobViewTableViewCell.h; sourceTree = "<group>"; };
+		5F3E9DB8206886C800263A45 /* JobViewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobViewTableViewCell.m; sourceTree = "<group>"; };
+		5F3E9DB9206886C800263A45 /* JobViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobViewTableViewCell.xib; sourceTree = "<group>"; };
+		5F3E9DBC20689A0500263A45 /* JobDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobDetailViewController.h; sourceTree = "<group>"; };
+		5F3E9DBD20689A0500263A45 /* JobDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobDetailViewController.m; sourceTree = "<group>"; };
+		5F3E9DBE20689A0500263A45 /* JobDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailViewController.xib; sourceTree = "<group>"; };
+		5F3E9DC120689C2800263A45 /* JobDetailDescribeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobDetailDescribeTableViewCell.h; sourceTree = "<group>"; };
+		5F3E9DC220689C2800263A45 /* JobDetailDescribeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobDetailDescribeTableViewCell.m; sourceTree = "<group>"; };
+		5F3E9DC320689C2800263A45 /* JobDetailDescribeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailDescribeTableViewCell.xib; sourceTree = "<group>"; };
+		5F3E9DC620689C5C00263A45 /* JobDetailCompanyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobDetailCompanyTableViewCell.h; sourceTree = "<group>"; };
+		5F3E9DC720689C5C00263A45 /* JobDetailCompanyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobDetailCompanyTableViewCell.m; sourceTree = "<group>"; };
+		5F3E9DC820689C5C00263A45 /* JobDetailCompanyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailCompanyTableViewCell.xib; sourceTree = "<group>"; };
+		5F3E9DCB20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobDetailCompanyDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		5F3E9DCC20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobDetailCompanyDescriptionTableViewCell.m; sourceTree = "<group>"; };
+		5F3E9DCD20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailCompanyDescriptionTableViewCell.xib; sourceTree = "<group>"; };
+		5F3E9DD02068C64900263A45 /* FindJobTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindJobTableViewCell.h; sourceTree = "<group>"; };
+		5F3E9DD12068C64900263A45 /* FindJobTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindJobTableViewCell.m; sourceTree = "<group>"; };
+		5F3E9DD22068C64900263A45 /* FindJobTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindJobTableViewCell.xib; sourceTree = "<group>"; };
+		5F3E9DD52068CE8F00263A45 /* FindJodDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindJodDetailViewController.h; sourceTree = "<group>"; };
+		5F3E9DD62068CE8F00263A45 /* FindJodDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindJodDetailViewController.m; sourceTree = "<group>"; };
+		5F3E9DD72068CE8F00263A45 /* FindJodDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindJodDetailViewController.xib; sourceTree = "<group>"; };
+		5F3E9DDA2068CEEF00263A45 /* FindJobDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindJobDetailTableViewCell.h; sourceTree = "<group>"; };
+		5F3E9DDB2068CEEF00263A45 /* FindJobDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindJobDetailTableViewCell.m; sourceTree = "<group>"; };
+		5F3E9DDC2068CEEF00263A45 /* FindJobDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindJobDetailTableViewCell.xib; sourceTree = "<group>"; };
+		5F3E9DDF2068D5C200263A45 /* InteractionDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractionDetailViewController.h; sourceTree = "<group>"; };
+		5F3E9DE02068D5C200263A45 /* InteractionDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractionDetailViewController.m; sourceTree = "<group>"; };
+		5F3E9DE12068D5C200263A45 /* InteractionDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractionDetailViewController.xib; sourceTree = "<group>"; };
+		5F3E9DE42068D8EC00263A45 /* CommentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		5F3E9DE52068D8EC00263A45 /* CommentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
+		5F3E9DE62068D8EC00263A45 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		5F3E9DE92068DF3400263A45 /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
+		5F3E9DEA2068DF3400263A45 /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		5F3E9DEC2068E6E400263A45 /* CommentKeyboardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentKeyboardView.h; sourceTree = "<group>"; };
+		5F3E9DED2068E6E400263A45 /* CommentKeyboardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentKeyboardView.m; sourceTree = "<group>"; };
+		5F3E9DEF2068E74100263A45 /* CommentKeyboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentKeyboardView.xib; sourceTree = "<group>"; };
 		5FB31095205F4EB100186A56 /* TianKunApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TianKunApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FDC719F2064A0B3009EA1E3 /* IndustryInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndustryInformationViewController.h; sourceTree = "<group>"; };
 		5FDC71A02064A0B3009EA1E3 /* IndustryInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndustryInformationViewController.m; sourceTree = "<group>"; };
@@ -1040,9 +1103,15 @@
 				5F3AB3342064857D00850BA7 /* JobViewController.h */,
 				5F3AB3352064857D00850BA7 /* JobViewController.m */,
 				5F3AB3362064857D00850BA7 /* JobViewController.xib */,
+				5F3E9DBC20689A0500263A45 /* JobDetailViewController.h */,
+				5F3E9DBD20689A0500263A45 /* JobDetailViewController.m */,
+				5F3E9DBE20689A0500263A45 /* JobDetailViewController.xib */,
 				5F04AB802067B03400A91390 /* FindJobViewController.h */,
 				5F04AB812067B03400A91390 /* FindJobViewController.m */,
 				5F04AB822067B03400A91390 /* FindJobViewController.xib */,
+				5F3E9DD52068CE8F00263A45 /* FindJodDetailViewController.h */,
+				5F3E9DD62068CE8F00263A45 /* FindJodDetailViewController.m */,
+				5F3E9DD72068CE8F00263A45 /* FindJodDetailViewController.xib */,
 			);
 			path = "招聘";
 			sourceTree = "<group>";
@@ -1255,6 +1324,9 @@
 				5F04AB702067982300A91390 /* ArticleDetailViewController.h */,
 				5F04AB712067982300A91390 /* ArticleDetailViewController.m */,
 				5F04AB722067982300A91390 /* ArticleDetailViewController.xib */,
+				5F3E9DB22068790100263A45 /* WriteArticleViewController.h */,
+				5F3E9DB32068790100263A45 /* WriteArticleViewController.m */,
+				5F3E9DB42068790100263A45 /* WriteArticleViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1268,6 +1340,11 @@
 				5F3AB33D2064857D00850BA7 /* InteractionViewController.h */,
 				5F3AB33E2064857D00850BA7 /* InteractionViewController.m */,
 				5F3AB33F2064857D00850BA7 /* InteractionViewController.xib */,
+				5F3E9DDF2068D5C200263A45 /* InteractionDetailViewController.h */,
+				5F3E9DE02068D5C200263A45 /* InteractionDetailViewController.m */,
+				5F3E9DE12068D5C200263A45 /* InteractionDetailViewController.xib */,
+				5F3E9DEA2068DF3400263A45 /* CommentViewController.h */,
+				5F3E9DE92068DF3400263A45 /* CommentViewController.m */,
 			);
 			path = "交流互动";
 			sourceTree = "<group>";
@@ -1382,6 +1459,30 @@
 				5F04AB7A20679CA700A91390 /* ArticleCommentTableViewCell.h */,
 				5F04AB7B20679CA700A91390 /* ArticleCommentTableViewCell.m */,
 				5F04AB7C20679CA700A91390 /* ArticleCommentTableViewCell.xib */,
+				5F3E9DB7206886C800263A45 /* JobViewTableViewCell.h */,
+				5F3E9DB8206886C800263A45 /* JobViewTableViewCell.m */,
+				5F3E9DB9206886C800263A45 /* JobViewTableViewCell.xib */,
+				5F3E9DC120689C2800263A45 /* JobDetailDescribeTableViewCell.h */,
+				5F3E9DC220689C2800263A45 /* JobDetailDescribeTableViewCell.m */,
+				5F3E9DC320689C2800263A45 /* JobDetailDescribeTableViewCell.xib */,
+				5F3E9DC620689C5C00263A45 /* JobDetailCompanyTableViewCell.h */,
+				5F3E9DC720689C5C00263A45 /* JobDetailCompanyTableViewCell.m */,
+				5F3E9DC820689C5C00263A45 /* JobDetailCompanyTableViewCell.xib */,
+				5F3E9DCB20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.h */,
+				5F3E9DCC20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.m */,
+				5F3E9DCD20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.xib */,
+				5F3E9DD02068C64900263A45 /* FindJobTableViewCell.h */,
+				5F3E9DD12068C64900263A45 /* FindJobTableViewCell.m */,
+				5F3E9DD22068C64900263A45 /* FindJobTableViewCell.xib */,
+				5F3E9DDA2068CEEF00263A45 /* FindJobDetailTableViewCell.h */,
+				5F3E9DDB2068CEEF00263A45 /* FindJobDetailTableViewCell.m */,
+				5F3E9DDC2068CEEF00263A45 /* FindJobDetailTableViewCell.xib */,
+				5F3E9DE42068D8EC00263A45 /* CommentTableViewCell.h */,
+				5F3E9DE52068D8EC00263A45 /* CommentTableViewCell.m */,
+				5F3E9DE62068D8EC00263A45 /* CommentTableViewCell.xib */,
+				5F3E9DEC2068E6E400263A45 /* CommentKeyboardView.h */,
+				5F3E9DED2068E6E400263A45 /* CommentKeyboardView.m */,
+				5F3E9DEF2068E74100263A45 /* CommentKeyboardView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2216,6 +2317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F3AB4C22064857D00850BA7 /* InteractionListTableViewCell.xib in Resources */,
+				5F3E9DD92068CE8F00263A45 /* FindJodDetailViewController.xib in Resources */,
 				5F3AB48B2064857D00850BA7 /* FindTableViewCell.xib in Resources */,
 				5FFCC74620663CBB0047E9F7 /* MBProgressHUD.bundle in Resources */,
 				5FFCC7E8206659010047E9F7 /* UserInfoPhotoTableViewCell.xib in Resources */,
@@ -2236,13 +2338,16 @@
 				5F3AB4992064857D00850BA7 /* InteractionListViewController.xib in Resources */,
 				5F3AB4D32064857D00850BA7 /* TextFieldTableViewCell.xib in Resources */,
 				5F3AB50B2064857D00850BA7 /* SuBack@2x.png in Resources */,
+				5F3E9DBB206886C800263A45 /* JobViewTableViewCell.xib in Resources */,
 				5FFCC7ED2066613F0047E9F7 /* BusinessLicenseViewController.xib in Resources */,
+				5F3E9DC520689C2800263A45 /* JobDetailDescribeTableViewCell.xib in Resources */,
 				5F3AB4BA2064857D00850BA7 /* HomeClassTableViewCell.xib in Resources */,
 				5FFCC6D02065DEC20047E9F7 /* CollectionViewController.xib in Resources */,
 				5F3AB47B2064857D00850BA7 /* PublicEnterpriseViewController.xib in Resources */,
 				5FDC71E32064DF04009EA1E3 /* FadebackViewController.xib in Resources */,
 				5FDC71CA2064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib in Resources */,
 				5F3AB4CB2064857D00850BA7 /* LoginViewController.xib in Resources */,
+				5F3E9DCA20689C5C00263A45 /* JobDetailCompanyTableViewCell.xib in Resources */,
 				5F3AB4BC2064857D00850BA7 /* HomeGuessTableViewCell.xib in Resources */,
 				5F0410BC20648CDF0098234C /* ShareSDK.bundle in Resources */,
 				5FFCC7DE20664F660047E9F7 /* UserInfoEditTableViewCell.xib in Resources */,
@@ -2253,9 +2358,11 @@
 				5FDC71C52064B1D0009EA1E3 /* MessageSetTableViewCell.xib in Resources */,
 				5F3AB48E2064857D00850BA7 /* ConstructionSearchViewController.xib in Resources */,
 				5F3AB4C72064857D00850BA7 /* Info.plist in Resources */,
+				5F3E9DF02068E74100263A45 /* CommentKeyboardView.xib in Resources */,
 				5F3AB4C62064857D00850BA7 /* TInvitationlistableViewCell.xib in Resources */,
 				5F3AB4C02064857D00850BA7 /* HomeListTableViewCell.xib in Resources */,
 				5F3AB4A22064857D00850BA7 /* EducationViewController.xib in Resources */,
+				5F3E9DE82068D8EC00263A45 /* CommentTableViewCell.xib in Resources */,
 				5FFCC7E3206657100047E9F7 /* UserInfoHeadTableViewCell.xib in Resources */,
 				5F3AB4D62064857D00850BA7 /* MessageViewController.xib in Resources */,
 				5F04AB3E2067387600A91390 /* RecommendMessageViewController.xib in Resources */,
@@ -2304,6 +2411,7 @@
 				5F3AB4A52064857D00850BA7 /* FileNoticceViewController.xib in Resources */,
 				5F3AB4B62064857D00850BA7 /* HomeBrandTableViewCell.xib in Resources */,
 				5F04AB3920672BD200A91390 /* SystemMessageTableViewCell.xib in Resources */,
+				5F3E9DB62068790100263A45 /* WriteArticleViewController.xib in Resources */,
 				5FFCC6DA2065E9B50047E9F7 /* DetailRecordViewController.xib in Resources */,
 				5FFCC6DF2065EA5D0047E9F7 /* MyRecordTableViewCell.xib in Resources */,
 				5F04AB6A20677A1300A91390 /* CompanyDetailViewController.xib in Resources */,
@@ -2315,13 +2423,18 @@
 				5FDC71F52064F084009EA1E3 /* HistoryViewController.xib in Resources */,
 				5F3AB4B42064857D00850BA7 /* HomeBrandCollectionViewCell.xib in Resources */,
 				5F3AB4D12064857D00850BA7 /* RegisterGetCodeTableViewCell.xib in Resources */,
+				5F3E9DD42068C64900263A45 /* FindJobTableViewCell.xib in Resources */,
 				5F3AB49B2064857D00850BA7 /* InteractionViewController.xib in Resources */,
 				5F04AB502067456B00A91390 /* RemindMessageTableViewCell.xib in Resources */,
 				5FDC71B02064A244009EA1E3 /* FindeListViewController.xib in Resources */,
 				5F3AB4922064857D00850BA7 /* InvitationlistViewController.xib in Resources */,
 				5F04AB2F2067256700A91390 /* MessageListTableViewCell.xib in Resources */,
+				5F3E9DE32068D5C200263A45 /* InteractionDetailViewController.xib in Resources */,
+				5F3E9DC020689A0500263A45 /* JobDetailViewController.xib in Resources */,
 				5F3AB4902064857D00850BA7 /* HomeViewController.xib in Resources */,
+				5F3E9DDE2068CEEF00263A45 /* FindJobDetailTableViewCell.xib in Resources */,
 				5FFCC6F92066372B0047E9F7 /* VIPUploadInfoViewController.xib in Resources */,
+				5F3E9DCF20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2335,12 +2448,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TianKunApp/Pods-TianKunApp-resources.sh",
+				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/QMUIKit/QMUIKit/QMUIResources/QMUIResources.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QMUIResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
@@ -2393,6 +2508,7 @@
 				5F3AB4A92064857D00850BA7 /* ConstructionSearchTableViewCell.m in Sources */,
 				5FDC71A62064A0E6009EA1E3 /* IndustryInformationListViewController.m in Sources */,
 				5FDC71CE2064D45C009EA1E3 /* QMUIConfigurationTemplate.m in Sources */,
+				5F3E9DE72068D8EC00263A45 /* CommentTableViewCell.m in Sources */,
 				5F3AB4CC2064857D00850BA7 /* RegisterViewController.m in Sources */,
 				5F3AB4772064857D00850BA7 /* AddViewController.m in Sources */,
 				5F04AB5F206772E300A91390 /* CooperationViewController.m in Sources */,
@@ -2437,6 +2553,7 @@
 				5FDC71D22064DA34009EA1E3 /* HelpViewController.m in Sources */,
 				5F3AB4882064857D00850BA7 /* FindViewController.m in Sources */,
 				5FDC71C92064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m in Sources */,
+				5F3E9DDD2068CEEF00263A45 /* FindJobDetailTableViewCell.m in Sources */,
 				5F3AB52E2064857D00850BA7 /* WQUploadSingleImage.m in Sources */,
 				5F3AB5032064857D00850BA7 /* UIView+SuLine.m in Sources */,
 				5F3AB4F02064857D00850BA7 /* WQTabBarViewController.m in Sources */,
@@ -2471,11 +2588,13 @@
 				5F3AB51E2064857D00850BA7 /* NSString+WQString.m in Sources */,
 				5F3AB4B52064857D00850BA7 /* HomeBrandTableViewCell.m in Sources */,
 				5FFCC6CF2065DEC10047E9F7 /* CollectionViewController.m in Sources */,
+				5F3E9DE22068D5C200263A45 /* InteractionDetailViewController.m in Sources */,
 				5F3AB4F92064857D00850BA7 /* NSTimer+FSLoop.m in Sources */,
 				5FFCC78C20663CCA0047E9F7 /* PYPhotoBrowserConst.m in Sources */,
 				5F3AB4C12064857D00850BA7 /* InteractionListTableViewCell.m in Sources */,
 				5F3AB4ED2064857D00850BA7 /* UIBarButtonItem+Addition.m in Sources */,
 				5FFCC78520663CCA0047E9F7 /* MBProgressHUD+PYExtension.m in Sources */,
+				5F3E9DC920689C5C00263A45 /* JobDetailCompanyTableViewCell.m in Sources */,
 				5FDC71AA2064A23A009EA1E3 /* FindImageListViewController.m in Sources */,
 				5FFCC79020663CCA0047E9F7 /* PYPhotoCell.m in Sources */,
 				5F3AB49C2064857D00850BA7 /* PublicViewController.m in Sources */,
@@ -2486,6 +2605,8 @@
 				5F3AB4792064857D00850BA7 /* MapViewController.m in Sources */,
 				5F04AB6E2067868A00A91390 /* CompanyIntroduceTableViewCell.m in Sources */,
 				5FFCC7E7206659010047E9F7 /* UserInfoPhotoTableViewCell.m in Sources */,
+				5F3E9DCE20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.m in Sources */,
+				5F3E9DD82068CE8F00263A45 /* FindJodDetailViewController.m in Sources */,
 				5F3AB48F2064857D00850BA7 /* HomeViewController.m in Sources */,
 				5FDC71DD2064DD98009EA1E3 /* UIBarButtonItem+Extension.m in Sources */,
 				5F04AB4F2067456B00A91390 /* RemindMessageTableViewCell.m in Sources */,
@@ -2494,6 +2615,7 @@
 				5FFCC7C120663E3E0047E9F7 /* FLAnimatedImageView+WebCache.m in Sources */,
 				5F3AB4FB2064857D00850BA7 /* FSSegmentTitleView.m in Sources */,
 				5F3AB52C2064857D00850BA7 /* WQTextView.m in Sources */,
+				5F3E9DC420689C2800263A45 /* JobDetailDescribeTableViewCell.m in Sources */,
 				5F3AB4BD2064857D00850BA7 /* HomeInfoTableViewCell.m in Sources */,
 				5F3AB50A2064857D00850BA7 /* SuAblumInfo.m in Sources */,
 				5FFCC74220663CBB0047E9F7 /* DACircularProgressView.m in Sources */,
@@ -2531,8 +2653,10 @@
 				5FDC71B42064A328009EA1E3 /* FindListTableViewCell.m in Sources */,
 				5FFCC78F20663CCA0047E9F7 /* PYPhotoBrowseView.m in Sources */,
 				5F3AB4BF2064857D00850BA7 /* HomeListTableViewCell.m in Sources */,
+				5F3E9DEB2068DF3400263A45 /* CommentViewController.m in Sources */,
 				5FFCC6EE206622DA0047E9F7 /* DredgeViewController.m in Sources */,
 				5FFCC78620663CCA0047E9F7 /* UIView+PYExtension.m in Sources */,
+				5F3E9DD32068C64900263A45 /* FindJobTableViewCell.m in Sources */,
 				5F3AB4EF2064857D00850BA7 /* WQTabBar.m in Sources */,
 				5F3AB4842064857D00850BA7 /* MenuInfo.m in Sources */,
 				5FDC71F02064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m in Sources */,
@@ -2566,22 +2690,26 @@
 				5F3AB5202064857D00850BA7 /* UIView+Extension.m in Sources */,
 				5F04AB6920677A1300A91390 /* CompanyDetailViewController.m in Sources */,
 				5F3AB4822064857D00850BA7 /* CompanyInfo.m in Sources */,
+				5F3E9DEE2068E6E400263A45 /* CommentKeyboardView.m in Sources */,
 				5FDC71FD2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m in Sources */,
 				5F3AB52A2064857D00850BA7 /* WQTableView.m in Sources */,
 				5F3AB4F62064857D00850BA7 /* CorePagesBarBtn.m in Sources */,
 				5F3AB4A32064857D00850BA7 /* FileNoticceListViewController.m in Sources */,
 				5F3AB4F32064857D00850BA7 /* CorePagesView.m in Sources */,
 				5F3AB5012064857D00850BA7 /* UIView+SU.m in Sources */,
+				5F3E9DBA206886C800263A45 /* JobViewTableViewCell.m in Sources */,
 				5FFCC6E8206620A80047E9F7 /* UserInfoViewController.m in Sources */,
 				5F3AB49A2064857D00850BA7 /* InteractionViewController.m in Sources */,
 				5F3AB5262064857D00850BA7 /* WQFile.m in Sources */,
 				5F3AB5182064857D00850BA7 /* UICollectionView+EmpayData.m in Sources */,
 				5F3AB51A2064857D00850BA7 /* UITableView+EmpayData.m in Sources */,
 				5FFCC74420663CBB0047E9F7 /* FLAnimatedImage.m in Sources */,
+				5F3E9DBF20689A0500263A45 /* JobDetailViewController.m in Sources */,
 				5F3AB5342064857D00850BA7 /* UserCenterViewController.m in Sources */,
 				5FFCC7E2206657100047E9F7 /* UserInfoHeadTableViewCell.m in Sources */,
 				5F3AB52B2064857D00850BA7 /* WQTextField.m in Sources */,
 				5FFCC79120663CCA0047E9F7 /* PYPhotosView.m in Sources */,
+				5F3E9DB52068790100263A45 /* WriteArticleViewController.m in Sources */,
 				5FFCC7F320666B6B0047E9F7 /* MesssageViewModel.m in Sources */,
 				5FFCC74320663CBB0047E9F7 /* DALabeledCircularProgressView.m in Sources */,
 			);

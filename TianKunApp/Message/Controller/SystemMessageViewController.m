@@ -1,25 +1,25 @@
 //
-//  InteractionListViewController.m
+//  SystemMessageViewController.m
 //  TianKunApp
 //
-//  Created by 天堃 on 2018/3/22.
+//  Created by 天堃 on 2018/3/25.
 //  Copyright © 2018年 天堃. All rights reserved.
 //
 
-#import "InteractionListViewController.h"
-#import "InteractionListTableViewCell.h"
-#import "InteractionDetailViewController.h"
+#import "SystemMessageViewController.h"
+#import "SystemMessageTableViewCell.h"
 
-@interface InteractionListViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SystemMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
 
 @end
 
-@implementation InteractionListViewController
+@implementation SystemMessageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.titleView setTitle:@"系统消息"];
     if (!_arrData) {
         _arrData = [NSMutableArray arrayWithCapacity:0];
         [_arrData addObject:@""];
@@ -36,9 +36,8 @@
         
     }
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"InteractionListTableViewCell" bundle:nil] forCellReuseIdentifier:@"InteractionListTableViewCell"];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 100;
+    [self.tableView registerNib:[UINib nibWithNibName:@"SystemMessageTableViewCell" bundle:nil] forCellReuseIdentifier:@"SystemMessageTableViewCell"];
+    
     [self.tableView beginRefreshing];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.tableView endRefresh];
@@ -52,6 +51,9 @@
         _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 286;
+        _tableView.separatorColor = COLOR_VIEW_BACK;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
         [_tableView headerWithRefreshingBlock:^{
             
@@ -62,6 +64,10 @@
             
         }];
         [self.view addSubview:_tableView];
+        
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.equalTo(self.view);
+        }];
         
         
         
@@ -75,19 +81,25 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    InteractionListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"InteractionListTableViewCell"];
+    SystemMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SystemMessageTableViewCell"];
     if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"InteractionListTableViewCell" owner:nil options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"SystemMessageTableViewCell" owner:nil options:nil] firstObject];
+        cell.selectionStyle = 0;
+
     }
-    cell.selectionStyle = 0;
+    NSString *str = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521952402362&di=3b06b6f5ac723680ea525ca52212d2c7&imgtype=0&src=http%3A%2F%2Fp1.gexing.com%2Fshaitu%2F20120726%2F1141%2F5010bc5a80fd5.jpg";
+    
+    [cell.mainImageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_21]];
+    
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    InteractionDetailViewController *vc = [[InteractionDetailViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
     
-    
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 

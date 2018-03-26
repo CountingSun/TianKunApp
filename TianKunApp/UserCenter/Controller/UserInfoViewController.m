@@ -12,8 +12,10 @@
 #import "UserInfoPhotoTableViewCell.h"
 #import "UIView+AddTapGestureRecognizer.h"
 #import "BusinessLicenseViewController.h"
+#import "WQUploadSingleImage.h"
 
-@interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic ,assign) BOOL canEdit;
 
@@ -43,15 +45,16 @@
     [button addTarget:self action:@selector(editButtobClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
-    __weak typeof(self) weakSelf = self;
 
-    [self.view addTapGestureRecognizerWithActionBlock:^{
-       
-        [weakSelf.view endEditing:YES];
-    }];
-    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapEndEditing)];
+    [self.view addGestureRecognizer:tap];
+    tap.delegate = self;
 
 
+
+}
+- (void)tapEndEditing{
+    [self.view endEditing:YES];
 }
 - (void)editButtobClick:(UIButton *)button{
     if ([button isSelected]) {
@@ -204,6 +207,19 @@
         }
     }
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [[WQUploadSingleImage manager] showUpImagePickerWithVC:self compression:0.5 selectSucceedBlock:^(UIImage *image, NSString *filePath) {
+        
+    }];
+    
+}
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {//判断如果点击的是tableView的cell，就把手势给关闭了
+        return NO;//关闭手势
+    }//否则手势存在
+    return YES;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

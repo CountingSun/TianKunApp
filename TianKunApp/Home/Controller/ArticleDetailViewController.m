@@ -10,8 +10,9 @@
 #import "ArticleDetailTimeTableViewCell.h"
 #import "ArticleCommentTableViewCell.h"
 #import "HomeListTableViewCell.h"
+#import "WriteArticleViewController.h"
 
-@interface ArticleDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ArticleDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 
 @property (nonatomic, strong) UIWebView *headerView;
 @property (nonatomic ,strong) WQTableView *tableView;
@@ -40,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"详情"];
+
     _arrAbout = [NSMutableArray array];
     [_arrAbout addObject:@""];
     [_arrAbout addObject:@""];
@@ -60,12 +62,15 @@
 
     [self.tableView reloadData];
     [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://baike.baidu.com/item/iOS/45705?fr=aladdin"]]];
-    
+    [self showLoadingView];
+
     
 }
 - (UIWebView *)headerView {
     if (!_headerView) {
         _headerView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.1)];
+        _headerView.delegate = self;
+        
         [_headerView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     }
     return _headerView;
@@ -177,6 +182,27 @@
     }
     return [UIView new];
 }
+#pragma mark-
+- (void)webViewDidStartLoad:(UIWebView *)webView{
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    [self hideLoadingView];
+    
+    
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [self hideLoadingView];
+
+    [self showGetDataNullWithReloadBlock:^{
+        [self showLoadingView];
+
+        [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://baike.baidu.com/item/iOS/45705?fr=aladdin"]]];
+    }];
+    
+    
+}
+
+
 - (IBAction)lookMoreButtonClick:(id)sender {
     for (NSInteger i = 0; i<4; i++) {
         _count++;
@@ -188,6 +214,11 @@
     }
 //    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1]] withRowAnimation:UITableViewRowAnimationFade];
 
+}
+
+- (IBAction)leaveMessageButtonClick:(id)sender {
+    WriteArticleViewController *vc = [[WriteArticleViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)dealloc{
     [_headerView.scrollView removeObserver:self forKeyPath:@"contentSize"];
