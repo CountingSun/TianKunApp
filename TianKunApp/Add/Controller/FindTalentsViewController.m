@@ -15,6 +15,9 @@
 #import "ClassTypeInfo.h"
 #import "CompanyInfo.h"
 #import "PublicEnterpriseViewController.h"
+#import "SelectJobTypeViewController.h"
+
+#import "AddinputTextTableViewCell.h"
 
 @interface PublicModel :NSObject
 
@@ -28,6 +31,18 @@
  */
 
 @property (nonatomic, copy) NSString *edificename;
+/**
+ 职位类型ID
+ */
+@property (nonatomic, copy) NSString *edificeTypeID;
+
+/**
+ 职位类型名称
+ */
+
+@property (nonatomic, copy) NSString *edificeTypename;
+
+
 /**
  市级编码
  */
@@ -55,6 +70,8 @@
 @property (nonatomic ,strong) PublicModel *publicModel;
 @property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
 @property (nonatomic ,strong) CompanyInfo *companyInfo;
+@property (strong, nonatomic) IBOutlet UIView *footView;
+@property (weak, nonatomic) IBOutlet UIButton *publicButton;
 
 @end
 
@@ -64,13 +81,21 @@
     [super viewDidLoad];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.tableFooterView = [UIView new];
+    _tableView.tableFooterView = _footView;
+    _footView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
+    _publicButton.backgroundColor = COLOR_THEME;
+    _publicButton.layer.masksToBounds = YES;
+    _publicButton.layer.cornerRadius = 5;
+    
     
     [self.titleView setTitle:@"发布职位"];
     _publicModel = [[PublicModel alloc]init];
     
     _tableView.rowHeight = 45;
     [_tableView  registerNib:[UINib nibWithNibName:@"FindTalentsTableViewCell" bundle:nil] forCellReuseIdentifier:@"FindTalentsTableViewCell"];
+    [_tableView  registerNib:[UINib nibWithNibName:@"AddinputTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"AddinputTextTableViewCell"];
+
     [self showLoadingView];
     [self getEnterpriseInfo];
     
@@ -114,7 +139,44 @@
     
     
 }
+- (void)publicJob{
+    
+    NSDictionary *partDict = @{
+                              @"userid":[UserInfoEngine getUserInfo].userID,
+                              @"username":[UserInfoEngine getUserInfo].nickname,
+                              @"enterpriseid":@(_companyInfo.companyID),
+                              @"edificeid":_publicModel.edificeTypeID,
+                              @"edificename":_publicModel.edificename,
+                              @"work_describe":_publicModel.work_describe,
+                              @"cityid":_publicModel.cityid,
 
+
+
+                              };
+    
+    [self showWithStatus:NET_WAIT_TOST];
+    self.view.userInteractionEnabled = NO;
+    
+    [self.netWorkEngine postWithDict:partDict url:BaseUrl(@"addjob/postjob.action") succed:^(id responseObject) {
+        self.view.userInteractionEnabled = YES;
+
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            [self showSuccessWithStatus:@"发布成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
+        
+    } errorBlock:^(NSError *error) {
+        self.view.userInteractionEnabled = YES;
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
+    
+    
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
@@ -127,9 +189,22 @@
     
 }
 
-
+- (void)texeFieldTextChange:(UITextField *)textField{
+    
+    _publicModel.edificename = textField.text;
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            AddinputTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddinputTextTableViewCell" forIndexPath:indexPath];
+            [cell.textField addTarget:self action:@selector(texeFieldTextChange:) forControlEvents:UIControlEventEditingChanged];
+            
+            return cell;
+            
+        }
+    }
     FindTalentsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindTalentsTableViewCell" forIndexPath:indexPath];
     
     if (indexPath.section == 0) {
@@ -145,11 +220,11 @@
             case 0:
             {
                 cell.titleLabel.text = @"职位类型";
-                if (!_publicModel.edificename.length) {
+                if (!_publicModel.edificeTypename.length) {
                     cell.detailLabel.text = @"请选择";
 
                 }else{
-                    cell.detailLabel.text = _publicModel.edificename;
+                    cell.detailLabel.text = _publicModel.edificeTypename;
 
                 }
             }
@@ -195,6 +270,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    [self.view endEditing:YES];
+    
     if (indexPath.section == 0) {
         PublicEnterpriseViewController *vc = [[PublicEnterpriseViewController alloc]init];
         vc.EditSucceedBlock = ^(CompanyInfo *companyInfo) {
@@ -209,12 +286,20 @@
         switch (indexPath.row) {
             case 0:
                 {
-                    AddSelectJobTypeViewController *vc = [[AddSelectJobTypeViewController alloc]init];
+                    SelectJobTypeViewController *vc = [[SelectJobTypeViewController alloc]init];
                     [self.navigationController pushViewController:vc animated:YES];
-                    vc.selectSucceedBlock = ^(ClassTypeInfo *classTypeInfo) {
-                        _publicModel.edificename = classTypeInfo.typeName;
-                        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    vc.selectJobSucceedBlock = ^(FilterInfo *first, FilterInfo *second) {
+                    _publicModel.edificeTypename = second.propertyName;
+                        _publicModel.edificeTypeID = second.propertyID;
+
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
                     };
+                    
+//                    vc.selectSucceedBlock = ^(ClassTypeInfo *classTypeInfo) {
+//                        _publicModel.edificename = classTypeInfo.typeName;
+//                        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//                    };
 
                 }
                 break;
@@ -256,6 +341,38 @@
                 break;
         }
     }
+}
+- (IBAction)publicButtonClick:(id)sender {
+    
+    if (!_companyInfo.companyID) {
+        [self showErrorWithStatus:@"请选择公司"];
+        return;
+        
+    }
+    if (!_publicModel.edificeTypeID.length) {
+        [self showErrorWithStatus:@"请选择职位类型"];
+        return;
+        
+    }
+    if (!_publicModel.edificename.length) {
+        [self showErrorWithStatus:@"请输入职位名称"];
+        return;
+        
+    }
+    if (!_publicModel.address.length) {
+        [self showErrorWithStatus:@"请选择工作地点"];
+        return;
+        
+    }
+    if (!_publicModel.work_describe.length) {
+        [self showErrorWithStatus:@"请输入职位描述"];
+        return;
+        
+    }
+    [self publicJob];
+    
+
+
 }
 - (NetWorkEngine *)netWorkEngine{
     if (!_netWorkEngine) {

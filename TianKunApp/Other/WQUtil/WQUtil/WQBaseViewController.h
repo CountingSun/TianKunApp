@@ -62,8 +62,27 @@
  隐藏加载动画
  */
 - (void)hideLoadingView;
+
+/**
+ 网络连接失败
+
+ @param reloadBlock 点击按钮回调
+ */
 - (void)showGetDataFailViewWithReloadBlock:(dispatch_block_t)reloadBlock;
+
+/**
+ 没有数据展示界面
+
+ @param reloadBlock <#reloadBlock description#>
+ */
 - (void)showGetDataNullWithReloadBlock:(dispatch_block_t)reloadBlock;
+
+/**
+ 获取数据错误
+
+ @param message <#message description#>
+ */
+- (void)showGetDataErrorWithMessage:(NSString *)message reloadBlock:(dispatch_block_t)reloadBlock;
 
 
 @end

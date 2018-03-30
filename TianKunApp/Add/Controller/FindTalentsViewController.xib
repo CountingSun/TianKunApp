@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FindTalentsViewController">
+            <connections>
+                <outlet property="footView" destination="IWR-UO-scN" id="b8C-Kz-iBI"/>
+                <outlet property="publicButton" destination="JXV-R6-IYK" id="Cgb-Eg-64h"/>
+                <outlet property="tableView" destination="uht-h5-DkW" id="99f-l9-CXA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uht-h5-DkW">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="uht-h5-DkW" secondAttribute="trailing" id="8oQ-zK-1xS"/>
+                <constraint firstItem="uht-h5-DkW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JWL-KX-dlT"/>
+                <constraint firstItem="uht-h5-DkW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PTA-7y-UQg"/>
+                <constraint firstAttribute="bottom" secondItem="uht-h5-DkW" secondAttribute="bottom" id="iuC-1e-kxV"/>
+            </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="IWR-UO-scN">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JXV-R6-IYK">
+                    <rect key="frame" x="10" y="30" width="355" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="qWq-z9-D6H"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="确认发布"/>
+                    <connections>
+                        <action selector="publicButtonClick:" destination="-1" eventType="touchUpInside" id="8p7-jB-Jz1"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="JXV-R6-IYK" secondAttribute="trailing" constant="10" id="GGY-h5-wr3"/>
+                <constraint firstItem="JXV-R6-IYK" firstAttribute="leading" secondItem="IWR-UO-scN" secondAttribute="leading" constant="10" id="eQs-OF-vAt"/>
+                <constraint firstItem="JXV-R6-IYK" firstAttribute="top" secondItem="IWR-UO-scN" secondAttribute="top" constant="30" id="hot-pU-2qz"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="32.5" y="536"/>
+        </view>
+    </objects>
+</document>

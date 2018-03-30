@@ -10,6 +10,7 @@
 #import "WQNavigationViewController.h"
 #import "WQTabBar.h"
 #import "AddViewController.h"
+#import "AppDelegate.h"
 
 @interface WQTabBarViewController ()<UITabBarControllerDelegate>
 @property (nonatomic ,assign) NSInteger index;
@@ -29,10 +30,22 @@
         AddViewController *addViewController = [[AddViewController alloc] init];
     
         WQNavigationViewController *navController = [[WQNavigationViewController alloc] initWithRootViewController:addViewController];
-        [self presentViewController:navController animated:NO completion:^{
+//        [self presentViewController:navController animated:NO completion:^{
+//
+//        }];
+
+        AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        appdelegate.window.rootViewController.definesPresentationContext = YES;
+        
+        navController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        
+        [appdelegate.window.rootViewController presentViewController:navController animated:YES completion:^{
+            
+            navController.view.backgroundColor=[UIColor colorWithRed:237/255.0 green:236/255.0 blue:244/255.0 alpha:0];
             
         }];
-
+        
     };
     
     [self setValue:tabBar forKey:@"tabBar"];

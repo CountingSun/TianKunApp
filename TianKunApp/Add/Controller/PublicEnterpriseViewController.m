@@ -36,7 +36,6 @@
     [super viewDidLoad];
     [self.titleView setTitle:@"发布"];
     [self setupUI];
-    _saveButton.enabled = NO;
     
     [self showLoadingView];
     _companyInfo = [[CompanyInfo alloc]init];
@@ -51,6 +50,7 @@
     UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     negativeSpacer.width = -20;
     self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
+    _saveButton.enabled = NO;
 
     
     

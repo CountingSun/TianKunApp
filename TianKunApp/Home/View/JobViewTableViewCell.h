@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JobViewTableViewCell : UITableViewCell
+@class JobInfo;
 
+@interface JobViewTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *jonImageView;
+@property (weak, nonatomic) IBOutlet UILabel *jobNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *anotherLabel;
+@property (nonatomic ,strong) JobInfo *jobInfo;
 @end

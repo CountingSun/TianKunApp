@@ -55,16 +55,15 @@
                                     <constraint firstAttribute="height" constant="1" id="GbY-Df-n2Z"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZm-hG-a5X">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZm-hG-a5X">
                                 <rect key="frame" x="10" y="10" width="60" height="60"/>
-                                <color key="backgroundColor" red="1" green="0.36419479710000002" blue="0.1619840256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="Zzz-qd-0jx"/>
                                     <constraint firstAttribute="height" constant="60" id="vwR-Ll-LOs"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在招聘：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEM-iX-MTz">
-                                <rect key="frame" x="80" y="86" width="61.5" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEM-iX-MTz">
+                                <rect key="frame" x="80" y="86" width="0.0" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" id="K0l-Xs-QxF"/>
                                     <constraint firstAttribute="height" constant="20" id="gQD-bw-0ah"/>
@@ -73,8 +72,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="油漆工" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kD-VE-Fyk">
-                                <rect key="frame" x="141.5" y="86" width="37" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kD-VE-Fyk">
+                                <rect key="frame" x="80" y="86" width="0.0" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="JbO-KK-wXl"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" id="TVb-ck-t7b"/>
@@ -84,7 +83,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="等7个职位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWo-w0-qhH">
-                                <rect key="frame" x="179" y="86" width="167" height="20"/>
+                                <rect key="frame" x="80.5" y="86" width="265.5" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="iiO-sC-mbz"/>
                                 </constraints>
@@ -127,6 +126,13 @@
                     <constraint firstAttribute="bottom" secondItem="JFB-5q-u9c" secondAttribute="bottom" constant="10" id="tD9-1x-Io3"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="addressLabel" destination="OY1-vr-VPN" id="tEu-zT-g7G"/>
+                <outlet property="anotherLabel" destination="xWo-w0-qhH" id="66A-OG-VQO"/>
+                <outlet property="jobNameLabel" destination="9ko-Nc-veC" id="Teb-uN-Ouf"/>
+                <outlet property="jonImageView" destination="dZm-hG-a5X" id="Q48-3J-idL"/>
+                <outlet property="typeLabel" destination="M9p-OL-ICq" id="9NE-cd-wHP"/>
+            </connections>
             <point key="canvasLocation" x="67" y="97"/>
         </tableViewCell>
     </objects>

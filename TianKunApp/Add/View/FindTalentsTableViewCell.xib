@@ -28,14 +28,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭头" translatesAutoresizingMaskIntoConstraints="NO" id="gcR-kZ-tMt">
-                        <rect key="frame" x="280" y="11.5" width="20" height="20"/>
+                        <rect key="frame" x="290" y="11.5" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="cRN-uD-RXp"/>
                             <constraint firstAttribute="width" constant="20" id="rEH-k0-Ji7"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IC7-oE-MGM">
-                        <rect key="frame" x="145" y="0.0" width="125" height="44.5"/>
+                        <rect key="frame" x="145" y="0.0" width="135" height="44.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                     <constraint firstAttribute="bottom" secondItem="IC7-oE-MGM" secondAttribute="bottom" id="0Us-HJ-g8f"/>
                     <constraint firstItem="gcR-kZ-tMt" firstAttribute="leading" secondItem="IC7-oE-MGM" secondAttribute="trailing" constant="10" id="3yv-8V-RPE"/>
                     <constraint firstItem="STv-cq-kQb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="NPd-RG-Xs8"/>
-                    <constraint firstAttribute="trailing" secondItem="gcR-kZ-tMt" secondAttribute="trailing" constant="20" id="SrC-Ss-546"/>
+                    <constraint firstAttribute="trailing" secondItem="gcR-kZ-tMt" secondAttribute="trailing" constant="10" id="SrC-Ss-546"/>
                     <constraint firstItem="IC7-oE-MGM" firstAttribute="leading" secondItem="STv-cq-kQb" secondAttribute="trailing" constant="30" id="ant-Fg-Wei"/>
                     <constraint firstItem="IC7-oE-MGM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oD4-a6-2zf"/>
                     <constraint firstItem="STv-cq-kQb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sMh-9j-vXe"/>

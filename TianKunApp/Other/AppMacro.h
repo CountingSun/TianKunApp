@@ -29,7 +29,7 @@
 #endif
 
 #define BaseUrl(string) [@"http://47.92.72.134/" stringByAppendingString:string]
-//#define BaseUrl(string) [@"http://192.168.1.226/" stringByAppendingString:string]
+//#define BaseUrl(string) [@"http://192.168.1.128/" stringByAppendingString:string]
 
 #define LOGIN_SUCCEED_NOTICE @"netWorkChangeEventNotification"
 
@@ -43,4 +43,5 @@
 #define DEFAULT_IMAGE_11 @"行业信息"
 #define DEFAULT_IMAGE_21 @"行业信息"
 
+#define DEFAULT_PAGE_SIZE 15
 #endif /* AppMacro_h */

@@ -10,4 +10,7 @@
 
 @interface JobDetailViewController : WQBaseViewController
 
+- (instancetype)initWithJobID:(NSString *)jobID;
+
+
 @end

@@ -13,6 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _addImageView.userInteractionEnabled = YES;
+    _addImageView.layer.masksToBounds = YES;
+    
     [_addImageView addTapGestureRecognizerWithActionBlock:^{
         if (_block) {
             _block();

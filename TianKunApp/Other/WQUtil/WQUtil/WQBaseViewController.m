@@ -41,6 +41,10 @@
     }
     
     
+    
+}
+- (BOOL)shouldHideKeyboardWhenTouchInView:(UIView *)view{
+    return YES;
 }
 -(void)setBackButtonTitle:(NSString *)backButtonTitle{
     UIBarButtonItem *backIetm = [[UIBarButtonItem alloc] init];
@@ -101,12 +105,12 @@
 
 - (void)showGetDataFailViewWithReloadBlock:(dispatch_block_t)reloadBlock{
     _reloadBlock = reloadBlock;
+    [self showEmptyViewWithImage:[UIImage imageNamed:@"net_fail"] text:@"网络连接失败" detailText:@"" buttonTitle:@"重新加载" buttonAction:@selector(reloData)];
     self.emptyView.backgroundColor = COLOR_VIEW_BACK;
-    
-    [self showEmptyViewWithImage:[UIImage imageNamed:@"AppIcon"] text:@"网络连接失败" detailText:@"" buttonTitle:@"从新加载" buttonAction:@selector(reloData)];
+
 }
 -(void)reloData{
-    
+    [self hideEmptyView];
     if (_reloadBlock) {
         _reloadBlock();
     }
@@ -114,10 +118,21 @@
 - (void)showGetDataNullWithReloadBlock:(dispatch_block_t)reloadBlock{
     _reloadBlock = reloadBlock;
 
-    [self showEmptyViewWithImage:[UIImage imageNamed:@"AppIcon"] text:@"暂无数据" detailText:@"" buttonTitle:@"从新加载" buttonAction:@selector(reloData)];
+    [self showEmptyViewWithImage:[UIImage imageNamed:@"net_fail"] text:@"暂无数据" detailText:@"" buttonTitle:@"重新加载" buttonAction:@selector(reloData)];
+    self.emptyView.backgroundColor = COLOR_VIEW_BACK;
+
+}
+- (void)showGetDataErrorWithMessage:(NSString *)message reloadBlock:(dispatch_block_t)reloadBlock{
+    _reloadBlock = reloadBlock;
+    
+    [self showEmptyViewWithImage:[UIImage imageNamed:@"net_fail"] text:message detailText:@"" buttonTitle:@"重新加载" buttonAction:@selector(reloData)];
+    self.emptyView.backgroundColor = COLOR_VIEW_BACK;
 
 }
 
 //- (void)
+- (void)dealloc{
+    WQLog(@"dealloc");
+}
 
 @end

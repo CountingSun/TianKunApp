@@ -49,18 +49,6 @@
 - (void)getJobTypeWithID:(NSString *)typeID{
     
     
-    
-    
-    /*edificeid
-    1:教育分类
-    2：职位分类
-    3：招标/投标广告
-    5：互动交流
-    6:建设企业
-    7：人员分类
-    10：项目类型
-     */
-    
     [[[NetWorkEngine alloc]init] postWithDict:@{@"edificeid":typeID} url:BaseUrl(@"home/getcategory.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         [self hideLoadingView];

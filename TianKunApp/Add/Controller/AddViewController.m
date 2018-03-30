@@ -70,7 +70,10 @@
     
 }
 -(void)setupUI{
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *effectView =[[UIVisualEffectView alloc]initWithEffect:blurEffect];
+    self.view = effectView;
     self.isHiddenNav = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapBackEvent)];
     [self.view addGestureRecognizer:tap];

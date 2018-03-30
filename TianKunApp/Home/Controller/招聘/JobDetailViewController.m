@@ -15,45 +15,56 @@
 @interface JobDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
+@property (nonatomic, copy) NSString *jobID;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
 
 
 @end
 
 @implementation JobDetailViewController
+- (instancetype)initWithJobID:(NSString *)jobID{
+    if (self = [super init]) {
+        _jobID = jobID;
+        
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@""];
+    [self showLoadingView];
+    [self getData];
     
-    if (!_arrData) {
-        _arrData = [NSMutableArray arrayWithCapacity:0];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        
+}
+- (void)getData{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
     }
-    
-    [_tableView registerNib:[UINib nibWithNibName:@"JobDetailDescribeTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobDetailDescribeTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"JobDetailCompanyTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobDetailCompanyTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"JobDetailCompanyDescriptionTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobDetailCompanyDescriptionTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"JobViewTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobViewTableViewCell"];
-
-    [self.tableView beginRefreshing];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView endRefresh];
+    [_netWorkEngine postWithDict:@{@"jobid":_jobID} url:BaseUrl(@"home/invitationAsDetail.action") succed:^(id responseObject) {
+        [self hideLoadingView];
         
-    });
-    
-    [self.tableView reloadData];
-    
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            if (!_arrData) {
+                _arrData = [NSMutableArray arrayWithCapacity:0];
+            }
+        }else{
+            [self showGetDataErrorWithMessage:[responseObject objectForKey:@"msg"] reloadBlock:^{
+                [self showLoadingView];
+                [self getData];
+
+            }];
+        }
+    } errorBlock:^(NSError *error) {
+        [self hideLoadingView];
+        [self showGetDataFailViewWithReloadBlock:^{
+            [self showLoadingView];
+            [self getData];
+            
+        }];
+        
+    }];
     
 }
 - (WQTableView *)tableView{
@@ -80,7 +91,11 @@
             make.left.right.bottom.equalTo(self.view);
             make.top.equalTo(self.view).offset(0);
         }];
-        
+        [_tableView registerNib:[UINib nibWithNibName:@"JobDetailDescribeTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobDetailDescribeTableViewCell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"JobDetailCompanyTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobDetailCompanyTableViewCell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"JobDetailCompanyDescriptionTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobDetailCompanyDescriptionTableViewCell"];
+        [_tableView registerNib:[UINib nibWithNibName:@"JobViewTableViewCell" bundle:nil] forCellReuseIdentifier:@"JobViewTableViewCell"];
+
         
         
         

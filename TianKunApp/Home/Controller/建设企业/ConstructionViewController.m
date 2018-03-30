@@ -41,7 +41,7 @@
     [self showLoadingView];
 
     _pageIndex = 1;
-    _pageSize = 15;
+    _pageSize = DEFAULT_PAGE_SIZE;
     [self setupTitleView];
     [self getData];
     
