@@ -8,6 +8,9 @@
 
 #import "WQBaseViewController.h"
 
+@class CompanyInfo;
+
 @interface DetailListViewController : WQBaseViewController
+@property (nonatomic ,strong) CompanyInfo *companyInfo;
 
 @end

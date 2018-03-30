@@ -16,6 +16,7 @@
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) FSSegmentTitleView *segmentTitleView;
 @property (nonatomic ,strong) CompanyInfo *companyInfo;
+@property (nonatomic ,strong) CompanyInfo *companyDetailInfo;
 
 @end
 
@@ -32,12 +33,34 @@
     [super viewDidLoad];
     [self.titleView setTitle:@"建设信息"];
     [self showLoadingView];
+    [self getData];
+    
     
 }
 - (void)getData{
     [self showLoadingView];
-    [[[NetWorkEngine alloc]init] postWithDict:@{} url:BaseUrl(@"") succed:^(id responseObject) {
+    [[[NetWorkEngine alloc]init] postWithDict:@{@"id":@(_companyInfo.companyID)} url:BaseUrl(@"/CompanyListXinXi/findcompanyxinxilists.action") succed:^(id responseObject) {
+        
+    
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         [self hideLoadingView];
+
+        if (code == 1) {
+            NSDictionary *dict = [[[responseObject objectForKey:@"value"] objectForKey:@"CompanyInformation"] objectAtIndex:0];
+            _companyDetailInfo = [CompanyInfo mj_objectWithKeyValues:dict];
+            [self.tableView reloadData];
+
+        }else{
+            
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self showLoadingView];
+                [self getData];
+            }];
+
+        }
+        
+        
+        
         
         
     } errorBlock:^(NSError *error) {
@@ -97,15 +120,29 @@
         cell.selectionStyle = 0;
     }
     
-    NSString *str = @"公司名称:郑州市建设装饰";
-    
-    NSMutableAttributedString * mAttribute = [[NSMutableAttributedString alloc] initWithString:str];
-    [mAttribute addAttribute:NSForegroundColorAttributeName
-                       value:COLOR_THEME
-                       range:NSMakeRange(5, str.length-5)];
-    
-    cell.textLabel.attributedText = mAttribute;
-    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            NSString *str = [NSString stringWithFormat:@"公司名称：%@",_companyInfo.companyName];
+            
+            NSMutableAttributedString * mAttribute = [[NSMutableAttributedString alloc] initWithString:str];
+            [mAttribute addAttribute:NSForegroundColorAttributeName
+                               value:COLOR_THEME
+                               range:NSMakeRange(5, str.length-5)];
+            
+            cell.textLabel.attributedText = mAttribute;
+        }else if(indexPath.row == 1){
+            cell.textLabel.text = [NSString stringWithFormat:@"法定代表人：%@",_companyInfo.companyLegalRepresentative];
+            
+        }else{
+            cell.textLabel.text = [NSString stringWithFormat:@"公司注册属地：%@",_companyInfo.companyAddress];
+            ;
+
+        }
+    }else{
+        cell.textLabel.text = @"";
+        
+    }
+
     
     return cell;
 
@@ -118,7 +155,7 @@
             
             backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
             backView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-            _segmentTitleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 40) titles:@[@"企业资质资格",@"注册人员",@"工程项目",@"不良",@"测试1",@"测试2",@"测试7",@"测试3",@"测试8"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+            _segmentTitleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 40) titles:@[@"企业资质",@"注册人员",@"工程项目",@"不良",@"良好",@"黑名单",@"变更记录"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
             _segmentTitleView.titleSelectColor = COLOR_THEME;
             _segmentTitleView.indicatorColor = COLOR_THEME;
             [backView addSubview:_segmentTitleView];
@@ -130,9 +167,15 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    DetailListViewController *vc = [[DetailListViewController alloc]init];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            DetailListViewController *vc = [[DetailListViewController alloc]init];
+            vc.companyInfo = _companyDetailInfo;
+            
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+    }
     
 }
 /**
@@ -153,14 +196,5 @@
     [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

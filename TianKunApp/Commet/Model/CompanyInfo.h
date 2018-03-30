@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class CompanyClassInfo;
+
 @interface CompanyInfo : NSObject
 
 /**
@@ -38,7 +40,7 @@
  */
 @property (nonatomic, copy) NSString *companyAddress;
  /**
-  企业资质资格：(资质表关联此表主键)  暂时弃用
+  企业资质类型
   */
 
 @property (nonatomic, copy) NSString *companyCertification;
@@ -72,5 +74,38 @@
  更新时间 
  */
 @property (nonatomic, copy) NSString *companyUpDate;
+/**
+ 企业描述 
+ */
+@property (nonatomic, copy) NSString *companyIntroduce;
+
+/**
+ 公司类型信息 
+ */
+@property (nonatomic ,strong) CompanyClassInfo *companyClassInfo;
+
+
+/**
+ 公司联系人
+ */
+@property (nonatomic, copy) NSString *contacts;
+
+/**
+ 手机号
+ */
+@property (nonatomic, copy) NSString *phone;
+
+ /**
+  企业图片地址
+  */
+
+@property (nonatomic ,strong) NSString *picture_url;
+/**
+ 企业注册地址
+ */
+
+@property (nonatomic ,strong) NSString *registered_address;
+
+
 
 @end

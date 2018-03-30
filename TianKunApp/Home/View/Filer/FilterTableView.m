@@ -26,6 +26,8 @@
     self.dataSource = self;
     self.tableFooterView = [UIView new];
     self.backgroundColor = [UIColor clearColor];
+    self.showsVerticalScrollIndicator = NO;
+    self.showsHorizontalScrollIndicator = NO;
     
 }
 - (void)setArrData:(NSMutableArray *)arrData{

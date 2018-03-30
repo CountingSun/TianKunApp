@@ -70,6 +70,44 @@
 		5F30D4AA206109080035EA44 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F30D4A9206109080035EA44 /* JavaScriptCore.framework */; };
 		5F30D4AC206109150035EA44 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F30D4AB206109150035EA44 /* ImageIO.framework */; };
 		5F30D4AE2061091F0035EA44 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F30D4AD2061091F0035EA44 /* libsqlite3.tbd */; };
+		5F34C7EF206B1D6800977A71 /* CALayer+Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C7EC206B1D6800977A71 /* CALayer+Transition.m */; };
+		5F34C7F0206B1D6800977A71 /* XTGuidePagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C7EE206B1D6800977A71 /* XTGuidePagesViewController.m */; };
+		5F34C7FB206B321700977A71 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 5F34C7F2206B321700977A71 /* LICENSE */; };
+		5F34C7FC206B321700977A71 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5F34C7F3206B321700977A71 /* README.md */; };
+		5F34C7FD206B321700977A71 /* UITableView+SDAutoTableViewCellHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C7F8206B321700977A71 /* UITableView+SDAutoTableViewCellHeight.m */; };
+		5F34C7FE206B321700977A71 /* UIView+SDAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C7FA206B321700977A71 /* UIView+SDAutoLayout.m */; };
+		5F34C807206B9EDC00977A71 /* NSObject+ModelHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C805206B9EDC00977A71 /* NSObject+ModelHandle.m */; };
+		5F34C80D206BB51100977A71 /* AptitudeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C80C206BB51100977A71 /* AptitudeInfo.m */; };
+		5F34C812206BBB4C00977A71 /* HomePeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C810206BBB4C00977A71 /* HomePeopleViewController.m */; };
+		5F34C817206BBB7900977A71 /* HomePeopleInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C815206BBB7900977A71 /* HomePeopleInfoViewController.m */; };
+		5F34C818206BBB7900977A71 /* HomePeopleInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F34C816206BBB7900977A71 /* HomePeopleInfoViewController.xib */; };
+		5F34C81B206BBBE900977A71 /* PeopleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F34C81A206BBBE900977A71 /* PeopleInfo.m */; };
+		5F37E3BE206C751E00AB1C0B /* FindTalentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E3BC206C751E00AB1C0B /* FindTalentsViewController.m */; };
+		5F37E3BF206C751E00AB1C0B /* FindTalentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E3BD206C751E00AB1C0B /* FindTalentsViewController.xib */; };
+		5F37E3C3206C75C000AB1C0B /* FindTalentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E3C1206C75C000AB1C0B /* FindTalentsTableViewCell.m */; };
+		5F37E3C4206C75C000AB1C0B /* FindTalentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E3C2206C75C000AB1C0B /* FindTalentsTableViewCell.xib */; };
+		5F37E3C8206C790600AB1C0B /* JobIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E3C6206C790600AB1C0B /* JobIntroduceViewController.m */; };
+		5F37E3C9206C790600AB1C0B /* JobIntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E3C7206C790600AB1C0B /* JobIntroduceViewController.xib */; };
+		5F37E3CD206C806B00AB1C0B /* SelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E3CB206C806B00AB1C0B /* SelectAddressViewController.m */; };
+		5F37E3CE206C806B00AB1C0B /* SelectAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E3CC206C806B00AB1C0B /* SelectAddressViewController.xib */; };
+		5F37E47A206C92A700AB1C0B /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E478206C92A600AB1C0B /* PlayViewController.m */; };
+		5F37E4A5206CC44E00AB1C0B /* SBControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E498206CC44E00AB1C0B /* SBControlView.m */; };
+		5F37E4A6206CC44E00AB1C0B /* SBPauseOrPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E49A206CC44E00AB1C0B /* SBPauseOrPlayView.m */; };
+		5F37E4A7206CC44E00AB1C0B /* SBPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E49C206CC44E00AB1C0B /* SBPlayer.m */; };
+		5F37E4A8206CC44E00AB1C0B /* full_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E49E206CC44E00AB1C0B /* full_screen.png */; };
+		5F37E4A9206CC44E00AB1C0B /* full_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E49F206CC44E00AB1C0B /* full_screen@2x.png */; };
+		5F37E4AA206CC44E00AB1C0B /* knob.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E4A0206CC44E00AB1C0B /* knob.png */; };
+		5F37E4AB206CC44E00AB1C0B /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E4A1206CC44E00AB1C0B /* pause.png */; };
+		5F37E4AC206CC44E00AB1C0B /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E4A2206CC44E00AB1C0B /* pause@2x.png */; };
+		5F37E4AD206CC44E00AB1C0B /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E4A3206CC44E00AB1C0B /* play.png */; };
+		5F37E4AE206CC44E00AB1C0B /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E4A4206CC44E00AB1C0B /* play@2x.png */; };
+		5F37E4B1206CCDA700AB1C0B /* SBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E4B0206CCDA700AB1C0B /* SBTitleView.m */; };
+		5F37E4B4206CD13600AB1C0B /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E4B3206CD13600AB1C0B /* MarqueeLabel.m */; };
+		5F37E4B8206CE8D000AB1C0B /* AddFindJobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E4B6206CE8D000AB1C0B /* AddFindJobViewController.m */; };
+		5F37E4B9206CE8D000AB1C0B /* AddFindJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E4B7206CE8D000AB1C0B /* AddFindJobViewController.xib */; };
+		5F37E4BD206CF1B500AB1C0B /* AddSelectJobTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E4BB206CF1B500AB1C0B /* AddSelectJobTypeViewController.m */; };
+		5F37E4BE206CF1B500AB1C0B /* AddSelectJobTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F37E4BC206CF1B500AB1C0B /* AddSelectJobTypeViewController.xib */; };
+		5F37E4C1206CFAEB00AB1C0B /* ClassTypeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F37E4C0206CFAEB00AB1C0B /* ClassTypeInfo.m */; };
 		5F3AB2C9206484F500850BA7 /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3AB2C1206484F500850BA7 /* BaiduMapAPI_Base.framework */; };
 		5F3AB2CA206484F500850BA7 /* BaiduMapAPI_Location.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3AB2C2206484F500850BA7 /* BaiduMapAPI_Location.framework */; };
 		5F3AB2CB206484F500850BA7 /* BaiduMapAPI_Map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F3AB2C3206484F500850BA7 /* BaiduMapAPI_Map.framework */; };
@@ -310,6 +348,28 @@
 		5FDC71FD2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FC2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m */; };
 		5FDC720020651512009EA1E3 /* HistoryBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */; };
 		5FDC720220651544009EA1E3 /* HistoryBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC720120651544009EA1E3 /* HistoryBottomView.xib */; };
+		5FF658E62069D7F6000016D6 /* CommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658E42069D7F6000016D6 /* CommentListViewController.m */; };
+		5FF658E72069D7F6000016D6 /* CommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF658E52069D7F6000016D6 /* CommentListViewController.xib */; };
+		5FF658EB2069DF0E000016D6 /* PublicInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658E92069DF0E000016D6 /* PublicInfoTableViewCell.m */; };
+		5FF658EC2069DF0E000016D6 /* PublicInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF658EA2069DF0E000016D6 /* PublicInfoTableViewCell.xib */; };
+		5FF658F02069E11A000016D6 /* PublicTextViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658EE2069E11A000016D6 /* PublicTextViewTableViewCell.m */; };
+		5FF658F12069E11A000016D6 /* PublicTextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF658EF2069E11A000016D6 /* PublicTextViewTableViewCell.xib */; };
+		5FF658F52069E184000016D6 /* PublicUploadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658F32069E184000016D6 /* PublicUploadTableViewCell.m */; };
+		5FF658F62069E184000016D6 /* PublicUploadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF658F42069E184000016D6 /* PublicUploadTableViewCell.xib */; };
+		5FF658FA2069E571000016D6 /* EnterpriseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658F92069E571000016D6 /* EnterpriseInfo.m */; };
+		5FF658FF206A1195000016D6 /* EducationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658FD206A1195000016D6 /* EducationDetailViewController.m */; };
+		5FF65900206A1195000016D6 /* EducationDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF658FE206A1195000016D6 /* EducationDetailViewController.xib */; };
+		5FF65904206A1849000016D6 /* EducationMeansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF65902206A1849000016D6 /* EducationMeansViewController.m */; };
+		5FF65905206A1849000016D6 /* EducationMeansViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF65903206A1849000016D6 /* EducationMeansViewController.xib */; };
+		5FF65908206A2978000016D6 /* EducationVidoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF65907206A2978000016D6 /* EducationVidoListViewController.m */; };
+		5FF6590B206A299A000016D6 /* EducationTextListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6590A206A299A000016D6 /* EducationTextListViewController.m */; };
+		5FF6590F206A2CB0000016D6 /* EducationVidoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6590D206A2CB0000016D6 /* EducationVidoCollectionViewCell.m */; };
+		5FF65910206A2CB0000016D6 /* EducationVidoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6590E206A2CB0000016D6 /* EducationVidoCollectionViewCell.xib */; };
+		5FF65914206A30FE000016D6 /* EducationTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF65912206A30FE000016D6 /* EducationTextTableViewCell.m */; };
+		5FF65915206A30FE000016D6 /* EducationTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF65913206A30FE000016D6 /* EducationTextTableViewCell.xib */; };
+		5FF6594C206A4890000016D6 /* CompanyClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6594B206A4890000016D6 /* CompanyClassInfo.m */; };
+		5FF65950206A4B6D000016D6 /* SelectCompanyClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF6594E206A4B6D000016D6 /* SelectCompanyClassViewController.m */; };
+		5FF65951206A4B6D000016D6 /* SelectCompanyClassViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF6594F206A4B6D000016D6 /* SelectCompanyClassViewController.xib */; };
 		5FFCC6CF2065DEC10047E9F7 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6CD2065DEC10047E9F7 /* CollectionViewController.m */; };
 		5FFCC6D02065DEC20047E9F7 /* CollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFCC6CE2065DEC10047E9F7 /* CollectionViewController.xib */; };
 		5FFCC6D42065E6AA0047E9F7 /* MyVIPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FFCC6D22065E6AA0047E9F7 /* MyVIPViewController.m */; };
@@ -454,6 +514,68 @@
 		5F30D4A9206109080035EA44 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		5F30D4AB206109150035EA44 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		5F30D4AD2061091F0035EA44 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		5F34C7EB206B1D6800977A71 /* CALayer+Transition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Transition.h"; sourceTree = "<group>"; };
+		5F34C7EC206B1D6800977A71 /* CALayer+Transition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Transition.m"; sourceTree = "<group>"; };
+		5F34C7ED206B1D6800977A71 /* XTGuidePagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTGuidePagesViewController.h; sourceTree = "<group>"; };
+		5F34C7EE206B1D6800977A71 /* XTGuidePagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTGuidePagesViewController.m; sourceTree = "<group>"; };
+		5F34C7F2206B321700977A71 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		5F34C7F3206B321700977A71 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5F34C7F6206B321700977A71 /* SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAutoLayout.h; sourceTree = "<group>"; };
+		5F34C7F7206B321700977A71 /* UITableView+SDAutoTableViewCellHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+SDAutoTableViewCellHeight.h"; sourceTree = "<group>"; };
+		5F34C7F8206B321700977A71 /* UITableView+SDAutoTableViewCellHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+SDAutoTableViewCellHeight.m"; sourceTree = "<group>"; };
+		5F34C7F9206B321700977A71 /* UIView+SDAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDAutoLayout.h"; sourceTree = "<group>"; };
+		5F34C7FA206B321700977A71 /* UIView+SDAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDAutoLayout.m"; sourceTree = "<group>"; };
+		5F34C805206B9EDC00977A71 /* NSObject+ModelHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ModelHandle.m"; sourceTree = "<group>"; };
+		5F34C806206B9EDC00977A71 /* NSObject+ModelHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ModelHandle.h"; sourceTree = "<group>"; };
+		5F34C80B206BB51100977A71 /* AptitudeInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AptitudeInfo.h; sourceTree = "<group>"; };
+		5F34C80C206BB51100977A71 /* AptitudeInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AptitudeInfo.m; sourceTree = "<group>"; };
+		5F34C80F206BBB4C00977A71 /* HomePeopleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePeopleViewController.h; sourceTree = "<group>"; };
+		5F34C810206BBB4C00977A71 /* HomePeopleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePeopleViewController.m; sourceTree = "<group>"; };
+		5F34C814206BBB7900977A71 /* HomePeopleInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomePeopleInfoViewController.h; sourceTree = "<group>"; };
+		5F34C815206BBB7900977A71 /* HomePeopleInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomePeopleInfoViewController.m; sourceTree = "<group>"; };
+		5F34C816206BBB7900977A71 /* HomePeopleInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePeopleInfoViewController.xib; sourceTree = "<group>"; };
+		5F34C819206BBBE900977A71 /* PeopleInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeopleInfo.h; sourceTree = "<group>"; };
+		5F34C81A206BBBE900977A71 /* PeopleInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PeopleInfo.m; sourceTree = "<group>"; };
+		5F37E3BB206C751E00AB1C0B /* FindTalentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindTalentsViewController.h; sourceTree = "<group>"; };
+		5F37E3BC206C751E00AB1C0B /* FindTalentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindTalentsViewController.m; sourceTree = "<group>"; };
+		5F37E3BD206C751E00AB1C0B /* FindTalentsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindTalentsViewController.xib; sourceTree = "<group>"; };
+		5F37E3C0206C75C000AB1C0B /* FindTalentsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FindTalentsTableViewCell.h; sourceTree = "<group>"; };
+		5F37E3C1206C75C000AB1C0B /* FindTalentsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindTalentsTableViewCell.m; sourceTree = "<group>"; };
+		5F37E3C2206C75C000AB1C0B /* FindTalentsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindTalentsTableViewCell.xib; sourceTree = "<group>"; };
+		5F37E3C5206C790600AB1C0B /* JobIntroduceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobIntroduceViewController.h; sourceTree = "<group>"; };
+		5F37E3C6206C790600AB1C0B /* JobIntroduceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobIntroduceViewController.m; sourceTree = "<group>"; };
+		5F37E3C7206C790600AB1C0B /* JobIntroduceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobIntroduceViewController.xib; sourceTree = "<group>"; };
+		5F37E3CA206C806B00AB1C0B /* SelectAddressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectAddressViewController.h; sourceTree = "<group>"; };
+		5F37E3CB206C806B00AB1C0B /* SelectAddressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectAddressViewController.m; sourceTree = "<group>"; };
+		5F37E3CC206C806B00AB1C0B /* SelectAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAddressViewController.xib; sourceTree = "<group>"; };
+		5F37E478206C92A600AB1C0B /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
+		5F37E479206C92A600AB1C0B /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
+		5F37E496206CC44E00AB1C0B /* SBCommonHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCommonHeader.h; sourceTree = "<group>"; };
+		5F37E497206CC44E00AB1C0B /* SBControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBControlView.h; sourceTree = "<group>"; };
+		5F37E498206CC44E00AB1C0B /* SBControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBControlView.m; sourceTree = "<group>"; };
+		5F37E499206CC44E00AB1C0B /* SBPauseOrPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPauseOrPlayView.h; sourceTree = "<group>"; };
+		5F37E49A206CC44E00AB1C0B /* SBPauseOrPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPauseOrPlayView.m; sourceTree = "<group>"; };
+		5F37E49B206CC44E00AB1C0B /* SBPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBPlayer.h; sourceTree = "<group>"; };
+		5F37E49C206CC44E00AB1C0B /* SBPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBPlayer.m; sourceTree = "<group>"; };
+		5F37E49E206CC44E00AB1C0B /* full_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = full_screen.png; sourceTree = "<group>"; };
+		5F37E49F206CC44E00AB1C0B /* full_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "full_screen@2x.png"; sourceTree = "<group>"; };
+		5F37E4A0206CC44E00AB1C0B /* knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knob.png; sourceTree = "<group>"; };
+		5F37E4A1206CC44E00AB1C0B /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		5F37E4A2206CC44E00AB1C0B /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
+		5F37E4A3206CC44E00AB1C0B /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		5F37E4A4206CC44E00AB1C0B /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		5F37E4AF206CCDA700AB1C0B /* SBTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBTitleView.h; sourceTree = "<group>"; };
+		5F37E4B0206CCDA700AB1C0B /* SBTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBTitleView.m; sourceTree = "<group>"; };
+		5F37E4B2206CD13600AB1C0B /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
+		5F37E4B3206CD13600AB1C0B /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
+		5F37E4B5206CE8D000AB1C0B /* AddFindJobViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddFindJobViewController.h; sourceTree = "<group>"; };
+		5F37E4B6206CE8D000AB1C0B /* AddFindJobViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddFindJobViewController.m; sourceTree = "<group>"; };
+		5F37E4B7206CE8D000AB1C0B /* AddFindJobViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddFindJobViewController.xib; sourceTree = "<group>"; };
+		5F37E4BA206CF1B500AB1C0B /* AddSelectJobTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddSelectJobTypeViewController.h; sourceTree = "<group>"; };
+		5F37E4BB206CF1B500AB1C0B /* AddSelectJobTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddSelectJobTypeViewController.m; sourceTree = "<group>"; };
+		5F37E4BC206CF1B500AB1C0B /* AddSelectJobTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSelectJobTypeViewController.xib; sourceTree = "<group>"; };
+		5F37E4BF206CFAEB00AB1C0B /* ClassTypeInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassTypeInfo.h; sourceTree = "<group>"; };
+		5F37E4C0206CFAEB00AB1C0B /* ClassTypeInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassTypeInfo.m; sourceTree = "<group>"; };
 		5F3AB2C1206484F500850BA7 /* BaiduMapAPI_Base.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Base.framework; sourceTree = "<group>"; };
 		5F3AB2C2206484F500850BA7 /* BaiduMapAPI_Location.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Location.framework; sourceTree = "<group>"; };
 		5F3AB2C3206484F500850BA7 /* BaiduMapAPI_Map.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Map.framework; sourceTree = "<group>"; };
@@ -853,6 +975,41 @@
 		5FDC71FE20651512009EA1E3 /* HistoryBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryBottomView.h; sourceTree = "<group>"; };
 		5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryBottomView.m; sourceTree = "<group>"; };
 		5FDC720120651544009EA1E3 /* HistoryBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryBottomView.xib; sourceTree = "<group>"; };
+		5FF658E32069D7F6000016D6 /* CommentListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListViewController.h; sourceTree = "<group>"; };
+		5FF658E42069D7F6000016D6 /* CommentListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListViewController.m; sourceTree = "<group>"; };
+		5FF658E52069D7F6000016D6 /* CommentListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentListViewController.xib; sourceTree = "<group>"; };
+		5FF658E82069DF0E000016D6 /* PublicInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicInfoTableViewCell.h; sourceTree = "<group>"; };
+		5FF658E92069DF0E000016D6 /* PublicInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicInfoTableViewCell.m; sourceTree = "<group>"; };
+		5FF658EA2069DF0E000016D6 /* PublicInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicInfoTableViewCell.xib; sourceTree = "<group>"; };
+		5FF658ED2069E11A000016D6 /* PublicTextViewTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicTextViewTableViewCell.h; sourceTree = "<group>"; };
+		5FF658EE2069E11A000016D6 /* PublicTextViewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicTextViewTableViewCell.m; sourceTree = "<group>"; };
+		5FF658EF2069E11A000016D6 /* PublicTextViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicTextViewTableViewCell.xib; sourceTree = "<group>"; };
+		5FF658F22069E184000016D6 /* PublicUploadTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicUploadTableViewCell.h; sourceTree = "<group>"; };
+		5FF658F32069E184000016D6 /* PublicUploadTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicUploadTableViewCell.m; sourceTree = "<group>"; };
+		5FF658F42069E184000016D6 /* PublicUploadTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PublicUploadTableViewCell.xib; sourceTree = "<group>"; };
+		5FF658F82069E571000016D6 /* EnterpriseInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnterpriseInfo.h; sourceTree = "<group>"; };
+		5FF658F92069E571000016D6 /* EnterpriseInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnterpriseInfo.m; sourceTree = "<group>"; };
+		5FF658FC206A1195000016D6 /* EducationDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EducationDetailViewController.h; sourceTree = "<group>"; };
+		5FF658FD206A1195000016D6 /* EducationDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EducationDetailViewController.m; sourceTree = "<group>"; };
+		5FF658FE206A1195000016D6 /* EducationDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EducationDetailViewController.xib; sourceTree = "<group>"; };
+		5FF65901206A1849000016D6 /* EducationMeansViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EducationMeansViewController.h; sourceTree = "<group>"; };
+		5FF65902206A1849000016D6 /* EducationMeansViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EducationMeansViewController.m; sourceTree = "<group>"; };
+		5FF65903206A1849000016D6 /* EducationMeansViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EducationMeansViewController.xib; sourceTree = "<group>"; };
+		5FF65906206A2978000016D6 /* EducationVidoListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EducationVidoListViewController.h; sourceTree = "<group>"; };
+		5FF65907206A2978000016D6 /* EducationVidoListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EducationVidoListViewController.m; sourceTree = "<group>"; };
+		5FF65909206A299A000016D6 /* EducationTextListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EducationTextListViewController.h; sourceTree = "<group>"; };
+		5FF6590A206A299A000016D6 /* EducationTextListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EducationTextListViewController.m; sourceTree = "<group>"; };
+		5FF6590C206A2CB0000016D6 /* EducationVidoCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EducationVidoCollectionViewCell.h; sourceTree = "<group>"; };
+		5FF6590D206A2CB0000016D6 /* EducationVidoCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EducationVidoCollectionViewCell.m; sourceTree = "<group>"; };
+		5FF6590E206A2CB0000016D6 /* EducationVidoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EducationVidoCollectionViewCell.xib; sourceTree = "<group>"; };
+		5FF65911206A30FE000016D6 /* EducationTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EducationTextTableViewCell.h; sourceTree = "<group>"; };
+		5FF65912206A30FE000016D6 /* EducationTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EducationTextTableViewCell.m; sourceTree = "<group>"; };
+		5FF65913206A30FE000016D6 /* EducationTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EducationTextTableViewCell.xib; sourceTree = "<group>"; };
+		5FF6594A206A4890000016D6 /* CompanyClassInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CompanyClassInfo.h; sourceTree = "<group>"; };
+		5FF6594B206A4890000016D6 /* CompanyClassInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CompanyClassInfo.m; sourceTree = "<group>"; };
+		5FF6594D206A4B6D000016D6 /* SelectCompanyClassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectCompanyClassViewController.h; sourceTree = "<group>"; };
+		5FF6594E206A4B6D000016D6 /* SelectCompanyClassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectCompanyClassViewController.m; sourceTree = "<group>"; };
+		5FF6594F206A4B6D000016D6 /* SelectCompanyClassViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectCompanyClassViewController.xib; sourceTree = "<group>"; };
 		5FFCC6CC2065DEC10047E9F7 /* CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
 		5FFCC6CD2065DEC10047E9F7 /* CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		5FFCC6CE2065DEC10047E9F7 /* CollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewController.xib; sourceTree = "<group>"; };
@@ -1116,6 +1273,90 @@
 			path = "招聘";
 			sourceTree = "<group>";
 		};
+		5F34C7EA206B1D6800977A71 /* XTGuidePageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5F34C7EB206B1D6800977A71 /* CALayer+Transition.h */,
+				5F34C7EC206B1D6800977A71 /* CALayer+Transition.m */,
+				5F34C7ED206B1D6800977A71 /* XTGuidePagesViewController.h */,
+				5F34C7EE206B1D6800977A71 /* XTGuidePagesViewController.m */,
+			);
+			path = XTGuidePageViewController;
+			sourceTree = "<group>";
+		};
+		5F34C7F1206B321700977A71 /* SDAutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				5F34C7F2206B321700977A71 /* LICENSE */,
+				5F34C7F3206B321700977A71 /* README.md */,
+				5F34C7F4206B321700977A71 /* SDAutoLayoutDemo */,
+			);
+			path = SDAutoLayout;
+			sourceTree = "<group>";
+		};
+		5F34C7F4206B321700977A71 /* SDAutoLayoutDemo */ = {
+			isa = PBXGroup;
+			children = (
+				5F34C7F5206B321700977A71 /* SDAutoLayout */,
+			);
+			path = SDAutoLayoutDemo;
+			sourceTree = "<group>";
+		};
+		5F34C7F5206B321700977A71 /* SDAutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				5F34C7F6206B321700977A71 /* SDAutoLayout.h */,
+				5F34C7F7206B321700977A71 /* UITableView+SDAutoTableViewCellHeight.h */,
+				5F34C7F8206B321700977A71 /* UITableView+SDAutoTableViewCellHeight.m */,
+				5F34C7F9206B321700977A71 /* UIView+SDAutoLayout.h */,
+				5F34C7FA206B321700977A71 /* UIView+SDAutoLayout.m */,
+			);
+			path = SDAutoLayout;
+			sourceTree = "<group>";
+		};
+		5F34C80E206BBB1F00977A71 /* 从业人员 */ = {
+			isa = PBXGroup;
+			children = (
+				5F34C80F206BBB4C00977A71 /* HomePeopleViewController.h */,
+				5F34C810206BBB4C00977A71 /* HomePeopleViewController.m */,
+				5F34C814206BBB7900977A71 /* HomePeopleInfoViewController.h */,
+				5F34C815206BBB7900977A71 /* HomePeopleInfoViewController.m */,
+				5F34C816206BBB7900977A71 /* HomePeopleInfoViewController.xib */,
+			);
+			path = "从业人员";
+			sourceTree = "<group>";
+		};
+		5F37E495206CC44E00AB1C0B /* SBPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				5F37E496206CC44E00AB1C0B /* SBCommonHeader.h */,
+				5F37E497206CC44E00AB1C0B /* SBControlView.h */,
+				5F37E498206CC44E00AB1C0B /* SBControlView.m */,
+				5F37E499206CC44E00AB1C0B /* SBPauseOrPlayView.h */,
+				5F37E49A206CC44E00AB1C0B /* SBPauseOrPlayView.m */,
+				5F37E49B206CC44E00AB1C0B /* SBPlayer.h */,
+				5F37E49C206CC44E00AB1C0B /* SBPlayer.m */,
+				5F37E49D206CC44E00AB1C0B /* Source */,
+				5F37E4AF206CCDA700AB1C0B /* SBTitleView.h */,
+				5F37E4B0206CCDA700AB1C0B /* SBTitleView.m */,
+			);
+			path = SBPlayer;
+			sourceTree = "<group>";
+		};
+		5F37E49D206CC44E00AB1C0B /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5F37E49E206CC44E00AB1C0B /* full_screen.png */,
+				5F37E49F206CC44E00AB1C0B /* full_screen@2x.png */,
+				5F37E4A0206CC44E00AB1C0B /* knob.png */,
+				5F37E4A1206CC44E00AB1C0B /* pause.png */,
+				5F37E4A2206CC44E00AB1C0B /* pause@2x.png */,
+				5F37E4A3206CC44E00AB1C0B /* play.png */,
+				5F37E4A4206CC44E00AB1C0B /* play@2x.png */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		5F3AB2C0206484F500850BA7 /* BaiduMap_IOSSDK_v3.4.4_Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -1141,6 +1382,7 @@
 		5F3AB2F52064857D00850BA7 /* TianKunApp */ = {
 			isa = PBXGroup;
 			children = (
+				5FF658FB2069F093000016D6 /* Player */,
 				5F3AB38C2064857D00850BA7 /* Info.plist */,
 				5F3AB30B2064857D00850BA7 /* Commet */,
 				5F3AB38D2064857D00850BA7 /* Login */,
@@ -1157,6 +1399,7 @@
 		5F3AB2F62064857D00850BA7 /* Add */ = {
 			isa = PBXGroup;
 			children = (
+				5FF658F72069E55A000016D6 /* Model */,
 				5F3AB2F72064857D00850BA7 /* Controller */,
 				5F3AB3002064857D00850BA7 /* View */,
 			);
@@ -1174,6 +1417,24 @@
 				5F3AB2FD2064857D00850BA7 /* PublicEnterpriseViewController.h */,
 				5F3AB2FE2064857D00850BA7 /* PublicEnterpriseViewController.m */,
 				5F3AB2FF2064857D00850BA7 /* PublicEnterpriseViewController.xib */,
+				5FF6594D206A4B6D000016D6 /* SelectCompanyClassViewController.h */,
+				5FF6594E206A4B6D000016D6 /* SelectCompanyClassViewController.m */,
+				5FF6594F206A4B6D000016D6 /* SelectCompanyClassViewController.xib */,
+				5F37E3BB206C751E00AB1C0B /* FindTalentsViewController.h */,
+				5F37E3BC206C751E00AB1C0B /* FindTalentsViewController.m */,
+				5F37E3BD206C751E00AB1C0B /* FindTalentsViewController.xib */,
+				5F37E3C5206C790600AB1C0B /* JobIntroduceViewController.h */,
+				5F37E3C6206C790600AB1C0B /* JobIntroduceViewController.m */,
+				5F37E3C7206C790600AB1C0B /* JobIntroduceViewController.xib */,
+				5F37E3CA206C806B00AB1C0B /* SelectAddressViewController.h */,
+				5F37E3CB206C806B00AB1C0B /* SelectAddressViewController.m */,
+				5F37E3CC206C806B00AB1C0B /* SelectAddressViewController.xib */,
+				5F37E4B5206CE8D000AB1C0B /* AddFindJobViewController.h */,
+				5F37E4B6206CE8D000AB1C0B /* AddFindJobViewController.m */,
+				5F37E4B7206CE8D000AB1C0B /* AddFindJobViewController.xib */,
+				5F37E4BA206CF1B500AB1C0B /* AddSelectJobTypeViewController.h */,
+				5F37E4BB206CF1B500AB1C0B /* AddSelectJobTypeViewController.m */,
+				5F37E4BC206CF1B500AB1C0B /* AddSelectJobTypeViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1181,9 +1442,21 @@
 		5F3AB3002064857D00850BA7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5F3AB3012064857D00850BA7 /* MapFootView.h */,
 				5F3AB3022064857D00850BA7 /* MapFootView.m */,
+				5F3AB3012064857D00850BA7 /* MapFootView.h */,
 				5F3AB3032064857D00850BA7 /* MapFootView.xib */,
+				5FF658E82069DF0E000016D6 /* PublicInfoTableViewCell.h */,
+				5FF658E92069DF0E000016D6 /* PublicInfoTableViewCell.m */,
+				5FF658EA2069DF0E000016D6 /* PublicInfoTableViewCell.xib */,
+				5FF658ED2069E11A000016D6 /* PublicTextViewTableViewCell.h */,
+				5FF658EE2069E11A000016D6 /* PublicTextViewTableViewCell.m */,
+				5FF658EF2069E11A000016D6 /* PublicTextViewTableViewCell.xib */,
+				5FF658F22069E184000016D6 /* PublicUploadTableViewCell.h */,
+				5FF658F32069E184000016D6 /* PublicUploadTableViewCell.m */,
+				5FF658F42069E184000016D6 /* PublicUploadTableViewCell.xib */,
+				5F37E3C0206C75C000AB1C0B /* FindTalentsTableViewCell.h */,
+				5F37E3C1206C75C000AB1C0B /* FindTalentsTableViewCell.m */,
+				5F37E3C2206C75C000AB1C0B /* FindTalentsTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1211,6 +1484,8 @@
 				5F3AB3142064857D00850BA7 /* UserInfo.m */,
 				5F3AB3152064857D00850BA7 /* UserInfoEngine.h */,
 				5F3AB3162064857D00850BA7 /* UserInfoEngine.m */,
+				5F37E4BF206CFAEB00AB1C0B /* ClassTypeInfo.h */,
+				5F37E4C0206CFAEB00AB1C0B /* ClassTypeInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1288,8 +1563,8 @@
 		5F3AB3242064857D00850BA7 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				5F3AB3252064857D00850BA7 /* Controller */,
 				5F3AB3552064857D00850BA7 /* Model */,
+				5F3AB3252064857D00850BA7 /* Controller */,
 				5F3AB3582064857D00850BA7 /* View */,
 			);
 			path = Home;
@@ -1298,6 +1573,7 @@
 		5F3AB3252064857D00850BA7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5F34C80E206BBB1F00977A71 /* 从业人员 */,
 				5F04AB7F2067B01200A91390 /* 招聘 */,
 				5F3AB3392064857D00850BA7 /* 交流互动 */,
 				5F3AB3402064857D00850BA7 /* 公告公示 */,
@@ -1345,6 +1621,9 @@
 				5F3E9DE12068D5C200263A45 /* InteractionDetailViewController.xib */,
 				5F3E9DEA2068DF3400263A45 /* CommentViewController.h */,
 				5F3E9DE92068DF3400263A45 /* CommentViewController.m */,
+				5FF658E32069D7F6000016D6 /* CommentListViewController.h */,
+				5FF658E42069D7F6000016D6 /* CommentListViewController.m */,
+				5FF658E52069D7F6000016D6 /* CommentListViewController.xib */,
 			);
 			path = "交流互动";
 			sourceTree = "<group>";
@@ -1361,10 +1640,10 @@
 		5F3AB3432064857D00850BA7 /* 建设企业 */ = {
 			isa = PBXGroup;
 			children = (
-				5F3AB3442064857D00850BA7 /* ConstructionInfoViewController.h */,
-				5F3AB3452064857D00850BA7 /* ConstructionInfoViewController.m */,
 				5F3AB3462064857D00850BA7 /* ConstructionViewController.h */,
 				5F3AB3472064857D00850BA7 /* ConstructionViewController.m */,
+				5F3AB3442064857D00850BA7 /* ConstructionInfoViewController.h */,
+				5F3AB3452064857D00850BA7 /* ConstructionInfoViewController.m */,
 				5F3AB3482064857D00850BA7 /* DetailListViewController.h */,
 				5F3AB3492064857D00850BA7 /* DetailListViewController.m */,
 				5F3AB34A2064857D00850BA7 /* DetailListViewController.xib */,
@@ -1375,9 +1654,22 @@
 		5F3AB34B2064857D00850BA7 /* 教育培训 */ = {
 			isa = PBXGroup;
 			children = (
+				5F37E495206CC44E00AB1C0B /* SBPlayer */,
 				5F3AB34C2064857D00850BA7 /* EducationViewController.h */,
 				5F3AB34D2064857D00850BA7 /* EducationViewController.m */,
 				5F3AB34E2064857D00850BA7 /* EducationViewController.xib */,
+				5FF658FC206A1195000016D6 /* EducationDetailViewController.h */,
+				5FF658FD206A1195000016D6 /* EducationDetailViewController.m */,
+				5FF658FE206A1195000016D6 /* EducationDetailViewController.xib */,
+				5FF65901206A1849000016D6 /* EducationMeansViewController.h */,
+				5FF65902206A1849000016D6 /* EducationMeansViewController.m */,
+				5FF65903206A1849000016D6 /* EducationMeansViewController.xib */,
+				5FF65906206A2978000016D6 /* EducationVidoListViewController.h */,
+				5FF65907206A2978000016D6 /* EducationVidoListViewController.m */,
+				5FF65909206A299A000016D6 /* EducationTextListViewController.h */,
+				5FF6590A206A299A000016D6 /* EducationTextListViewController.m */,
+				5F37E479206C92A600AB1C0B /* PlayViewController.h */,
+				5F37E478206C92A600AB1C0B /* PlayViewController.m */,
 			);
 			path = "教育培训";
 			sourceTree = "<group>";
@@ -1399,6 +1691,12 @@
 			children = (
 				5F3AB3562064857D00850BA7 /* HomeViewModel.h */,
 				5F3AB3572064857D00850BA7 /* HomeViewModel.m */,
+				5FF6594A206A4890000016D6 /* CompanyClassInfo.h */,
+				5FF6594B206A4890000016D6 /* CompanyClassInfo.m */,
+				5F34C80B206BB51100977A71 /* AptitudeInfo.h */,
+				5F34C80C206BB51100977A71 /* AptitudeInfo.m */,
+				5F34C819206BBBE900977A71 /* PeopleInfo.h */,
+				5F34C81A206BBBE900977A71 /* PeopleInfo.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1483,6 +1781,12 @@
 				5F3E9DEC2068E6E400263A45 /* CommentKeyboardView.h */,
 				5F3E9DED2068E6E400263A45 /* CommentKeyboardView.m */,
 				5F3E9DEF2068E74100263A45 /* CommentKeyboardView.xib */,
+				5FF6590C206A2CB0000016D6 /* EducationVidoCollectionViewCell.h */,
+				5FF6590D206A2CB0000016D6 /* EducationVidoCollectionViewCell.m */,
+				5FF6590E206A2CB0000016D6 /* EducationVidoCollectionViewCell.xib */,
+				5FF65911206A30FE000016D6 /* EducationTextTableViewCell.h */,
+				5FF65912206A30FE000016D6 /* EducationTextTableViewCell.m */,
+				5FF65913206A30FE000016D6 /* EducationTextTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1501,6 +1805,7 @@
 		5F3AB38D2064857D00850BA7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				5F34C7EA206B1D6800977A71 /* XTGuidePageViewController */,
 				5F3AB38E2064857D00850BA7 /* Controller */,
 				5F3AB3982064857D00850BA7 /* View */,
 			);
@@ -1552,6 +1857,7 @@
 		5F3AB3A72064857D00850BA7 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				5F34C7F1206B321700977A71 /* SDAutoLayout */,
 				5FDC71CB2064D45B009EA1E3 /* QMUIConfigurationTemplate */,
 				5F3AB3A22064857D00850BA7 /* main.m */,
 				5F3AB4762064857D00850BA7 /* 样式.gif */,
@@ -1574,6 +1880,10 @@
 		5F3AB3D32064857D00850BA7 /* WQUtil */ = {
 			isa = PBXGroup;
 			children = (
+				5F37E4B2206CD13600AB1C0B /* MarqueeLabel.h */,
+				5F37E4B3206CD13600AB1C0B /* MarqueeLabel.m */,
+				5F34C806206B9EDC00977A71 /* NSObject+ModelHandle.h */,
+				5F34C805206B9EDC00977A71 /* NSObject+ModelHandle.m */,
 				5F3AB3D42064857D00850BA7 /* CLTab */,
 				5F3AB3DD2064857D00850BA7 /* CorePagesView */,
 				5F3AB3F02064857D00850BA7 /* FSLoopScrollView */,
@@ -2029,6 +2339,22 @@
 			path = Set;
 			sourceTree = "<group>";
 		};
+		5FF658F72069E55A000016D6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5FF658F82069E571000016D6 /* EnterpriseInfo.h */,
+				5FF658F92069E571000016D6 /* EnterpriseInfo.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5FF658FB2069F093000016D6 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
 		5FFCC6EA206622A60047E9F7 /* Vip */ = {
 			isa = PBXGroup;
 			children = (
@@ -2316,6 +2642,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F37E4AB206CC44E00AB1C0B /* pause.png in Resources */,
 				5F3AB4C22064857D00850BA7 /* InteractionListTableViewCell.xib in Resources */,
 				5F3E9DD92068CE8F00263A45 /* FindJodDetailViewController.xib in Resources */,
 				5F3AB48B2064857D00850BA7 /* FindTableViewCell.xib in Resources */,
@@ -2323,20 +2650,27 @@
 				5FFCC7E8206659010047E9F7 /* UserInfoPhotoTableViewCell.xib in Resources */,
 				5F3AB4812064857D00850BA7 /* Main.storyboard in Resources */,
 				5FFCC6E42065FD000047E9F7 /* VipItemCollectionViewCell.xib in Resources */,
+				5F37E4BE206CF1B500AB1C0B /* AddSelectJobTypeViewController.xib in Resources */,
 				5F3AB4B02064857D00850BA7 /* EducationTableViewCell.xib in Resources */,
 				5F3AB4AE2064857D00850BA7 /* EasyTableViewCell.xib in Resources */,
 				5FDC71D32064DA34009EA1E3 /* HelpViewController.xib in Resources */,
 				5F3AB50D2064857D00850BA7 /* SuPhoto_circle@2x.png in Resources */,
 				5F3AB5092064857D00850BA7 /* SuPhotoPreviewer.xib in Resources */,
 				5FDC71FA2064F36A009EA1E3 /* HistoryTableViewCell.xib in Resources */,
+				5F37E3C4206C75C000AB1C0B /* FindTalentsTableViewCell.xib in Resources */,
 				5FFCC6D52065E6AA0047E9F7 /* MyVIPViewController.xib in Resources */,
+				5F34C818206BBB7900977A71 /* HomePeopleInfoViewController.xib in Resources */,
 				5F3AB5172064857D00850BA7 /* SuPhotoBrowserCell.xib in Resources */,
 				5F04AB5520674A6800A91390 /* ExpertTableViewCell.xib in Resources */,
 				5F3AB4CD2064857D00850BA7 /* RegisterViewController.xib in Resources */,
+				5FF65951206A4B6D000016D6 /* SelectCompanyClassViewController.xib in Resources */,
 				5F04AB3420672B8500A91390 /* SystemMessageViewController.xib in Resources */,
 				5FDC720220651544009EA1E3 /* HistoryBottomView.xib in Resources */,
+				5F37E3C9206C790600AB1C0B /* JobIntroduceViewController.xib in Resources */,
+				5F37E3BF206C751E00AB1C0B /* FindTalentsViewController.xib in Resources */,
 				5F3AB4992064857D00850BA7 /* InteractionListViewController.xib in Resources */,
 				5F3AB4D32064857D00850BA7 /* TextFieldTableViewCell.xib in Resources */,
+				5F37E4AC206CC44E00AB1C0B /* pause@2x.png in Resources */,
 				5F3AB50B2064857D00850BA7 /* SuBack@2x.png in Resources */,
 				5F3E9DBB206886C800263A45 /* JobViewTableViewCell.xib in Resources */,
 				5FFCC7ED2066613F0047E9F7 /* BusinessLicenseViewController.xib in Resources */,
@@ -2346,6 +2680,8 @@
 				5F3AB47B2064857D00850BA7 /* PublicEnterpriseViewController.xib in Resources */,
 				5FDC71E32064DF04009EA1E3 /* FadebackViewController.xib in Resources */,
 				5FDC71CA2064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.xib in Resources */,
+				5F37E4AA206CC44E00AB1C0B /* knob.png in Resources */,
+				5FF658F62069E184000016D6 /* PublicUploadTableViewCell.xib in Resources */,
 				5F3AB4CB2064857D00850BA7 /* LoginViewController.xib in Resources */,
 				5F3E9DCA20689C5C00263A45 /* JobDetailCompanyTableViewCell.xib in Resources */,
 				5F3AB4BC2064857D00850BA7 /* HomeGuessTableViewCell.xib in Resources */,
@@ -2354,15 +2690,19 @@
 				5FDC71AB2064A23A009EA1E3 /* FindImageListViewController.xib in Resources */,
 				5F04AB652067731F00A91390 /* CooperationTableViewCell.xib in Resources */,
 				5F3AB50C2064857D00850BA7 /* SuBack@3x.png in Resources */,
+				5FF65910206A2CB0000016D6 /* EducationVidoCollectionViewCell.xib in Resources */,
 				5F3AB4C92064857D00850BA7 /* DynamicLoginViewController.xib in Resources */,
 				5FDC71C52064B1D0009EA1E3 /* MessageSetTableViewCell.xib in Resources */,
+				5F37E4A9206CC44E00AB1C0B /* full_screen@2x.png in Resources */,
 				5F3AB48E2064857D00850BA7 /* ConstructionSearchViewController.xib in Resources */,
+				5FF65915206A30FE000016D6 /* EducationTextTableViewCell.xib in Resources */,
 				5F3AB4C72064857D00850BA7 /* Info.plist in Resources */,
 				5F3E9DF02068E74100263A45 /* CommentKeyboardView.xib in Resources */,
 				5F3AB4C62064857D00850BA7 /* TInvitationlistableViewCell.xib in Resources */,
 				5F3AB4C02064857D00850BA7 /* HomeListTableViewCell.xib in Resources */,
 				5F3AB4A22064857D00850BA7 /* EducationViewController.xib in Resources */,
 				5F3E9DE82068D8EC00263A45 /* CommentTableViewCell.xib in Resources */,
+				5FF65905206A1849000016D6 /* EducationMeansViewController.xib in Resources */,
 				5FFCC7E3206657100047E9F7 /* UserInfoHeadTableViewCell.xib in Resources */,
 				5F3AB4D62064857D00850BA7 /* MessageViewController.xib in Resources */,
 				5F04AB3E2067387600A91390 /* RecommendMessageViewController.xib in Resources */,
@@ -2370,12 +2710,15 @@
 				5FFCC6F420662EDF0047E9F7 /* DredgeTableViewCell.xib in Resources */,
 				5F04AB742067982300A91390 /* ArticleDetailViewController.xib in Resources */,
 				5FDC71BF2064B16D009EA1E3 /* MessageSetViewController.xib in Resources */,
+				5F34C7FB206B321700977A71 /* LICENSE in Resources */,
 				5F3AB4F42064857D00850BA7 /* CorePagesView.xib in Resources */,
+				5F37E3CE206C806B00AB1C0B /* SelectAddressViewController.xib in Resources */,
 				5F3AB4A82064857D00850BA7 /* ConstructionSearchSelectTableViewCell.xib in Resources */,
 				5FFCC6E9206620A80047E9F7 /* UserInfoViewController.xib in Resources */,
 				5FDC71ED2064E4EC009EA1E3 /* ChangePasswordViewController.xib in Resources */,
 				5F3AB47D2064857D00850BA7 /* MapFootView.xib in Resources */,
 				5F3AB4782064857D00850BA7 /* AddViewController.xib in Resources */,
+				5F37E4B9206CE8D000AB1C0B /* AddFindJobViewController.xib in Resources */,
 				5F3AB4AC2064857D00850BA7 /* ConstructionSearchTextTableViewCell.xib in Resources */,
 				5F3AB4942064857D00850BA7 /* InvitationViewController.xib in Resources */,
 				5F3AB50E2064857D00850BA7 /* SuPhoto_selected@2x.png in Resources */,
@@ -2384,6 +2727,7 @@
 				5F3AB4B82064857D00850BA7 /* HomeClassCollectionViewCell.xib in Resources */,
 				5F0410BB20648CDF0098234C /* README.txt in Resources */,
 				5F04AB4B2067444500A91390 /* RemindMessageHeadTableViewCell.xib in Resources */,
+				5FF658E72069D7F6000016D6 /* CommentListViewController.xib in Resources */,
 				5F0410B920648CDF0098234C /* WeiboSDK.bundle in Resources */,
 				5F3AB4802064857D00850BA7 /* LaunchScreen.storyboard in Resources */,
 				5F04AB432067390300A91390 /* RecommendMessageTableViewCell.xib in Resources */,
@@ -2396,6 +2740,7 @@
 				5FDC71BA2064A337009EA1E3 /* FindImageListTableViewCell.xib in Resources */,
 				5F04AB7920679AD200A91390 /* ArticleDetailTimeTableViewCell.xib in Resources */,
 				5F3AB4BE2064857D00850BA7 /* HomeInfoTableViewCell.xib in Resources */,
+				5F37E4AE206CC44E00AB1C0B /* play@2x.png in Resources */,
 				5FFCC7D9206649C10047E9F7 /* MyPublickViewController.xib in Resources */,
 				5F3AB2CD206484F500850BA7 /* mapapi.bundle in Resources */,
 				5FFCC78E20663CCA0047E9F7 /* PYPhotosView.bundle in Resources */,
@@ -2410,6 +2755,7 @@
 				5F04AB60206772E300A91390 /* CooperationViewController.xib in Resources */,
 				5F3AB4A52064857D00850BA7 /* FileNoticceViewController.xib in Resources */,
 				5F3AB4B62064857D00850BA7 /* HomeBrandTableViewCell.xib in Resources */,
+				5FF65900206A1195000016D6 /* EducationDetailViewController.xib in Resources */,
 				5F04AB3920672BD200A91390 /* SystemMessageTableViewCell.xib in Resources */,
 				5F3E9DB62068790100263A45 /* WriteArticleViewController.xib in Resources */,
 				5FFCC6DA2065E9B50047E9F7 /* DetailRecordViewController.xib in Resources */,
@@ -2417,14 +2763,18 @@
 				5F04AB6A20677A1300A91390 /* CompanyDetailViewController.xib in Resources */,
 				5F0410B720648CDF0098234C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				5F3AB5152064857D00850BA7 /* SuPhotoAblumCell.xib in Resources */,
+				5FF658F12069E11A000016D6 /* PublicTextViewTableViewCell.xib in Resources */,
 				5F04AB6F2067868A00A91390 /* CompanyIntroduceTableViewCell.xib in Resources */,
+				5F37E4A8206CC44E00AB1C0B /* full_screen.png in Resources */,
 				5F0410AB20648CDF0098234C /* ShareSDKConfigFile.bundle in Resources */,
 				5F3AB4892064857D00850BA7 /* FindViewController.xib in Resources */,
 				5FDC71F52064F084009EA1E3 /* HistoryViewController.xib in Resources */,
 				5F3AB4B42064857D00850BA7 /* HomeBrandCollectionViewCell.xib in Resources */,
+				5F34C7FC206B321700977A71 /* README.md in Resources */,
 				5F3AB4D12064857D00850BA7 /* RegisterGetCodeTableViewCell.xib in Resources */,
 				5F3E9DD42068C64900263A45 /* FindJobTableViewCell.xib in Resources */,
 				5F3AB49B2064857D00850BA7 /* InteractionViewController.xib in Resources */,
+				5FF658EC2069DF0E000016D6 /* PublicInfoTableViewCell.xib in Resources */,
 				5F04AB502067456B00A91390 /* RemindMessageTableViewCell.xib in Resources */,
 				5FDC71B02064A244009EA1E3 /* FindeListViewController.xib in Resources */,
 				5F3AB4922064857D00850BA7 /* InvitationlistViewController.xib in Resources */,
@@ -2435,6 +2785,7 @@
 				5F3E9DDE2068CEEF00263A45 /* FindJobDetailTableViewCell.xib in Resources */,
 				5FFCC6F92066372B0047E9F7 /* VIPUploadInfoViewController.xib in Resources */,
 				5F3E9DCF20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.xib in Resources */,
+				5F37E4AD206CC44E00AB1C0B /* play.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2510,6 +2861,7 @@
 				5FDC71CE2064D45C009EA1E3 /* QMUIConfigurationTemplate.m in Sources */,
 				5F3E9DE72068D8EC00263A45 /* CommentTableViewCell.m in Sources */,
 				5F3AB4CC2064857D00850BA7 /* RegisterViewController.m in Sources */,
+				5F37E4A7206CC44E00AB1C0B /* SBPlayer.m in Sources */,
 				5F3AB4772064857D00850BA7 /* AddViewController.m in Sources */,
 				5F04AB5F206772E300A91390 /* CooperationViewController.m in Sources */,
 				5F3AB49F2064857D00850BA7 /* DetailListViewController.m in Sources */,
@@ -2518,30 +2870,38 @@
 				5F3AB4CA2064857D00850BA7 /* LoginViewController.m in Sources */,
 				5F3AB5302064857D00850BA7 /* XHStarRateView.m in Sources */,
 				5F3AB5272064857D00850BA7 /* WQLabel.m in Sources */,
+				5F37E4BD206CF1B500AB1C0B /* AddSelectJobTypeViewController.m in Sources */,
 				5FFCC78A20663CCA0047E9F7 /* PYPhotosViewController.m in Sources */,
 				5FFCC78D20663CCA0047E9F7 /* PYProgressView.m in Sources */,
 				5FDC71F42064F084009EA1E3 /* HistoryViewController.m in Sources */,
+				5F34C81B206BBBE900977A71 /* PeopleInfo.m in Sources */,
 				5F3AB4D52064857D00850BA7 /* MessageViewController.m in Sources */,
 				5F3AB5282064857D00850BA7 /* WQModelLog.m in Sources */,
+				5F34C807206B9EDC00977A71 /* NSObject+ModelHandle.m in Sources */,
 				5F3AB5102064857D00850BA7 /* SuPhotoPicker.m in Sources */,
 				5F3AB52F2064857D00850BA7 /* WQUploadVido.m in Sources */,
 				5F3AB4A62064857D00850BA7 /* HomeViewModel.m in Sources */,
+				5F34C7EF206B1D6800977A71 /* CALayer+Transition.m in Sources */,
 				5F3AB5082064857D00850BA7 /* SuPhotoPreviewer.m in Sources */,
 				5F3AB49D2064857D00850BA7 /* ConstructionInfoViewController.m in Sources */,
 				5F3AB51B2064857D00850BA7 /* DownloadFile.m in Sources */,
+				5F37E4A6206CC44E00AB1C0B /* SBPauseOrPlayView.m in Sources */,
 				5F3AB4F52064857D00850BA7 /* CorePageModel.m in Sources */,
 				5F3AB4F82064857D00850BA7 /* FSLoopScrollView.m in Sources */,
+				5FF65904206A1849000016D6 /* EducationMeansViewController.m in Sources */,
 				5F3AB4972064857D00850BA7 /* SearchViewController.m in Sources */,
 				5F3AB5362064857D00850BA7 /* UserCenterViewModel.m in Sources */,
 				5FDC71BE2064B16D009EA1E3 /* MessageSetViewController.m in Sources */,
 				5F3AB5042064857D00850BA7 /* SuPhotoAblumList.m in Sources */,
 				5F3AB4AD2064857D00850BA7 /* EasyTableViewCell.m in Sources */,
 				5F3AB4FF2064857D00850BA7 /* UIButton+SU.m in Sources */,
+				5F37E47A206C92A700AB1C0B /* PlayViewController.m in Sources */,
 				5FFCC6F82066372B0047E9F7 /* VIPUploadInfoViewController.m in Sources */,
 				5F3AB4A12064857D00850BA7 /* EducationViewController.m in Sources */,
 				5F3AB4C32064857D00850BA7 /* SearchCollectionCell.m in Sources */,
 				5F3AB4852064857D00850BA7 /* UserInfo.m in Sources */,
 				5FDC71DA2064DCF8009EA1E3 /* WebLinkViewController.m in Sources */,
+				5F34C7FE206B321700977A71 /* UIView+SDAutoLayout.m in Sources */,
 				5F3AB4C82064857D00850BA7 /* DynamicLoginViewController.m in Sources */,
 				5F3AB4872064857D00850BA7 /* ComposeButton.m in Sources */,
 				5F3AB5002064857D00850BA7 /* UIImage+SU.m in Sources */,
@@ -2551,13 +2911,17 @@
 				5F3AB4C52064857D00850BA7 /* TInvitationlistableViewCell.m in Sources */,
 				5FFCC7DD20664F660047E9F7 /* UserInfoEditTableViewCell.m in Sources */,
 				5FDC71D22064DA34009EA1E3 /* HelpViewController.m in Sources */,
+				5FF658EB2069DF0E000016D6 /* PublicInfoTableViewCell.m in Sources */,
 				5F3AB4882064857D00850BA7 /* FindViewController.m in Sources */,
 				5FDC71C92064CAFA009EA1E3 /* MessageSetVoiceTableViewCell.m in Sources */,
 				5F3E9DDD2068CEEF00263A45 /* FindJobDetailTableViewCell.m in Sources */,
 				5F3AB52E2064857D00850BA7 /* WQUploadSingleImage.m in Sources */,
 				5F3AB5032064857D00850BA7 /* UIView+SuLine.m in Sources */,
 				5F3AB4F02064857D00850BA7 /* WQTabBarViewController.m in Sources */,
+				5FF658E62069D7F6000016D6 /* CommentListViewController.m in Sources */,
+				5FF658F02069E11A000016D6 /* PublicTextViewTableViewCell.m in Sources */,
 				5FFCC78920663CCA0047E9F7 /* PYPhotosReaderController.m in Sources */,
+				5F34C7F0206B1D6800977A71 /* XTGuidePagesViewController.m in Sources */,
 				5F3AB4EE2064857D00850BA7 /* WQNavigationViewController.m in Sources */,
 				5F3AB5052064857D00850BA7 /* SuPhotoBaseController.m in Sources */,
 				5FFCC6D92065E9B50047E9F7 /* DetailRecordViewController.m in Sources */,
@@ -2565,12 +2929,16 @@
 				5F3AB5322064857D00850BA7 /* SetViewController.m in Sources */,
 				5FDC71E72064E203009EA1E3 /* AboutUsViewController.m in Sources */,
 				5FDC71E22064DF04009EA1E3 /* FadebackViewController.m in Sources */,
+				5F37E4B1206CCDA700AB1C0B /* SBTitleView.m in Sources */,
 				5F3AB4D22064857D00850BA7 /* TextFieldTableViewCell.m in Sources */,
 				5F3AB5222064857D00850BA7 /* WQAppInfo.m in Sources */,
 				5FDC71AF2064A244009EA1E3 /* FindeListViewController.m in Sources */,
+				5F34C812206BBB4C00977A71 /* HomePeopleViewController.m in Sources */,
 				5F3AB47C2064857D00850BA7 /* MapFootView.m in Sources */,
 				5F3AB4FC2064857D00850BA7 /* LoadingView.m in Sources */,
+				5FF658FA2069E571000016D6 /* EnterpriseInfo.m in Sources */,
 				5F04AB7D20679CA700A91390 /* ArticleCommentTableViewCell.m in Sources */,
+				5F34C80D206BB51100977A71 /* AptitudeInfo.m in Sources */,
 				5F3AB4A42064857D00850BA7 /* FileNoticceViewController.m in Sources */,
 				5FDC71A22064A0B3009EA1E3 /* IndustryInformationViewController.m in Sources */,
 				5F3AB5312064857D00850BA7 /* ZWVerticalAlignLabel.m in Sources */,
@@ -2581,6 +2949,7 @@
 				5F04AB4A2067444500A91390 /* RemindMessageHeadTableViewCell.m in Sources */,
 				5F3AB4D02064857D00850BA7 /* RegisterGetCodeTableViewCell.m in Sources */,
 				5FFCC7EC2066613F0047E9F7 /* BusinessLicenseViewController.m in Sources */,
+				5F37E3C8206C790600AB1C0B /* JobIntroduceViewController.m in Sources */,
 				5FFCC78B20663CCA0047E9F7 /* PYPhoto.m in Sources */,
 				5F3AB4B22064857D00850BA7 /* FilterView.m in Sources */,
 				5F3AB51D2064857D00850BA7 /* NetWorkEngine.m in Sources */,
@@ -2592,6 +2961,7 @@
 				5F3AB4F92064857D00850BA7 /* NSTimer+FSLoop.m in Sources */,
 				5FFCC78C20663CCA0047E9F7 /* PYPhotoBrowserConst.m in Sources */,
 				5F3AB4C12064857D00850BA7 /* InteractionListTableViewCell.m in Sources */,
+				5F34C7FD206B321700977A71 /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				5F3AB4ED2064857D00850BA7 /* UIBarButtonItem+Addition.m in Sources */,
 				5FFCC78520663CCA0047E9F7 /* MBProgressHUD+PYExtension.m in Sources */,
 				5F3E9DC920689C5C00263A45 /* JobDetailCompanyTableViewCell.m in Sources */,
@@ -2601,11 +2971,14 @@
 				5F3AB51F2064857D00850BA7 /* RefreshManager.m in Sources */,
 				5F3AB4D72064857D00850BA7 /* AppShared.m in Sources */,
 				5FFCC6E32065FD000047E9F7 /* VipItemCollectionViewCell.m in Sources */,
+				5F34C817206BBB7900977A71 /* HomePeopleInfoViewController.m in Sources */,
 				5F3AB4982064857D00850BA7 /* InteractionListViewController.m in Sources */,
+				5FF658F52069E184000016D6 /* PublicUploadTableViewCell.m in Sources */,
 				5F3AB4792064857D00850BA7 /* MapViewController.m in Sources */,
 				5F04AB6E2067868A00A91390 /* CompanyIntroduceTableViewCell.m in Sources */,
 				5FFCC7E7206659010047E9F7 /* UserInfoPhotoTableViewCell.m in Sources */,
 				5F3E9DCE20689C9500263A45 /* JobDetailCompanyDescriptionTableViewCell.m in Sources */,
+				5F37E4B8206CE8D000AB1C0B /* AddFindJobViewController.m in Sources */,
 				5F3E9DD82068CE8F00263A45 /* FindJodDetailViewController.m in Sources */,
 				5F3AB48F2064857D00850BA7 /* HomeViewController.m in Sources */,
 				5FDC71DD2064DD98009EA1E3 /* UIBarButtonItem+Extension.m in Sources */,
@@ -2617,6 +2990,7 @@
 				5F3AB52C2064857D00850BA7 /* WQTextView.m in Sources */,
 				5F3E9DC420689C2800263A45 /* JobDetailDescribeTableViewCell.m in Sources */,
 				5F3AB4BD2064857D00850BA7 /* HomeInfoTableViewCell.m in Sources */,
+				5FF65908206A2978000016D6 /* EducationVidoListViewController.m in Sources */,
 				5F3AB50A2064857D00850BA7 /* SuAblumInfo.m in Sources */,
 				5FFCC74220663CBB0047E9F7 /* DACircularProgressView.m in Sources */,
 				5F3AB4CE2064857D00850BA7 /* LoginTextTableViewCell.m in Sources */,
@@ -2631,8 +3005,10 @@
 				5F3AB4AF2064857D00850BA7 /* EducationTableViewCell.m in Sources */,
 				5F3AB5212064857D00850BA7 /* WQAlertController.m in Sources */,
 				5F3AB5252064857D00850BA7 /* WQButton.m in Sources */,
+				5FF658FF206A1195000016D6 /* EducationDetailViewController.m in Sources */,
 				5FFCC6F320662EDF0047E9F7 /* DredgeTableViewCell.m in Sources */,
 				5FDC71EC2064E4EC009EA1E3 /* ChangePasswordViewController.m in Sources */,
+				5FF6590B206A299A000016D6 /* EducationTextListViewController.m in Sources */,
 				5F04AB4620673E7600A91390 /* RemindMessageViewController.m in Sources */,
 				5F3AB4AB2064857D00850BA7 /* ConstructionSearchTextTableViewCell.m in Sources */,
 				5F3AB47E2064857D00850BA7 /* AppDelegate.mm in Sources */,
@@ -2646,6 +3022,7 @@
 				5F3AB47A2064857D00850BA7 /* PublicEnterpriseViewController.m in Sources */,
 				5F04AB5820674DC600A91390 /* ExpertMessageViewController.m in Sources */,
 				5F3AB5292064857D00850BA7 /* WQPigeonhole.m in Sources */,
+				5F37E3C3206C75C000AB1C0B /* FindTalentsTableViewCell.m in Sources */,
 				5F3AB52D2064857D00850BA7 /* WQTools.m in Sources */,
 				5F04AB5B20676DFE00A91390 /* ExpertMessageInfo.m in Sources */,
 				5F3AB48D2064857D00850BA7 /* ConstructionSearchViewController.m in Sources */,
@@ -2655,10 +3032,12 @@
 				5F3AB4BF2064857D00850BA7 /* HomeListTableViewCell.m in Sources */,
 				5F3E9DEB2068DF3400263A45 /* CommentViewController.m in Sources */,
 				5FFCC6EE206622DA0047E9F7 /* DredgeViewController.m in Sources */,
+				5F37E4C1206CFAEB00AB1C0B /* ClassTypeInfo.m in Sources */,
 				5FFCC78620663CCA0047E9F7 /* UIView+PYExtension.m in Sources */,
 				5F3E9DD32068C64900263A45 /* FindJobTableViewCell.m in Sources */,
 				5F3AB4EF2064857D00850BA7 /* WQTabBar.m in Sources */,
 				5F3AB4842064857D00850BA7 /* MenuInfo.m in Sources */,
+				5F37E3BE206C751E00AB1C0B /* FindTalentsViewController.m in Sources */,
 				5FDC71F02064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m in Sources */,
 				5FFCC78820663CCA0047E9F7 /* PYPhotosPreviewController.m in Sources */,
 				5F3AB4862064857D00850BA7 /* UserInfoEngine.m in Sources */,
@@ -2671,7 +3050,9 @@
 				5F3AB4B32064857D00850BA7 /* HomeBrandCollectionViewCell.m in Sources */,
 				5F3AB5242064857D00850BA7 /* WQBaseViewController.m in Sources */,
 				5F3AB5132064857D00850BA7 /* SuPhotoManager.m in Sources */,
+				5F37E3CD206C806B00AB1C0B /* SelectAddressViewController.m in Sources */,
 				5F3AB5142064857D00850BA7 /* SuPhotoAblumCell.m in Sources */,
+				5FF6594C206A4890000016D6 /* CompanyClassInfo.m in Sources */,
 				5FFCC74720663CBB0047E9F7 /* MBProgressHUD.m in Sources */,
 				5F3AB49E2064857D00850BA7 /* ConstructionViewController.m in Sources */,
 				5F3AB4B12064857D00850BA7 /* FilterTableView.m in Sources */,
@@ -2687,14 +3068,17 @@
 				5F3AB4BB2064857D00850BA7 /* HomeGuessTableViewCell.m in Sources */,
 				5FDC71C42064B1D0009EA1E3 /* MessageSetTableViewCell.m in Sources */,
 				5F3AB5022064857D00850BA7 /* UIView+SuAnimation.m in Sources */,
+				5F37E4B4206CD13600AB1C0B /* MarqueeLabel.m in Sources */,
 				5F3AB5202064857D00850BA7 /* UIView+Extension.m in Sources */,
 				5F04AB6920677A1300A91390 /* CompanyDetailViewController.m in Sources */,
+				5F37E4A5206CC44E00AB1C0B /* SBControlView.m in Sources */,
 				5F3AB4822064857D00850BA7 /* CompanyInfo.m in Sources */,
 				5F3E9DEE2068E6E400263A45 /* CommentKeyboardView.m in Sources */,
 				5FDC71FD2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m in Sources */,
 				5F3AB52A2064857D00850BA7 /* WQTableView.m in Sources */,
 				5F3AB4F62064857D00850BA7 /* CorePagesBarBtn.m in Sources */,
 				5F3AB4A32064857D00850BA7 /* FileNoticceListViewController.m in Sources */,
+				5FF65914206A30FE000016D6 /* EducationTextTableViewCell.m in Sources */,
 				5F3AB4F32064857D00850BA7 /* CorePagesView.m in Sources */,
 				5F3AB5012064857D00850BA7 /* UIView+SU.m in Sources */,
 				5F3E9DBA206886C800263A45 /* JobViewTableViewCell.m in Sources */,
@@ -2705,6 +3089,8 @@
 				5F3AB51A2064857D00850BA7 /* UITableView+EmpayData.m in Sources */,
 				5FFCC74420663CBB0047E9F7 /* FLAnimatedImage.m in Sources */,
 				5F3E9DBF20689A0500263A45 /* JobDetailViewController.m in Sources */,
+				5FF6590F206A2CB0000016D6 /* EducationVidoCollectionViewCell.m in Sources */,
+				5FF65950206A4B6D000016D6 /* SelectCompanyClassViewController.m in Sources */,
 				5F3AB5342064857D00850BA7 /* UserCenterViewController.m in Sources */,
 				5FFCC7E2206657100047E9F7 /* UserInfoHeadTableViewCell.m in Sources */,
 				5F3AB52B2064857D00850BA7 /* WQTextField.m in Sources */,

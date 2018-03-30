@@ -30,7 +30,7 @@ static NSString *collectionCellIdentifier = @"collectionCellIdentifier";
         self.parentVC = parentVC;
         self.childsVCs = childVCs;
         self.delegate = delegate;
-        
+        _scrollAnimation = YES;
         [self setupSubViews];
     }
     return self;
@@ -170,7 +170,7 @@ static NSString *collectionCellIdentifier = @"collectionCellIdentifier";
     }
     _isSelectBtn = YES;
     _contentViewCurrentIndex = contentViewCurrentIndex;
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:contentViewCurrentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:contentViewCurrentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:_scrollAnimation];
 }
 
 - (void)setContentViewCanScroll:(BOOL)contentViewCanScroll
@@ -178,5 +178,8 @@ static NSString *collectionCellIdentifier = @"collectionCellIdentifier";
     _contentViewCanScroll = contentViewCanScroll;
     _collectionView.scrollEnabled = _contentViewCanScroll;
 }
-
+- (void)setScrollAnimation:(BOOL)scrollAnimation{
+    _scrollAnimation = scrollAnimation;
+    
+}
 @end

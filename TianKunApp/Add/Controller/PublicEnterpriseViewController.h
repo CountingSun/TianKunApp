@@ -8,6 +8,9 @@
 
 #import "WQBaseViewController.h"
 
+@class CompanyInfo;
+
 @interface PublicEnterpriseViewController : WQBaseViewController
 
+@property (nonatomic, copy) void(^EditSucceedBlock)(CompanyInfo *companyInfo);
 @end

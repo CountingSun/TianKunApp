@@ -9,11 +9,20 @@
 #import "WQNavigationViewController.h"
 #import "UIBarButtonItem+Addition.h"
 
-@interface WQNavigationViewController ()
+@interface WQNavigationViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
 @implementation WQNavigationViewController
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
+}
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer
+                                      *)gestureRecognizer{
+    return YES; //YES：允许右滑返回  NO：禁止右滑返回
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

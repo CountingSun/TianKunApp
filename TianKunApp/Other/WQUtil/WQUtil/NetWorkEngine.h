@@ -48,7 +48,10 @@ typedef void(^ProgressBlock)(CGFloat progress);
  @param succed 成功会回调
  @param errorBlock 失败回调
  */
-- (void)postWithDict:(NSDictionary *)dic url:(NSString *)url succed:(SucceedBlock)succed errorBlock:(ErrorBlock)errorBlock;
+- (void)postWithDict:(NSDictionary *)dic
+                 url:(NSString *)url
+              succed:(SucceedBlock)succed
+          errorBlock:(ErrorBlock)errorBlock;
 
 /**
  get请求
@@ -57,7 +60,9 @@ typedef void(^ProgressBlock)(CGFloat progress);
  @param succed 成功会回调
  @param errorBlock 失败回调
  */
-- (void)getWithUrl:(NSString *)url succed:(SucceedBlock)succed errorBlock:(ErrorBlock)errorBlock;
+- (void)getWithUrl:(NSString *)url
+            succed:(SucceedBlock)succed
+        errorBlock:(ErrorBlock)errorBlock;
 
 /**
  上传图片（NSData形式）
@@ -68,7 +73,11 @@ typedef void(^ProgressBlock)(CGFloat progress);
  @param succed 成功回调
  @param errorBlock 失败回调
  */
-- (void)upLoadmageData:(NSData *)imageData Url:(NSString *)url dict:(NSDictionary *)dic succed:(SucceedBlock)succed errorBlock:(ErrorBlock)errorBlock;
+- (void)upLoadmageData:(NSData *)imageData
+                   Url:(NSString *)url
+                  dict:(NSDictionary *)dic
+                succed:(SucceedBlock)succed
+            errorBlock:(ErrorBlock)errorBlock;
 
 /**
  post请求 返回字符串
@@ -78,7 +87,10 @@ typedef void(^ProgressBlock)(CGFloat progress);
  @param succed 成功回调
  @param errorBlock 失败回调
  */
-- (void)postWithReturnDataDict:(NSDictionary *)dic url:(NSString *)url succed:(SucceedBlock)succed errorBlock:(ErrorBlock)errorBlock;
+- (void)postWithReturnDataDict:(NSDictionary *)dic
+                           url:(NSString *)url
+                        succed:(SucceedBlock)succed
+                    errorBlock:(ErrorBlock)errorBlock;
 
 
 /**
@@ -93,12 +105,39 @@ typedef void(^ProgressBlock)(CGFloat progress);
  @param progressBlock 进度
  @param errorBlock 失败回调
  */
-- (void)postVidoWithfilePath:(NSString *)filePath url:(NSString *)url dict:(NSDictionary *)dic name:(NSString *)name fileName:(NSString *)fileName succed:(SucceedBlock)succed progressBlock:(ProgressBlock)progressBlock errorBlock:(ErrorBlock)errorBlock;
+- (void)postVidoWithfilePath:(NSString *)filePath
+                         url:(NSString *)url
+                        dict:(NSDictionary *)dic
+                        name:(NSString *)name
+                    fileName:(NSString *)fileName
+                      succed:(SucceedBlock)succed
+               progressBlock:(ProgressBlock)progressBlock
+                  errorBlock:(ErrorBlock)errorBlock;
 
 
 
+- (void)formDataUpDataWithUrl:(NSString *)url
+                    paramsDic:(NSDictionary *)paramsDic
+                     imageArr:(NSMutableArray<UIImage *> *)imageArr
+                       succed:(SucceedBlock)succed
+                   errorBlock:(ErrorBlock)errorBlock;
 
-
+/**
+ 上传图片（NSData形式）
+ 
+ @param imageData 图片data
+ @param imageName 图片名称
+ @param url URL
+ @param dic 参数
+ @param succed 成功回调
+ @param errorBlock 失败回调
+ */
+- (void)upLoadmageData:(NSData *)imageData
+             imageName:(NSString *)imageName
+                   Url:(NSString *)url
+                  dict:(NSDictionary *)dic
+                succed:(SucceedBlock)succed
+            errorBlock:(ErrorBlock)errorBlock;
 
 
 @end

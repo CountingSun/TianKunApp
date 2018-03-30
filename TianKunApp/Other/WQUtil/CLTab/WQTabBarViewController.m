@@ -66,7 +66,10 @@
     [vController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : COLOR_TEXT_GENGRAL } forState:UIControlStateNormal];
     [vController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : COLOR_THEME } forState:UIControlStateSelected];
 
-    WQNavigationViewController *navController = [[WQNavigationViewController alloc] initWithRootViewController:vController];
+    QMUINavigationController *navController = [[QMUINavigationController alloc] initWithRootViewController:vController];
+    navController.navigationBar.tintColor = COLOR_TEXT_GENGRAL;
+
+    
     
     [self addChildViewController:navController];
 }

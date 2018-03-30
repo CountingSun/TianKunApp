@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="EducationVidoCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="215" height="195"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="215" height="195"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i81-cV-LgO">
+                        <rect key="frame" x="0.0" y="0.0" width="215" height="107.5"/>
+                        <color key="backgroundColor" red="0.90685113888161106" green="1" blue="0.25351652489732113" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="i81-cV-LgO" secondAttribute="height" multiplier="2:1" id="euF-hy-HlR"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53L-2d-dG6">
+                        <rect key="frame" x="170" y="5" width="35" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="Zob-Pc-91Y"/>
+                            <constraint firstAttribute="height" constant="15" id="z4K-WY-TLg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="建筑法律法规" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GR-vJ-NG2">
+                        <rect key="frame" x="10" y="107.5" width="195" height="49"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名师精讲 紧扣命题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rq-VK-UAC">
+                        <rect key="frame" x="10" y="156.5" width="195" height="38.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="5rq-VK-UAC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="4zf-hJ-se0"/>
+                <constraint firstAttribute="trailing" secondItem="7GR-vJ-NG2" secondAttribute="trailing" constant="10" id="BIW-kz-FDJ"/>
+                <constraint firstAttribute="bottom" secondItem="5rq-VK-UAC" secondAttribute="bottom" id="Bs2-KB-6On"/>
+                <constraint firstAttribute="trailing" secondItem="53L-2d-dG6" secondAttribute="trailing" constant="10" id="JpM-BP-aNZ"/>
+                <constraint firstItem="5rq-VK-UAC" firstAttribute="top" secondItem="7GR-vJ-NG2" secondAttribute="bottom" id="Jsr-LK-DIz"/>
+                <constraint firstAttribute="trailing" secondItem="5rq-VK-UAC" secondAttribute="trailing" constant="10" id="MNG-1h-BEL"/>
+                <constraint firstItem="7GR-vJ-NG2" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="1/4" id="Mie-0r-kB4"/>
+                <constraint firstItem="i81-cV-LgO" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="YKF-mk-kUZ"/>
+                <constraint firstItem="7GR-vJ-NG2" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="aM2-3v-pmY"/>
+                <constraint firstItem="i81-cV-LgO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cid-kP-khF"/>
+                <constraint firstItem="7GR-vJ-NG2" firstAttribute="top" secondItem="i81-cV-LgO" secondAttribute="bottom" id="rGs-vY-kqq"/>
+                <constraint firstAttribute="trailing" secondItem="i81-cV-LgO" secondAttribute="trailing" id="ytI-cB-Exi"/>
+                <constraint firstItem="53L-2d-dG6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="zq9-Kr-C8O"/>
+            </constraints>
+            <size key="customSize" width="215" height="195"/>
+            <point key="canvasLocation" x="116.5" y="126.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

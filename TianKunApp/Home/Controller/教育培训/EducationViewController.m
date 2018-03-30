@@ -12,6 +12,9 @@
 #import "MenuInfo.h"
 #import "HomeViewModel.h"
 
+#import "EducationDetailViewController.h"
+#import "EducationMeansViewController.h"
+
 @interface EducationViewController ()<UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
@@ -95,6 +98,11 @@
     return _arrMenu;
     
 }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    EducationMeansViewController *vc = [[EducationMeansViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     if (scrollView == _collectionView) {
 
@@ -111,6 +119,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 120;
+        _tableView.separatorStyle = 0;
         
         _tableView.backgroundColor = COLOR_VIEW_BACK;
         [_tableView headerWithRefreshingBlock:^{
@@ -133,13 +142,7 @@
     }
     return _tableView;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 10;
-}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
-}
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.arrData.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -154,7 +157,9 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    EducationDetailViewController *vc = [[EducationDetailViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {

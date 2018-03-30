@@ -65,5 +65,9 @@
  设置contentView能否左右滑动，默认YES
  */
 @property (nonatomic, assign) BOOL contentViewCanScroll;
+/**
+ 是否显示滑动动画，默认YES
+ */
+@property (nonatomic, assign) BOOL scrollAnimation;
 
 @end

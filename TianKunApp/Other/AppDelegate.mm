@@ -25,8 +25,10 @@
 //百度地图
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
 
+#import "XTGuidePagesViewController.h"
+#import "CALayer+Transition.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<selectDelegate>
 @property (nonatomic,strong) NetWorkEngine *netWorkEngine;
 @property (nonatomic ,strong) BMKMapManager *mapManager;
 
@@ -44,19 +46,35 @@
     [self setSDImage];
     [self configureShare];
     [self configureBaiduMap];
-    
-    
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
     [SVProgressHUD setBackgroundColor:COLOR_TEXT_BLACK];
     [SVProgressHUD setForegroundColor:COLOR_WHITE];
-    [self  setRootController];
+
+    NSArray *images = @[@"welcome1", @"welcome2", @"welcome3"];
+    BOOL y = [XTGuidePagesViewController isShow];
+    if (y) {
+        XTGuidePagesViewController *xt = [[XTGuidePagesViewController alloc] init];
+        self.window.rootViewController = xt;
+        xt.delegate = self;
+        [xt guidePageControllerWithImages:images];
+    }else{
+        [self clickEnter];
+    }
+
     return YES;
 }
+- (void)clickEnter{
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self  setRootController];
+
+
+}
+
 - (void)setRootController{
     self.window.rootViewController =  [self getRootViewController];
     [self.window makeKeyAndVisible];
-    
+    [self.window.layer transitionWithAnimType:TransitionAnimTypeRippleEffect subType:TransitionSubtypesFromTop curve:TransitionCurveEaseIn duration:1.0f];
+
     
 }
 -(UIViewController *)getRootViewController{
@@ -164,6 +182,15 @@
     }
 
 }
+#pragma mark - 屏幕旋转相关设置
+-(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    if (self.allowRotation) {
+        return UIInterfaceOrientationMaskAll;
+    }
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

@@ -61,7 +61,7 @@
         [_tableView endRefresh];
         
 //        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
-        NSMutableArray *arr = [responseObject objectForKey:@"CompanyList"];
+        NSMutableArray *arr = [responseObject objectForKey:@"value"];
         if (arr.count) {
             if (!_arrData) {
                 _arrData = [NSMutableArray array];
@@ -192,7 +192,10 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    ConstructionInfoViewController *vc = [[ConstructionInfoViewController alloc]init];
+    CompanyInfo *companyInfo = _arrData[indexPath.row];
+
+    ConstructionInfoViewController *vc = [[ConstructionInfoViewController alloc]initWithCompanyInfo:companyInfo];
+    
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -204,15 +207,5 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

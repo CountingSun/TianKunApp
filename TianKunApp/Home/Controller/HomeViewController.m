@@ -27,6 +27,7 @@
 #import "FindJobViewController.h"
 
 #import "ConstructionViewController.h"
+#import "HomePeopleViewController.h"
 
 @interface HomeViewController ()<QMUISearchControllerDelegate,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,SDCycleScrollViewDelegate,HomeClassTableViewCellDelegate>
 
@@ -300,7 +301,7 @@
         }
             break;
         case 1:{
-            ConstructionViewController *vc = [[ConstructionViewController alloc]init];
+            HomePeopleViewController *vc = [[HomePeopleViewController alloc]init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
 

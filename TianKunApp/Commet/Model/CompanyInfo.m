@@ -7,9 +7,9 @@
 //
 
 #import "CompanyInfo.h"
+#import "CompanyClassInfo.h"
 
 @implementation CompanyInfo
-
 + (NSDictionary *)mj_replacedKeyFromPropertyName{
     return  @{
       @"companyID":@"id",
@@ -20,15 +20,15 @@
       @"companyAddress":@"business_address",
       @"companyCertification":@"company_certification",
       @"companyProject":@"engineering_project",
-      @"companySocialNum":@"social_credit_number",
-      @"companySocialNum":@"social_credit_number",
-      @"companySocialNum":@"social_credit_number",
-      @"companySocialNum":@"social_credit_number",
-      @"companySocialNum":@"social_credit_number",
 
       };
     
 }
-
+-(CompanyClassInfo *)companyClassInfo{
+    if (!_companyClassInfo) {
+        _companyClassInfo = [[CompanyClassInfo alloc]init];
+    }
+    return _companyClassInfo;
+}
 @end
 

@@ -11,6 +11,7 @@
 #import "MenuInfo.h"
 #import "ComposeButton.h"
 #import "PublicEnterpriseViewController.h"
+#import "FindTalentsViewController.h"
 
 @interface AddViewController ()
 @property (nonatomic,strong) NSArray *arrMenu;
@@ -108,6 +109,13 @@
             
         }
             
+            break;
+        case 1:{
+            FindTalentsViewController *vc = [[FindTalentsViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+
+            
+        }
             break;
         case 2:{
             

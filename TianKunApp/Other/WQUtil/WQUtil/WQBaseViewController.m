@@ -101,6 +101,7 @@
 
 - (void)showGetDataFailViewWithReloadBlock:(dispatch_block_t)reloadBlock{
     _reloadBlock = reloadBlock;
+    self.emptyView.backgroundColor = COLOR_VIEW_BACK;
     
     [self showEmptyViewWithImage:[UIImage imageNamed:@"AppIcon"] text:@"网络连接失败" detailText:@"" buttonTitle:@"从新加载" buttonAction:@selector(reloData)];
 }

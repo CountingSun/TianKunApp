@@ -13,6 +13,11 @@
 
 #ifndef AppMacro_h
 #define AppMacro_h
+///判断是否为空
+#define kObjectIsEmpty(_object) (_object == nil \
+|| [_object isKindOfClass:[NSNull class]] \
+|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
+|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
 
 // 日志输出宏定义
 #ifdef DEBUG
@@ -24,6 +29,7 @@
 #endif
 
 #define BaseUrl(string) [@"http://47.92.72.134/" stringByAppendingString:string]
+//#define BaseUrl(string) [@"http://192.168.1.226/" stringByAppendingString:string]
 
 #define LOGIN_SUCCEED_NOTICE @"netWorkChangeEventNotification"
 

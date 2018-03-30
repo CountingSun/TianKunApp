@@ -12,6 +12,7 @@
 #import "CommentViewController.h"
 #import <YYCategories/YYCategories.h>
 #import "UIView+Extension.h"
+#import "CommentListViewController.h"
 
 
 @interface InteractionDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,QMUIKeyboardManagerDelegate>
@@ -22,10 +23,15 @@
 @property (nonatomic ,strong) CommentViewController  * customViewController;
 @property (weak, nonatomic) IBOutlet UIView *keyBoardView;
 @property (weak, nonatomic) IBOutlet QMUITextView *textView;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *shareButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *collectButton;
+@property (weak, nonatomic) IBOutlet QMUIButton *collectButton;
 @property (nonatomic ,strong) QMUIKeyboardManager *keyboardManager;
+
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *publicButton;
+
+@property (weak, nonatomic) IBOutlet UIView *twoButtonBaseView;
 
 @end
 
@@ -40,23 +46,117 @@
     [self.tableView reloadData];
     [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.baidu.com/"]]];
 //    [self showLoadingView];
+    [self setupView];
     
+    
+    
+    
+}
+- (void)setupView{
+    
+    
+    [_collectButton setImagePosition:QMUIButtonImagePositionLeft];
+    [_shareButton setImagePosition:QMUIButtonImagePositionLeft];
+    [_collectButton setSpacingBetweenImageAndTitle:5];
+    [_shareButton setSpacingBetweenImageAndTitle:5];
+
     _keyboardManager = [[QMUIKeyboardManager alloc]initWithDelegate:self];
 
+    _twoButtonBaseView.backgroundColor = COLOR_VIEW_BACK;
     [_keyboardManager addTargetResponder:_textView];
+    _publicButton.hidden = YES;
+    _cancelButton.hidden = YES;
+    _twoButtonBaseView.hidden = NO;
+    
+    _keyBoardView.backgroundColor = COLOR_VIEW_BACK;
+    
     
     [_keyBoardView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.view);
-        make.height.mas_offset(50);
+        make.left.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+        make.height.mas_offset(60);
     }];
     [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.top.equalTo(_keyBoardView).offset(10);
+        make.left.equalTo(_keyBoardView).offset(10);
+        make.right.equalTo(_keyBoardView).offset(-140);
+        make.bottom.equalTo(_keyBoardView.mas_bottom).offset(-10);
+        make.top.equalTo(_keyBoardView.mas_top).offset(10);
         
     }];
+    _textView.layer.masksToBounds = YES;
+    _textView.layer.cornerRadius = 5;
+    _textView.layer.borderWidth = 1;
+    _textView.layer.borderColor = COLOR_VIEW_SEGMENTATION.CGColor;
     
     
+    [_twoButtonBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_keyBoardView).offset(-10);
+        make.bottom.equalTo(_keyBoardView.mas_bottom).offset(-10);
+        make.top.equalTo(_keyBoardView.mas_top).offset(10);
+        make.width.mas_offset(120);
+    }];
+    [_collectButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.top.equalTo(_twoButtonBaseView);
+        make.width.offset(60);
+        
+        
+    }];
+    [_shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.top.equalTo(_twoButtonBaseView);
+        make.width.offset(60);
+    }];
     
+    [_cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(_keyBoardView);
+        make.width.offset(60);
+        make.height.offset(30);
+        
+        
+    }];
+    [_publicButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_keyBoardView);
+        make.right.equalTo(_keyBoardView.mas_right);
+        make.width.offset(60);
+        make.height.offset(30);
+        
+        
+    }];
+
+
+}
+- (void)keyboardShowMason{
+    _twoButtonBaseView.hidden = YES;
+    _cancelButton.hidden = NO;
+    _publicButton.hidden = NO;
+    [_textView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(_keyBoardView).offset(-10);
+        make.top.equalTo(_keyBoardView).offset(30);
+    }];
+    [_keyBoardView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.offset(150);
+
+    }];
+
     
+
+    
+}
+- (void)keyboardHidenMason{
+    _twoButtonBaseView.hidden = NO;
+    _cancelButton.hidden = YES;
+    _publicButton.hidden = YES;
+    [_keyBoardView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.offset(60);
+
+    }];
+    [_textView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_keyBoardView).offset(10);
+        make.right.equalTo(_keyBoardView).offset(-140);
+
+    }];
+    
+
 }
 
 - (UIWebView *)headerView {
@@ -111,14 +211,8 @@
 
         }
     [cell.commentButton addBlockForControlEvents:UIControlEventTouchUpInside block:^(id  _Nonnull sender) {
-        if (!self.customViewController) {
-            self.customViewController = [[CommentViewController alloc] init];
-        }
-        if (!self.customViewController.view.superview) {
-            [self.customViewController showInParentViewController:self.navigationController];
-        } else {
-            [self.customViewController.textView resignFirstResponder];
-        }
+        [_textView becomeFirstResponder];
+        
 
     }];
     
@@ -136,6 +230,10 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return [UIView new];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CommentListViewController *commentListViewController = [[CommentListViewController alloc]init];
+    [self.navigationController pushViewController:commentListViewController animated:YES];
 }
 #pragma mark-
 - (void)webViewDidStartLoad:(UIWebView *)webView{
@@ -159,49 +257,34 @@
 #pragma mark - <QMUIKeyboardManagerDelegate>
 
 - (void)keyboardWillChangeFrameWithUserInfo:(QMUIKeyboardUserInfo *)keyboardUserInfo {
-    __weak __typeof(self)weakSelf = self;
     [QMUIKeyboardManager handleKeyboardNotificationWithUserInfo:keyboardUserInfo showBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
         [QMUIKeyboardManager animateWithAnimated:YES keyboardUserInfo:keyboardUserInfo animations:^{
-            CGFloat distanceFromBottom = [QMUIKeyboardManager distanceFromMinYToBottomInView:weakSelf.view keyboardRect:keyboardUserInfo.endFrame];
             
-            [_keyBoardView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.bottom.equalTo(self.view);
-
-                make.height.offset(150);
-
-            }];
-            [_keyBoardView layoutIfNeeded];
-
+            [self keyboardShowMason];
+            
             
         } completion:NULL];
     } hideBlock:^(QMUIKeyboardUserInfo *keyboardUserInfo) {
         [QMUIKeyboardManager animateWithAnimated:YES keyboardUserInfo:keyboardUserInfo animations:^{
 
-            [_keyBoardView mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.left.right.bottom.equalTo(self.view);
+            [self keyboardHidenMason];
 
-                make.height.offset(50);
-                
-            }];
-            [_keyBoardView layoutIfNeeded];
 
         } completion:NULL];
     }];
 }
-/**
- *  键盘已经显示
- */
-- (void)keyboardDidShowWithUserInfo:(QMUIKeyboardUserInfo *)keyboardUserInfo{
-    [_keyBoardView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.offset(150);
-    }];
-    [_keyBoardView layoutIfNeeded];
-
-
-}
 
 - (void)dealloc{
     [_headerView.scrollView removeObserver:self forKeyPath:@"contentSize"];
+}
+- (IBAction)cancelButtonClick:(id)sender {
+    [_textView endEditing:YES];
+}
+- (IBAction)publicButtobClick:(id)sender {
+}
+- (IBAction)shareButtonClick:(id)sender {
+}
+- (IBAction)colloctButtonClicl:(id)sender {
 }
 
 - (void)didReceiveMemoryWarning {

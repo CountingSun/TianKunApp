@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *propertyName;
 @property (nonatomic, copy) NSString *propertyID;
+@property (nonatomic, copy) NSString *contentID;
 
 
 @end

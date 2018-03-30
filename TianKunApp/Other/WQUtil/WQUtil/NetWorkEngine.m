@@ -57,6 +57,9 @@
 }
 
 - (void)postWithDict:(NSDictionary *_Nullable)dic url:(NSString *)url succed:(SucceedBlock)succed errorBlock:(ErrorBlock )errorBlock{
+    
+    
+    WQLog(@"%@\n%@",url,dic);
 
     _succeedBlock = succed;
     _errorBlock = errorBlock;
@@ -81,45 +84,46 @@
     
 }
 - (void)getWithUrl:(NSString *)url succed:(SucceedBlock)succed errorBlock:(ErrorBlock)errorBlock{
-    _succeedBlock = succed;
-    _errorBlock = errorBlock;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     
     manager.responseSerializer.acceptableContentTypes =[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
     [manager GET:url parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        if (_succeedBlock) {
-            _succeedBlock(responseObject);
+        if (succed) {
+            succed(responseObject);
             
         }
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (_errorBlock) {
-            _errorBlock(error);
+        if (errorBlock) {
+            errorBlock(error);
             
         }
 
     }];
 }
 - (void)upLoadmageData:(NSData *)imageData Url:(NSString *)url dict:(NSDictionary *)dic succed:(SucceedBlock)succed errorBlock:(ErrorBlock)errorBlock{
-    _succeedBlock = succed;
-    _errorBlock = errorBlock;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
 
     [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:imageData name:@"img" fileName:@"img" mimeType:@"image/png"];
         
+
+//        [formData appendPartWithFileData:imageData name:@"file" fileName:@"file" mimeType:@"image/png"];
+        [formData appendPartWithFormData:jsonData name:@"xxxx"];
+
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        if (_succeedBlock) {
-            _succeedBlock(responseObject);
+        if (succed) {
+            succed(responseObject);
             
         }
         
 
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (_errorBlock) {
-            _errorBlock(error);
+        if (errorBlock) {
+            errorBlock(error);
             
         }
 
@@ -156,6 +160,7 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
 
     AFHTTPRequestOperation *operation = [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+       
         [formData appendPartWithFileData:[NSData dataWithContentsOfURL:[NSURL URLWithString:filePath]] name:name fileName:fileName mimeType:@"video/quicktime"];
         
 
@@ -179,6 +184,73 @@
     }];
     
 
+    
+}
+- (void)formDataUpDataWithUrl:(NSString *)url
+                    paramsDic:(NSDictionary *)paramsDic
+                     imageArr:(NSMutableArray<UIImage *> *)imageArr
+                       succed:(SucceedBlock)succed
+                   errorBlock:(ErrorBlock)errorBlock{
+    //设置网络请求管理者
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
+
+    //发送网络请求  
+    [manager POST:url parameters:paramsDic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (NSInteger i = 0; i<imageArr.count; i++) {
+            UIImage *image = imageArr[i];
+            NSData *data = UIImagePNGRepresentation(image);
+            [formData appendPartWithFileData:data name:[NSString stringWithFormat:@""] fileName:[NSString stringWithFormat:@""] mimeType:@"image/png"];
+        }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (succed) {
+            succed(responseObject);
+            
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {  
+        if (errorBlock) {
+            errorBlock(error);
+            
+        }
+
+    }];  
+
+}
+- (void)upLoadmageData:(NSData *)imageData
+             imageName:(NSString *)imageName
+                   Url:(NSString *)url
+                  dict:(NSDictionary *)dic
+                succed:(SucceedBlock)succed
+            errorBlock:(ErrorBlock)errorBlock{
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json", nil];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+
+    [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        if (imageData) {
+            [formData appendPartWithFileData:imageData name:imageName fileName:@"name.png" mimeType:@"image/png"];
+        }
+        
+        [formData appendPartWithFormData:jsonData name:@"xxxx"];
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if (succed) {
+            succed(responseObject);
+            
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (errorBlock) {
+            errorBlock(error);
+            
+        }
+        
+    }];
     
 }
 

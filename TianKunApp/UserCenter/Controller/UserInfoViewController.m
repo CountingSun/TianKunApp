@@ -210,6 +210,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [[WQUploadSingleImage manager] showUpImagePickerWithVC:self compression:0.5 selectSucceedBlock:^(UIImage *image, NSString *filePath) {
         
+        [self upLoadImageWithImage:image];
+    }];
+    
+}
+- (void)upLoadImageWithImage:(UIImage *)image{
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
+    [[[NetWorkEngine alloc] init] upLoadmageData:imageData Url:@"http://192.168.1.226/addjob/uploadimage.action" dict:@{@"uid":@"1"} succed:^(id responseObject) {
+        
+    } errorBlock:^(NSError *error) {
+        
     }];
     
 }
