@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface JobDetailDescribeTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end

@@ -7,14 +7,33 @@
 //
 
 #import "JobDetailCompanyTableViewCell.h"
-
+#import "CompanyInfo.h"
+#import "UIView+AddTapGestureRecognizer.h"
 @implementation JobDetailCompanyTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
+- (void)setCompanyInfo:(CompanyInfo *)companyInfo{
+    _companyInfo = companyInfo;
+    _nameLabel.text = companyInfo.companyName;
+    _addressLabel.text = companyInfo.companyAddress;
+    _contentLabel.text = [NSString stringWithFormat:@"%@:",companyInfo.contacts];
+    _phoneLabel.text = companyInfo.phone;
 
+    _typeLabel.text = _companyInfo.firstTypeName;
+    _typeDeaiLabel.text = _companyInfo.secondTypeName;
+    _phoneLabel.userInteractionEnabled = YES;
+    [_phoneLabel addTapGestureRecognizerWithActionBlock:^{
+        if (_clickPhoneLabelBlock) {
+            _clickPhoneLabelBlock(companyInfo.phone);
+            
+        }
+    }];
+    
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -12,11 +12,12 @@
 #import "ComposeButton.h"
 #import "PublicEnterpriseViewController.h"
 #import "FindTalentsViewController.h"
+#import "AddFindJobViewController.h"
 
 @interface AddViewController ()
 @property (nonatomic,strong) NSArray *arrMenu;
 @property (nonatomic,strong) NSMutableArray *buttonsArray;
-
+@property (nonatomic ,strong) UIVisualEffectView *effectView;
 @end
 
 @implementation AddViewController
@@ -73,6 +74,7 @@
     
     UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     UIVisualEffectView *effectView =[[UIVisualEffectView alloc]initWithEffect:blurEffect];
+    _effectView = effectView;
     self.view = effectView;
     self.isHiddenNav = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapBackEvent)];
@@ -96,7 +98,7 @@
         [button setTitleColor:COLOR_TEXT_GENGRAL forState:0];
         button.frame = CGRectMake(i*itemW, SCREEN_HEIGHT - itemH -60 +350, itemW, itemH);
         [_buttonsArray addObject:button];
-        [self.view addSubview:button];
+        [_effectView.contentView addSubview:button];
         button.tag = menuInfo.menuID;
         [button addTarget:self action:@selector(childButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -122,8 +124,8 @@
             break;
         case 2:{
             
-//            AddTwoViewController *vc = [[AddTwoViewController alloc]init];
-//            [self presentViewController:vc animated:YES completion:nil];
+            AddFindJobViewController *vc = [[AddFindJobViewController alloc]init];
+            [self presentViewController:vc animated:YES completion:nil];
             
         }
             break;

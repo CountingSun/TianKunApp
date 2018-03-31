@@ -311,6 +311,7 @@
 		5F3E9DEB2068DF3400263A45 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DE92068DF3400263A45 /* CommentViewController.m */; };
 		5F3E9DEE2068E6E400263A45 /* CommentKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E9DED2068E6E400263A45 /* CommentKeyboardView.m */; };
 		5F3E9DF02068E74100263A45 /* CommentKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3E9DEF2068E74100263A45 /* CommentKeyboardView.xib */; };
+		5FCDD1BB206F28A300EB1308 /* UIImageView+WQSDWebImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCDD1BA206F28A300EB1308 /* UIImageView+WQSDWebImageView.m */; };
 		5FD709F0206DC4F200BC8CA3 /* SelectJobTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD709EE206DC4F200BC8CA3 /* SelectJobTypeViewController.m */; };
 		5FD709F5206DCD9D00BC8CA3 /* AddinputTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD709F3206DCD9D00BC8CA3 /* AddinputTextTableViewCell.m */; };
 		5FD709F6206DCD9D00BC8CA3 /* AddinputTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD709F4206DCD9D00BC8CA3 /* AddinputTextTableViewCell.xib */; };
@@ -920,6 +921,8 @@
 		5F3E9DED2068E6E400263A45 /* CommentKeyboardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentKeyboardView.m; sourceTree = "<group>"; };
 		5F3E9DEF2068E74100263A45 /* CommentKeyboardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentKeyboardView.xib; sourceTree = "<group>"; };
 		5FB31095205F4EB100186A56 /* TianKunApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TianKunApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5FCDD1B9206F28A300EB1308 /* UIImageView+WQSDWebImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WQSDWebImageView.h"; sourceTree = "<group>"; };
+		5FCDD1BA206F28A300EB1308 /* UIImageView+WQSDWebImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WQSDWebImageView.m"; sourceTree = "<group>"; };
 		5FD709ED206DC4F200BC8CA3 /* SelectJobTypeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectJobTypeViewController.h; sourceTree = "<group>"; };
 		5FD709EE206DC4F200BC8CA3 /* SelectJobTypeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectJobTypeViewController.m; sourceTree = "<group>"; };
 		5FD709F2206DCD9D00BC8CA3 /* AddinputTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddinputTextTableViewCell.h; sourceTree = "<group>"; };
@@ -2185,6 +2188,8 @@
 				5F3AB4662064857D00850BA7 /* WQUtil.h */,
 				5FDC71EE2064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.h */,
 				5FDC71EF2064E9DE009EA1E3 /* UIView+AddTapGestureRecognizer.m */,
+				5FCDD1B9206F28A300EB1308 /* UIImageView+WQSDWebImageView.h */,
+				5FCDD1BA206F28A300EB1308 /* UIImageView+WQSDWebImageView.m */,
 			);
 			path = WQUtil;
 			sourceTree = "<group>";
@@ -3088,6 +3093,7 @@
 				5F3AB5022064857D00850BA7 /* UIView+SuAnimation.m in Sources */,
 				5F37E4B4206CD13600AB1C0B /* MarqueeLabel.m in Sources */,
 				5F3AB5202064857D00850BA7 /* UIView+Extension.m in Sources */,
+				5FCDD1BB206F28A300EB1308 /* UIImageView+WQSDWebImageView.m in Sources */,
 				5F04AB6920677A1300A91390 /* CompanyDetailViewController.m in Sources */,
 				5F37E4A5206CC44E00AB1C0B /* SBControlView.m in Sources */,
 				5F3AB4822064857D00850BA7 /* CompanyInfo.m in Sources */,

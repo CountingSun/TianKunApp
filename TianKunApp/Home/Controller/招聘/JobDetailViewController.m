@@ -11,12 +11,19 @@
 #import "JobDetailDescribeTableViewCell.h"
 #import "JobDetailCompanyTableViewCell.h"
 #import "JobDetailCompanyDescriptionTableViewCell.h"
+#import "JobInfo.h"
+#import "CompanyInfo.h"
+#import "AppShared.h"
 
 @interface JobDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
 @property (nonatomic, copy) NSString *jobID;
 @property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,strong) JobInfo *jobInfo;
+@property (nonatomic ,strong) CompanyInfo *companyInfo;
+@property (strong, nonatomic) IBOutlet UIView *rightBarButtonView;
+@property (weak, nonatomic) IBOutlet QMUIButton *collectButton;
 
 
 @end
@@ -33,6 +40,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@""];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightBarButtonView];
+    [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
+    [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
+
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -20;
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
+
     [self showLoadingView];
     [self getData];
     
@@ -49,6 +64,24 @@
             if (!_arrData) {
                 _arrData = [NSMutableArray arrayWithCapacity:0];
             }
+            
+            NSDictionary *dict = [[responseObject objectForKey:@"value"] objectForKey:@"job"];
+            _jobInfo = [JobInfo mj_objectWithKeyValues:dict];
+            _companyInfo = [CompanyInfo mj_objectWithKeyValues:dict];
+            _companyInfo.picture_url = [dict objectForKey:@"imageurl"];
+            _companyInfo.companyIntroduce = [dict objectForKey:@"introduce"];
+            _companyInfo.companyAddress = [dict objectForKey:@"address"];
+            _companyInfo.companyName = [dict objectForKey:@"enterpriseName"];
+
+            
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"jobList"];
+            
+            for (NSDictionary *dicts in arr) {
+                JobInfo *jobInfo = [JobInfo mj_objectWithKeyValues:dicts];
+                [_arrData addObject:jobInfo];
+                
+            }
+            [self.tableView reloadData];
         }else{
             [self showGetDataErrorWithMessage:[responseObject objectForKey:@"msg"] reloadBlock:^{
                 [self showLoadingView];
@@ -76,7 +109,6 @@
         _tableView.estimatedRowHeight = 130;
         
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.backgroundColor = COLOR_WHITE;
         [_tableView headerWithRefreshingBlock:^{
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -127,7 +159,7 @@
             cell.textLabel.font = [UIFont systemFontOfSize:20];
             cell.textLabel.textColor = COLOR_TEXT_BLACK;
         }
-        cell.textLabel.text = @"XXXX有限公司®";
+        cell.textLabel.text = _jobInfo.name;
         return cell;
         
     }else if (indexPath.section == 1){
@@ -137,6 +169,11 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"JobDetailDescribeTableViewCell" owner:nil options:nil] firstObject];
         }
         cell.selectionStyle = 0;
+        cell.label.text = _jobInfo.work_describe;
+        
+        
+        cell.timeLabel.text = [NSString timeReturnDate:[NSNumber numberWithInteger:[_jobInfo.update_date integerValue]]];
+        
         return cell;
 
     }else if(indexPath.section == 2){
@@ -144,7 +181,11 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"JobDetailCompanyTableViewCell" owner:nil options:nil] firstObject];
         }
-        cell.selectionStyle = 0;
+        cell.companyInfo = _companyInfo;
+        cell.clickPhoneLabelBlock = ^(NSString *phoneNumber) {
+            [WQTools callWithTel:phoneNumber];
+        };
+        
         return cell;
 
     }else if(indexPath.section == 3){
@@ -153,15 +194,19 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"JobDetailCompanyDescriptionTableViewCell" owner:nil options:nil] firstObject];
         }
         cell.selectionStyle = 0;
+        cell.contentLabel.text = _companyInfo.companyIntroduce;
+        
         return cell;
 
     }else{
         JobViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JobViewTableViewCell"];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"JobViewTableViewCell" owner:nil options:nil] firstObject];
-            cell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         }
         cell.selectionStyle = 0;
+        cell.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
+        cell.jobInfo = _arrData[indexPath.row];
         return cell;
 
     }
@@ -200,6 +245,28 @@
     return view;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+- (IBAction)collectButtonClick:(id)sender {
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    [_netWorkEngine postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"jobid":_jobID} url:BaseUrl(@"home/jobcollection.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            _collectButton.selected =!_collectButton.selected;
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
+        
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+    }];
+    
+}
+- (IBAction)shareButtonClick:(id)sender {
+    [AppShared shared];
     
 }
 

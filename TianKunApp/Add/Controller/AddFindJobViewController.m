@@ -9,6 +9,8 @@
 #import "AddFindJobViewController.h"
 
 @interface AddFindJobViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *headView;
 
 @end
 

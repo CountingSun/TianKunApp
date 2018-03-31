@@ -23,5 +23,6 @@
 #import "NetWorkEngine.h"
 #import "GCDTimer.h"
 #import "WQTableView.h"
+#import "UIImageView+WQSDWebImageView.h"
 
 #endif /* WQUtil_h */

@@ -132,7 +132,6 @@
     JobViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JobViewTableViewCell"];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"JobViewTableViewCell" owner:nil options:nil] firstObject];
-        cell.contentView.backgroundColor = COLOR_VIEW_BACK;
     }
     
     JobInfo *jobInfo = _arrData[indexPath.row];

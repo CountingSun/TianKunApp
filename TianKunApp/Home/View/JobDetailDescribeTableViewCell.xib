@@ -72,6 +72,10 @@
                     <constraint firstAttribute="trailing" secondItem="Sw8-wA-REV" secondAttribute="trailing" constant="10" id="wPS-JE-SAw"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="label" destination="69f-0H-WgA" id="0TF-wj-a5A"/>
+                <outlet property="timeLabel" destination="Sw8-wA-REV" id="DW7-8D-uw6"/>
+            </connections>
             <point key="canvasLocation" x="275.5" y="85.5"/>
         </tableViewCell>
     </objects>

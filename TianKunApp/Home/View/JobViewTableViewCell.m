@@ -13,7 +13,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.contentView.backgroundColor = COLOR_VIEW_BACK;
+    
 }
 - (void)setJobInfo:(JobInfo *)jobInfo{
     _jobInfo = jobInfo;

@@ -106,6 +106,10 @@
 
 @property (nonatomic ,strong) NSString *registered_address;
 
+@property (nonatomic ,strong) NSString *firstTypeName;
+@property (nonatomic ,strong) NSString *secondTypeName;
+
+
 
 
 @end

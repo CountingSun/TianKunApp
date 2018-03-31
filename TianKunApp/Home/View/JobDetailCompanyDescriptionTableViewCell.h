@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface JobDetailCompanyDescriptionTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @end

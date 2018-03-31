@@ -6,11 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JobDetailViewController">
             <connections>
+                <outlet property="collectButton" destination="dSz-64-29C" id="eJQ-u2-YyL"/>
+                <outlet property="rightBarButtonView" destination="sjI-FE-HVC" id="2x5-ME-FZw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,5 +23,41 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </view>
+        <view contentMode="scaleToFill" id="sjI-FE-HVC">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSz-64-29C" customClass="QMUIButton">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="收藏"/>
+                    <connections>
+                        <action selector="collectButtonClick:" destination="-1" eventType="touchUpInside" id="v6a-Wa-baY"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JPt-8k-Xdg" customClass="QMUIButton">
+                    <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="分享"/>
+                    <connections>
+                        <action selector="shareButtonClick:" destination="-1" eventType="touchUpInside" id="j6J-AL-M33"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="JPt-8k-Xdg" secondAttribute="trailing" id="SsE-6X-BfV"/>
+                <constraint firstItem="dSz-64-29C" firstAttribute="leading" secondItem="sjI-FE-HVC" secondAttribute="leading" id="UKi-1a-cLY"/>
+                <constraint firstItem="dSz-64-29C" firstAttribute="top" secondItem="sjI-FE-HVC" secondAttribute="top" id="Uba-5c-EnS"/>
+                <constraint firstAttribute="bottom" secondItem="dSz-64-29C" secondAttribute="bottom" id="fil-qY-qjE"/>
+                <constraint firstItem="JPt-8k-Xdg" firstAttribute="width" secondItem="sjI-FE-HVC" secondAttribute="width" multiplier="1/2" id="gyP-mE-mkD"/>
+                <constraint firstAttribute="bottom" secondItem="JPt-8k-Xdg" secondAttribute="bottom" id="nzr-Vv-fuC"/>
+                <constraint firstItem="JPt-8k-Xdg" firstAttribute="leading" secondItem="dSz-64-29C" secondAttribute="trailing" id="oNy-jB-HFO"/>
+                <constraint firstItem="JPt-8k-Xdg" firstAttribute="top" secondItem="sjI-FE-HVC" secondAttribute="top" id="pM9-3Z-ZgJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="599" y="-1248"/>
+        </view>
     </objects>
+    <resources>
+        <image name="分享" width="20" height="20"/>
+        <image name="收藏" width="24" height="24"/>
+    </resources>
 </document>
