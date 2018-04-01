@@ -17,10 +17,13 @@
 
 @interface WQTableView : UITableView
 
+@property (nonatomic, copy) void(^headRefreshBlock)(void);
+@property (nonatomic, copy) void(^footRefreshBlock)(void);
+
 /**
  初始化方法
 
- @param frame <#frame description#>
+ @param frame <#frame descriptvoidion#>
  @param delegateAndDataScource <#delegateAndDataScource description#>
  @param style <#style description#>
  @return <#return value description#>
@@ -64,5 +67,7 @@
  @param block <#block description#>
  */
 - (void)gifWithRefreshingBlock:(dispatch_block_t)block;
+
+
 
 @end

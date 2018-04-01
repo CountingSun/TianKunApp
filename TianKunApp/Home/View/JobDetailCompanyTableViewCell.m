@@ -25,6 +25,7 @@
     _typeLabel.text = _companyInfo.firstTypeName;
     _typeDeaiLabel.text = _companyInfo.secondTypeName;
     _phoneLabel.userInteractionEnabled = YES;
+    [_contentImageView sd_imageDef11WithUrlStr:companyInfo.picture_url];
     [_phoneLabel addTapGestureRecognizerWithActionBlock:^{
         if (_clickPhoneLabelBlock) {
             _clickPhoneLabelBlock(companyInfo.phone);

@@ -132,6 +132,7 @@
 
 //- (void)
 - (void)dealloc{
+    _loadingView = nil;
     WQLog(@"dealloc");
 }
 

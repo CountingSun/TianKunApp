@@ -46,7 +46,7 @@
         
     }
     
-    [_tableView registerNib:[UINib nibWithNibName:@"FindJobTableViewCell" bundle:nil] forCellReuseIdentifier:@"FindJobTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"FindJobTableViewCell" bundle:nil] forCellReuseIdentifier:@"FindJobTableViewCell"];
     
     [self.tableView beginRefreshing];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -67,13 +67,16 @@
         _tableView.estimatedRowHeight = 165;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        
+        __weak typeof(self) weakSelf = self;
+        
         [_tableView headerWithRefreshingBlock:^{
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_tableView endRefresh];
-                
+                [weakSelf.tableView endRefresh];
+
             });
-            
+
         }];
         [self.view addSubview:_tableView];
         

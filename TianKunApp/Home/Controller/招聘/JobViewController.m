@@ -216,16 +216,18 @@
         _tableView.rowHeight = 130;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        __weak typeof(self) weakSelf = self;
+        
         [_tableView headerWithRefreshingBlock:^{
-            _pageIndex = 1;
+            weakSelf.pageIndex = 1;
             
-            [self getJob];
+            [weakSelf getJob];
             
         }];
         [_tableView footerWithRefreshingBlock:^{
-            _pageIndex --;
+            weakSelf.pageIndex --;
             
-            [self getJob];
+            [weakSelf getJob];
 
         }];
         

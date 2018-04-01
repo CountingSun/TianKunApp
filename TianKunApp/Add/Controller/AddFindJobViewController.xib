@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddFindJobViewController">
             <connections>
+                <outlet property="headImageView" destination="M1P-7V-W2i" id="6oT-xu-aa2"/>
                 <outlet property="headView" destination="any-5s-7Nt" id="yDP-sr-O4R"/>
                 <outlet property="tableView" destination="iC3-G8-3Eu" id="W0a-jr-Xqa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -23,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iC3-G8-3Eu">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="-64" width="375" height="731"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -31,7 +32,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="iC3-G8-3Eu" secondAttribute="bottom" id="ByZ-4O-UsZ"/>
                 <constraint firstAttribute="trailing" secondItem="iC3-G8-3Eu" secondAttribute="trailing" id="Dbn-8e-1FL"/>
-                <constraint firstItem="iC3-G8-3Eu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OvZ-At-jSM"/>
+                <constraint firstItem="iC3-G8-3Eu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-64" id="OvZ-At-jSM"/>
                 <constraint firstItem="iC3-G8-3Eu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jER-dr-pnh"/>
             </constraints>
         </view>

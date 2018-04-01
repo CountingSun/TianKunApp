@@ -352,6 +352,7 @@
 		5FDC71FD2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FC2064F5E7009EA1E3 /* HistoryTableViewHeaderView.m */; };
 		5FDC720020651512009EA1E3 /* HistoryBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */; };
 		5FDC720220651544009EA1E3 /* HistoryBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FDC720120651544009EA1E3 /* HistoryBottomView.xib */; };
+		5FEF1F1C2070D2EF00D30FE4 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEF1F1B2070D2EE00D30FE4 /* AFAppDotNetAPIClient.m */; };
 		5FF658E62069D7F6000016D6 /* CommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658E42069D7F6000016D6 /* CommentListViewController.m */; };
 		5FF658E72069D7F6000016D6 /* CommentListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FF658E52069D7F6000016D6 /* CommentListViewController.xib */; };
 		5FF658EB2069DF0E000016D6 /* PublicInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF658E92069DF0E000016D6 /* PublicInfoTableViewCell.m */; };
@@ -987,6 +988,8 @@
 		5FDC71FE20651512009EA1E3 /* HistoryBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryBottomView.h; sourceTree = "<group>"; };
 		5FDC71FF20651512009EA1E3 /* HistoryBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryBottomView.m; sourceTree = "<group>"; };
 		5FDC720120651544009EA1E3 /* HistoryBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryBottomView.xib; sourceTree = "<group>"; };
+		5FEF1F1A2070D2EE00D30FE4 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
+		5FEF1F1B2070D2EE00D30FE4 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
 		5FF658E32069D7F6000016D6 /* CommentListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentListViewController.h; sourceTree = "<group>"; };
 		5FF658E42069D7F6000016D6 /* CommentListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentListViewController.m; sourceTree = "<group>"; };
 		5FF658E52069D7F6000016D6 /* CommentListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentListViewController.xib; sourceTree = "<group>"; };
@@ -1891,6 +1894,8 @@
 				5FFCC76320663CCA0047E9F7 /* PYPhotoBrowser */,
 				5FFCC6FA20663CBB0047E9F7 /* Dependency */,
 				5F3AB3D32064857D00850BA7 /* WQUtil */,
+				5FEF1F1A2070D2EE00D30FE4 /* AFAppDotNetAPIClient.h */,
+				5FEF1F1B2070D2EE00D30FE4 /* AFAppDotNetAPIClient.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -3005,6 +3010,7 @@
 				5F3AB48F2064857D00850BA7 /* HomeViewController.m in Sources */,
 				5FDC71DD2064DD98009EA1E3 /* UIBarButtonItem+Extension.m in Sources */,
 				5F04AB4F2067456B00A91390 /* RemindMessageTableViewCell.m in Sources */,
+				5FEF1F1C2070D2EF00D30FE4 /* AFAppDotNetAPIClient.m in Sources */,
 				5F04AB3D2067387600A91390 /* RecommendMessageViewController.m in Sources */,
 				5F3AB4B92064857D00850BA7 /* HomeClassTableViewCell.m in Sources */,
 				5FFCC7C120663E3E0047E9F7 /* FLAnimatedImageView+WebCache.m in Sources */,

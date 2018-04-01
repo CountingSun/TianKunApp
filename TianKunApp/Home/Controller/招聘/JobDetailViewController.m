@@ -40,6 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@""];
+    _rightBarButtonView.frame = CGRectMake(0, 0, 100, 40);
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightBarButtonView];
     [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
     [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
@@ -48,15 +50,29 @@
     negativeSpacer.width = -20;
     self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
+    
+    
     [self showLoadingView];
     [self getData];
     
+}
+- (void)loginSucceed{
+    [self getData];
 }
 - (void)getData{
     if (!_netWorkEngine) {
         _netWorkEngine = [[NetWorkEngine alloc]init];
     }
-    [_netWorkEngine postWithDict:@{@"jobid":_jobID} url:BaseUrl(@"home/invitationAsDetail.action") succed:^(id responseObject) {
+    NSDictionary *dict;
+    
+    if ([UserInfoEngine getUserInfo].userID) {
+        dict = @{@"jobid":_jobID,@"userid":[UserInfoEngine getUserInfo].userID};
+        
+    }else{
+        dict = @{@"jobid":_jobID};
+    }
+    [_netWorkEngine postWithDict:dict url:BaseUrl(@"home/invitationAsDetail.action") succed:^(id responseObject) {
         [self hideLoadingView];
         
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
@@ -76,6 +92,12 @@
             
             NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"jobList"];
             
+            if (_companyInfo.collectionid.length) {
+                _collectButton.selected = YES;
+                
+            }else{
+                _collectButton.selected = NO;
+            }
             for (NSDictionary *dicts in arr) {
                 JobInfo *jobInfo = [JobInfo mj_objectWithKeyValues:dicts];
                 [_arrData addObject:jobInfo];
@@ -245,24 +267,40 @@
     return view;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JobInfo *jobInfo = _arrData[indexPath.row];
+    JobDetailViewController *vc = [[JobDetailViewController alloc]initWithJobID:jobInfo.job_id];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 - (IBAction)collectButtonClick:(id)sender {
-    if (!_netWorkEngine) {
-        _netWorkEngine = [[NetWorkEngine alloc]init];
-    }
-    [_netWorkEngine postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"jobid":_jobID} url:BaseUrl(@"home/jobcollection.action") succed:^(id responseObject) {
-        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
-        if (code == 1) {
-            _collectButton.selected =!_collectButton.selected;
-            
-        }else{
-            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+    if ([UserInfoEngine isLogin]) {
+        if (!_netWorkEngine) {
+            _netWorkEngine = [[NetWorkEngine alloc]init];
         }
-        
-    } errorBlock:^(NSError *error) {
-        [self showErrorWithStatus:NET_ERROR_TOST];
-    }];
+        [_netWorkEngine postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,
+                                       @"jobid":_jobID,
+                                       @"username":[UserInfoEngine getUserInfo].nickname,
+                                       @"state":@(_collectButton.selected)
+                                       }
+                                 url:BaseUrl(@"home/jobcollection.action") succed:^(id responseObject) {
+                                     NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+                                     if (code == 1) {
+                                         _collectButton.selected =!_collectButton.selected;
+                                         if (_collectButton.selected) {
+                                             [self showSuccessWithStatus:@"收藏成功"];
+                                         }else{
+                                             [self showSuccessWithStatus:@"取消收藏成功"];
+                                         }
+                                         
+                                     }else{
+                                         [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+                                     }
+                                     
+                                 } errorBlock:^(NSError *error) {
+                                     [self showErrorWithStatus:NET_ERROR_TOST];
+                                 }];
+
+    }
     
 }
 - (IBAction)shareButtonClick:(id)sender {

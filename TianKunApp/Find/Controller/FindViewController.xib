@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConstructionSearchViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FindViewController">
             <connections>
-                <outlet property="tableView" destination="l68-h6-xTG" id="ra6-Bn-e47"/>
+                <outlet property="tableView" destination="2rh-v7-HMq" id="JPK-nQ-9K7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,17 +20,17 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l68-h6-xTG">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2rh-v7-HMq" customClass="WQTableView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="l68-h6-xTG" secondAttribute="trailing" id="KJC-Ge-uKr"/>
-                <constraint firstAttribute="bottom" secondItem="l68-h6-xTG" secondAttribute="bottom" id="YoK-5Z-b36"/>
-                <constraint firstItem="l68-h6-xTG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gvs-an-ix9"/>
-                <constraint firstItem="l68-h6-xTG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rFe-AD-gAj"/>
+                <constraint firstAttribute="bottom" secondItem="2rh-v7-HMq" secondAttribute="bottom" id="7Bu-Sx-UNJ"/>
+                <constraint firstItem="2rh-v7-HMq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AJl-Y2-AYL"/>
+                <constraint firstItem="2rh-v7-HMq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xC0-o6-Kva"/>
+                <constraint firstAttribute="trailing" secondItem="2rh-v7-HMq" secondAttribute="trailing" id="yaA-9j-TU3"/>
             </constraints>
         </view>
     </objects>

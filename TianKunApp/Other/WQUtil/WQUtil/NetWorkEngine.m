@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
+#import "AFAppDotNetAPIClient.h"
 
 @implementation NetWorkEngine
 
@@ -61,8 +62,7 @@
     
     WQLog(@"%@\n%@",url,dic);
 
-    _succeedBlock = succed;
-    _errorBlock = errorBlock;
+
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
 
@@ -70,13 +70,14 @@
         
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        if (_succeedBlock) {
-            _succeedBlock(responseObject);
+        if (succed) {
+            succed(responseObject);
             
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (_errorBlock) {
-            _errorBlock(error);
+        
+        if (errorBlock) {
+            errorBlock(error);
             
             
         }
@@ -132,8 +133,6 @@
 }
 - (void)postWithReturnDataDict:(NSDictionary *)dic url:(NSString *)url succed:(SucceedBlock)succed errorBlock:(ErrorBlock )errorBlock{
     
-    _succeedBlock = succed;
-    _errorBlock = errorBlock;
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -142,13 +141,13 @@
         
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        if (_succeedBlock) {
-            _succeedBlock(responseObject);
+        if (succed) {
+            succed(responseObject);
             
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (_errorBlock) {
-            _errorBlock(error);
+        if (errorBlock) {
+            errorBlock(error);
             
         }
     }];

@@ -9,9 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConstructionSearchViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VIPUploadInfoViewController">
             <connections>
-                <outlet property="tableView" destination="l68-h6-xTG" id="ra6-Bn-e47"/>
+                <outlet property="label" destination="i7d-aF-fWY" id="qdz-Td-j4N"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,17 +20,21 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="l68-h6-xTG">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    上传简历附件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7d-aF-fWY">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Oam-jg-Bg9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="l68-h6-xTG" secondAttribute="trailing" id="KJC-Ge-uKr"/>
-                <constraint firstAttribute="bottom" secondItem="l68-h6-xTG" secondAttribute="bottom" id="YoK-5Z-b36"/>
-                <constraint firstItem="l68-h6-xTG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gvs-an-ix9"/>
-                <constraint firstItem="l68-h6-xTG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rFe-AD-gAj"/>
+                <constraint firstAttribute="trailing" secondItem="i7d-aF-fWY" secondAttribute="trailing" id="8CM-0b-zk7"/>
+                <constraint firstItem="i7d-aF-fWY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PEG-Xl-8aI"/>
+                <constraint firstItem="i7d-aF-fWY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Tx3-ph-wED"/>
             </constraints>
         </view>
     </objects>

@@ -35,20 +35,33 @@
 }
 
 - (void)headerWithRefreshingBlock:(dispatch_block_t)block{
+    _headRefreshBlock = block;
+    
+    __weak typeof(self) weakSelf = self;
+    
     self.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (block) {
-            block();
-            
-        }
+        [weakSelf wqHeadRefresh];
     }];
 
     
 }
-- (void)gifWithRefreshingBlock:(dispatch_block_t)block{
+- (void)footerWithRefreshingBlock:(dispatch_block_t)block{
+        _footRefreshBlock = block;
+    __weak typeof(self) weakSelf = self;
     
+    self.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf wqFootRefresh];
+    }];
+    
+    
+}
+
+- (void)gifWithRefreshingBlock:(dispatch_block_t)block{
+    __weak typeof(block) weakBlock = block;
+
             MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
-                if (block) {
-                    block();
+                if (weakBlock) {
+                    weakBlock();
                 }
 
             }];
@@ -59,20 +72,24 @@
             [self refreshOfheader:self refreshGifHeader:header];
 
 }
-- (void)footerWithRefreshingBlock:(dispatch_block_t)block{
-    self.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        if (block) {
-            block();
-        }
-    }];
-    
-    
+- (void)wqHeadRefresh{
+    if (_headRefreshBlock) {
+        _headRefreshBlock();
+    }
+}
+- (void)wqFootRefresh{
+    if (_footRefreshBlock) {
+        _footRefreshBlock();
+    }
 }
 
 - (void)endRefresh{
-    
-    [self.header endRefreshing];
-    [self.footer endRefreshing];
+    if ([self.header isRefreshing]) {
+        [self.header endRefreshing];
+    }
+    if ([self.footer isRefreshing]) {
+        [self.footer endRefreshing];
+    }
     
 }
 /**

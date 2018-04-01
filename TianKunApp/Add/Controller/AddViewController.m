@@ -125,8 +125,8 @@
         case 2:{
             
             AddFindJobViewController *vc = [[AddFindJobViewController alloc]init];
-            [self presentViewController:vc animated:YES completion:nil];
-            
+            [self.navigationController pushViewController:vc animated:YES];
+
         }
             break;
         default:{

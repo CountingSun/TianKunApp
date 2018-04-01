@@ -108,6 +108,12 @@
 
 @property (nonatomic ,strong) NSString *firstTypeName;
 @property (nonatomic ,strong) NSString *secondTypeName;
+/**
+ 为空、此用户为收藏此招聘信息 
+ */
+
+@property (nonatomic ,strong) NSString *collectionid;
+
 
 
 

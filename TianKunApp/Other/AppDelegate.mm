@@ -27,6 +27,7 @@
 
 #import "XTGuidePagesViewController.h"
 #import "CALayer+Transition.h"
+#import "AFAppDotNetAPIClient.h"
 
 @interface AppDelegate ()<selectDelegate>
 @property (nonatomic,strong) NetWorkEngine *netWorkEngine;
@@ -48,6 +49,7 @@
     [self configureBaiduMap];
     [SVProgressHUD setBackgroundColor:COLOR_TEXT_BLACK];
     [SVProgressHUD setForegroundColor:COLOR_WHITE];
+    [AFAppDotNetAPIClient shared];
 
     NSArray *images = @[@"welcome1", @"welcome2", @"welcome3"];
     BOOL y = [XTGuidePagesViewController isShow];

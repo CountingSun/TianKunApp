@@ -44,7 +44,8 @@
     _pageSize = DEFAULT_PAGE_SIZE;
     [self setupTitleView];
     [self getData];
-    
+ 
+//    [self tableView];
 }
 - (void)getData{
     
@@ -58,7 +59,7 @@
     NSLog(@"pageIndex%@",@(_pageIndex));
     [_netWorkEngine postWithDict:@{@"startnum":@(_pageIndex),@"num":@(_pageSize)} url:BaseUrl(@"CompanyListXinXi/selectAppCompanyList.action") succed:^(id responseObject) {
         [self hideLoadingView];
-        [_tableView endRefresh];
+        [self.tableView endRefresh];
         
 //        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         NSMutableArray *arr = [responseObject objectForKey:@"value"];
@@ -119,16 +120,19 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 45;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        __weak typeof(self) weakSelf = self;
+        
         [_tableView headerWithRefreshingBlock:^{
-            _pageIndex = 1;
-            [self getData];
+            weakSelf.pageIndex = 1;
+            [weakSelf getData];
         }];
-        [self.view addSubview:_tableView];
         [_tableView footerWithRefreshingBlock:^{
-            _pageIndex++;
-            [self getData];
+            weakSelf.pageIndex++;
+            [weakSelf getData];
             
         }];
+
+        [self.view addSubview:_tableView];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.equalTo(self.view);
         }];
@@ -203,6 +207,12 @@
     
     ConstructionSearchViewController *vc= [[ConstructionSearchViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)dealloc{
+    _tableView = nil;
+    _searchView = nil;
+    _netWorkEngine = nil;
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

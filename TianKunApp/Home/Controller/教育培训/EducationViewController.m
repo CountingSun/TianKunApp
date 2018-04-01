@@ -122,10 +122,13 @@
         _tableView.separatorStyle = 0;
         
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        
+        __weak typeof(self) weakSelf = self;
+
         [_tableView headerWithRefreshingBlock:^{
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_tableView endRefresh];
+                [weakSelf.tableView endRefresh];
                 
             });
             
