@@ -24,14 +24,20 @@
 //新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
 //百度地图
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
+#import <AlipaySDK/AlipaySDK.h>
+//融云
+#import <RongIMLib/RongIMLib.h>
 
 #import "XTGuidePagesViewController.h"
 #import "CALayer+Transition.h"
 #import "AFAppDotNetAPIClient.h"
 
-@interface AppDelegate ()<selectDelegate>
+@interface AppDelegate ()<selectDelegate,WXApiDelegate>
 @property (nonatomic,strong) NetWorkEngine *netWorkEngine;
 @property (nonatomic ,strong) BMKMapManager *mapManager;
+
+@property (nonatomic ,assign) NSInteger messageNum;
+
 
 @end
 
@@ -44,9 +50,38 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //注册appid
+    BOOL isSucceed = [WXApi registerApp:@"wxaf103657968f1a62"];
+    
+    if(isSucceed){
+        
+    }
+   
+    
+
     [self setSDImage];
     [self configureShare];
     [self configureBaiduMap];
+    [self configureRongCloud];
+    
+    _messageNum = 5;
+    
+    
+    // 获取当前应用程序的UIApplication对象
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    // iOS 8 系统要求设置通知的时候必须经过用户许可。
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge categories:nil];
+    
+    [app registerUserNotificationSettings:settings];
+    
+    // 设置应用程序右上角的"通知图标"Badge
+//    app.applicationIconBadgeNumber = _messageNum;  // 根据逻辑设置
+
+    
+    
+    
     [SVProgressHUD setBackgroundColor:COLOR_TEXT_BLACK];
     [SVProgressHUD setForegroundColor:COLOR_WHITE];
     [AFAppDotNetAPIClient shared];
@@ -120,22 +155,15 @@
     
     [ShareSDK registerActivePlatforms:@[
                                         @(SSDKPlatformTypeSinaWeibo),
-                                        @(SSDKPlatformTypeMail),
-                                        @(SSDKPlatformTypeSMS),
-                                        @(SSDKPlatformTypeCopy),
                                         @(SSDKPlatformTypeWechat),
                                         @(SSDKPlatformTypeQQ),
-                                        @(SSDKPlatformTypeRenren),
-                                        @(SSDKPlatformTypeFacebook),
-                                        @(SSDKPlatformTypeTwitter),
-                                        @(SSDKPlatformTypeGooglePlus)
                                         ]
                              onImport:^(SSDKPlatformType platformType)
      {
          switch (platformType)
          {
              case SSDKPlatformTypeWechat:
-                 [ShareSDKConnector connectWeChat:[WXApi class]];
+                 [ShareSDKConnector connectWeChat:[WXApi class] delegate:self];
                  break;
              case SSDKPlatformTypeQQ:
                  [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
@@ -160,8 +188,8 @@
                                             authType:SSDKAuthTypeBoth];
                  break;
              case SSDKPlatformTypeWechat:
-                 [appInfo SSDKSetupWeChatByAppId:@"wx4868b35061f87885"
-                                       appSecret:@"64020361b8ec4c99936c0e3999a9f249"];
+                 [appInfo SSDKSetupWeChatByAppId:@"wxaf103657968f1a62"
+                                       appSecret:@"1f595c95bbc52790528e24205abf76b4"];
                  break;
              case SSDKPlatformTypeQQ:
                  [appInfo SSDKSetupQQByAppId:@"100371282"
@@ -184,6 +212,10 @@
     }
 
 }
+- (void)configureRongCloud{
+    [[RCIMClient sharedRCIMClient] initWithAppKey:@"YourTestAppKey"];
+
+}
 #pragma mark - 屏幕旋转相关设置
 -(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
@@ -200,8 +232,7 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
 }
 
 
@@ -235,6 +266,108 @@
     
     
 }
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            if (_aliPayFinishBlock) {
+                _aliPayFinishBlock(resultDic);
+                
+            }
+            WQLog(@"result = %@",resultDic);
+        }];
+        
+        // 授权跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            // 解析 auth code
+            NSString *result = resultDic[@"result"];
+            NSString *authCode = nil;
+            if (result.length>0) {
+                NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+                for (NSString *subResult in resultArr) {
+                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+                        authCode = [subResult substringFromIndex:10];
+                        break;
+                    }
+                }
+            }
+            NSLog(@"授权结果 authCode = %@", authCode?:@"");
+        }];
+    }
+    [WXApi handleOpenURL:url delegate:self];
+    return YES;
+}
 
+// NOTE: 9.0以后使用新API接口
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
+{
+    if ([url.host isEqualToString:@"safepay"]) {
+        // 支付跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+            if (_aliPayFinishBlock) {
+                _aliPayFinishBlock(resultDic);
+                
+            }
+
+            WQLog(@"result = %@",resultDic);
+        }];
+        
+        // 授权跳转支付宝钱包进行支付，处理支付结果
+        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"result = %@",resultDic);
+            // 解析 auth code
+            NSString *result = resultDic[@"result"];
+            NSString *authCode = nil;
+            if (result.length>0) {
+                NSArray *resultArr = [result componentsSeparatedByString:@"&"];
+                for (NSString *subResult in resultArr) {
+                    if (subResult.length > 10 && [subResult hasPrefix:@"auth_code="]) {
+                        authCode = [subResult substringFromIndex:10];
+                        break;
+                    }
+                }
+            }
+            NSLog(@"授权结果 authCode = %@", authCode?:@"");
+        }];
+    }
+    [WXApi handleOpenURL:url delegate:self];
+    
+    return YES;
+}
+#pragma mark ---微信
+//9.0前的方法，为了适配低版本 保留
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [WXApi handleOpenURL:url delegate:self];
+}
+//微信SDK自带的方法，处理从微信客户端完成操作后返回程序之后的回调方法,显示支付结果的
+-(void) onResp:(BaseResp*)resp
+{
+    
+    if (_wexinPayFinishBlock) {
+        _wexinPayFinishBlock(resp.errCode,[NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr]);
+        
+    }
+    //启动微信支付的response
+    NSString *payResoult = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        switch (resp.errCode) {
+            case 0:
+                payResoult = @"支付结果：成功！";
+                break;
+            case -1:
+                payResoult = @"支付结果：失败！";
+                break;
+            case -2:
+                payResoult = @"用户已经退出支付！";
+                break;
+            default:
+                payResoult = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+                break;
+        }
+    }
+}
 
 @end

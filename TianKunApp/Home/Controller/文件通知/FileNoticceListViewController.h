@@ -8,6 +8,9 @@
 
 #import "WQBaseViewController.h"
 
+@class ClassTypeInfo;
+
 @interface FileNoticceListViewController : WQBaseViewController
 
+- (instancetype)initWithClassTypeInfo:(ClassTypeInfo *)classTypeInfo;
 @end

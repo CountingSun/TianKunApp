@@ -8,6 +8,10 @@
 
 #import "WQBaseViewController.h"
 
+@class ResumeInfo;
+
 @interface FindJodDetailViewController : WQBaseViewController
+//@property (nonatomic ,strong) ResumeInfo *resumeInfo;
+- (instancetype)initWithResumeID:(NSString *)resumeID;
 
 @end

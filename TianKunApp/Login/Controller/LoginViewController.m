@@ -10,6 +10,8 @@
 #import "RegisterViewController.h"
 #import "LoginTextTableViewCell.h"
 #import "DynamicLoginViewController.h"
+#import <ShareSDK/ShareSDK.h>
+#import "FindBackPasswordViewController.h"
 
 @interface LoginViewController ()<UITableViewDelegate,UITableViewDataSource,ClickSecureButtonDelegate>
 
@@ -55,7 +57,8 @@
     _lineView.backgroundColor = COLOR_VIEW_SEGMENTATION;
     _footView.backgroundColor = COLOR_VIEW_BACK;
     _otherLabel.backgroundColor = COLOR_VIEW_BACK;
-
+    [_loginButton setBackgroundColor:COLOR_THEME];
+    
     
     [_registerButton setTitleColor:COLOR_TEXT_BLACK forState:0];
     [_tableView registerNib:[UINib nibWithNibName:@"LoginTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"LoginTextTableViewCell"];
@@ -136,6 +139,11 @@
         [self showErrorWithStatus:@"请输入手机号"];
         return;
     }
+    if (![_nameStr isMobileNum]) {
+        [self showErrorWithStatus:@"请输入正确的手机号"];
+        return;
+    }
+
     if (!_passwordStr) {
         [self showErrorWithStatus:@"请输入密码"];
         return;
@@ -147,16 +155,93 @@
     
 }
 - (IBAction)forgetButtonClickEvent:(id)sender {
+    [self.navigationController pushViewController:[FindBackPasswordViewController new] animated:YES];
+
+    
 }
 #pragma mark 第三方登录
 - (IBAction)wxButtonClickEvent:(id)sender {
+    [self showWithStatus:NET_WAIT_TOST];
+
+    [ShareSDK getUserInfo:SSDKPlatformTypeWechat
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+     {
+         if (state == SSDKResponseStateSuccess)
+         {
+             
+             WQLog(@"uid=%@",user.uid);
+             WQLog(@"%@",user.credential);
+             WQLog(@"token=%@",user.credential.token);
+             WQLog(@"nickname=%@",user.nickname);
+             [self thirdPartyLoginWithUID:user.uid name:user.nickname];
+             
+         }
+         else if(state == SSDKResponseStateCancel){
+             [self showErrorWithStatus:@"登录取消"];
+         }
+
+         else
+         {
+             [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
+         }
+         
+     }];
 }
 - (IBAction)qqButtonClickEvent:(id)sender {
+    [self showWithStatus:NET_WAIT_TOST];
+
+    [ShareSDK getUserInfo:SSDKPlatformTypeQQ
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+     {
+         if (state == SSDKResponseStateSuccess)
+         {
+             
+             NSLog(@"uid=%@",user.uid);
+             NSLog(@"%@",user.credential);
+             NSLog(@"token=%@",user.credential.token);
+             NSLog(@"nickname=%@",user.nickname);
+             [self thirdPartyLoginWithUID:user.uid name:user.nickname];
+
+         }
+         else if(state == SSDKResponseStateCancel){
+             [self showErrorWithStatus:@"登录取消"];
+         }
+         
+         else
+         {
+             [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
+         }
+         
+     }];
 }
 - (IBAction)weiBoButtonClickEvent:(id)sender {
+    [ShareSDK getUserInfo:SSDKPlatformTypeSinaWeibo
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
+     {
+         if (state == SSDKResponseStateSuccess)
+         {
+             
+             NSLog(@"uid=%@",user.uid);
+             NSLog(@"%@",user.credential);
+             NSLog(@"token=%@",user.credential.token);
+             NSLog(@"nickname=%@",user.nickname);
+         }
+         else if(state == SSDKResponseStateCancel){
+             [self showErrorWithStatus:@"登录取消"];
+         }
+
+         else
+         {
+             [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
+         }
+         
+     }];
+
 }
 - (IBAction)taobao:(id)sender {
 }
+
+
 - (void)userLogin{
     [self showWithStatus:NET_WAIT_TOST];
     
@@ -181,6 +266,30 @@
         
     }];
     
+}
+- (void)thirdPartyLoginWithUID:(NSString *)uid name:(NSString *)name{
+    [self showWithStatus:NET_WAIT_TOST];
+    [self.netWorkEngine postWithDict:@{@"uid":uid,@"name":name} url:BaseUrl(@"lg/otherlogin.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            [self.view endEditing:YES];
+            [self showSuccessWithStatus:@"登录成功"];
+            UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[responseObject objectForKey:@"value"]];
+            [UserInfoEngine setUserInfo:userInfo];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+            
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
+        
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+        
+    }];
+
 }
 - (NetWorkEngine *)netWorkEngine{
     if (!_netWorkEngine) {

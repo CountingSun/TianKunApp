@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CooperationDetailViewController">
+            <connections>
+                <outlet property="collectButton" destination="kBr-ys-zlU" id="cX0-NV-SAV"/>
+                <outlet property="companyNameLabel" destination="o9s-YI-36g" id="B6V-cK-kHz"/>
+                <outlet property="hadSeeLabel" destination="49C-8J-bSZ" id="APy-b1-ceJ"/>
+                <outlet property="headView" destination="JBe-b0-HMW" id="BHn-v0-GTA"/>
+                <outlet property="publicTimeIaLbel" destination="72C-ZV-PuP" id="52C-rE-lUC"/>
+                <outlet property="rightBarButtonView" destination="9NG-d5-MFH" id="QmH-ow-EN2"/>
+                <outlet property="shareButton" destination="qaK-wz-wzi" id="2Dl-CZ-rwn"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </view>
+        <view contentMode="scaleToFill" id="JBe-b0-HMW">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o9s-YI-36g">
+                    <rect key="frame" x="15" y="10" width="350" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="nCM-ph-09D"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72C-ZV-PuP">
+                    <rect key="frame" x="15" y="70" width="0.0" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="4UB-1c-eEn"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="Th1-Jb-SrB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49C-8J-bSZ">
+                    <rect key="frame" x="360" y="70" width="0.0" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="2p8-se-NEc"/>
+                        <constraint firstAttribute="height" constant="20" id="4ZD-Bm-pb1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-XM-HnS">
+                    <rect key="frame" x="0.0" y="99" width="375" height="1"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="kWP-e4-DdF"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="49C-8J-bSZ" secondAttribute="trailing" constant="15" id="Bro-OD-Upb"/>
+                <constraint firstAttribute="bottom" secondItem="72C-ZV-PuP" secondAttribute="bottom" constant="10" id="DRj-MM-bpo"/>
+                <constraint firstAttribute="trailing" secondItem="CoZ-XM-HnS" secondAttribute="trailing" id="W3R-8K-Re1"/>
+                <constraint firstAttribute="bottom" secondItem="CoZ-XM-HnS" secondAttribute="bottom" id="cx6-XA-bqx"/>
+                <constraint firstItem="72C-ZV-PuP" firstAttribute="leading" secondItem="JBe-b0-HMW" secondAttribute="leading" constant="15" id="eh4-t1-EFQ"/>
+                <constraint firstAttribute="bottom" secondItem="49C-8J-bSZ" secondAttribute="bottom" constant="10" id="gwJ-sN-6DG"/>
+                <constraint firstItem="o9s-YI-36g" firstAttribute="top" secondItem="JBe-b0-HMW" secondAttribute="top" constant="10" id="iCC-2n-KaS"/>
+                <constraint firstItem="o9s-YI-36g" firstAttribute="leading" secondItem="JBe-b0-HMW" secondAttribute="leading" constant="15" id="k0a-LL-Ubt"/>
+                <constraint firstItem="CoZ-XM-HnS" firstAttribute="leading" secondItem="JBe-b0-HMW" secondAttribute="leading" id="xoe-4O-KMG"/>
+                <constraint firstAttribute="trailing" secondItem="o9s-YI-36g" secondAttribute="trailing" constant="10" id="zRb-C9-YlW"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="36" y="-968"/>
+        </view>
+        <view contentMode="scaleToFill" id="9NG-d5-MFH">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kBr-ys-zlU" customClass="QMUIButton">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="收藏-1"/>
+                    <connections>
+                        <action selector="collectButtonClick:" destination="-1" eventType="touchUpInside" id="Nct-Cc-te2"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaK-wz-wzi" customClass="QMUIButton">
+                    <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                    <state key="normal" image="分享"/>
+                    <connections>
+                        <action selector="shareButtonClick:" destination="-1" eventType="touchUpInside" id="S3R-Cl-1L5"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="qaK-wz-wzi" secondAttribute="trailing" id="1o8-Nh-1p1"/>
+                <constraint firstItem="qaK-wz-wzi" firstAttribute="width" secondItem="9NG-d5-MFH" secondAttribute="width" multiplier="1/2" id="MU8-gC-QPV"/>
+                <constraint firstAttribute="bottom" secondItem="qaK-wz-wzi" secondAttribute="bottom" id="T36-u2-ifL"/>
+                <constraint firstItem="kBr-ys-zlU" firstAttribute="leading" secondItem="9NG-d5-MFH" secondAttribute="leading" id="ZP5-Pn-y8V"/>
+                <constraint firstItem="kBr-ys-zlU" firstAttribute="top" secondItem="9NG-d5-MFH" secondAttribute="top" id="cP4-cJ-cBK"/>
+                <constraint firstItem="qaK-wz-wzi" firstAttribute="leading" secondItem="kBr-ys-zlU" secondAttribute="trailing" id="fDW-94-r7O"/>
+                <constraint firstAttribute="bottom" secondItem="kBr-ys-zlU" secondAttribute="bottom" id="izm-tI-n7u"/>
+                <constraint firstItem="qaK-wz-wzi" firstAttribute="top" secondItem="9NG-d5-MFH" secondAttribute="top" id="l5m-aO-Obt"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="599" y="-1248"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="分享" width="20" height="20"/>
+        <image name="收藏-1" width="20" height="20"/>
+    </resources>
+</document>

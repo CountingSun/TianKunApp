@@ -13,20 +13,112 @@
 #import "UIView+AddTapGestureRecognizer.h"
 #import "BusinessLicenseViewController.h"
 #import "WQUploadSingleImage.h"
+#import "EditPhoneViewController.h"
+#import "SexSelectView.h"
 
-@interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
+@interface UserInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,SexPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic ,assign) BOOL canEdit;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
 
+@property (nonatomic ,strong) UserInfo *userInfo;
+@property (nonatomic ,strong) SexSelectView *sexSelectView;
+
+@property (nonatomic ,strong) UIButton *editButton;
 
 
 @end
 
 @implementation UserInfoViewController
+- (instancetype)initWithUserInfo:(UserInfo *)userInfo{
+    if (self = [super init]) {
+        _userInfo = userInfo;
+        
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupView];
+    
+    [self showLoadingView];
+    
+    [self getUserInfo];
+    
+
+
+}
+- (void)getUserInfo{
+    [self.netWorkEngine postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} url:BaseUrl(@"my/userdetail.action") succed:^(id responseObject) {
+        [self hideLoadingView];
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if(code == 1 ){
+            _userInfo = [UserInfo mj_objectWithKeyValues:[[responseObject objectForKey:@"value"] objectForKey:@"usermessage"]];
+            [UserInfoEngine setUserInfo:_userInfo];
+            [self.tableView reloadData];
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+
+        }
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        [self hideLoadingView];
+
+    }];
+    
+}
+- (void)tapEndEditing{
+    [self.view endEditing:YES];
+}
+- (void)editButtobClick:(UIButton *)button{
+    if ([button isSelected]) {
+        
+        [self editUserInfo];
+    }else{
+        _canEdit = YES;
+        button.selected = YES;
+        [self.tableView reloadData];
+        
+        
+    }
+    
+    
+    
+}
+- (void)editUserInfo{
+    _editButton.enabled = NO;
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userid"];
+    [dict setObject:_userInfo.name forKey:@"name"];
+    [dict setObject:_userInfo.nickname forKey:@"nickname"];
+    [dict setObject:@(_userInfo.sex) forKey:@"sex"];
+    [dict setObject:_userInfo.company_name forKey:@"company_name"];
+
+    [self showWithStatus:NET_WAIT_TOST];
+    [self.netWorkEngine postWithDict:dict url:BaseUrl(@"my/editusermessage.action") succed:^(id responseObject) {
+        _editButton.enabled = YES;
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            [self showSuccessWithStatus:@"修改成功"];
+            _canEdit = NO;
+            _editButton.selected = NO;
+            [self.tableView reloadData];
+
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            
+        }
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        _editButton.enabled = YES;
+    }];
+    
+}
+
+- (void)setupView{
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.titleView setTitle:@"个人详情"];
@@ -41,49 +133,42 @@
     button.titleLabel.font = [UIFont systemFontOfSize:13];
     [button setTitleColor:COLOR_TEXT_BLACK forState:0];
     [button setTitleColor:COLOR_TEXT_BLACK forState:UIControlStateSelected];
-
-    [button addTarget:self action:@selector(editButtobClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    [button addTarget:self action:@selector(editButtobClick:) forControlEvents:UIControlEventTouchUpInside];
+    _editButton = button;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapEndEditing)];
     [self.view addGestureRecognizer:tap];
     tap.delegate = self;
 
-
-
 }
-- (void)tapEndEditing{
-    [self.view endEditing:YES];
-}
-- (void)editButtobClick:(UIButton *)button{
-    if ([button isSelected]) {
-        _canEdit = NO;
-        button.selected = NO;
-        [self.tableView reloadData];
+- (SexSelectView *)sexSelectView{
+    if (!_sexSelectView) {
+        _sexSelectView = [[[NSBundle mainBundle] loadNibNamed:@"SexSelectView" owner:nil options:nil] firstObject];
+        [self.view addSubview:_sexSelectView];
+        [_sexSelectView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.top.equalTo(self.view);
+        }];
+        _sexSelectView.delegate = self;
         
-    }else{
-        _canEdit = YES;
-        button.selected = YES;
-        [self.tableView reloadData];
-
-
     }
-    
-    
-    
+    return _sexSelectView;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
         UserInfoHeadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoHeadTableViewCell" forIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (_canEdit) {
-            cell.headImage.userInteractionEnabled = YES;
+            cell.headImage.userInteractionEnabled = NO;
         }else{
             cell.headImage.userInteractionEnabled = NO;
 
         }
-
+        [cell.headImage sd_imageWithUrlStr:_userInfo.headimg placeholderImage:@"头像"];
+        
         return cell;
     }else if (indexPath.section == 1){
         UserInfoEditTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoEditTableViewCell"];
@@ -91,35 +176,48 @@
             cell = [[[NSBundle mainBundle] loadNibNamed:@"UserInfoEditTableViewCell" owner:nil options:nil] firstObject];
         }
         cell.indexPath = indexPath;
-        cell.editBlock = ^(NSString *string, NSIndexPath *indexPath) {
-            
-        };
         if (_canEdit) {
             cell.textField.enabled = YES;
 
         }else{
             cell.textField.enabled = NO;
         }
-        
+        cell.accessoryType = UITableViewCellAccessoryNone;
+
         switch (indexPath.row) {
             case 0:
             {
                 cell.titleLabel.text = @"姓        名：";
                 cell.textField.placeholder = @"请输入姓名";
-                
+                cell.textField.text = _userInfo.name;
+                cell.editBlock = ^(NSString *string, NSIndexPath *indexPath) {
+                    _userInfo.name = string;
+                };
+
             }
                 break;
             case 1:
             {
                 cell.titleLabel.text = @"昵        称：";
                 cell.textField.placeholder = @"请输入昵称";
-                
+                cell.textField.text = _userInfo.nickname;
+                cell.editBlock = ^(NSString *string, NSIndexPath *indexPath) {
+                    _userInfo.nickname = string;
+                };
+
             }
                 break;
             case 2:
             {
                 cell.titleLabel.text = @"性        别：";
-                cell.textField.placeholder = @"请输入性别";
+                cell.textField.placeholder = @"请选择性别";
+                cell.textField.enabled = NO;
+
+                if (_userInfo.sex == 1) {
+                    cell.textField.text = @"男";
+                }else{
+                    cell.textField.text = @"女";
+                }
                 
             }
                 break;
@@ -127,6 +225,9 @@
             {
                 cell.titleLabel.text = @"手  机  号：";
                 cell.textField.placeholder = @"请输入手机号";
+                cell.textField.text = _userInfo.phone;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.textField.userInteractionEnabled = NO;
                 
             }
                 break;
@@ -134,7 +235,11 @@
             {
                 cell.titleLabel.text = @"企业名称：";
                 cell.textField.placeholder = @"请输入企业名称";
-                
+                cell.textField.text = _userInfo.company_name;
+                cell.editBlock = ^(NSString *string, NSIndexPath *indexPath) {
+                    _userInfo.company_name = string;
+                };
+
             }
                 break;
                 
@@ -156,14 +261,38 @@
             return cell;
         }else{
             UserInfoPhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoPhotoTableViewCell" forIndexPath:indexPath];
-            if (_canEdit) {
-                cell.photoButton.enabled = YES;
-                
-            }else{
-                cell.photoButton.enabled = NO;
+            [cell.upImageView sd_imageWithUrlStr:_userInfo.picture_url placeholderImage:@"上传-image"];
+            switch (_userInfo.stastu) {
+                case 1:
+                    {
+                        cell.goLabel.text = @"待审核";
+                    }
+                    break;
+                case 2:
+                {
+                    cell.goLabel.text = @"审核中";
+                }
+                    break;
+                case 3:
+                {
+                    cell.goLabel.text = @"审核通过";
+                }
+                    break;
+                case 4:
+                {
+                    cell.goLabel.text = @"审核未通过";
+                }
+                    break;
+
+                default:{
+                    cell.goLabel.text = @"去认证";
+                }
+                    break;
             }
             cell.block = ^{
-                [self.navigationController pushViewController:[BusinessLicenseViewController new] animated:YES];
+                if (_canEdit) {
+                    [self.navigationController pushViewController:[BusinessLicenseViewController new] animated:YES];
+                }
             };
             
 
@@ -208,28 +337,92 @@
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [[WQUploadSingleImage manager] showUpImagePickerWithVC:self compression:0.5 selectSucceedBlock:^(UIImage *image, NSString *filePath) {
-        
-        [self upLoadImageWithImage:image];
-    }];
     
+    if (!_canEdit) {
+        return;
+    }
+    if (indexPath.section == 0) {
+            [[WQUploadSingleImage manager] showUpImagePickerWithVC:self compression:0.5 selectSucceedBlock:^(UIImage *image, NSString *filePath) {
+        
+                [self upLoadImageWithImage:image];
+            }];
+    }
+
+    if (indexPath.section == 1) {
+        if (indexPath.row == 2) {
+            if (self.sexSelectView.isShow) {
+                [self.sexSelectView hidden];
+                
+            }else{
+                [self.sexSelectView show];
+            }
+
+        }
+        if (indexPath.row == 3) {
+            EditPhoneViewController *vc = [[EditPhoneViewController alloc]initWithType:1 userTel:_userInfo.phone];
+            vc.succeedBlock = ^{
+                _userInfo.phone = [UserInfoEngine getUserInfo].phone;
+                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+
+    }
 }
 - (void)upLoadImageWithImage:(UIImage *)image{
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
-    [[[NetWorkEngine alloc] init] upLoadmageData:imageData Url:@"http://192.168.1.226/addjob/uploadimage.action" dict:@{@"uid":@"1"} succed:^(id responseObject) {
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    [self.netWorkEngine upLoadmageData:imageData imageName:@"file" Url:BaseUrl(@"my/edituserimage.action") dict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            [self showSuccessWithStatus:@"修改成功"];
+            UserInfoHeadTableViewCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            cell.headImage.image = image;
+            
+            _userInfo.headimg = [[responseObject objectForKey:@"value"] objectForKey:@"imageurl"];
+            
+            
+            UserInfo *info = [UserInfoEngine getUserInfo];
+            info.headimg = _userInfo.headimg;
+            [UserInfoEngine setUserInfo:info];
+            
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
         
     } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
         
     }];
     
+    
 }
+#pragma mark- SexPickerViewDelegate
+- (void)clickSexCancelButton{
+    [_sexSelectView hidden];
+
+}
+- (void)clickSexFinishButtonWithSex:(NSString *)sex{
+    _userInfo.sex = [sex integerValue];
+    [_sexSelectView hidden];
+    
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:2 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+
+}
+
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {//判断如果点击的是tableView的cell，就把手势给关闭了
         return NO;//关闭手势
     }//否则手势存在
     return YES;
 }
-
+-(NetWorkEngine *)netWorkEngine{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    return _netWorkEngine;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

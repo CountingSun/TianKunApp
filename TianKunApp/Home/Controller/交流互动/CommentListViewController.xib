@@ -13,6 +13,8 @@
             <connections>
                 <outlet property="cancelButton" destination="fTS-TU-kPp" id="W7l-Ad-cIm"/>
                 <outlet property="keyboardBaseView" destination="kdZ-c5-7WX" id="0U9-2z-2T9"/>
+                <outlet property="noDataFootView" destination="b89-14-4Lz" id="bDP-fj-IpX"/>
+                <outlet property="noMoreDataFootView" destination="rsi-bf-iHb" id="PUp-LJ-BZD"/>
                 <outlet property="publicButton" destination="NiW-Tr-Cqx" id="qMF-b9-w3o"/>
                 <outlet property="textView" destination="BJa-4E-QDz" id="0X0-Vs-qz7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -27,12 +29,15 @@
                     <rect key="frame" x="0.0" y="517" width="375" height="150"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="说点什么吧。。。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BJa-4E-QDz" customClass="QMUITextView">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BJa-4E-QDz" customClass="QMUITextView">
                             <rect key="frame" x="8" y="39" width="359" height="103"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="说点什么吧。。。"/>
+                            </userDefinedRuntimeAttributes>
                         </textView>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTS-TU-kPp">
                             <rect key="frame" x="8" y="8" width="46" height="30"/>
@@ -41,6 +46,9 @@
                             <state key="normal" title="取消">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="cancelButtonClickEvent:" destination="-1" eventType="touchUpInside" id="R7v-7F-sxT"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NiW-Tr-Cqx">
                             <rect key="frame" x="312" y="1" width="46" height="30"/>
@@ -49,12 +57,57 @@
                             <state key="normal" title="发布">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="publicButtonClickEvent:" destination="-1" eventType="touchUpInside" id="1u8-5X-98T"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </view>
+        <view contentMode="scaleToFill" id="rsi-bf-iHb">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="没有更多评论啦！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrd-nZ-LLf">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="xrd-nZ-LLf" secondAttribute="trailing" id="59f-73-l4H"/>
+                <constraint firstAttribute="bottom" secondItem="xrd-nZ-LLf" secondAttribute="bottom" id="Fgp-zK-mvS"/>
+                <constraint firstItem="xrd-nZ-LLf" firstAttribute="top" secondItem="rsi-bf-iHb" secondAttribute="top" id="SEE-da-Pce"/>
+                <constraint firstItem="xrd-nZ-LLf" firstAttribute="leading" secondItem="rsi-bf-iHb" secondAttribute="leading" id="Sic-dR-YWW"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="896" y="-300"/>
+        </view>
+        <view contentMode="scaleToFill" id="b89-14-4Lz">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="暂无评论" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHz-ac-aUJ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="mHz-ac-aUJ" firstAttribute="top" secondItem="b89-14-4Lz" secondAttribute="top" id="J2C-Pa-j9F"/>
+                <constraint firstAttribute="trailing" secondItem="mHz-ac-aUJ" secondAttribute="trailing" id="MQw-Mn-yVC"/>
+                <constraint firstItem="mHz-ac-aUJ" firstAttribute="leading" secondItem="b89-14-4Lz" secondAttribute="leading" id="Ydq-gL-gzs"/>
+                <constraint firstAttribute="bottom" secondItem="mHz-ac-aUJ" secondAttribute="bottom" id="nkc-UZ-ffK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="476" y="-416"/>
         </view>
     </objects>
 </document>

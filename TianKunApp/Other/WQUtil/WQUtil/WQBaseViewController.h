@@ -10,10 +10,6 @@
 
 @interface WQBaseViewController : QMUICommonViewController
 /**
- 是否隐藏导航栏
- */
-@property (nonatomic,assign) BOOL isHiddenNav;
-/**
  设置返回按钮文字
  
  @param backButtonTitle void
@@ -33,6 +29,7 @@
  @param status 提示语
  */
 -(void)showWithStatus:(NSString *)status;
+- (void)showTipsWithText:(NSString *)text;
 
 /**
  加载成功提示
@@ -83,6 +80,9 @@
  @param message <#message description#>
  */
 - (void)showGetDataErrorWithMessage:(NSString *)message reloadBlock:(dispatch_block_t)reloadBlock;
-
+- (void)showGetDataNullEmptyViewInView:(UIView *)view reloadBlock:(dispatch_block_t)reloadBlock;
+- (void)showGetDataFailEmptyViewInView:(UIView *)view reloadBlock:(dispatch_block_t)reloadBlock;
+- (void)hideSelfEmptyView;
+- (void)showGetDataFailEmptyViewInView:(UIView *)view message:(NSString *)message reloadBlock:(dispatch_block_t)reloadBlock;
 
 @end

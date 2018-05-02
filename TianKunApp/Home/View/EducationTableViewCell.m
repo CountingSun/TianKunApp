@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
+    _titleImageView.layer.masksToBounds = YES;
     
 }
 

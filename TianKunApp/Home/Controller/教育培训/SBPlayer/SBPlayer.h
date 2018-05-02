@@ -11,12 +11,33 @@
 #import "SBCommonHeader.h"
 #import "SBControlView.h"
 #import "SBPauseOrPlayView.h"
+#import "PlayerTryWatchFinishView.h"
 
+#import "SBPlayerStateView.h"
 
 @protocol SBPlayerDelegate <NSObject>
 
+
+/**
+ 点击返回按钮
+ */
 - (void)clickBakcButton;
 
+/**
+ 购买vip
+
+ @param button <#button description#>
+ */
+- (void)buyVipButtonClick:(QMUIButton *)button;
+
+/**
+ 购买视频
+
+ @param button <#button description#>
+ */
+- (void)buyButtonClick:(QMUIButton *)button;
+
+- (void)clickStateViewPlayButton;
 
 @end
 
@@ -34,10 +55,11 @@ typedef NS_ENUM(NSInteger,SBPlayerStatus){
     SBPlayerStatusReadyToPlay,
     SBPlayerStatusUnknown,
     SBPlayerStatusBuffering,
+    SBPlayerStatusCanPlay,
     SBPlayerStatusPlaying,
     SBPlayerStatusStopped,
 };
-@interface SBPlayer : UIView<SBControlViewDelegate,SBPauseOrPlayViewDelegate,UIGestureRecognizerDelegate>{
+@interface SBPlayer : UIView<SBControlViewDelegate,SBPauseOrPlayViewDelegate,UIGestureRecognizerDelegate,PlayerTryWatchFinishViewDelegate,SBPlayerStateViewDelegat>{
     id playbackTimerObserver;
 }
 //AVPlayer
@@ -62,6 +84,18 @@ typedef NS_ENUM(NSInteger,SBPlayerStatus){
 @property (nonatomic,assign,readonly) BOOL isFullScreen;
 //设置标题
 @property (nonatomic,copy) NSString *title;
+//试看时间 为0的时候不限制
+@property (nonatomic ,assign) CGFloat tryWatchTime;
+
+/**
+ 开始的视图
+ */
+@property (nonatomic,strong) SBPlayerStateView *playerStateView;
+
+/**
+ 试看完成时展示的视图
+ */
+@property (nonatomic ,strong) PlayerTryWatchFinishView *playerTryWatchFinishView;
 
 @property (nonatomic,weak) id<SBPlayerDelegate> delegate;
 

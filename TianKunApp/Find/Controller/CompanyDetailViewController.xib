@@ -13,7 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompanyDetailViewController">
             <connections>
                 <outlet property="collectButton" destination="e1D-pZ-jzR" id="bxj-6A-uRc"/>
+                <outlet property="companyNameLabel" destination="j07-QP-IQH" id="nmF-pU-ftD"/>
+                <outlet property="hadSeeLabel" destination="GXV-bt-awf" id="OEU-X7-Bqr"/>
                 <outlet property="headView" destination="VLH-YW-uYe" id="YVz-Cu-cPd"/>
+                <outlet property="publicTimeIaLbel" destination="Ub9-dg-V1u" id="5X4-w4-YjB"/>
                 <outlet property="rightBarButtonView" destination="P3r-8j-OS7" id="dYA-cz-PP8"/>
                 <outlet property="shareButton" destination="R1u-WO-pQ3" id="PH8-Lt-kXd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,8 +32,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="河南省中原银行河南省中原银行河南省中原银行河南省中原银行河南省中原银行河南省中原银行" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j07-QP-IQH">
-                    <rect key="frame" x="15" y="10" width="350" height="41"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j07-QP-IQH">
+                    <rect key="frame" x="15" y="10" width="350" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="IoM-3i-ENC"/>
                     </constraints>
@@ -38,8 +41,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布时间：2小时前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub9-dg-V1u">
-                    <rect key="frame" x="15" y="70" width="105.5" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub9-dg-V1u">
+                    <rect key="frame" x="15" y="70" width="0.0" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="OcC-uh-fCM"/>
                         <constraint firstAttribute="height" constant="20" id="tYS-mt-fIY"/>
@@ -48,8 +51,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有6人阅读" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXV-bt-awf">
-                    <rect key="frame" x="291" y="70" width="69" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXV-bt-awf">
+                    <rect key="frame" x="360" y="70" width="0.0" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="X7O-LD-EKW"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="rMH-zM-p53"/>
@@ -80,7 +83,7 @@
                 <constraint firstAttribute="bottom" secondItem="Ub9-dg-V1u" secondAttribute="bottom" constant="10" id="z4S-2t-b9A"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="41.5" y="-960"/>
+            <point key="canvasLocation" x="36" y="-968"/>
         </view>
         <view contentMode="scaleToFill" id="P3r-8j-OS7">
             <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>

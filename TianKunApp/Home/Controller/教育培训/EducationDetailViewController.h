@@ -8,7 +8,10 @@
 
 #import "WQBaseViewController.h"
 
+
 @interface EducationDetailViewController : WQBaseViewController
 
 @property (nonatomic, copy) NSString *urlStr;
+- (instancetype)initWithDocumentID:(NSInteger)documentID;
+
 @end

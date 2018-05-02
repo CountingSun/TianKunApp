@@ -28,14 +28,56 @@
 
 #import "ConstructionViewController.h"
 #import "HomePeopleViewController.h"
+#import "CompanyInfo.h"
+#import "CompanyDetailViewController.h"
+#import "ImageInfo.h"
+#import "WebLinkViewController.h"
+#import "Historyinfo.h"
+
+
+#import "FindJodDetailViewController.h"
+#import "JobDetailViewController.h"
+#import "ArticleDetailViewController.h"
+#import "InteractionDetailViewController.h"
+
 
 @interface HomeViewController ()<QMUISearchControllerDelegate,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate,SDCycleScrollViewDelegate,HomeClassTableViewCellDelegate>
 
 @property (nonatomic ,strong) UIView *barView;
 @property (nonatomic ,strong) QMUISearchController *searchBarController;
-@property (weak, nonatomic) IBOutlet WQTableView *tableView;
+@property (nonatomic ,strong)  WQTableView *tableView;
 @property (nonatomic ,strong) SDCycleScrollView *headView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+
+
+/**
+ 6个 公司的数组
+ */
+@property (nonatomic ,strong) NSMutableArray *arrCompany;
+
+/**
+ 轮播图
+ */
+@property (nonatomic ,strong) NSMutableArray *arrBanner;
+@property (nonatomic ,strong) NSMutableArray *arrBannerUrl;
+
+/**
+ 便民服务
+ */
+@property (nonatomic ,strong) NSMutableArray *arrEasy;
+
+/**
+ 轮播广告
+ */
+@property (nonatomic ,strong) NSMutableArray *arrScrollAd;
+@property (nonatomic ,strong) NSMutableArray *arrScrollAdTitle;
+
+@property (nonatomic ,assign) NSInteger pageIndex;
+@property (nonatomic ,assign) NSInteger pageSize;
+@property (nonatomic ,strong) QMUIButton *reloadButton;
+
+
 
 
 @end
@@ -53,25 +95,72 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _pageSize = DEFAULT_PAGE_SIZE;
+    _pageIndex = 1;
     [self setupUI];
     [self setUpNav];
     [self setUpSearchBarController];
+    [self getEnterpriseList];
+    [self getBanner];
+    [self getScorllAdvertising];
+    
+    [self getRecommend];
+    
+    
+    
 
 }
+#pragma mark - ui
+
 - (void)setupUI{
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.tableHeaderView = self.headView;
-    _tableView.estimatedRowHeight = 80;
-    _tableView.rowHeight = UITableViewAutomaticDimension;
-    [_tableView registerNib:[UINib nibWithNibName:@"HomeClassTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeClassTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"HomeInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeInfoTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"HomeBrandTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeBrandTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"EasyTableViewCell" bundle:nil] forCellReuseIdentifier:@"EasyTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"HomeGuessTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeGuessTableViewCell"];
-    [_tableView registerNib:[UINib nibWithNibName:@"HomeListTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeListTableViewCell"];
-
+        [self.tableView registerNib:[UINib nibWithNibName:@"HomeClassTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeClassTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeInfoTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeBrandTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeBrandTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"EasyTableViewCell" bundle:nil] forCellReuseIdentifier:@"EasyTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeGuessTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeGuessTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeListTableViewCell" bundle:nil] forCellReuseIdentifier:@"HomeListTableViewCell"];
+    
 }
+- (WQTableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-56) delegate:self dataScource:self style:UITableViewStylePlain];
+        _tableView.tableHeaderView = self.headView;
+        _tableView.estimatedRowHeight = 160;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedSectionHeaderHeight = 10;
+        
+        _tableView.estimatedSectionFooterHeight = 10;
+        
+
+        _tableView.backgroundColor = COLOR_VIEW_BACK;
+        __weak typeof(self) weakSelf = self;
+        
+        [_tableView headerWithRefreshingBlock:^{
+            [weakSelf getEnterpriseList];
+            [weakSelf getBanner];
+            [weakSelf getScorllAdvertising];
+
+
+        }];
+        [_tableView footerWithRefreshingBlock:^{
+            weakSelf.pageIndex++;
+            [weakSelf getRecommend];
+            
+        }];
+
+        [self.view addSubview:_tableView];
+        
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.equalTo(self.view);
+        }];
+        
+        
+        
+        
+    }
+    return _tableView;
+}
+
 - (void)setUpNav {
     
     _barView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, NavigationContentStaticTop)];
@@ -93,9 +182,9 @@
     [searchField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [searchField setValue:[UIFont boldSystemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
     // 设置搜索图标
-    UIImage *iconImage = [UIImage imageNamed:@"home_search"];
-    [searchBar setImage:iconImage forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-    [searchBar sizeToFit];
+//    UIImage *iconImage = [UIImage imageNamed:@"home_search"];
+//    [searchBar setImage:iconImage forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
+//    [searchBar sizeToFit];
 
     [_barView addSubview:searchBar];
     CGFloat width = 240 * SCREENSCAL;
@@ -108,15 +197,15 @@
         make.width.mas_offset(width);
         make.height.mas_offset(30);
     }];
-    UIImageView *searchBarRight = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"搜索"]];
-    searchBarRight.contentMode = UIViewContentModeCenter;
-    [searchBarRight sizeToFit];
-    [searchBar addSubview:searchBarRight];
-    [searchBarRight mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(searchBar).offset(-10);
-        make.centerY.equalTo(searchBar);
-        make.size.mas_offset(CGSizeMake(18, 18));
-    }];
+//    UIImageView *searchBarRight = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"搜索"]];
+//    searchBarRight.contentMode = UIViewContentModeCenter;
+//    [searchBarRight sizeToFit];
+//    [searchBar addSubview:searchBarRight];
+//    [searchBarRight mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(searchBar).offset(-10);
+//        make.centerY.equalTo(searchBar);
+//        make.size.mas_offset(CGSizeMake(18, 18));
+//    }];
     
     QMUIButton *addressBtn = [QMUIButton buttonWithType:UIButtonTypeCustom];
     addressBtn.imagePosition = QMUIButtonImagePositionRight;
@@ -131,20 +220,181 @@
         make.centerY.equalTo(searchBar);
     }];
     
-    QMUIButton *messageBtn = [QMUIButton buttonWithType:UIButtonTypeCustom];
-    [messageBtn setImage:[UIImage imageNamed:@"消息"] forState:UIControlStateNormal];
-    [_barView addSubview:messageBtn];
-    [messageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(_barView).offset(-10);
-        make.centerY.equalTo(searchBar);
-    }];
+//    QMUIButton *messageBtn = [QMUIButton buttonWithType:UIButtonTypeCustom];
+//    [messageBtn setImage:[UIImage imageNamed:@"消息"] forState:UIControlStateNormal];
+//    [_barView addSubview:messageBtn];
+//    [messageBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(_barView).offset(-10);
+//        make.centerY.equalTo(searchBar);
+//    }];
 }
 - (SDCycleScrollView *)headView{
     if (!_headView) {
-        _headView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/2) delegate:self placeholderImage:[UIImage imageNamed:@"default_image_21@2x"]];
-        [_headView setImageURLStringsGroup:@[@"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=253568843,526167858&fm=27&gp=0.jpg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521461712420&di=46910b9e6a1a56a549e02470ac5b37e6&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201511%2F22%2F20151122131622_XYkMd.jpeg",@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521461712420&di=e2c5b119c9b1db78da4cf9472d36142c&imgtype=0&src=http%3A%2F%2Fimg0w.pconline.com.cn%2Fpconline%2F1606%2F15%2Fspcgroup%2Fwidth_640-qua_30%2F8023441_20140213174329_MQ2iZ.jpeg"]];
+        _headView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/2) delegate:self placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_21]];
     }
     return _headView;
+}
+
+#pragma mark- net
+
+- (void)getEnterpriseList{
+    [self.netWorkEngine postWithDict:@{@"amount":@"6"} url:BaseUrl(@"find.recommendExt.by.enterpriseList") succed:^(id responseObject) {
+        [_tableView endRefresh];
+        
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            if (!_arrCompany) {
+                _arrCompany = [NSMutableArray arrayWithCapacity:6];
+                
+            }
+            [_arrCompany removeAllObjects];
+            
+            NSMutableArray *arr = [responseObject objectForKey:@"value"];
+            for (NSDictionary *dicr in arr) {
+                CompanyInfo *companyInfo = [CompanyInfo mj_objectWithKeyValues:dicr];
+
+                [_arrCompany addObject:companyInfo];
+                if (_arrCompany.count>6) {
+                    [_arrCompany removeLastObject];
+                }
+
+            }
+
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
+        
+    } errorBlock:^(NSError *error) {
+        [_tableView endRefresh];
+
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
+    
+}
+- (void)getBanner{
+    [self.netWorkEngine postWithUrl:BaseUrl(@"ShouYeAndBianMingFuWu/selectslideshoworbianminbytypeapp.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            if (!_arrBanner) {
+                _arrBanner = [NSMutableArray array];
+            }
+            [_arrBanner removeAllObjects];
+            if (!_arrEasy) {
+                _arrEasy = [NSMutableArray array];
+            }
+            [_arrEasy removeAllObjects];
+            if (!_arrBannerUrl) {
+                _arrBannerUrl = [NSMutableArray array];
+            }
+            [_arrBannerUrl removeAllObjects];
+
+            
+            NSMutableArray *arrBanner = [[responseObject objectForKey:@"value"] objectForKey:@"shouye"];
+            for (NSDictionary *dict in arrBanner) {
+                MenuInfo *menuInfo = [[MenuInfo alloc]init];
+                menuInfo.menuIcon = [NSString stringWithFormat:@"%@%@",BaseUrl(@"image/slideshow/"),[dict objectForKey:@"image_url"]];
+                menuInfo.menuLink = [dict objectForKey:@"link_url"];
+                [_arrBanner addObject:menuInfo];
+                [_arrBannerUrl addObject:menuInfo.menuIcon];
+                
+            }
+            _headView.imageURLStringsGroup = _arrBannerUrl;
+            NSMutableArray *arrEasy = [[responseObject objectForKey:@"value"] objectForKey:@"bianmin"];
+
+            for (NSDictionary *dict in arrEasy) {
+                MenuInfo *menuInfo = [[MenuInfo alloc]init];
+                menuInfo.menuIcon = [NSString stringWithFormat:@"%@%@",BaseUrl(@"image/slideshow/"),[dict objectForKey:@"image_url"]];
+                menuInfo.menuLink = [dict objectForKey:@"link_url"];
+                menuInfo.menuName = [dict objectForKey:@"imagename"];
+                
+                [_arrEasy addObject:menuInfo];
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                
+            }
+
+            
+        }else{
+            
+        }
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+    }];
+    
+}
+- (void)getRecommend{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    if ([UserInfoEngine getUserInfo].userID) {
+        [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userId"];
+    }
+    [dict setObject:@(_pageIndex) forKey:@"pageNo"];
+    [dict setObject:@(_pageSize) forKey:@"pageSize"];
+
+    [self.netWorkEngine postWithDict:dict url:BaseUrl(@"find.watchRecordList.by") succed:^(id responseObject) {
+        [self.tableView endRefresh];
+        
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            if (!_arrData) {
+                _arrData = [NSMutableArray array];
+            }
+            if (_pageIndex == 1) {
+                [_arrData removeAllObjects];
+            }
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+            if (arr.count) {
+                for (NSDictionary *dict in arr) {
+                    Historyinfo *info = [Historyinfo mj_objectWithKeyValues:dict];
+                    [_arrData addObject:info];
+                }
+                [self.tableView reloadData];
+
+            }else{
+                _pageIndex--;
+            }
+        }else{
+            _pageIndex--;
+            
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
+    } errorBlock:^(NSError *error) {
+        [self.tableView endRefresh];
+        _pageIndex--;
+        [self showErrorWithStatus:NET_ERROR_TOST];
+    }];
+    
+}
+- (void)getScorllAdvertising{
+    [self.netWorkEngine postWithUrl:BaseUrl(@"ArticleNotices/recommendExt.by.flag") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            if (!_arrScrollAd) {
+                _arrScrollAd = [NSMutableArray array];
+                _arrScrollAdTitle = [NSMutableArray array];
+            }
+            if (_pageIndex == 1) {
+                [_arrScrollAd removeAllObjects];
+                _arrScrollAdTitle = [NSMutableArray array];
+
+            }
+            NSArray *arr = [responseObject objectForKey:@"value"];
+            for (NSDictionary *dict in arr) {
+                Historyinfo *info = [Historyinfo mj_objectWithKeyValues:dict];
+                [_arrScrollAd addObject:info];
+                [_arrScrollAdTitle addObject:info.data_title];
+
+            }
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+        }else{
+            
+        }
+    } errorBlock:^(NSError *error) {
+        
+    }];
+    
 }
 #pragma mark - UITableViewDelegate&&UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -182,10 +432,26 @@
     if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             HomeInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeInfoTableViewCell" forIndexPath:indexPath];
+            cell.arrData = _arrScrollAdTitle;
+            cell.clickWithIndexBlock = ^(NSInteger index) {
+                Historyinfo *info = _arrScrollAd[index];
+                NSLog(@"%@",@(info.data_id));
+                [self jumpTodetailWithHistoryinfo:info];
+
+            };
+            
             return cell;
 
         }else{
             HomeBrandTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeBrandTableViewCell" forIndexPath:indexPath];
+            cell.arrData = self.arrCompany;
+            cell.collectionViewDidSelectItemBlock = ^(CompanyInfo *companyInfo, NSIndexPath *indexPath) {
+                CompanyDetailViewController *vc = [[CompanyDetailViewController alloc]initWithCompanyID:companyInfo.companyID type:2];
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            };
+            
             return cell;
 
         }
@@ -195,7 +461,15 @@
     
     if (indexPath.section == 2) {
         EasyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EasyTableViewCell" forIndexPath:indexPath];
-        cell.arrMenu = [HomeViewModel arrEasyMenu];
+        cell.arrMenu = _arrEasy;
+        cell.selectSucceed = ^(MenuInfo *menuInfo) {
+            WebLinkViewController *webLinkViewController = [[WebLinkViewController alloc]initWithTitle:menuInfo.menuName urlString:menuInfo.menuLink];
+            webLinkViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:webLinkViewController animated:YES];
+
+        };
+        
+
         return cell;
 
     }
@@ -204,22 +478,90 @@
         if (indexPath.row == 0) {
             HomeGuessTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeGuessTableViewCell" forIndexPath:indexPath];
 
+           _reloadButton =  cell.reloadButton;
+            [_reloadButton addTarget:self action:@selector(reloadButtonClick) forControlEvents:UIControlEventTouchUpInside];
+            
+            
             return cell;
         }else{
+            Historyinfo *info =_arrData[indexPath.row-1];
+            
             HomeListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HomeListTableViewCell" forIndexPath:indexPath];
+            [cell.titleImageView sd_imageDef11WithUrlStr:@""];
+            cell.titleLabel.text = info.data_title;
+            cell.detailLabel.text = info.data_sketch;
+            
             return cell;
 
         }
     }
     return [UITableViewCell new];
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 3) {
+        if (indexPath.row >0) {
+            Historyinfo *info =_arrData[indexPath.row-1];
+            [self jumpTodetailWithHistoryinfo:info];
+            
+        }
+    }
+}
+//MARK: 根据ID 类型 跳转到相应详情
+- (void)jumpTodetailWithHistoryinfo:(Historyinfo *)info{
+    //  private Short data_type;//资料(信息)类型: 1岗位信息,2简历信息,3文件通知,4公示公告,5招投标信息,6教育培训,7互动交流,8企业信息(APP发布),9企业信息(WEB发布)
+    switch (info.data_type) {
+        case 1:
+        {
+            JobDetailViewController *viewController = [[JobDetailViewController alloc] initWithJobID:[NSString stringWithFormat:@"%@",@(info.data_id)]];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 2:{
+            
+            FindJodDetailViewController *viewController = [[FindJodDetailViewController alloc] initWithResumeID:[NSString stringWithFormat:@"%@",@(info.data_id)]];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 3:{
+            
+            ArticleDetailViewController *viewController = [[ArticleDetailViewController alloc] initWithArticleID:info.data_id fromType:1];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 4:{
+            
+            ArticleDetailViewController *viewController = [[ArticleDetailViewController alloc] initWithArticleID:info.data_id fromType:0];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 7:{
+            
+            InteractionDetailViewController *viewController = [[InteractionDetailViewController alloc] initWithInteractionID:[NSString stringWithFormat:@"%@",@(info.data_id)]];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+            
+            
+        default:
+            break;
+    }
 
+}
 #pragma mark - UIScrollviewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGFloat offsetY = scrollView.contentOffset.y;
     if (offsetY > 50) {
         CGFloat alpha = MIN(1, 1 - ((50 + 64 - offsetY) / 64));
-        _barView.backgroundColor = COLOR_THEME;
+        _barView.backgroundColor = UIColorMakeWithRGBA(75, 150, 247, alpha);
     } else {
         _barView.backgroundColor = [UIColor colorWithWhite:1 alpha:0];
     }
@@ -279,14 +621,21 @@
 #pragma mark - SDCycleScrollViewDelegate
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
-    
+    MenuInfo *menuInfo = _arrBanner[index];
+    WebLinkViewController *webLinkViewController = [[WebLinkViewController alloc]initWithTitle:menuInfo.menuName urlString:menuInfo.menuLink];
+    webLinkViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webLinkViewController animated:YES];
+
 }
 
 /** 图片滚动回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
     
 }
-#pragma makr - top view
+
+//MARK: ################## 功能模块点击回调 ##################
+
+
 - (void)didSelectCellWithMenuInfo:(MenuInfo *)menuInfo{
     
 //    if ([UserInfoEngine isLogin]) {
@@ -378,44 +727,31 @@
             break;
     }
 }
-- (NSMutableArray *)arrData{
-    if (!_arrData) {
-        _arrData = [NSMutableArray array];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
+- (void)reloadButtonClick{
+    CABasicAnimation* rotationAnimation;
+    rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
+    rotationAnimation.duration = 1;
+    rotationAnimation.cumulative = YES;
+    rotationAnimation.repeatCount = CGFLOAT_MAX;
+    
+    [_reloadButton.imageView.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 
-    }
-    return _arrData;
+    _pageIndex = 1;
+    [self getRecommend];
 }
+- (NetWorkEngine *)netWorkEngine{
+    
+    
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+        
+    }
+    return _netWorkEngine;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

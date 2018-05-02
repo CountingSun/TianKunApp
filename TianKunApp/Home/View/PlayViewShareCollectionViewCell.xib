@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PlayViewShareCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="371" height="79"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="371" height="79"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="文章标题" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qzg-44-CRG">
+                        <rect key="frame" x="10" y="10" width="351" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1月5日" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yl-gX-zo1">
+                        <rect key="frame" x="175.5" y="39" width="40.5" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Pr8-MD-37Y"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.59993284940000002" green="0.60003870729999997" blue="0.59992617370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPz-wT-gzN" customClass="QMUIButton">
+                        <rect key="frame" x="301" y="39" width="60" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="ecZ-n9-dr7"/>
+                            <constraint firstAttribute="height" constant="30" id="pom-SG-YUp"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="分享" image="分享">
+                            <color key="titleColor" red="0.59993284940000002" green="0.60003870729999997" blue="0.59992617370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="shareButtonClock:" destination="gTV-IL-0wX" eventType="touchUpInside" id="0bY-mC-tPy"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJa-df-8UV">
+                        <rect key="frame" x="15" y="39" width="151" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="ChS-st-MT9"/>
+                            <constraint firstAttribute="height" constant="30" id="rxC-Dc-AA4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lk-Y4-hon" customClass="QMUIButton">
+                        <rect key="frame" x="226" y="39" width="60" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="0WW-Kf-eq6"/>
+                            <constraint firstAttribute="height" constant="30" id="cLv-7E-wFN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="收藏" image="收藏-1">
+                            <color key="titleColor" red="0.59993284940000002" green="0.60003870729999997" blue="0.59992617370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="YJa-df-8UV" secondAttribute="bottom" constant="10" id="5cZ-Pv-n4m"/>
+                <constraint firstAttribute="bottom" secondItem="7yl-gX-zo1" secondAttribute="bottom" constant="10" id="7tE-aP-eyx"/>
+                <constraint firstAttribute="bottom" secondItem="EPz-wT-gzN" secondAttribute="bottom" constant="10" id="DHr-0a-2SD"/>
+                <constraint firstItem="7yl-gX-zo1" firstAttribute="leading" secondItem="YJa-df-8UV" secondAttribute="trailing" constant="10" id="MnR-1A-ryw"/>
+                <constraint firstAttribute="trailing" secondItem="EPz-wT-gzN" secondAttribute="trailing" constant="10" id="Rul-Ot-UtI"/>
+                <constraint firstItem="7Lk-Y4-hon" firstAttribute="leading" secondItem="7yl-gX-zo1" secondAttribute="trailing" constant="10" id="W0q-Mg-f6w"/>
+                <constraint firstAttribute="bottom" secondItem="7Lk-Y4-hon" secondAttribute="bottom" constant="10" id="c0Z-1z-cem"/>
+                <constraint firstItem="YJa-df-8UV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="qX1-ta-8nQ"/>
+                <constraint firstItem="EPz-wT-gzN" firstAttribute="leading" secondItem="7Lk-Y4-hon" secondAttribute="trailing" constant="15" id="t66-Ud-ndc"/>
+            </constraints>
+            <size key="customSize" width="371" height="79"/>
+            <connections>
+                <outlet property="collectButton" destination="7Lk-Y4-hon" id="E0z-Ak-6ZJ"/>
+                <outlet property="publicLabel" destination="YJa-df-8UV" id="ljq-Zh-kFw"/>
+                <outlet property="shareButton" destination="EPz-wT-gzN" id="SAN-kW-lVI"/>
+                <outlet property="timeLabel" destination="7yl-gX-zo1" id="atE-9W-MG8"/>
+                <outlet property="titleLabel" destination="Qzg-44-CRG" id="TGd-aA-47t"/>
+            </connections>
+            <point key="canvasLocation" x="57.5" y="68.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="分享" width="20" height="20"/>
+        <image name="收藏-1" width="20" height="20"/>
+    </resources>
+</document>

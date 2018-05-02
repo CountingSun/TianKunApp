@@ -9,5 +9,6 @@
 #import "WQBaseViewController.h"
 
 @interface InteractionListViewController : WQBaseViewController
+- (instancetype)initWithClassID:(NSString *)classID;
 
 @end

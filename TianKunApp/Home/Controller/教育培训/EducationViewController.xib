@@ -25,11 +25,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="FOK-YB-tgK">
-            <rect key="frame" x="0.0" y="0.0" width="433" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="433" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="K8H-G8-Bu2">
-                    <rect key="frame" x="0.0" y="0.0" width="433" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="433" height="90"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NIv-5g-bDN">
                         <size key="itemSize" width="50" height="50"/>
@@ -39,7 +39,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="3ge-Iy-ZuE">
-                    <rect key="frame" x="0.0" y="90" width="433" height="10"/>
+                    <rect key="frame" x="0.0" y="75" width="433" height="10"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="3BZ-AE-PTM"/>
                     </constraints>
@@ -53,7 +53,7 @@
                 <constraint firstItem="K8H-G8-Bu2" firstAttribute="top" secondItem="FOK-YB-tgK" secondAttribute="top" id="Bou-wq-mkr"/>
                 <constraint firstAttribute="trailing" secondItem="3ge-Iy-ZuE" secondAttribute="trailing" id="GlI-tz-zoc"/>
                 <constraint firstAttribute="bottom" secondItem="K8H-G8-Bu2" secondAttribute="bottom" id="M1n-zC-K9i"/>
-                <constraint firstAttribute="bottom" secondItem="3ge-Iy-ZuE" secondAttribute="bottom" id="QXP-RJ-RAc"/>
+                <constraint firstAttribute="bottom" secondItem="3ge-Iy-ZuE" secondAttribute="bottom" constant="5" id="QXP-RJ-RAc"/>
                 <constraint firstItem="K8H-G8-Bu2" firstAttribute="leading" secondItem="FOK-YB-tgK" secondAttribute="leading" id="dog-0e-Ywm"/>
                 <constraint firstItem="3ge-Iy-ZuE" firstAttribute="leading" secondItem="FOK-YB-tgK" secondAttribute="leading" id="fyT-DT-m0g"/>
             </constraints>

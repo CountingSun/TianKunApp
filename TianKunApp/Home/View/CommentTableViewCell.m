@@ -12,9 +12,18 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    [_commentButton addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
+    
 }
-
+- (void)setCommentInfo:(CommentInfo *)commentInfo{
+    _commentInfo = commentInfo;
+    
+}
+- (void)buttonClick{
+    if (_clickButtonBlock) {
+        _clickButtonBlock(_commentInfo);
+    }
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

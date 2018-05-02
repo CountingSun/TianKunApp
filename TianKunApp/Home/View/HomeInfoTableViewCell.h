@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CCPScrollView.h"
 
 @interface HomeInfoTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *choicenessLabel;
-@property (weak, nonatomic) IBOutlet UILabel *choicenessDetailLabel;
+@property (weak, nonatomic) IBOutlet UIView *baseView;
+@property (nonatomic ,strong) CCPScrollView *ccpView;
+@property (nonatomic ,strong) CCPScrollView *ccpView2;
+@property (nonatomic ,strong) NSMutableArray *arrData;
 
-@property (weak, nonatomic) IBOutlet UILabel *attentionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *attentionDetailLabel;
+@property (nonatomic, copy) void(^clickWithIndexBlock)(NSInteger index);
+
+
 @end

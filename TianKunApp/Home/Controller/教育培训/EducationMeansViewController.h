@@ -9,5 +9,6 @@
 #import "WQBaseViewController.h"
 
 @interface EducationMeansViewController : WQBaseViewController
+- (instancetype)initWithClassID:(NSInteger)classID viewTitle:(NSString *)viewTitle;
 
 @end

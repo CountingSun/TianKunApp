@@ -558,5 +558,15 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone]];
         
     }}
+//判断系统是否接收推送
+- (BOOL)isAllowedNotification
+{
+    //ios8及以上
+    UIUserNotificationSettings*settings=[UIApplication sharedApplication].currentUserNotificationSettings;
+    if (settings.types != UIUserNotificationTypeNone) {
+        return YES;
+    }else
+        return NO;
+}
 
 @end

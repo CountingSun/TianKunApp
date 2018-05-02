@@ -12,7 +12,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    _headImageView.layer.masksToBounds = YES;
+    _headImageView.layer.cornerRadius = 10;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

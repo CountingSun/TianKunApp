@@ -8,10 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class ClassTypeInfo;
+
+@protocol ConstructionSearchSelectDelegate <NSObject>
+- (void)selectWithClassTypeInfo:(ClassTypeInfo *)classTypeInfo index:(NSInteger)index;
+
+@end
+
+
 @interface ConstructionSearchSelectTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet QMUIButton *firsetButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *secondButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *thirdButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *fourButton;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic ,strong) NSMutableArray *arrData;
+@property (nonatomic, copy) dispatch_block_t reloadHeightBlock;
+
+@property (nonatomic ,weak) id<ConstructionSearchSelectDelegate> delegate;
++ (CGFloat)getCellHeightWithArr:(NSMutableArray *)arr;
 
 @end

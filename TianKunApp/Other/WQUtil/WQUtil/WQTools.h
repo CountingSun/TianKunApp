@@ -249,5 +249,13 @@
 + (void)callWithTel:(NSString *)tel;
 
 
+/**
+ 判断系统是否接收推送
+
+ @return bool
+ */
+- (BOOL)isAllowedNotification;
+
+
 
 @end

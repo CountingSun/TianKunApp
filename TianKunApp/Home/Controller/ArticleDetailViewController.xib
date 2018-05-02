@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="aboutView" destination="mBY-CJ-bIN" id="7Jk-bf-U8a"/>
                 <outlet property="leaveView" destination="wCt-gC-viD" id="kdO-i4-0hy"/>
+                <outlet property="lodingView" destination="53Y-jq-tju" id="yn3-U4-jHI"/>
                 <outlet property="lookMoreButton" destination="fsY-0L-2V2" id="22M-TO-3gy"/>
                 <outlet property="lookMoreView" destination="xZ3-ii-VOF" id="bKy-S7-vMI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -83,6 +84,9 @@
                         <action selector="lookMoreButtonClick:" destination="-1" eventType="touchUpInside" id="X6C-Tg-ps2"/>
                     </connections>
                 </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="53Y-jq-tju">
+                    <rect key="frame" x="177" y="15" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -90,8 +94,10 @@
                 <constraint firstItem="fsY-0L-2V2" firstAttribute="centerX" secondItem="xZ3-ii-VOF" secondAttribute="centerX" id="87f-IA-QBY"/>
                 <constraint firstItem="Nt4-J4-oiY" firstAttribute="top" secondItem="fsY-0L-2V2" secondAttribute="bottom" id="GXs-0l-DGx"/>
                 <constraint firstAttribute="trailing" secondItem="Nt4-J4-oiY" secondAttribute="trailing" id="agJ-ow-Kbr"/>
+                <constraint firstItem="53Y-jq-tju" firstAttribute="centerX" secondItem="xZ3-ii-VOF" secondAttribute="centerX" id="hbe-dK-dkq"/>
                 <constraint firstItem="Nt4-J4-oiY" firstAttribute="leading" secondItem="xZ3-ii-VOF" secondAttribute="leading" id="smb-iA-dm2"/>
                 <constraint firstItem="fsY-0L-2V2" firstAttribute="top" secondItem="xZ3-ii-VOF" secondAttribute="top" id="v9T-wV-cFt"/>
+                <constraint firstItem="53Y-jq-tju" firstAttribute="centerY" secondItem="xZ3-ii-VOF" secondAttribute="centerY" id="xrk-Hb-hta"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="480.5" y="-1213"/>

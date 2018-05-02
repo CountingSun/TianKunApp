@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EducationDetailViewController">
             <connections>
+                <outlet property="boBuyButton" destination="bLc-hS-iGC" id="yeh-gn-mOs"/>
+                <outlet property="goBuyView" destination="ZUf-PQ-RS9" id="NA9-dW-gTU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,6 +21,52 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </view>
+        <view contentMode="scaleToFill" id="ZUf-PQ-RS9">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0M-Ce-Q26">
+                    <rect key="frame" x="87.5" y="0.0" width="200" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试看结束，" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIg-n6-UTH">
+                            <rect key="frame" x="0.0" y="0.0" width="71.5" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLc-hS-iGC">
+                            <rect key="frame" x="71.5" y="0.0" width="129" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="点此查看资料完整版">
+                                <color key="titleColor" red="0.36322450639999998" green="0.63158446550000003" blue="0.98442620039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="goBuyButtonClick:" destination="-1" eventType="touchUpInside" id="KJs-tD-6Z7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="bLc-hS-iGC" firstAttribute="top" secondItem="S0M-Ce-Q26" secondAttribute="top" id="2xP-Xz-BmM"/>
+                        <constraint firstAttribute="bottom" secondItem="QIg-n6-UTH" secondAttribute="bottom" id="8Wn-Hn-XUa"/>
+                        <constraint firstItem="QIg-n6-UTH" firstAttribute="leading" secondItem="S0M-Ce-Q26" secondAttribute="leading" id="9pC-Y7-0Lh"/>
+                        <constraint firstItem="bLc-hS-iGC" firstAttribute="leading" secondItem="QIg-n6-UTH" secondAttribute="trailing" id="F3R-pc-5Dh"/>
+                        <constraint firstAttribute="bottom" secondItem="QIg-n6-UTH" secondAttribute="bottom" id="KNL-hs-yCK"/>
+                        <constraint firstItem="QIg-n6-UTH" firstAttribute="top" secondItem="S0M-Ce-Q26" secondAttribute="top" id="NPM-1q-rDq"/>
+                        <constraint firstItem="QIg-n6-UTH" firstAttribute="leading" secondItem="S0M-Ce-Q26" secondAttribute="leading" id="O4I-n7-cjP"/>
+                        <constraint firstItem="QIg-n6-UTH" firstAttribute="top" secondItem="S0M-Ce-Q26" secondAttribute="top" id="OKB-fD-PXc"/>
+                        <constraint firstAttribute="bottom" secondItem="bLc-hS-iGC" secondAttribute="bottom" id="bKt-lk-Nn3"/>
+                        <constraint firstAttribute="width" constant="200" id="pqU-N9-hNr"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="S0M-Ce-Q26" secondAttribute="bottom" id="73d-gW-tdM"/>
+                <constraint firstItem="S0M-Ce-Q26" firstAttribute="top" secondItem="ZUf-PQ-RS9" secondAttribute="top" id="7vg-Xx-M7C"/>
+                <constraint firstItem="S0M-Ce-Q26" firstAttribute="centerX" secondItem="ZUf-PQ-RS9" secondAttribute="centerX" id="yeZ-Zt-Xax"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="327" y="876"/>
         </view>
     </objects>
 </document>

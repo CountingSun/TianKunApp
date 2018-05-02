@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface EnterpriseInfo : NSObject
+/**
+ 企业名称
+ */
+@property (nonatomic, assign) NSInteger enterprise_id;
 
 /**
  企业名称
@@ -45,6 +49,12 @@
  联系人
  */
 @property (nonatomic, copy) NSString *contacts;
+
+/**
+ 企业介绍
+ */
+@property (nonatomic, copy) NSString *enterprise_introduce;
+
 
 
 @end

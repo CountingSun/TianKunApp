@@ -38,7 +38,7 @@
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DnI-98-fLH">
                         <rect key="frame" x="251" y="15.5" width="51" height="31"/>
-                        <color key="onTintColor" red="1" green="0.36419479710000002" blue="0.1619840256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="onTintColor" red="0.36322450639999998" green="0.63158446550000003" blue="0.98442620039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </switch>
                 </subviews>
                 <constraints>

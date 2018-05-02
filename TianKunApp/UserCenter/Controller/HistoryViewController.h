@@ -7,6 +7,8 @@
 //
 
 #import "WQBaseViewController.h"
+@interface HistoryViewModel : NSObject
+@end
 
 @interface HistoryViewController : WQBaseViewController
 

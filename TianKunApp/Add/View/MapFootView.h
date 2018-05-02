@@ -10,7 +10,7 @@
 
 @interface MapFootView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *changeButton;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end

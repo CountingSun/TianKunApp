@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
-                <outlet property="tableView" destination="VSr-rH-WPJ" id="XxI-zT-DGL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,19 +18,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VSr-rH-WPJ" customClass="WQTableView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="VSr-rH-WPJ" secondAttribute="bottom" id="FPC-iC-5Pg"/>
-                <constraint firstItem="VSr-rH-WPJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MZL-7I-wXZ"/>
-                <constraint firstAttribute="trailing" secondItem="VSr-rH-WPJ" secondAttribute="trailing" id="Ubf-vk-N9z"/>
-                <constraint firstItem="VSr-rH-WPJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="c5p-Ub-MIc"/>
-            </constraints>
         </view>
     </objects>
 </document>

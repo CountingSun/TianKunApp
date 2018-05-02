@@ -62,6 +62,17 @@ typedef void(^ProgressBlock)(CGFloat progress);
         errorBlock:(ErrorBlock)errorBlock;
 
 /**
+ post请求
+
+ @param url url
+ @param succed 回调
+ @param errorBlock 回调
+ */
+- (void)postWithUrl:(NSString *)url
+             succed:(SucceedBlock)succed
+         errorBlock:(ErrorBlock)errorBlock;
+
+/**
  上传图片（NSData形式）
 
  @param imageData 图片data
@@ -135,6 +146,17 @@ typedef void(^ProgressBlock)(CGFloat progress);
                   dict:(NSDictionary *)dic
                 succed:(SucceedBlock)succed
             errorBlock:(ErrorBlock)errorBlock;
+
+
+- (void)uploadImagesWithArrImageData:(NSMutableArray *)arrImageData
+                               url:(NSString *)url
+                              dict:(NSDictionary *)dic
+                              name:(NSString *)name
+                          fileName:(NSString *)fileName
+                            succed:(SucceedBlock)succed
+                     progressBlock:(ProgressBlock)progressBlock
+                        errorBlock:(ErrorBlock)errorBlock;
+
 
 
 @end

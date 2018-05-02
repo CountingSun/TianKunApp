@@ -10,4 +10,5 @@
 
 @interface UserInfoViewController : WQBaseViewController
 
+- (instancetype)initWithUserInfo:(UserInfo *)userInfo;
 @end

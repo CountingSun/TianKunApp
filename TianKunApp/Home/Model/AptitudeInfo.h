@@ -10,5 +10,36 @@
 
 @interface AptitudeInfo : NSObject
 
-@property (nonatomic, copy) NSString *aaa;
+/**
+类别名称
+ */
+@property (nonatomic, copy) NSString *lbname;
+
+/**
+ 证书编号
+
+ */
+@property (nonatomic, copy) NSString *zsbh;
+/**
+ /发证时间
+
+ */
+@property (nonatomic, copy) NSString *fzdate;
+/**
+ 测试类型",//证书名称
+
+ */
+@property (nonatomic, copy) NSString *name;
+/**
+ 证书截止日期
+
+ */
+@property (nonatomic, copy) NSString *jzdate;
+/**
+ 发证机关
+
+ */
+@property (nonatomic, copy) NSString *jg;
+
+
 @end

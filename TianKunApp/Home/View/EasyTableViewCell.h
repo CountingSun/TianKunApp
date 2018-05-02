@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class MenuInfo;
+
 @interface EasyTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet QMUIButton *gsQueryButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *zzQueryButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *peopleQueryButton;
-
-@property (weak, nonatomic) IBOutlet QMUIButton *projectQueryButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *cxQueryButton;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
-
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic ,strong) NSMutableArray *arrMenu;
+@property (nonatomic, copy) void(^selectSucceed)(MenuInfo *menuInfo);
 @end

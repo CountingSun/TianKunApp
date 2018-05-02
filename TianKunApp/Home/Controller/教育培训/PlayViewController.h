@@ -10,4 +10,6 @@
 
 @interface PlayViewController : WQBaseViewController
 
+- (instancetype)initWithDocumentID:(NSInteger)documentID;
+
 @end

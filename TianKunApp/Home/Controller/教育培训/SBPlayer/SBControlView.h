@@ -34,11 +34,22 @@
  @param button 全屏按钮
  */
 -(void)controlView:(SBControlView *)controlView withLargeButton:(UIButton *)button;
+
+/**
+ 点击播放按钮
+
+ @param controlView 控制视图
+ @param button 播放按钮
+ */
+-(void)controlView:(SBControlView *)controlView withPlayButton:(UIButton *)button;
+
 @end
 @interface SBControlView : UIView
 
 //全屏按钮
 @property (nonatomic,strong) UIButton *largeButton;
+//播放按钮
+@property (nonatomic ,strong) UIButton *playButton;
 //进度条当前值
 @property (nonatomic,assign) CGFloat value;
 //最小值

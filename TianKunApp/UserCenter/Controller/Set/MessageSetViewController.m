@@ -9,6 +9,9 @@
 #import "MessageSetViewController.h"
 #import "MessageSetTableViewCell.h"
 #import "MessageSetVoiceTableViewCell.h"
+//融云
+#import <RongIMKit/RongIMKit.h>
+
 
 @interface MessageSetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -64,7 +67,9 @@
             cell.mainLabel.text = @"系统消息";
             cell.detilLabel.text = @"系统通知、聊天消息等必提醒";
             _messageSwitch =  cell.selectSwitch;
+            [_messageSwitch addTarget:self action:@selector(messageSwitchClick:) forControlEvents:UIControlEventValueChanged];
             
+
             
         }else{
             cell.mainLabel.text = @"热门推荐";
@@ -89,7 +94,11 @@
 
     
 }
+- (void)messageSwitchClick:(UISwitch *)sender{
+    [RCIM sharedRCIM].disableMessageAlertSound = sender.isOn;
+    [RCIM sharedRCIM].disableMessageNotificaiton = sender.isOn;
 
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

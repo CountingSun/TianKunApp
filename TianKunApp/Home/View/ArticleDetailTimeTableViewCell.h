@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ArticleDetailTimeTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet QMUIButton *shareButton;
 
+@property (weak, nonatomic) IBOutlet QMUIButton *collectButton;
 @end

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EducationMeansViewController">
             <connections>
+                <outlet property="buttonBaseView" destination="E4I-kW-cqR" id="Hag-Ix-vgA"/>
                 <outlet property="classButton" destination="m8p-ne-bJL" id="0xs-1k-Kxz"/>
                 <outlet property="ifFreeButton" destination="XtF-rQ-cqZ" id="uDH-Dh-sXc"/>
                 <outlet property="typeButton" destination="VXi-h4-X1K" id="jhU-7b-SYg"/>
@@ -39,7 +40,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXi-h4-X1K">
                             <rect key="frame" x="126" y="0.0" width="125" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <state key="normal" title="视频">
+                            <state key="normal" title="文本">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
                             <connections>

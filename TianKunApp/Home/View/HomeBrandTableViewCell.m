@@ -8,6 +8,8 @@
 
 #import "HomeBrandTableViewCell.h"
 #import "HomeBrandCollectionViewCell.h"
+#import "CompanyInfo.h"
+
 
 @interface HomeBrandTableViewCell()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -26,19 +28,25 @@
     _collectionView.backgroundColor = COLOR_VIEW_BACK;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 6;
+    return self.arrData.count;
     
     
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     HomeBrandCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeBrandCollectionViewCell" forIndexPath:indexPath];
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522132646&di=4353633ae497bc82e1e3586a187e0758&imgtype=jpg&er=1&src=http%3A%2F%2Fs2.sinaimg.cn%2Fmw690%2F00348Lt3zy6QnS8eP9n21%26amp%3B690"] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_21]];
+    CompanyInfo *info = self.arrData[indexPath.row];
+    [cell.imageView sd_imageDef21WithUrlStr:info.picture_url];
     
     return cell;
     
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    CompanyInfo *info = self.arrData[indexPath.row];
+    if (_collectionViewDidSelectItemBlock) {
+        _collectionViewDidSelectItemBlock(info,indexPath);
+    }
     
+
 }
 - (UICollectionViewFlowLayout *)flowLayout{
     if (!_flowLayout) {
@@ -50,14 +58,9 @@
     }
     return _flowLayout;
 }
-
-- (NSMutableArray *)arrMenu{
-    if (!_arrMenu) {
-        _arrMenu = [NSMutableArray array];
-        
-    }
-    return _arrMenu;
-    
+- (void)setArrData:(NSMutableArray *)arrData{
+    _arrData = arrData;
+    [self.collectionView reloadData];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

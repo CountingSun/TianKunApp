@@ -14,6 +14,7 @@
                 <outlet property="footView" destination="oDe-Gv-ceA" id="81q-dK-fEc"/>
                 <outlet property="headView" destination="kV0-uh-VNc" id="C2D-9S-8bM"/>
                 <outlet property="loginButton" destination="40H-x5-ALU" id="BqN-8x-5hd"/>
+                <outlet property="registerButton" destination="akP-B3-gCo" id="per-Gc-OGz"/>
                 <outlet property="tableView" destination="QxU-wD-44W" id="59i-uM-alr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

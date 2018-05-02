@@ -13,6 +13,7 @@
 #import "UIBarButtonItem+Extension.h"
 #import "DredgeViewController.h"
 #import "VIPUploadInfoViewController.h"
+#import "VipInfo.h"
 
 @interface MyVIPViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -27,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *publicButton;
 ///立即开通按钮
 @property (weak, nonatomic) IBOutlet UIButton *dredgeButton;
+@property (nonatomic ,assign) BOOL isVIP;
+@property (nonatomic ,strong) VipInfo *vipInfo;
 
 @end
 
@@ -38,6 +41,7 @@
     
     //去掉透明后导航栏下边的黑边
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self getIsVip];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     
@@ -49,21 +53,64 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _arrMenu = [UserCenterViewModel arrVipMenu];
-    [self.titleView setTitle:@"我的会员"];
     self.title = @"我的会员";
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     
+     @{NSFontAttributeName:[UIFont systemFontOfSize:19],
+       
+       NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    
+
     [self setupUI];
+    [self getIsVip];
+    _nameLabel.text = [UserInfoEngine getUserInfo].nickname;
     
     [self setupCollectonView];
     self.navigationItem.leftBarButtonItem=[UIBarButtonItem itemWithTarget:self action:@selector(back) image:@"返回_白色" highImage:@"返回_白色"];
 
 }
+- (void)getIsVip{
+//    [self showWithStatus:NET_WAIT_TOST];
+    
+    [[[NetWorkEngine alloc]init] postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} url:BaseUrl(@"payment/userdetail.action") succed:^(id responseObject) {
+        
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            
+            _vipInfo = [[VipInfo alloc]init];
+            
+            _vipInfo.vip_endtime = [[[responseObject objectForKey:@"value"] objectForKey:@"usermessage"] objectForKey:@"vip_endtime"];
+            _vipInfo.vip_status = [[[[responseObject objectForKey:@"value"] objectForKey:@"usermessage"] objectForKey:@"vip_status"] integerValue];
+
+            if (_vipInfo.vip_status) {
+                _timeLabel.text = [NSString stringWithFormat:@"至%@",[NSString timeReturnDateString:_vipInfo.vip_endtime formatter:@"yyyy/MM/dd"]];
+
+            }else{
+                _timeLabel.text = @"";
+
+            }
+            
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
+    
+}
+
 - (void)setupUI{
     
     _freeLabel.textColor = COLOR_THEME;
     _freeLabel.font = [UIFont fontWithName:@"Arial-BoldItalicMT" size:16];
     _dredgeButton.layer.masksToBounds = YES;
     _dredgeButton.layer.cornerRadius = _dredgeButton.qmui_height/2;
-
+    _headImageView.layer.masksToBounds = YES;
+    _headImageView.layer.cornerRadius = _headImageView.qmui_width/2;
+    [_headImageView sd_imageWithUrlStr:[UserInfoEngine getUserInfo].headimg placeholderImage:@"头像"];
     
 }
 - (void)setupCollectonView{

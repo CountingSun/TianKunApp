@@ -8,6 +8,9 @@
 
 #import "WQBaseViewController.h"
 
+@class DocumentPropertyInfo;
+
 @interface EducationTextListViewController : WQBaseViewController
+- (void)reloadWithDocumentPropertyInfo:(DocumentPropertyInfo *)documentPropertyInfo;
 
 @end

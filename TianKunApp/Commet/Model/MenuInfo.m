@@ -21,5 +21,15 @@
     
     
 }
+-(instancetype)initWithMenuName:(NSString *)menuName menuIcon:(NSString *)menuIcon menuID:(NSInteger)menuID menuDetail:(NSString *)menuDetail{
+    if (self = [super init]) {
+        _menuName = menuName;
+        _menuIcon = menuIcon;
+        _menuID = menuID;
+        _menuDetail = menuDetail;
+    }
+    return self;
+
+}
 
 @end

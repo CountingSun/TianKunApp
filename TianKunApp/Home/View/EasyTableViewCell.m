@@ -8,64 +8,62 @@
 
 #import "EasyTableViewCell.h"
 #import "MenuInfo.h"
+#import "HomeClassCollectionViewCell.h"
+
+@interface EasyTableViewCell()<UICollectionViewDelegate,UICollectionViewDataSource>
+
+@property (nonatomic ,strong) UICollectionViewFlowLayout *flowLayout;
+@end
 
 @implementation EasyTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     _lineView.backgroundColor = COLOR_THEME;
-    
-    [_gsQueryButton setImagePosition:QMUIButtonImagePositionTop];
-    [_gsQueryButton setSpacingBetweenImageAndTitle:10];
-    
-    [_zzQueryButton setImagePosition:QMUIButtonImagePositionTop];
-    [_zzQueryButton setSpacingBetweenImageAndTitle:10];
-
-    [_peopleQueryButton setImagePosition:QMUIButtonImagePositionTop];
-    [_peopleQueryButton setSpacingBetweenImageAndTitle:10];
-
-    [_projectQueryButton setImagePosition:QMUIButtonImagePositionTop];
-    [_projectQueryButton setSpacingBetweenImageAndTitle:10];
-
-    [_cxQueryButton setImagePosition:QMUIButtonImagePositionTop];
-    [_cxQueryButton setSpacingBetweenImageAndTitle:10];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    _collectionView.collectionViewLayout = self.flowLayout;
+    [_collectionView registerNib:[UINib nibWithNibName:@"HomeClassCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"HomeClassCollectionViewCell"];
 
     
 }
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.arrMenu.count;
+    
+    
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    HomeClassCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HomeClassCollectionViewCell" forIndexPath:indexPath];
+    MenuInfo *menuInfo = self.arrMenu[indexPath.row];
+    cell.label.text = menuInfo.menuName;
+    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[menuInfo.menuIcon stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding ]] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_11]];
+
+    return cell;
+    
+}
+- (UICollectionViewFlowLayout *)flowLayout{
+    if (!_flowLayout) {
+        _flowLayout = [[UICollectionViewFlowLayout alloc]init];
+        _flowLayout.minimumLineSpacing = 0;
+        _flowLayout.minimumInteritemSpacing = 0;
+        _flowLayout.itemSize = CGSizeMake(SCREEN_WIDTH/5, 70);
+        _flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        
+    }
+    return _flowLayout;
+}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    MenuInfo *menuInfo = self.arrMenu[indexPath.row];
+    if (_selectSucceed) {
+        _selectSucceed(menuInfo);
+    }
+    
+}
+
 - (void)setArrMenu:(NSMutableArray *)arrMenu{
     _arrMenu = arrMenu;
-    [_arrMenu enumerateObjectsUsingBlock:^(MenuInfo *menuInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-        switch (idx) {
-            case 0:
-                [_gsQueryButton setTitle:menuInfo.menuName forState:0];
-                [_gsQueryButton setImage:[UIImage imageNamed:menuInfo.menuIcon] forState:0];
-                break;
-            case 1:
-                [_zzQueryButton setTitle:menuInfo.menuName forState:0];
-                [_zzQueryButton setImage:[UIImage imageNamed:menuInfo.menuIcon] forState:0];
-                break;
-            case 2:
-                [_peopleQueryButton setTitle:menuInfo.menuName forState:0];
-                [_peopleQueryButton setImage:[UIImage imageNamed:menuInfo.menuIcon] forState:0];
-                break;
-            case 3:
-                [_projectQueryButton setTitle:menuInfo.menuName forState:0];
-                [_projectQueryButton setImage:[UIImage imageNamed:menuInfo.menuIcon] forState:0];
-                break;
-            case 4:
-                [_cxQueryButton setTitle:menuInfo.menuName forState:0];
-                [_cxQueryButton setImage:[UIImage imageNamed:menuInfo.menuIcon] forState:0];
-                break;
-
-            default:{
-                
-            }
-                break;
-        }
-        
-    }];
-    
-    
+    [self.collectionView reloadData];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

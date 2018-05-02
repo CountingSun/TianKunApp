@@ -115,6 +115,11 @@
 @property (nonatomic ,strong) NSString *collectionid;
 
 
+/**
+ 点击量
+ */
+@property (nonatomic, copy) NSString *hits_show;
+
 
 
 

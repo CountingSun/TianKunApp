@@ -13,6 +13,8 @@
 #import "PublicEnterpriseViewController.h"
 #import "FindTalentsViewController.h"
 #import "AddFindJobViewController.h"
+#import "AddEnterpriseCcommunicationViewController.h"
+#import "AddBusinessCooperationViewController.h"
 
 @interface AddViewController ()
 @property (nonatomic,strong) NSArray *arrMenu;
@@ -32,12 +34,15 @@
     [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self showAnimationWithButton:obj index:idx];
     }];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self hiddenAnimationWithButton:obj index:idx];
     }];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 
 }
 
@@ -76,7 +81,6 @@
     UIVisualEffectView *effectView =[[UIVisualEffectView alloc]initWithEffect:blurEffect];
     _effectView = effectView;
     self.view = effectView;
-    self.isHiddenNav = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapBackEvent)];
     [self.view addGestureRecognizer:tap];
     [self addButton];
@@ -105,6 +109,9 @@
 }
 -(void)childButtonClick:(UIButton *)button{
     
+    if(![UserInfoEngine isLogin]){
+        return;
+    }
     switch (button.tag) {
         case 0:
         {
@@ -129,6 +136,19 @@
 
         }
             break;
+        case 3:{
+            AddEnterpriseCcommunicationViewController *vc = [[AddEnterpriseCcommunicationViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+        case 4:{
+            AddBusinessCooperationViewController *vc = [[AddBusinessCooperationViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+            break;
+            
         default:{
             
             

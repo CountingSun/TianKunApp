@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ConstructionSearchTextTableViewCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="ConstructionSearchTextTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -19,16 +19,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="企业注册属地：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jz-mv-jwf">
-                        <rect key="frame" x="15" y="0.0" width="100" height="43.5"/>
+                        <rect key="frame" x="15" y="0.0" width="100" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="Eeh-0b-XCh"/>
+                            <constraint firstAttribute="height" constant="45" id="STR-3B-o06"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vPH-39-P2d">
-                        <rect key="frame" x="120" y="0.0" width="185" height="43.5"/>
+                        <rect key="frame" x="120" y="0.0" width="185" height="17"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -44,6 +45,10 @@
                     <constraint firstItem="vPH-39-P2d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="n4S-Sa-WyC"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="textField" destination="vPH-39-P2d" id="obM-y9-Ljj"/>
+                <outlet property="titleLabel" destination="4jz-mv-jwf" id="9N8-LT-pgH"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

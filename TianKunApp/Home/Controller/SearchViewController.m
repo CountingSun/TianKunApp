@@ -352,7 +352,7 @@
 
 #pragma mark - 取消回去上级页面
 - (void)rightBarButtonItemClick {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {

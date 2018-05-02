@@ -9,40 +9,230 @@
 #import "EducationDetailViewController.h"
 #import "EducationTableViewCell.h"
 #import <WebKit/WebKit.h>
+#import "DocumentInfo.h"
+#import "EductationNetworkEngine.h"
+#import "BuyDocumentView.h"
+#import "MyVIPViewController.h"
+#import "SingleBuyDocumentView.h"
+#import "CollectShareView.h"
+#import "AppShared.h"
 
-@interface EducationDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
+
+@interface EducationDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate,BuyDocumentViewDelegate>
 @property (nonatomic, strong) UIWebView *headerView;
 @property (nonatomic ,strong) WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
+@property (nonatomic ,assign) NSInteger pageIndex;
+@property (nonatomic ,assign) NSInteger pageSize;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,strong) DocumentInfo *documentInfo;
+@property (nonatomic ,assign) NSInteger documentID;
+@property (nonatomic ,strong) EductationNetworkEngine *eductationNetworkEngine;
+@property (strong, nonatomic) IBOutlet UIView *goBuyView;
+@property (weak, nonatomic) IBOutlet UIButton *boBuyButton;
+@property (nonatomic ,strong) BuyDocumentView *buyDocumentView;
+@property (nonatomic ,strong) SingleBuyDocumentView *singleBuyDocumentView;
+@property (nonatomic ,strong) CollectShareView *collectShareView;
 
 @end
 
 @implementation EducationDetailViewController
+- (instancetype)initWithDocumentID:(NSInteger)documentID{
+    if (self = [super init]) {
+        _documentID = documentID;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"正文"];
-    
-    _arrData = [NSMutableArray array];
-    [_arrData addObject:@""];
-    [_arrData addObject:@""];
-    [_arrData addObject:@""];
-    [_arrData addObject:@""];
-    [_arrData addObject:@""];
-    [_arrData addObject:@""];
-    [_arrData addObject:@""];
-    [_arrData addObject:@""];
-
-    
-    [self.tableView reloadData];
-    [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://baike.baidu.com/item/iOS/45705?fr=aladdin"]]];
+    self.tableView.tableHeaderView = self.headerView;
     [self showLoadingView];
+    _pageSize = DEFAULT_PAGE_SIZE;
+    _pageIndex = 1;
+    _collectShareView = [CollectShareView collectShareView];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_collectShareView];
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -20;
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
+    _collectShareView.shareButtonBlock = ^{
+        [AppShared shared];
+    };
+    __weak typeof(self) weakSelf = self;
     
+    _collectShareView.collectButtonBlock = ^{
+        [weakSelf collect];
+    };
+
+    //获取通知中心单例对象
+    NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+    //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+    [center addObserver:self selector:@selector(notice:) name:PAY_SUCCEED_NOTICE object:nil];
+    self.tableView.canLoadMore = NO;
+
+    [self getData];
+    
+    
+}
+-(void)notice:(id)sender{
+    NSLog(@"%@",sender);
+    
+    [self showLoadingView];
+    [self getData];
+
+}
+- (IBAction)goBuyButtonClick:(id)sender {
+    
+    if (!_buyDocumentView) {
+        _buyDocumentView = [[BuyDocumentView alloc]initWithNib];
+        _buyDocumentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        _buyDocumentView.delegate = self;
+        
+    }
+    [_buyDocumentView showBuyDocumentView];
+    
+}
+
+
+- (void)getData{
+    if (!_eductationNetworkEngine) {
+        _eductationNetworkEngine = [[EductationNetworkEngine alloc]init];
+    }
+    [_eductationNetworkEngine getEductationInfoWithDocumentID:_documentID returnBlock:^(NSInteger code, NSString *msg, DocumentInfo *documentInfo) {
+        if (code == 1) {
+            _documentInfo = documentInfo;
+            if (_documentInfo.canSee == 1) {
+                if (_documentInfo.date_details_url.length) {
+                    [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_documentInfo.date_details_url]]];
+                    
+                }
+            }else{
+                if (_documentInfo.date_details_url.length) {
+                    [self.headerView loadHTMLString:_documentInfo.synopsis baseURL:[NSURL URLWithString:BaseUrl(@""])];
+                    
+                }
+            }
+             if (_documentInfo.collectID) {
+                 _collectShareView.collectButton.selected = YES;
+                 
+             }else{
+                 _collectShareView.collectButton.selected = NO;
+             }
+
+            [self getRecommend];
+            
+        }else if(code == -1){
+            [self hideLoadingView];
+
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self showLoadingView];
+                [self getData];
+            }];
+
+        }else{
+            [self hideLoadingView];
+
+            [self showGetDataErrorWithMessage:msg reloadBlock:^{
+                [self showLoadingView];
+                [self getData];
+            }];
+
+            
+        }
+    }];
+    
+    
+}
+- (void)getRecommend{
+    if (!_eductationNetworkEngine) {
+        _eductationNetworkEngine = [[EductationNetworkEngine alloc]init];
+    }
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
+    [_eductationNetworkEngine postWithPageIndex:_pageIndex pageSize:_pageSize dataType2:_documentInfo.data_type2 calssType:_documentInfo.type returnBlock:^(NSInteger code,NSString *msg, NSMutableArray *arrData) {
+        if (code == 1) {
+            if(!_arrData){
+                _arrData = [NSMutableArray array];
+            }
+            if (_pageIndex == 1) {
+                [_arrData removeAllObjects];
+            }
+            [_arrData addObjectsFromArray:arrData];
+            [self.tableView reloadData];
+            if (arrData.count<_pageSize) {
+                self.tableView.canLoadMore= NO;
+            }else{
+                self.tableView.canLoadMore= YES;
+            }
+            
+        }else if(code == -1){
+            [self showErrorWithStatus:NET_ERROR_TOST];
+            _pageIndex--;
+        }else{
+            [self showErrorWithStatus:msg];
+            _pageIndex--;
+
+        }
+        
+    }];
+    
+    
+}
+- (void)collect{
+    if (![UserInfoEngine isLogin]) {
+        return;
+    }
+    _collectShareView.collectButton.enabled = NO;
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"user_id"];
+    [dict setObject:@(_documentInfo.data_id) forKey:@"learning_notice_id"];
+    if (_collectShareView.collectButton.selected) {
+        [dict setObject:@(2) forKey:@"type"];
+        [dict setObject:@(_documentInfo.collectID) forKey:@"id"];
+        
+    }else{
+        [dict setObject:@(1) forKey:@"type"];
+    }
+    
+    
+    [self showWithStatus:NET_WAIT_TOST];
+    [_netWorkEngine postWithDict:dict url:BaseUrl(@"Learning/insertforumcollectible.action") succed:^(id responseObject) {
+        _collectShareView.collectButton.enabled = YES;
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+                _collectShareView.collectButton.selected =! _collectShareView.collectButton.selected;
+                
+                if (_collectShareView.collectButton.selected) {
+                    [self showSuccessWithStatus:@"收藏成功"];
+                    _documentInfo.collectID = [[responseObject objectForKey:@"value"] integerValue];
+                    
+                }else{
+                    [self showSuccessWithStatus:@"取消收藏成功"];
+                    
+                }
+            
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            
+        }
+        
+    } errorBlock:^(NSError *error) {
+        _collectShareView.collectButton.enabled = YES;
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
     
 }
 - (UIWebView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.1)];
+        _headerView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
         _headerView.delegate = self;
         
         [_headerView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
@@ -64,11 +254,14 @@
         _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.tableHeaderView = self.headerView;
-        _tableView.estimatedRowHeight = 80;
-        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.rowHeight = 140;
         [self.view addSubview:_tableView];
+        __weak typeof(self)  weakSelf = self;
         
+        [_tableView footerWithRefreshingBlock:^{
+            weakSelf.pageIndex++;
+            [weakSelf getRecommend];
+        }];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.equalTo(self.view);
         }];
@@ -76,31 +269,69 @@
     return _tableView;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return  _arrData.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return  _arrData.count;
+  return  1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     EducationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EducationTableViewCell"];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"EducationTableViewCell" owner:nil options:nil] firstObject];
+        cell.selectionStyle = 0;
+        
     }
-    cell.selectionStyle = 0;
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:@"https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2721528669,2849290984&fm=173&app=25&f=JPEG?w=218&h=146&s=5229B044DADEFE9ED03B559E0300D09F"] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_11]];
     
+    DocumentInfo *info = _arrData[indexPath.section];
+    [cell.titleImageView sd_imageDef11WithUrlStr:info.video_image_url];
+    cell.titleLabel.text = info.data_title;
+    cell.detailLabel.text = info.synopsis;
+    if (info.is_charge) {
+        cell.isFreeLabel.text = @"收费";
+    }else{
+        cell.isFreeLabel.text = @"免费";
+        
+    }
+    cell.numLabel.text = [NSString stringWithFormat:@"浏览%@次",@(info.hits_show)];
     return cell;
 
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-        return CGFLOAT_MIN;
+    if(_documentInfo.canSee == 1){
         
+    }else{
+        if(section == 0)
+            return 40;
+    }
+
+        return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
+        return CGFLOAT_MIN;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [UIView new];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(_documentInfo.canSee == 1){
+        
+    }else{
+        if(section == 0)
+            return _goBuyView;
+    }
+    return [UIView new];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    DocumentInfo *info = _arrData[indexPath.section];
+    
+    EducationDetailViewController *vc = [[EducationDetailViewController alloc]initWithDocumentID:info.data_id];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-        return CGFLOAT_MIN;
-}
+
 #pragma mark-
 - (void)webViewDidStartLoad:(UIWebView *)webView{
 }
@@ -111,21 +342,45 @@
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [self hideLoadingView];
-    
-    [self showGetDataNullWithReloadBlock:^{
+    [self showGetDataErrorWithMessage:@"数据加载失败" reloadBlock:^{
         [self showLoadingView];
         
-        [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://baike.baidu.com/item/iOS/45705?fr=aladdin"]]];
+        [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_documentInfo.date_details_url]]];
     }];
     
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    EducationDetailViewController *vc = [[EducationDetailViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+//MARK:BuyDocumentViewDelegate
+- (void)buyVIPButtonClickDelegate{
+    MyVIPViewController *myVIPViewController = [[MyVIPViewController alloc]init];
+    [self.navigationController pushViewController:myVIPViewController animated:YES];
     
+
+}
+                
+- (void)buyDocumentButtonClickDelegate{
+    if (!_singleBuyDocumentView) {
+        _singleBuyDocumentView = [[SingleBuyDocumentView alloc]initWithNib];
+        _singleBuyDocumentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+        __weak typeof(self) weakSelf = self;
+        _singleBuyDocumentView.pauSucceedBlock = ^{
+            [weakSelf showLoadingView];
+            [weakSelf getData];
+        };
+    }
+    _singleBuyDocumentView.documentID = _documentInfo.data_id;
+    [_singleBuyDocumentView showSingleBuyDocumentView];
+
 }
 
+- (NetWorkEngine *)netWorkEngine{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    return _netWorkEngine;
+    
+}
 - (void)dealloc{
     [_headerView.scrollView removeObserver:self forKeyPath:@"contentSize"];
 }

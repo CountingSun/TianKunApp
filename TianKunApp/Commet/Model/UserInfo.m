@@ -18,6 +18,7 @@
     [aCoder encodeObject:_login_token forKey:@"_login_token"];
     [aCoder encodeObject:_phone forKey:@"_phone"];
     [aCoder encodeObject:_nickname forKey:@"_nickname"];
+    [aCoder encodeObject:_headimg forKey:@"_headimg"];
 
 
 }
@@ -29,6 +30,7 @@
         _login_token = [aDecoder decodeObjectForKey:@"_login_token"];
         _phone = [aDecoder decodeObjectForKey:@"_phone"];
         _nickname = [aDecoder decodeObjectForKey:@"_nickname"];
+        _headimg = [aDecoder decodeObjectForKey:@"_headimg"];
 
         
     }

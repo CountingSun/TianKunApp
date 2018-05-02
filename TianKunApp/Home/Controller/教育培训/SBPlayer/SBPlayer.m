@@ -8,6 +8,7 @@
 
 #import "SBPlayer.h"
 #import "SBTitleView.h"
+#import "SBPlayerErrorView.h"
 
 @interface SBPlayer ()
 
@@ -24,6 +25,14 @@
 @property (nonatomic,strong) SBTitleView *titleView;
 //加载动画
 @property (nonatomic,strong) UIActivityIndicatorView *activityIndeView;
+
+@property (nonatomic ,strong) SBPlayerErrorView *playerErrorView;
+
+
+/**
+ 记录进入后台时 视频是否在播放
+ */
+@property (nonatomic ,assign) BOOL isHadPlay;
 @end
 static NSInteger count = 0;
 @implementation SBPlayer
@@ -75,6 +84,13 @@ static NSInteger count = 0;
     }
     return self;
 }
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        [self setupPlayerUI];
+    }
+    return self;
+}
 -(void)assetWithURL:(NSURL *)url{
     NSDictionary *options = @{ AVURLAssetPreferPreciseDurationAndTimingKey : @YES };
     self.anAsset = [[AVURLAsset alloc]initWithURL:url options:options];
@@ -98,7 +114,12 @@ static NSInteger count = 0;
                 break;
             case AVKeyValueStatusFailed:
             {
-                //NSLog(@"AVKeyValueStatusFailed失败,请检查网络,或查看plist中是否添加App Transport Security Settings");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.activityIndeView stopAnimating];
+                    self.controlView.userInteractionEnabled = NO;
+                    [self addErrorView];
+                    
+                });
             }
                 break;
             case AVKeyValueStatusCancelled:
@@ -144,7 +165,25 @@ static NSInteger count = 0;
 -(void)addPeriodicTimeObserver{
     __weak typeof(self) weakSelf = self;
     playbackTimerObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1.f, 1.f) queue:NULL usingBlock:^(CMTime time) {
-        weakSelf.controlView.value = weakSelf.item.currentTime.value/weakSelf.item.currentTime.timescale;
+        
+        CGFloat currectTime = weakSelf.item.currentTime.value/weakSelf.item.currentTime.timescale;
+        weakSelf.controlView.value = currectTime;
+        
+        if (weakSelf.tryWatchTime) {
+            if (currectTime>= weakSelf.tryWatchTime) {
+                [weakSelf pause];
+                weakSelf.playerTryWatchFinishView.hidden = NO;
+                [weakSelf setSubViewsIsHide:NO];
+                
+
+            }
+
+        }
+        
+        
+        
+        
+        
         if (!CMTIME_IS_INDEFINITE(self.anAsset.duration)) {
             weakSelf.controlView.currentTime = [weakSelf convertTime:weakSelf.controlView.value];
         }
@@ -200,14 +239,20 @@ static NSInteger count = 0;
         }
     } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
         NSLog(@"缓冲达到可播放");
+        _status = SBPlayerStatusCanPlay;
+
         [self.activityIndeView stopAnimating];
     } else if ([keyPath isEqualToString:@"rate"]){//当rate==0时为暂停,rate==1时为播放,当rate等于负数时为回放
         if ([[change objectForKey:NSKeyValueChangeNewKey]integerValue]==0) {
             _isPlaying=false;
             _status = SBPlayerStatusPlaying;
+            self.controlView.playButton.selected = NO;
+            
         }else{
             _isPlaying=true;
             _status = SBPlayerStatusStopped;
+            self.controlView.playButton.selected = YES;
+
         }
     }
 
@@ -230,6 +275,8 @@ static NSInteger count = 0;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(SBPlayerItemDidPlayToEndTimeNotification:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.player currentItem]];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(deviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+
 }
 //MARK: NotificationCenter
 -(void)SBPlayerItemDidPlayToEndTimeNotification:(NSNotification *)notification{
@@ -296,13 +343,23 @@ static NSInteger count = 0;
 
 }
 -(void)willResignActive:(NSNotification *)notification{
+    _isHadPlay = _isPlaying;
+    
     if (_isPlaying) {
         [self setSubViewsIsHide:NO];
         count = 0;
         [self pause];
-        [self.pauseOrPlayView.imageBtn setSelected:NO];
+        [self.controlView.playButton setSelected:NO];
     }
 }
+-(void)applicationDidBecomeActive:(NSNotification *)notification{
+    if (_isHadPlay) {
+        [self play];
+        [self setSubViewsIsHide:NO];
+        [self.controlView.playButton setSelected:YES];
+    }
+}
+
 
 //获取当前屏幕显示的viewcontroller
 - (UIViewController *)getCurrentVC
@@ -334,19 +391,19 @@ static NSInteger count = 0;
 }
 //MARK: 设置界面 在此方法下面可以添加自定义视图，和删除视图
 -(void)setupPlayerUI{
-    [self.activityIndeView startAnimating];
-    //添加标题
-    [self addTitle];
     //添加点击事件
     [self addGestureEvent];
-    //添加播放和暂停按钮
-//    [self addPauseAndPlayBtn];
     //添加控制视图
     [self addControlView];
     //添加加载视图
     [self addLoadingView];
     //初始化时间
     [self initTimeLabels];
+    //添加播放开始视图
+    [self addPlayerStateView];
+    //添加标题
+    [self addTitle];
+
 }
 //初始化时间
 -(void)initTimeLabels{
@@ -357,29 +414,75 @@ static NSInteger count = 0;
 -(void)addLoadingView{
     [self addSubview:self.activityIndeView];
     [self.activityIndeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(@80);
+        make.width.height.mas_equalTo(@64);
         make.center.mas_equalTo(self);
     }];
 }
 //添加标题
 -(void)addTitle{
     [self addSubview:self.titleView];
+    [self bringSubviewToFront:self.titleView];
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self);
-        make.top.mas_equalTo(self).offset(12);
+        make.top.mas_equalTo(self).offset(0);
         make.width.mas_equalTo(self.mas_width);
+        make.height.offset(44);
     }];
+}
+- (void)addErrorView{
+    [self addSubview:self.playerErrorView];
+    [self.playerErrorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.center.equalTo(self);
+        make.width.offset(80);
+        make.height.offset(60);
+
+    }];
+    
+    
 }
 //添加点击事件
 -(void)addGestureEvent{
+    
+//    添加右滑手势：
+
+    
+    UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGRAct:)];
+    [self addGestureRecognizer:panGR];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapAction:)];
     tap.delegate = self;
+    [tap requireGestureRecognizerToFail:panGR];
     [self addGestureRecognizer:tap];
+
+
+}
+- (void)panGRAct: (UIPanGestureRecognizer *)rec{
+    
+    CGPoint point = [rec translationInView:self];
+    
+    WQLog(@"X:%@\nY:%@",@(point.x),@(point.y));
+    
+    
 }
 -(void)handleTapAction:(UITapGestureRecognizer *)gesture{
-    [self setSubViewsIsHide:NO];
-    count = 0;
+    
+    if (_playerTryWatchFinishView) {
+        if (!_playerTryWatchFinishView.hidden) {
+            [self setSubViewsIsHide:NO];
+            count = 0;
+            return;
+        }
+    }
+    if (self.controlView.hidden) {
+        [self setSubViewsIsHide:NO];
+        count = 0;
+    }else{
+        [self setSubViewsIsHide:YES];
+        count = 6;
+    }
 }
+#pragma mark- ################## 懒加载视图 ################################
 //添加播放和暂停按钮
 -(void)addPauseAndPlayBtn{
     [self addSubview:self.pauseOrPlayView];
@@ -389,6 +492,16 @@ static NSInteger count = 0;
         make.bottom.equalTo(self.controlView);
     }];
 }
+//添加控制视图
+-(void)addPlayerStateView{
+    [self addSubview:self.playerStateView];
+    [_playerStateView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.bottom.equalTo(self);
+    }];
+    [self layoutIfNeeded];
+
+}
+
 //添加控制视图
 -(void)addControlView{
 
@@ -424,6 +537,17 @@ static NSInteger count = 0;
     }
     return _titleView;
 }
+//懒加载开始视图
+- (SBPlayerStateView *)playerStateView{
+    if (!_playerStateView) {
+        _playerStateView = [[SBPlayerStateView alloc]init];
+        _playerStateView.hidden = YES;
+        _playerStateView.delegate = self;
+        
+    }
+    return _playerStateView;
+}
+
 //懒加载暂停或者播放视图
 -(SBPauseOrPlayView *)pauseOrPlayView{
     if (!_pauseOrPlayView) {
@@ -443,11 +567,40 @@ static NSInteger count = 0;
     }
     return _controlView;
 }
+
+- (PlayerTryWatchFinishView *)playerTryWatchFinishView{
+    if (!_playerTryWatchFinishView) {
+        _playerTryWatchFinishView = [[[NSBundle mainBundle] loadNibNamed:@"PlayerTryWatchFinishView" owner:nil options:nil] firstObject];
+        _playerTryWatchFinishView.delegate = self;
+        
+        [self addSubview:_playerTryWatchFinishView];
+        
+        [_playerTryWatchFinishView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.right.bottom.equalTo(self);
+            
+        }];
+        _playerTryWatchFinishView.hidden = YES;
+        
+        
+    }
+    [self bringSubviewToFront:self.titleView];
+    return _playerTryWatchFinishView;
+    
+}
+- (SBPlayerErrorView *)playerErrorView{
+    if (!_playerErrorView) {
+        _playerErrorView = [[SBPlayerErrorView alloc]init];
+    }
+    return _playerErrorView;
+    
+}
 //设置子视图是否隐藏
 -(void)setSubViewsIsHide:(BOOL)isHide{
-    self.controlView.hidden = isHide;
-    self.pauseOrPlayView.hidden = isHide;
-    self.titleView.hidden = isHide;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.controlView.hidden = isHide;
+        self.pauseOrPlayView.hidden = isHide;
+        self.titleView.hidden = isHide;
+    }];
 }
 //MARK: SBPauseOrPlayViewDeleagate
 -(void)pauseOrPlayView:(SBPauseOrPlayView *)pauseOrPlayView withState:(BOOL)state{
@@ -461,13 +614,34 @@ static NSInteger count = 0;
 //MARK: SBControlViewDelegate
 -(void)controlView:(SBControlView *)controlView pointSliderLocationWithCurrentValue:(CGFloat)value{
     count = 0;
-    CMTime pointTime = CMTimeMake(value * self.item.currentTime.timescale, self.item.currentTime.timescale);
-    [self.item seekToTime:pointTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    
+    if (_tryWatchTime&&value>=_tryWatchTime) {
+        CMTime pointTime = CMTimeMake(_tryWatchTime * self.item.currentTime.timescale, self.item.currentTime.timescale);
+        [self.item seekToTime:pointTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+        self.playerTryWatchFinishView.hidden = NO;
+        [self setSubViewsIsHide:NO];
+
+    }else{
+        CMTime pointTime = CMTimeMake(value * self.item.currentTime.timescale, self.item.currentTime.timescale);
+        [self.item seekToTime:pointTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+
+    }
 }
 -(void)controlView:(SBControlView *)controlView draggedPositionWithSlider:(UISlider *)slider{
     count = 0;
-    CMTime pointTime = CMTimeMake(controlView.value * self.item.currentTime.timescale, self.item.currentTime.timescale);
-    [self.item seekToTime:pointTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    if (_tryWatchTime&&controlView.value>=_tryWatchTime) {
+        CMTime pointTime = CMTimeMake(_tryWatchTime * self.item.currentTime.timescale, self.item.currentTime.timescale);
+        [self.item seekToTime:pointTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+        controlView.value = _tryWatchTime;
+        self.playerTryWatchFinishView.hidden = NO;
+        [self setSubViewsIsHide:NO];
+
+    }else{
+        CMTime pointTime = CMTimeMake(controlView.value * self.item.currentTime.timescale, self.item.currentTime.timescale);
+        [self.item seekToTime:pointTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+
+    }
+
 }
 -(void)controlView:(SBControlView *)controlView withLargeButton:(UIButton *)button{
     count = 0;
@@ -476,6 +650,16 @@ static NSInteger count = 0;
     }else{
         [self interfaceOrientation:UIInterfaceOrientationPortrait];
     }
+}
+- (void)controlView:(SBControlView *)controlView withPlayButton:(UIButton *)button{
+    if (button.selected) {
+        [self pause];
+    }else{
+        [self play];
+        
+    }
+    
+
 }
 //MARK: UIGestureRecognizer
 -(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
@@ -520,11 +704,14 @@ static NSInteger count = 0;
 }
 
 -(void)play{
+    count = 0;
+
     if (self.player) {
         [self.player play];
     }
 }
 -(void)pause{
+    count = 0;
     if (self.player) {
         [self.player pause];
     }
@@ -539,6 +726,8 @@ static NSInteger count = 0;
     [[NSNotificationCenter defaultCenter]removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.player currentItem]];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+
     if (self.player) {
         [self pause];
         self.anAsset = nil;
@@ -555,4 +744,42 @@ static NSInteger count = 0;
     [self interfaceOrientation:UIInterfaceOrientationPortrait];
 
 }
+//MARK: PlayerTryWatchFinishViewDelegate
+
+- (void)replyButtonClick:(QMUIButton *)button{
+    CMTime pointTime = CMTimeMake(0 * self.item.currentTime.timescale, self.item.currentTime.timescale);
+    [self.item seekToTime:pointTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    self.controlView.value = 0;
+    self.playerTryWatchFinishView.hidden = YES;
+
+    [self play];
+
+}
+- (void)buyVipButtonClick:(QMUIButton *)button{
+    if (_delegate) {
+        [_delegate buyVipButtonClick:button];
+    }
+    
+}
+- (void)buyButtonClick:(QMUIButton *)button{
+    
+    if (_delegate) {
+        [_delegate buyButtonClick:button];
+    }
+
+}
+- (void)playerStateViewclickPlayButton{
+    if (_delegate) {
+        [_delegate clickStateViewPlayButton];
+    }
+    if (_status != SBPlayerStatusCanPlay) {
+        if (!self.activityIndeView.isAnimating) {
+            [self.activityIndeView startAnimating];
+        }
+    }
+    [self play];
+    [self.playerStateView hiddenStateView];
+    
+}
+
 @end

@@ -8,10 +8,19 @@
 
 #import "SystemMessageViewController.h"
 #import "SystemMessageTableViewCell.h"
+#import "TKMessageInfo.h"
+
+#import "JobDetailViewController.h"
+#import "FindJodDetailViewController.h"
+#import "ArticleDetailViewController.h"
+#import "InteractionDetailViewController.h"
 
 @interface SystemMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,assign) NSInteger pageIndex;
+@property (nonatomic ,assign) NSInteger pageSize;
 
 @end
 
@@ -20,32 +29,100 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"系统消息"];
-    if (!_arrData) {
-        _arrData = [NSMutableArray arrayWithCapacity:0];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        
-    }
-    
     [self.tableView registerNib:[UINib nibWithNibName:@"SystemMessageTableViewCell" bundle:nil] forCellReuseIdentifier:@"SystemMessageTableViewCell"];
-    
-    [self.tableView beginRefreshing];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    _pageIndex = 1;
+    _pageSize = DEFAULT_PAGE_SIZE;
+    [self showLoadingView];
+    [self getData];
+
+}
+- (void)getData{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
+    [_netWorkEngine postWithDict:@{@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize),@"recommend_message":@"2"} url:BaseUrl(@"find.recommendMessage.by") succed:^(id responseObject) {
+        [self hideLoadingView];
         [self.tableView endRefresh];
         
-    });
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+            if (arr.count) {
+                if (!_arrData) {
+                    _arrData = [NSMutableArray array];
+                }
+                if (_pageIndex == 1) {
+                    [_arrData removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    TKMessageInfo *info = [TKMessageInfo mj_objectWithKeyValues:dict];
+                    [_arrData addObject:info];
+                }
+                [self.tableView reloadData];
+                if(arr.count<_pageSize){
+                    _tableView.canLoadMore = NO;
+                }else{
+                    _tableView.canLoadMore = YES;
+                }
+                
+            }else{
+                if (!_arrData.count) {
+                    [self showGetDataNullWithReloadBlock:^{
+                        [self showLoadingView];
+                        [self getData];
+                    }];
+                    
+                    
+                }else{
+                    _pageIndex--;
+                    
+                    [self showErrorWithStatus:NET_WAIT_NO_DATA];
+                    
+                }
+            }
+            
+        }else{
+            if (!_arrData.count) {
+                [self showGetDataNullWithReloadBlock:^{
+                    [self showLoadingView];
+                    [self getData];
+                }];
+                
+                
+            }else{
+                _pageIndex--;
+                
+                [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+                
+            }
+            
+        }
+        
+    } errorBlock:^(NSError *error) {
+        [self hideLoadingView];
+        [_tableView endRefresh];
+        if (_arrData.count) {
+            _pageIndex = 1;
+            
+            [self showErrorWithStatus:NET_ERROR_TOST];
+        }else{
+            _pageIndex = 1;
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self hideEmptyView];
+                [self showLoadingView];
+                [self getData];
+            }];
+            
+        }
+        
+    }];
     
-    [self.tableView reloadData];
 }
+
 - (WQTableView *)tableView{
     if (!_tableView) {
         _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStylePlain];
@@ -87,15 +164,73 @@
         cell.selectionStyle = 0;
 
     }
-    NSString *str = @"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1521952402362&di=3b06b6f5ac723680ea525ca52212d2c7&imgtype=0&src=http%3A%2F%2Fp1.gexing.com%2Fshaitu%2F20120726%2F1141%2F5010bc5a80fd5.jpg";
-    
-    [cell.mainImageView sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_21]];
+    TKMessageInfo *messageInfo =_arrData[indexPath.row];
+
+    cell.titleLabel.text = messageInfo.title;
+    [cell.mainImageView sd_imageDef21WithUrlStr:BaseUrl(messageInfo.picture_url)];
+    cell.timeLabel.text = [NSString timeReturnDateString:messageInfo.create_date formatter:@"yyyy-MM-dd HH:mm"];
+    cell.detailLabel.text = messageInfo.content;
     
     return cell;
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+
+
+//MARK: 根据ID 类型 跳转到相应详情
+- (void)jumpTodetailWithHistoryinfo:(TKMessageInfo *)info{
+    //  private Short data_type;//资料(信息)类型: 1岗位信息,2简历信息,3文件通知,4公示公告,5招投标信息,6教育培训,7互动交流,8企业信息(APP发布),9企业信息(WEB发布)
+    switch (info.data_type) {
+        case 1:
+        {
+            JobDetailViewController *viewController = [[JobDetailViewController alloc] initWithJobID:[NSString stringWithFormat:@"%@",@(info.data_id)]];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 2:{
+            
+            FindJodDetailViewController *viewController = [[FindJodDetailViewController alloc] initWithResumeID:[NSString stringWithFormat:@"%@",@(info.data_id)]];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 3:{
+            
+            ArticleDetailViewController *viewController = [[ArticleDetailViewController alloc] initWithArticleID:info.data_id fromType:1];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 4:{
+            
+            ArticleDetailViewController *viewController = [[ArticleDetailViewController alloc] initWithArticleID:info.data_id fromType:0];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+        case 7:{
+            
+            InteractionDetailViewController *viewController = [[InteractionDetailViewController alloc] initWithInteractionID:[NSString stringWithFormat:@"%@",@(info.data_id)]];
+            
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+            break;
+            
+            
+        default:
+            break;
+    }
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    TKMessageInfo *messageInfo =_arrData[indexPath.row];
+    [self jumpTodetailWithHistoryinfo:messageInfo];
 }
 
 - (void)didReceiveMemoryWarning {

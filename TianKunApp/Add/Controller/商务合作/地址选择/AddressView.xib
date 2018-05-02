@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AddressView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YvP-HP-GPp">
+                    <rect key="frame" x="0.0" y="0.0" width="125" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="请选择">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRh-nN-nGg">
+                    <rect key="frame" x="250" y="0.0" width="125" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="请选择">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-vf-oCh">
+                    <rect key="frame" x="125" y="0.0" width="125" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="请选择">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="IRh-nN-nGg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0gx-31-Fmn"/>
+                <constraint firstItem="IRh-nN-nGg" firstAttribute="leading" secondItem="1MI-vf-oCh" secondAttribute="trailing" id="2rx-q0-Red"/>
+                <constraint firstAttribute="trailing" secondItem="IRh-nN-nGg" secondAttribute="trailing" id="2tL-2b-SJO"/>
+                <constraint firstAttribute="bottom" secondItem="1MI-vf-oCh" secondAttribute="bottom" id="47A-U1-Zks"/>
+                <constraint firstItem="1MI-vf-oCh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4qr-OW-Ezc"/>
+                <constraint firstAttribute="bottom" secondItem="YvP-HP-GPp" secondAttribute="bottom" id="EzE-J1-nML"/>
+                <constraint firstItem="1MI-vf-oCh" firstAttribute="leading" secondItem="YvP-HP-GPp" secondAttribute="trailing" id="K7w-iB-OEa"/>
+                <constraint firstItem="YvP-HP-GPp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ovb-ur-K26"/>
+                <constraint firstItem="YvP-HP-GPp" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1/3" id="Stn-aT-KxE"/>
+                <constraint firstItem="YvP-HP-GPp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Xme-UJ-ALl"/>
+                <constraint firstItem="1MI-vf-oCh" firstAttribute="width" secondItem="YvP-HP-GPp" secondAttribute="width" id="gal-fY-b3r"/>
+                <constraint firstAttribute="bottom" secondItem="IRh-nN-nGg" secondAttribute="bottom" id="hzC-dK-qOx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="firstButton" destination="YvP-HP-GPp" id="hYz-Zr-LGB"/>
+                <outlet property="secondButton" destination="1MI-vf-oCh" id="CQI-6H-Frp"/>
+                <outlet property="thirdButton" destination="IRh-nN-nGg" id="FeM-jZ-k4A"/>
+            </connections>
+        </view>
+    </objects>
+</document>

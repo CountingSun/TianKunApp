@@ -17,8 +17,9 @@
 #import "MyPublickViewController.h"
 #import "UserInfoViewController.h"
 #import "UIView+AddTapGestureRecognizer.h"
+#import "BuyRecoredViewController.h"
 
-@interface UserCenterViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface UserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *headView;
@@ -28,7 +29,10 @@
 @property (weak, nonatomic) IBOutlet QMUIButton *recordButton;
 @property (weak, nonatomic) IBOutlet QMUIButton *pointButton;
 @property (weak, nonatomic) IBOutlet QMUIButton *publicButton;
+@property (weak, nonatomic) IBOutlet UIImageView *headBGimageView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *vipStateImageView;
+@property (nonatomic ,strong) UserInfo *userInfo;
 @property (nonatomic ,strong) NSMutableArray *arrMenu;
 @end
 
@@ -36,6 +40,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    
+    [self getUserInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -46,9 +52,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+    [self getUserInfo];
     
 }
+
+- (void)getUserInfo{
+    [[[NetWorkEngine alloc]init] postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} url:BaseUrl(@"my/userdetail.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if(code == 1 ){
+            _userInfo = [UserInfo mj_objectWithKeyValues:[[responseObject objectForKey:@"value"] objectForKey:@"usermessage"]];
+            
+            [UserInfoEngine setUserInfo:_userInfo];
+            
+            [_headImageView sd_imageWithUrlStr:[UserInfoEngine getUserInfo].headimg placeholderImage:@"头像"];
+            _nameLabel.text = _userInfo.nickname;
+            if (_userInfo.vip_status) {
+                [_vipStateImageView setImage:[UIImage imageNamed:@"VIP_open"]];
+            }else{
+                [_vipStateImageView setImage:[UIImage imageNamed:@"VIP_close"]];
+            }
+        }else{
+            
+        }
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
+    
+}
+
+
 - (void)setupUI{
+    
     
     _arrMenu = [UserCenterViewModel arrMenu];
     _tableView.delegate = self;
@@ -56,7 +91,11 @@
     _tableView.tableHeaderView = self.headView;
     _tableView.rowHeight = 45;
     _tableView.tableFooterView = [UIView new];
-    
+    if (@available(iOS 11.0, *)) {
+        _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+    }
+
     _headImageView.layer.masksToBounds = YES;
     _headImageView.layer.cornerRadius = _headImageView.qmui_width/2;
     [self.tableView reloadData];
@@ -134,6 +173,15 @@
             
         }
             break;
+        case 3:{
+            BuyRecoredViewController *viewController = [[BuyRecoredViewController alloc]init];
+            viewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:viewController animated:YES];
+
+            
+        }
+            break;
+            
         default:
             break;
     }
@@ -165,6 +213,28 @@
 
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat y = scrollView.contentOffset.y;
+    
+    NSLog(@"Y:%@",@(y));
+    if (y<0) {
+//        [_headBGimageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.equalTo(_vipButton.mas_top);
+//            make.centerX.equalTo(_headView);
+//            make.height.offset(206-y);
+//            make.width.offset(SCREEN_WIDTH);
+//        }];
+//        
+//        [_headView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.height.offset(206-y);
+//            make.width.offset(SCREEN_WIDTH);
+//        }];
+        
+    }else{
+        
+    }
+    
+}
 /*
 #pragma mark - Navigation
 

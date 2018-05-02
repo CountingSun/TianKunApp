@@ -26,6 +26,20 @@
 @end
 
 @implementation DynamicLoginViewController
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if ([[GCDTimer sharedInstance] existTimer:@"code"]) {
+        [[GCDTimer sharedInstance] cancelTimerWithName:@"code"];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,6 +56,7 @@
     _footView.backgroundColor = COLOR_VIEW_BACK;
     _countTime = GET_CODE_TIME;
     
+    [self.titleView setTitle:@"手机动态码登录"];
     [_loginButton setTitleColor:COLOR_WHITE forState:0];
     [_loginButton setBackgroundColor:COLOR_TEXT_ORANGE];
     
@@ -92,22 +107,21 @@
         [self showErrorWithStatus:@"请输入手机号"];
         return;
     }
-    
-    [self.netWorkEngine postWithDict:@{@"iphone":_nameString,@"state":@"1"} url:BaseUrl(@"lg/getcode.action") succed:^(id responseObject) {
-        
-        
-        NSString *msg = [responseObject objectForKey:@"value"];
-        
-        if (msg) {
-            [self setCodeButton];
+    [self showWithStatus:NET_WAIT_TOST];
+    _dynamicButton.enabled = NO;
+    [self.netWorkEngine postWithDict:@{@"iphone":_nameString,@"state":@"2"} url:BaseUrl(@"lg/getcode.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
             [self showSuccessWithStatus:@"获取验证码成功"];
+            [self setCodeButton];
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            _dynamicButton.enabled = YES;
         }
-        
-        
         
     } errorBlock:^(NSError *error) {
         [self showErrorWithStatus:NET_ERROR_TOST];
-        
+        _dynamicButton.enabled = YES;
     }];
     
 }
@@ -162,6 +176,11 @@
         [self showErrorWithStatus:@"请输入手机号"];
         return;
     }
+    if (![_nameString isMobileNum]) {
+        [self showErrorWithStatus:@"请输入正确的手机号"];
+        return;
+    }
+
     if (!_codeString) {
         [self showErrorWithStatus:@"请输入动态码"];
         return;
@@ -172,7 +191,7 @@
 - (void)userLogin{
     [self showWithStatus:NET_WAIT_TOST];
     
-    [self.netWorkEngine postWithDict:@{@"iphone":_nameString,@"yzm":_codeString} url:BaseUrl(@"lg/login.action") succed:^(id responseObject) {
+    [self.netWorkEngine postWithDict:@{@"iphone":_nameString,@"yzm":_codeString} url:BaseUrl(@"lg/dynamic_login.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
             [self.view endEditing:YES];

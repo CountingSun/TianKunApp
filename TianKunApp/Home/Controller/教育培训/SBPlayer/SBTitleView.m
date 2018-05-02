@@ -12,7 +12,7 @@
 - (instancetype)init{
     if (self = [super init]) {
         [self setupView];
-        self.backgroundColor = UIColorMask;
+        self.backgroundColor = [UIColor clearColor];
         
     }
     return self;
@@ -26,7 +26,8 @@
     _titleLabel. fadeLength = 15.0f;
     _titleLabel.trailingBuffer = 35.0f;
     [_titleLabel setTextColor:[UIColor whiteColor]];
-    
+    _titleLabel.shadowOffset = CGSizeMake(0, 1);
+    _titleLabel.shadowColor = COLOR_TEXT_BLACK;
     [self addSubview:_titleLabel];
     
     _backButton = [[QMUIButton alloc] init];

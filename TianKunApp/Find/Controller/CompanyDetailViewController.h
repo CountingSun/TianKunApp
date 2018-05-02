@@ -7,7 +7,18 @@
 //
 
 #import "WQBaseViewController.h"
+@class CompanyInfo;
 
 @interface CompanyDetailViewController : WQBaseViewController
+
+/**
+ <#Description#>
+
+ @param companyID <#companyID description#>
+ @param type 2 是带图片的
+ @return <#return value description#>
+ */
+- (instancetype)initWithCompanyID:(NSInteger)companyID type:(NSInteger)type;
+
 
 @end

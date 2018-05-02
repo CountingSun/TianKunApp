@@ -87,13 +87,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="HaJ-Et-9MI">
-                    <rect key="frame" x="20" y="0.0" width="65" height="60"/>
+                    <rect key="frame" x="20" y="0.0" width="60" height="60"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="60" id="hxY-2F-IxG"/>
                         <constraint firstAttribute="height" constant="60" id="x5D-ar-fK9"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="奈何" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOy-H3-2q1">
-                    <rect key="frame" x="90" y="10" width="29" height="20"/>
+                    <rect key="frame" x="85" y="10" width="29" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="8sv-1I-jPd"/>
                         <constraint firstAttribute="height" constant="20" id="NdM-IL-YLU"/>
@@ -102,8 +103,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="至2020/2/23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwA-QV-k7D">
-                    <rect key="frame" x="90" y="35" width="72" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwA-QV-k7D">
+                    <rect key="frame" x="85" y="35" width="0.0" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Uzt-vy-V6U"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" id="vj8-tT-cCt"/>
@@ -182,7 +183,7 @@
     <resources>
         <image name="vip" width="246" height="1"/>
         <image name="上传" width="41" height="41"/>
-        <image name="头像" width="65" height="65"/>
+        <image name="头像" width="112" height="112"/>
         <image name="背景" width="375" height="189"/>
     </resources>
 </document>

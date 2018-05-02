@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    _unReadPoint.layer.masksToBounds = YES;
+    _unReadPoint.layer.cornerRadius =  _unReadPoint.qmui_width/2;
 }
 - (void)setUnReadCount:(NSInteger)unReadCount{
     if (unReadCount == 0) {

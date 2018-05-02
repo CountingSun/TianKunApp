@@ -206,16 +206,136 @@
     
     NSString *str1=[NSString stringWithFormat:@"%@",num];
     
-    int x=[[str1 substringToIndex:10] intValue];
+    NSTimeInterval interval    =[str1 doubleValue] / 1000.0;
+    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
     
-    NSDate  *date1 = [NSDate dateWithTimeIntervalSince1970:x];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *dateString       = [dateFormatter stringFromDate: date];
     
-    NSDateFormatter *dateformatter=[[NSDateFormatter alloc]init];
+    return dateString;
+
+}
++ (NSString *)timeReturnDateString:(NSString *)str{
+    NSTimeInterval interval    =[str doubleValue] / 1000.0;
+    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
     
-    [dateformatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *dateString       = [dateFormatter stringFromDate: date];
     
-    return [dateformatter stringFromDate:date1];
+    return dateString;
+
+}
+/**
+ 将后台传的秒数转换为日期格式
+ */
+
++ (NSString *)timeReturnDateString:(NSString *)str formatter:(NSString *)formatter{
+    // iOS 生成的时间戳是10位
+    NSTimeInterval interval    =[str doubleValue] / 1000.0;
+    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatter];
+    NSString *dateString       = [dateFormatter stringFromDate: date];
+
+    return dateString;
+
+}
++ (NSString *)updateTimeForTimeString:(NSString *)timeString {
+    // 获取当前时时间戳 1466386762.345715 十位整数 6位小数
+    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    // 创建歌曲时间戳(后台返回的时间 一般是13位数字)
+    NSTimeInterval createTime = [timeString integerValue]/1000;
+    // 时间差
+    NSTimeInterval time = currentTime - createTime;
+    
+    // 秒转秒
+    NSInteger second = time;
+    if (second<60) {
+        return [NSString stringWithFormat:@"%ld秒前",second];
+    }
+
+    
+    // 秒转分钟
+    NSInteger minute = time/60;
+    if (minute<60) {
+        return [NSString stringWithFormat:@"%ld分钟前",minute];
+    }
+    // 秒转小时
+    NSInteger hours = time/3600;
+    if (hours<24) {
+        return [NSString stringWithFormat:@"%ld小时前",hours];
+    }
+    //秒转天数
+    NSInteger days = time/3600/24;
+    if (days < 30) {
+        return [NSString stringWithFormat:@"%ld天前",days];
+    }
+    //秒转月
+    NSInteger months = time/3600/24/30;
+    if (months < 12) {
+        return [NSString stringWithFormat:@"%ld月前",months];
+    }
+    //秒转年
+    NSInteger years = time/3600/24/30/12;
+    return [NSString stringWithFormat:@"%ld年前",years];
+}
++ (NSString *)updateTimeForTime:(NSInteger)times{
+    // 获取当前时时间戳 1466386762.345715 十位整数 6位小数
+    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+    // 创建歌曲时间戳(后台返回的时间 一般是13位数字)
+    NSTimeInterval createTime = times/1000;
+    // 时间差
+    NSTimeInterval time = currentTime - createTime;
+    
+    // 秒转秒
+    NSInteger second = time;
+    if (second<60) {
+        return [NSString stringWithFormat:@"%ld秒前",second];
+    }
+    
+    
+    // 秒转分钟
+    NSInteger minute = time/60;
+    if (minute<60) {
+        return [NSString stringWithFormat:@"%ld分钟前",minute];
+    }
+    // 秒转小时
+    NSInteger hours = time/3600;
+    if (hours<24) {
+        return [NSString stringWithFormat:@"%ld小时前",hours];
+    }
+    //秒转天数
+    NSInteger days = time/3600/24;
+    if (days < 30) {
+        return [NSString stringWithFormat:@"%ld天前",days];
+    }
+    //秒转月
+    NSInteger months = time/3600/24/30;
+    if (months < 12) {
+        return [NSString stringWithFormat:@"%ld月前",months];
+    }
+    //秒转年
+    NSInteger years = time/3600/24/30/12;
+    return [NSString stringWithFormat:@"%ld年前",years];
+
+}
++ (NSString *)getMillisecondWithTimeString:(NSString*)timeString formatter:(NSString *)formatter
+
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:formatter];
+    
+    NSDate *date1=[dateFormatter dateFromString:timeString];
+    
+    return [NSString stringWithFormat:@"%@",@([date1 timeIntervalSince1970]*1000)];
+    
+}
+-(NSString *)dealToCanLoadUrl{
+    return [self stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
 }
 
 @end

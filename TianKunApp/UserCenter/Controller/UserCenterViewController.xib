@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserCenterViewController">
             <connections>
+                <outlet property="headBGimageView" destination="Yaf-Bu-7mG" id="BLN-b2-XO4"/>
                 <outlet property="headImageView" destination="bUc-N6-hHC" id="49U-9I-A3h"/>
                 <outlet property="headView" destination="lqO-dd-qbH" id="l2P-ya-Cj3"/>
                 <outlet property="nameLabel" destination="MXU-yA-opa" id="5db-Q7-bs9"/>
@@ -21,6 +22,7 @@
                 <outlet property="tableView" destination="s6O-C9-Ku8" id="c99-mV-kQi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="vipButton" destination="JbI-fe-ejp" id="QBs-hh-ao2"/>
+                <outlet property="vipStateImageView" destination="3hH-eP-MLj" id="Fcb-UB-eTW"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -45,22 +47,20 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="328"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yaf-Bu-7mG">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_center_back" translatesAutoresizingMaskIntoConstraints="NO" id="Yaf-Bu-7mG">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="206"/>
-                    <color key="backgroundColor" red="0.36322450637817383" green="0.63158446550369263" blue="0.98442620038986206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="206" id="EAH-W5-zM3"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-N6-hHC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-N6-hHC">
                     <rect key="frame" x="145" y="43" width="85" height="85"/>
-                    <color key="backgroundColor" red="0.39515438675880432" green="0.24202769994735718" blue="0.25716349482536316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="85" id="SEh-Ks-5b7"/>
                         <constraint firstAttribute="height" constant="85" id="bLj-Lj-cG8"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="奈何" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXU-yA-opa">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXU-yA-opa">
                     <rect key="frame" x="15" y="150" width="345" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="ovE-Fd-nI0"/>
@@ -141,14 +141,23 @@
                         <constraint firstAttribute="height" constant="10" id="4Ng-AC-g42"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VIP_close" translatesAutoresizingMaskIntoConstraints="NO" id="3hH-eP-MLj">
+                    <rect key="frame" x="206" y="104" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="jBV-HM-207"/>
+                        <constraint firstAttribute="width" constant="24" id="viU-fo-4AK"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="3hH-eP-MLj" firstAttribute="trailing" secondItem="bUc-N6-hHC" secondAttribute="trailing" id="0C9-cR-XZr"/>
                 <constraint firstItem="UNW-GK-yvx" firstAttribute="top" secondItem="Yc8-ax-KOo" secondAttribute="bottom" id="3sO-8j-Kt3"/>
                 <constraint firstAttribute="trailing" secondItem="Yaf-Bu-7mG" secondAttribute="trailing" id="7Zt-D7-BQC"/>
                 <constraint firstAttribute="trailing" secondItem="MXU-yA-opa" secondAttribute="trailing" constant="15" id="8DL-eU-EeV"/>
                 <constraint firstItem="bUc-N6-hHC" firstAttribute="centerX" secondItem="lqO-dd-qbH" secondAttribute="centerX" id="Bhv-kq-AGx"/>
                 <constraint firstItem="Yaf-Bu-7mG" firstAttribute="leading" secondItem="lqO-dd-qbH" secondAttribute="leading" id="Knl-LJ-EZw"/>
+                <constraint firstItem="3hH-eP-MLj" firstAttribute="baseline" secondItem="bUc-N6-hHC" secondAttribute="baseline" id="XFH-3b-8he"/>
                 <constraint firstItem="Yc8-ax-KOo" firstAttribute="leading" secondItem="lqO-dd-qbH" secondAttribute="leading" id="iCb-S1-PYm"/>
                 <constraint firstAttribute="trailing" secondItem="UNW-GK-yvx" secondAttribute="trailing" id="jTu-K6-ekK"/>
                 <constraint firstItem="bUc-N6-hHC" firstAttribute="top" secondItem="lqO-dd-qbH" secondAttribute="top" constant="43" id="ktE-XA-fh4"/>
@@ -164,6 +173,9 @@
         </view>
     </objects>
     <resources>
+        <image name="VIP_close" width="22" height="20"/>
+        <image name="user_center_back" width="375" height="205"/>
+        <image name="头像" width="112" height="112"/>
         <image name="我的VIP" width="39" height="39"/>
         <image name="我的发布" width="39" height="39"/>
         <image name="明细记录" width="39" height="40"/>

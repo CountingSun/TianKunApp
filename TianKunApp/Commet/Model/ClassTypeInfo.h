@@ -11,5 +11,6 @@
 @interface ClassTypeInfo : NSObject
 @property (nonatomic ,copy) NSString *typeID;
 @property (nonatomic ,copy) NSString *typeName;
+@property (nonatomic ,assign) BOOL isSelect;
 
 @end

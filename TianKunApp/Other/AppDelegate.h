@@ -26,5 +26,8 @@
 -(void)setRootController;
 @property (nonatomic,assign) BOOL allowRotation;
 
+@property (nonatomic, copy) void(^aliPayFinishBlock)(NSDictionary *resultDic);
+@property (nonatomic, copy) void(^wexinPayFinishBlock)(NSInteger errorCode,NSString *message);
+
 @end
 

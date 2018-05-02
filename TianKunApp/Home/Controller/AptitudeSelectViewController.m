@@ -7,10 +7,10 @@
 //
 
 #import "AptitudeSelectViewController.h"
+#import "ClassTypeInfo.h"
 
 @interface AptitudeSelectViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *tableView;
-@property (nonatomic,strong)NSMutableArray *arrData;
 
 @end
 
@@ -25,20 +25,30 @@
     }
     return self;
 }
-
+- (void)setArrData:(NSMutableArray *)arrData{
+    _arrData = arrData;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+    
+}
+- (void)setIndexPath:(NSIndexPath *)indexPath{
+    _indexPath = indexPath;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    
 
 }
 -(UITableView *)tableView{
     
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.qmui_width, 200) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor whiteColor];
-        
+        _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
@@ -46,6 +56,7 @@
     
     
     return self.arrData.count;
+    
     
     
 }
@@ -59,32 +70,16 @@
         cell.textLabel.textColor = COLOR_TEXT_BLACK;
         cell.backgroundColor = COLOR_WHITE;
     }
-    cell.textLabel.text = self.arrData[indexPath.row];
+    ClassTypeInfo *info = self.arrData[indexPath.row];
+    cell.textLabel.text = info.typeName;
     return cell;
 }
 
--(NSMutableArray *)arrData{
-    
-    if (!_arrData) {
-        _arrData = [NSMutableArray array];
-        [_arrData addObject:@"工程设计1"];
-        [_arrData addObject:@"工程设计2"];
-        [_arrData addObject:@"工程设计3"];
-        [_arrData addObject:@"工程设计4"];
-        [_arrData addObject:@"工程设计5"];
-        [_arrData addObject:@"工程设计6"];
-        [_arrData addObject:@"工程设计7"];
-        [_arrData addObject:@"工程设计8"];
-        [_arrData addObject:@"工程设计9"];
-        [_arrData addObject:@"工程设计10"];
-
-    }
-    return _arrData;
-    
-}
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ClassTypeInfo *info = self.arrData[indexPath.row];
+
     if (_succeedBlock) {
-        _succeedBlock(self.arrData[indexPath.row]);
+        _succeedBlock(info,_indexPath);
         
     }
     [self dismissViewControllerAnimated:YES completion:nil];

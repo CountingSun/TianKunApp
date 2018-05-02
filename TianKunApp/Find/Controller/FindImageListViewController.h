@@ -9,6 +9,6 @@
 #import "WQBaseViewController.h"
 
 @interface FindImageListViewController : WQBaseViewController
-- (instancetype)initWithViewTitle:(NSString *)viewTitle;
+- (instancetype)initWithViewTitle:(NSString *)viewTitle classID:(NSString *)classID;
 
 @end

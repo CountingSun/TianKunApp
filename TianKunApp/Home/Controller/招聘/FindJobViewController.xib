@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FindJobViewController">
             <connections>
+                <outlet property="fileterPropertyView" destination="DbZ-DN-1Pq" id="nGg-O2-utG"/>
                 <outlet property="firstButton" destination="qSt-GQ-ZNM" id="Z1j-C0-EyG"/>
-                <outlet property="secondButton" destination="LaE-9l-Gxc" id="XI0-wD-bQX"/>
+                <outlet property="secondButton" destination="LaE-9l-Gxc" id="P7T-vQ-tff"/>
                 <outlet property="thirdButton" destination="pP1-2e-0ud" id="dqZ-Hd-NYt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,14 +37,14 @@
                                 <action selector="firstButtonClick:" destination="-1" eventType="touchUpInside" id="DoZ-pR-9I2"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaE-9l-Gxc">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LaE-9l-Gxc" customClass="QMUIButton">
                             <rect key="frame" x="126" y="0.0" width="125" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="工作性质">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
                             <connections>
-                                <action selector="secondButtonClick:" destination="-1" eventType="touchUpInside" id="HEO-Vu-Fz3"/>
+                                <action selector="secondButtonClick:" destination="-1" eventType="touchUpInside" id="gl9-TV-JKL"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gvu-Ur-4pB">
@@ -109,6 +110,57 @@
                 <constraint firstAttribute="bottom" secondItem="wGk-SN-g0v" secondAttribute="bottom" id="ymN-zs-1xD"/>
                 <constraint firstItem="wGk-SN-g0v" firstAttribute="top" secondItem="NTD-HO-4x0" secondAttribute="bottom" id="zoW-X2-3Sp"/>
             </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="DbZ-DN-1Pq">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmY-WD-Zty">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78D-xD-1mN">
+                            <rect key="frame" x="187.5" y="0.0" width="187.5" height="45"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="兼职">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="partTimeButtonClick:" destination="-1" eventType="touchUpInside" id="twT-px-Ux9"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L6D-EM-Iee">
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="45"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="全职">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="allTimeButtonClick:" destination="-1" eventType="touchUpInside" id="x4a-hC-ePl"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="78D-xD-1mN" secondAttribute="trailing" id="G6v-ch-CRE"/>
+                        <constraint firstItem="78D-xD-1mN" firstAttribute="top" secondItem="hmY-WD-Zty" secondAttribute="top" id="KS9-zW-T4c"/>
+                        <constraint firstAttribute="height" constant="45" id="MLy-hd-Y09"/>
+                        <constraint firstAttribute="bottom" secondItem="L6D-EM-Iee" secondAttribute="bottom" id="WX8-l7-xPq"/>
+                        <constraint firstItem="L6D-EM-Iee" firstAttribute="leading" secondItem="hmY-WD-Zty" secondAttribute="leading" id="m1z-Gk-LjM"/>
+                        <constraint firstItem="L6D-EM-Iee" firstAttribute="width" secondItem="hmY-WD-Zty" secondAttribute="width" multiplier="1/2" id="rFK-Gz-XqZ"/>
+                        <constraint firstItem="78D-xD-1mN" firstAttribute="leading" secondItem="L6D-EM-Iee" secondAttribute="trailing" id="rus-n8-5ae"/>
+                        <constraint firstItem="L6D-EM-Iee" firstAttribute="top" secondItem="hmY-WD-Zty" secondAttribute="top" id="sOU-5I-Nbv"/>
+                        <constraint firstAttribute="bottom" secondItem="78D-xD-1mN" secondAttribute="bottom" id="zDB-vL-F1W"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="hmY-WD-Zty" firstAttribute="leading" secondItem="DbZ-DN-1Pq" secondAttribute="leading" id="8Hl-HU-ouK"/>
+                <constraint firstItem="hmY-WD-Zty" firstAttribute="top" secondItem="DbZ-DN-1Pq" secondAttribute="top" id="NAH-2E-3Bq"/>
+                <constraint firstAttribute="trailing" secondItem="hmY-WD-Zty" secondAttribute="trailing" id="X9N-EF-xT2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="43.5" y="-678.5"/>
         </view>
     </objects>
 </document>

@@ -11,26 +11,12 @@
 #import "LoadingView.h"
 
 
-@interface WQBaseViewController ()<UINavigationControllerDelegate>
+@interface WQBaseViewController ()
 @property (nonatomic ,strong) LoadingView *loadingView;
 @property (nonatomic, copy) dispatch_block_t reloadBlock;
+@property (nonatomic ,strong) QMUIEmptyView *selfEmptyView;
 @end
 @implementation WQBaseViewController
-
--(void)setIsHiddenNav:(BOOL)isHiddenNav{
-    
-    if (isHiddenNav) {
-        self.navigationController.delegate = self;
-        
-    }
-}
-#pragma mark - UINavigationControllerDelegate
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    // 判断要显示的控制器是否是自己
-    BOOL isShowHomePage = [viewController isKindOfClass:[self class]];
-    
-    [self.navigationController setNavigationBarHidden:isShowHomePage animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -111,6 +97,10 @@
 }
 -(void)reloData{
     [self hideEmptyView];
+    
+    if (_selfEmptyView) {
+        [_selfEmptyView removeFromSuperview];
+    }
     if (_reloadBlock) {
         _reloadBlock();
     }
@@ -130,6 +120,57 @@
 
 }
 
+- (QMUIEmptyView *)selfEmptyView{
+    if (!_selfEmptyView) {
+        _selfEmptyView = [[QMUIEmptyView alloc]init];
+        _selfEmptyView.backgroundColor = COLOR_VIEW_BACK;
+        [_selfEmptyView setLoadingViewHidden:YES];
+
+    }
+    return _selfEmptyView;
+}
+- (void)showGetDataNullEmptyViewInView:(UIView *)view reloadBlock:(dispatch_block_t)reloadBlock{
+    _reloadBlock = reloadBlock;
+
+    [self.selfEmptyView setImage:[UIImage imageNamed:@"net_fail"]];
+    [self.selfEmptyView setActionButtonTitle:@"重新加载"];
+    [self.selfEmptyView setTextLabelText:@"暂无数据"];
+    [self.selfEmptyView.actionButton addTarget:self action:@selector(reloData) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:self.selfEmptyView];
+    self.selfEmptyView.frame = CGRectMake(0, 0, view.qmui_width, view.qmui_height);
+    
+    
+    
+}
+- (void)showGetDataFailEmptyViewInView:(UIView *)view reloadBlock:(dispatch_block_t)reloadBlock{
+    _reloadBlock = reloadBlock;
+    
+    [self.selfEmptyView setImage:[UIImage imageNamed:@"net_fail"]];
+    [self.selfEmptyView setActionButtonTitle:@"重新加载"];
+    [self.selfEmptyView setTextLabelText:@"网络连接失败"];
+    [self.selfEmptyView.actionButton addTarget:self action:@selector(reloData) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:self.selfEmptyView];
+    self.selfEmptyView.frame = CGRectMake(0, 0, view.qmui_width, view.qmui_height);
+    
+
+}
+- (void)showGetDataFailEmptyViewInView:(UIView *)view message:(NSString *)message reloadBlock:(dispatch_block_t)reloadBlock{
+    _reloadBlock = reloadBlock;
+    
+    [self.selfEmptyView setImage:[UIImage imageNamed:@"net_fail"]];
+    [self.selfEmptyView setActionButtonTitle:@"重新加载"];
+    [self.selfEmptyView setTextLabelText:message];
+    [self.selfEmptyView.actionButton addTarget:self action:@selector(reloData) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:self.selfEmptyView];
+    self.selfEmptyView.frame = CGRectMake(0, 0, view.qmui_width, view.qmui_height);
+    
+    
+}
+
+- (void)hideSelfEmptyView{
+    [self.selfEmptyView removeFromSuperview];
+
+}
 //- (void)
 - (void)dealloc{
     _loadingView = nil;

@@ -19,6 +19,8 @@
 @property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
 @property (nonatomic ,assign) NSInteger pageIndex;
 @property (nonatomic ,assign) NSInteger pageSize;
+@property (nonatomic ,assign) NSInteger classID;
+@property (nonatomic, copy) NSString *address;
 
 @end
 
@@ -39,6 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showLoadingView];
+    _classID = 0;
+    _address = @"";
 
     _pageIndex = 1;
     _pageSize = DEFAULT_PAGE_SIZE;
@@ -55,42 +59,61 @@
     if (_pageIndex<1) {
         _pageIndex = 1;
     }
-    
-    NSLog(@"pageIndex%@",@(_pageIndex));
-    [_netWorkEngine postWithDict:@{@"startnum":@(_pageIndex),@"num":@(_pageSize)} url:BaseUrl(@"CompanyListXinXi/selectAppCompanyList.action") succed:^(id responseObject) {
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(_pageIndex) forKey:@"startnum"];
+    [paraDict setObject:@(_pageSize) forKey:@"num"];
+    if (_classID) {
+        [paraDict setObject:@(_classID) forKey:@"id"];
+    }else{
+        [paraDict setObject:@"" forKey:@"id"];
+    }
+    [paraDict setObject:_address forKey:@"address"];
+
+    [_netWorkEngine postWithDict:paraDict url:BaseUrl(@"CompanyListXinXi/selectAppCompanyList.action") succed:^(id responseObject) {
         [self hideLoadingView];
         [self.tableView endRefresh];
         
-//        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
-        NSMutableArray *arr = [responseObject objectForKey:@"value"];
-        if (arr.count) {
-            if (!_arrData) {
-                _arrData = [NSMutableArray array];
-            }
-            if (_pageIndex == 1) {
-                [_arrData removeAllObjects];
-            }
-            
-            for (NSDictionary *dict in arr) {
-                CompanyInfo *companyInfo = [CompanyInfo mj_objectWithKeyValues:dict];
-                [_arrData addObject:companyInfo];
-            }
-            [self.tableView reloadData];
-
-        }else{
-            if (!_arrData.count) {
-                [self showGetDataNullWithReloadBlock:^{
-                    [self showLoadingView];
-                    [self getData];
-                }];
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [responseObject objectForKey:@"value"];
+            if (arr.count) {
+                if (!_arrData) {
+                    _arrData = [NSMutableArray array];
+                }
+                if (_pageIndex == 1) {
+                    [_arrData removeAllObjects];
+                }
                 
+                for (NSDictionary *dict in arr) {
+                    CompanyInfo *companyInfo = [CompanyInfo mj_objectWithKeyValues:dict];
+                    [_arrData addObject:companyInfo];
+                }
+                [self.tableView reloadData];
+                if(arr.count<_pageSize){
+                    _tableView.canLoadMore = NO;
+                }else{
+                    _tableView.canLoadMore = YES;
+                }
                 
             }else{
-                _pageIndex--;
-                
-                [self showErrorWithStatus:NET_WAIT_NO_DATA];
-
+                if (!_arrData.count) {
+                    [self showGetDataNullWithReloadBlock:^{
+                        [self showLoadingView];
+                        [self getData];
+                    }];
+                    
+                    
+                }else{
+                    _pageIndex--;
+                    
+                    [self showErrorWithStatus:NET_WAIT_NO_DATA];
+                    
+                }
             }
+
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+
         }
         
     } errorBlock:^(NSError *error) {
@@ -206,6 +229,15 @@
 - (void)searchBarSearchButton{
     
     ConstructionSearchViewController *vc= [[ConstructionSearchViewController alloc]init];
+    vc.sureButtonClickBlock = ^(NSString *address, NSString *selectID) {
+        _classID = [selectID integerValue];
+        _address = address;
+        [_arrData removeAllObjects];
+        _pageIndex = 1;
+        [self showLoadingView];
+        [self getData];
+
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)dealloc{

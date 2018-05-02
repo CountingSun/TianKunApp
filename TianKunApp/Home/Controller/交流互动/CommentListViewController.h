@@ -7,7 +7,9 @@
 //
 
 #import "WQBaseViewController.h"
+@class CommentInfo;
 
 @interface CommentListViewController : WQBaseViewController
+- (instancetype)initWithCommentInfo:(CommentInfo *)commentInfo;
 
 @end

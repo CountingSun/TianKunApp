@@ -7,6 +7,8 @@
 //
 
 #import "WQBaseViewController.h"
+@interface VipViewModel : NSObject
+@end
 
 @interface VIPUploadInfoViewController : WQBaseViewController
 

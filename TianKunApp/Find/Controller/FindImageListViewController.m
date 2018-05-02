@@ -9,19 +9,27 @@
 #import "FindImageListViewController.h"
 #import "FindImageListTableViewCell.h"
 #import "CompanyDetailViewController.h"
+#import "EnterpriseInfo.h"
+#import "CompanyInfo.h"
+#import "FindListTableViewCell.h"
 
 @interface FindImageListViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
 @property (nonatomic, copy) NSString *viwTitle;
+@property (nonatomic ,copy)NSString * classID;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,assign) NSInteger pageIndex;
+@property (nonatomic ,assign) NSInteger pageSize;
 
 @end
 
 @implementation FindImageListViewController
 
-- (instancetype)initWithViewTitle:(NSString *)viewTitle{
+- (instancetype)initWithViewTitle:(NSString *)viewTitle classID:(NSString *)classID{
     if (self = [super init]) {
         _viwTitle = viewTitle;
+        _classID = classID;
         
     }
     return self;
@@ -30,31 +38,102 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:_viwTitle];
-    if (!_arrData) {
-        _arrData = [NSMutableArray arrayWithCapacity:0];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        
-    }
-    
+    _pageIndex = 1;
+    _pageSize = DEFAULT_PAGE_SIZE;
+
     [self.tableView registerNib:[UINib nibWithNibName:@"FindImageListTableViewCell" bundle:nil] forCellReuseIdentifier:@"FindImageListTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"FindListTableViewCell" bundle:nil] forCellReuseIdentifier:@"FindListTableViewCell"];
+
+    [self showLoadingView];
+    [self getData];
     
-    [self.tableView beginRefreshing];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView endRefresh];
+}
+- (void)getData{
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
+
+    [self.netWorkEngine postWithDict:@{@"categoryid":_classID,@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.by.enterpriseList") succed:^(id responseObject) {
+        [self hideLoadingView];
+        [_tableView endRefresh];
+
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+            if (arr.count) {
+                if (!_arrData) {
+                    _arrData = [NSMutableArray array];
+                }
+                if (_pageIndex == 1) {
+                    [_arrData removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    EnterpriseInfo *enterpriseInfo = [EnterpriseInfo mj_objectWithKeyValues:dict];
+                    [_arrData addObject:enterpriseInfo];
+                }
+                [self.tableView reloadData];
+                if(arr.count<_pageSize){
+                    _tableView.canLoadMore = NO;
+                }else{
+                    _tableView.canLoadMore = YES;
+                }
+                
+            }else{
+                if (!_arrData.count) {
+                    [self showGetDataNullWithReloadBlock:^{
+                        [self showLoadingView];
+                        [self getData];
+                    }];
+                    
+                    
+                }else{
+                    _pageIndex--;
+                    
+                    [self showErrorWithStatus:NET_WAIT_NO_DATA];
+                    
+                }
+            }
+            
+        }else{
+            if (!_arrData.count) {
+                [self showGetDataNullWithReloadBlock:^{
+                    [self showLoadingView];
+                    [self getData];
+                }];
+                
+                
+            }else{
+                _pageIndex--;
+                
+                [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+                
+            }
+            
+        }
         
-    });
+
+        
+        
+    } errorBlock:^(NSError *error) {
+        [self hideLoadingView];
+        [_tableView endRefresh];
+        if (_arrData.count) {
+            _pageIndex = 1;
+            
+            [self showErrorWithStatus:NET_ERROR_TOST];
+        }else{
+            _pageIndex = 1;
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self hideEmptyView];
+                [self showLoadingView];
+                [self getData];
+            }];
+            
+        }
+
+    }];
     
-    [self.tableView reloadData];
 }
 - (WQTableView *)tableView{
     if (!_tableView) {
@@ -63,14 +142,20 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 60;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        __weak typeof(self) weakSelf = self;
+
         [_tableView headerWithRefreshingBlock:^{
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_tableView endRefresh];
-                
-            });
+            _pageIndex = 1;
+            [weakSelf getData];
+
+        }];
+        [_tableView footerWithRefreshingBlock:^{
+            _pageIndex ++;
+            [weakSelf getData];
             
         }];
+
         [self.view addSubview:_tableView];
         
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,27 +174,54 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    FindImageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindImageListTableViewCell"];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"FindImageListTableViewCell" owner:nil options:nil] firstObject];
-        cell.titleLabel.textColor = COLOR_TEXT_BLACK;
-        cell.detailLabel.textColor = COLOR_TEXT_LIGHT;
+    EnterpriseInfo *enterpriseInfo = _arrData[indexPath.row];
 
-    }
-    cell.iconImageView.image = [UIImage imageNamed:DEFAULT_IMAGE_11];
-    cell.titleLabel.text = @"标题标题标题标题标题标题标题";
-    cell.detailLabel.text = @"详细详细详细详细详细详细详细";
+//    if ([_classID isEqualToString:@"23"]) {
+//        FindListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindListTableViewCell"];
+//        if (!cell) {
+//            cell = [[[NSBundle mainBundle] loadNibNamed:@"FindImageListTableViewCell" owner:nil options:nil] firstObject];
+//
+//        }
+//        cell.titleLabel.text = enterpriseInfo.enterprise_name;
+//        cell.detailLabel.text = enterpriseInfo.enterprise_introduce;
+//
+//        cell.selectionStyle = 0;
+//        return cell;
+//
+//    }else{
+        FindImageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindImageListTableViewCell"];
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"FindImageListTableViewCell" owner:nil options:nil] firstObject];
+            cell.titleLabel.textColor = COLOR_TEXT_BLACK;
+            cell.detailLabel.textColor = COLOR_TEXT_LIGHT;
+            
+        }
+    
+        [cell.iconImageView sd_imageDef11WithUrlStr:BaseUrl(enterpriseInfo.picture_url)];;
+        cell.titleLabel.text = enterpriseInfo.enterprise_name;
+        cell.detailLabel.text = enterpriseInfo.enterprise_introduce;
+        
+        cell.selectionStyle = 0;
+        return cell;
 
-    cell.selectionStyle = 0;
-    return cell;
+//    }
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CompanyDetailViewController *viewController = [[CompanyDetailViewController alloc]init];
+    EnterpriseInfo *enterpriseInfo = _arrData[indexPath.row];
+
+    CompanyDetailViewController *viewController = [[CompanyDetailViewController alloc]initWithCompanyID:enterpriseInfo.enterprise_id type:2];
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
-
+- (NetWorkEngine *)netWorkEngine{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+        
+    }
+    return _netWorkEngine;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

@@ -11,6 +11,10 @@
 #import "ArticleCommentTableViewCell.h"
 #import "HomeListTableViewCell.h"
 #import "WriteArticleViewController.h"
+#import "HomePublicInfo.h"
+#import "CommentInfo.h"
+#import "FileNoticceInfo.h"
+#import "AppShared.h"
 
 @interface ArticleDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate>
 
@@ -22,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet QMUIButton *lookMoreButton;
 @property (nonatomic ,assign) NSInteger count;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *lodingView;
 
 /**
  精彩留言
@@ -32,45 +37,366 @@
  相关推荐
  */
 @property (nonatomic ,strong) NSMutableArray *arrAbout;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,assign) NSInteger pageIndex;
+@property (nonatomic ,assign) NSInteger pageSize;
+@property (nonatomic ,assign) NSInteger articleID;
+@property (nonatomic ,assign) NSInteger fromType;
 
-
+@property (nonatomic ,assign) NSInteger pageIndexAbout;
+@property (nonatomic ,assign) NSInteger pageSizeAbout;
+@property (nonatomic ,strong) HomePublicInfo *publicInfo;
 @end
 
 @implementation ArticleDetailViewController
+- (instancetype)initWithArticleID:(NSInteger)articleID fromType:(NSInteger)fromType{
+    if (self = [super init]) {
+        _articleID = articleID;
+        _fromType = fromType;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"详情"];
-
-    _arrAbout = [NSMutableArray array];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-    [_arrAbout addObject:@""];
-
-    _arrMessage = [NSMutableArray array];
-    [_arrMessage addObject:@"AAAAAAA0"];
-    [_arrMessage addObject:@"AAAAAAA1"];
-    [_arrMessage addObject:@"AAAAAAA2"];
+    _pageSize = DEFAULT_PAGE_SIZE;
+    _pageIndex = 1;
+    _pageSizeAbout = DEFAULT_PAGE_SIZE;
+    _pageIndexAbout = 1;
 
     _count = 2;
-
+    [_lodingView stopAnimating];
+    _lodingView.hidesWhenStopped = YES;
     [self.tableView reloadData];
-    [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://baike.baidu.com/item/iOS/45705?fr=aladdin"]]];
     [self showLoadingView];
+    if (_fromType == 1) {
+        [self getData];
+
+    }else{
+        [self getPublic];
+
+    }
 
     
 }
+
+
+- (void)getData{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(1) forKey:@"startnum"];
+    [paraDict setObject:@(1) forKey:@"endnum"];
+    [paraDict setObject:@(_articleID) forKey:@"id"];
+
+    if ([UserInfoEngine getUserInfo].userID) {
+        [paraDict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userid"];
+
+    }
+    [_netWorkEngine postWithDict:paraDict url:BaseUrl(@"ArticleNotices/findarticlenoticexqszzfnumbyid.action") succed:^(id responseObject) {
+        
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSDictionary *dict = [responseObject objectForKey:@"value"];
+            _publicInfo = [[HomePublicInfo alloc]init];
+            _publicInfo.publicID = [dict objectForKey:@"id"];
+            _publicInfo.announcement_label = [dict objectForKey:@"article_label"];
+            _publicInfo.create_date = [dict objectForKey:@"create_date"];
+            _publicInfo.yonghushoucangid = [[dict objectForKey:@"yonghushoucangid"] integerValue];
+            _publicInfo.zfnum = [[dict objectForKey:@"zfnum"] integerValue];
+            _publicInfo.sznum = [[dict objectForKey:@"sznum"] integerValue];
+
+            _publicInfo.article_type = [[dict objectForKey:@"article_type"] integerValue];
+            _publicInfo.announcement_details_url = [dict objectForKey:@"article_details_url"];
+            
+            
+            [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_publicInfo.announcement_details_url dealToCanLoadUrl]]]];
+
+            [self getCommentList];
+            [self getRecommend];
+            
+            
+        }else{
+            [self showGetDataErrorWithMessage:[responseObject objectForKey:@"msg"] reloadBlock:^{
+                [self showLoadingView];
+                [self getData];
+            }];
+        }
+        
+    } errorBlock:^(NSError *error) {
+        _pageIndex --;
+        _pageIndex --;
+        [self hideLoadingView];
+        [self.tableView endRefresh];
+        [self showGetDataErrorWithMessage:NET_ERROR_TOST reloadBlock:^{
+            [self getData];
+        }];
+
+    }];
+    
+}
+//MARK:获取评论列表
+- (void)getCommentList{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(_pageIndex) forKey:@"startnum"];
+    [paraDict setObject:@(_pageSize) forKey:@"endnum"];
+    [paraDict setObject:@(_articleID) forKey:@"id"];
+    
+    [_netWorkEngine postWithDict:paraDict url:BaseUrl(@"ArticleNotices/selectcommentlist.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        [_lodingView stopAnimating];
+
+        _lookMoreButton.hidden = NO;
+        
+
+        if (code == 1) {
+            NSMutableArray *arr = [responseObject objectForKey:@"value"];
+            if (arr.count) {
+                if (!_arrMessage) {
+                    _arrMessage = [NSMutableArray array];
+                }
+                if (_pageIndex == 1) {
+                    [_arrMessage removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    CommentInfo *commentInfo = [CommentInfo mj_objectWithKeyValues:dict];
+                    commentInfo.commen =[dict objectForKey:@"content"];
+                    
+                    [_arrMessage addObject:commentInfo];
+                }
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+
+            }else{
+                _pageIndex --;
+
+            }
+            
+        }else{
+        }
+        
+    } errorBlock:^(NSError *error) {
+        [_lodingView stopAnimating];
+        _lookMoreButton.hidden = NO;
+        [self hideLoadingView];
+        _pageIndex --;
+        
+    }];
+
+}
+//MARK:获取推荐列表
+- (void)getRecommend{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(_pageIndexAbout) forKey:@"startnum"];
+    [paraDict setObject:@(_pageSizeAbout) forKey:@"endnum"];
+    [paraDict setObject:@(_publicInfo.article_type) forKey:@"article_type"];
+    
+    [_netWorkEngine postWithDict:paraDict url:BaseUrl(@"ArticleNotices/selectrecommend.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [responseObject objectForKey:@"value"];
+            if (arr.count) {
+                if (!_arrAbout) {
+                    _arrAbout = [NSMutableArray array];
+                }
+                if (_pageIndexAbout == 1) {
+                    [_arrAbout removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    FileNoticceInfo *info = [FileNoticceInfo mj_objectWithKeyValues:dict];
+                    [_arrAbout addObject:info];
+                }
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                
+            }else{
+                _pageIndexAbout --;
+                
+            }
+            
+        }else{
+        }
+        
+    } errorBlock:^(NSError *error) {
+        _lookMoreButton.hidden = NO;
+        _pageIndexAbout --;
+        
+    }];
+    
+}
+- (void)getPublic{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(1) forKey:@"startnum"];
+    [paraDict setObject:@(1) forKey:@"endnum"];
+    [paraDict setObject:@(_articleID) forKey:@"id"];
+    
+    if ([UserInfoEngine getUserInfo].userID) {
+        [paraDict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userid"];
+        
+    }
+    [_netWorkEngine postWithDict:paraDict url:BaseUrl(@"Announcement/findAnnouncementbyid.action") succed:^(id responseObject) {
+        [self hideLoadingView];
+        [self.tableView endRefresh];
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSDictionary *dict = [responseObject objectForKey:@"value"];
+            _publicInfo = [[HomePublicInfo alloc]init];
+            _publicInfo.publicID = [dict objectForKey:@"id"];
+            _publicInfo.announcement_label = [dict objectForKey:@"announcement_label"];
+            _publicInfo.create_date = [dict objectForKey:@"create_date"];
+            _publicInfo.yonghushoucangid = [[dict objectForKey:@"yonghushoucangid"] integerValue];
+            _publicInfo.zfnum = [[dict objectForKey:@"zfnum"] integerValue];
+            _publicInfo.sznum = [[dict objectForKey:@"sznum"] integerValue];\
+            _publicInfo.announcement_details_url = [dict objectForKey:@"announcement_details_url"];
+            _publicInfo.article_type = [[dict objectForKey:@"article_type"] integerValue];
+
+            [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_publicInfo.announcement_details_url dealToCanLoadUrl]]]];
+
+            [self getPublicCommentList];
+            [self getPublicRecommend];
+            
+            
+        }else{
+            [self showGetDataErrorWithMessage:[responseObject objectForKey:@"msg"] reloadBlock:^{
+                [self getPublic];
+            }];
+            
+        }
+        
+    } errorBlock:^(NSError *error) {
+        _pageIndex --;
+        [self hideLoadingView];
+        [self.tableView endRefresh];
+        [self showGetDataErrorWithMessage:NET_ERROR_TOST reloadBlock:^{
+            [self getPublic];
+        }];
+    }];
+
+}
+- (void)getPublicCommentList{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(_pageIndex) forKey:@"startnum"];
+    [paraDict setObject:@(_pageSize) forKey:@"endnum"];
+    [paraDict setObject:@(_articleID) forKey:@"id"];
+    
+    [_netWorkEngine postWithDict:paraDict url:BaseUrl(@"Announcement/selectcommentlist.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        
+        _lookMoreButton.hidden = NO;
+        
+        
+        if (code == 1) {
+            NSMutableArray *arr = [responseObject objectForKey:@"value"];
+            if (arr.count) {
+                if (!_arrMessage) {
+                    _arrMessage = [NSMutableArray array];
+                }
+                if (_pageIndex == 1) {
+                    [_arrMessage removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    CommentInfo *commentInfo = [CommentInfo mj_objectWithKeyValues:dict];
+                    commentInfo.commen =[dict objectForKey:@"content"];
+                    
+                    [_arrMessage addObject:commentInfo];
+                }
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+                
+            }else{
+                _pageIndex --;
+                
+            }
+            
+        }else{
+        }
+        
+    } errorBlock:^(NSError *error) {
+        [_lodingView stopAnimating];
+        _lookMoreButton.hidden = NO;
+        [self hideLoadingView];
+        _pageIndex --;
+        
+    }];
+    
+
+}
+- (void)getPublicRecommend{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
+    NSMutableDictionary *paraDict = [NSMutableDictionary dictionary];
+    [paraDict setObject:@(_pageIndexAbout) forKey:@"startnum"];
+    [paraDict setObject:@(_pageSizeAbout) forKey:@"endnum"];
+    
+    [_netWorkEngine postWithDict:paraDict url:BaseUrl(@"Announcement/selectrecommend.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [responseObject objectForKey:@"value"];
+            if (arr.count) {
+                if (!_arrAbout) {
+                    _arrAbout = [NSMutableArray array];
+                }
+                if (_pageIndexAbout == 1) {
+                    [_arrAbout removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    FileNoticceInfo *info = [FileNoticceInfo mj_objectWithKeyValues:dict];
+                    info.article_title = [dict objectForKey:@"announcement_title"];
+                    info.article_details = [dict objectForKey:@"announcement_details"];
+
+                    
+                    [_arrAbout addObject:info];
+                }
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+                
+            }else{
+                _pageIndexAbout --;
+                
+            }
+            
+        }else{
+        }
+        
+    } errorBlock:^(NSError *error) {
+        _lookMoreButton.hidden = NO;
+        _pageIndexAbout --;
+        
+    }];
+
+}
 - (UIWebView *)headerView {
     if (!_headerView) {
-        _headerView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.1)];
+        _headerView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.01)];
         _headerView.delegate = self;
-        
+        _headerView.scrollView.bouncesZoom = NO;
         [_headerView.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew context:nil];
     }
     return _headerView;
@@ -121,8 +447,21 @@
         ArticleDetailTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ArticleDetailTimeTableViewCell"];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"ArticleDetailTimeTableViewCell" owner:nil options:nil] firstObject];
+            [cell.shareButton addTarget:self action:@selector(shareButtonClick) forControlEvents:UIControlEventTouchUpInside];
+            [cell.collectButton addTarget:self action:@selector(collectButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+
         }
+        if (_publicInfo.yonghushoucangid) {
+            cell.collectButton.selected = YES;
+        }else{
+            cell.collectButton.selected = NO;
+        }
+        [cell.collectButton setTitle:[NSString stringWithFormat:@"%@",@(_publicInfo.sznum)] forState:0];
+        [cell.shareButton setTitle:[NSString stringWithFormat:@"%@",@(_publicInfo.zfnum)] forState:0];
+        cell.timeLabel.text = [NSString timeReturnDateString:_publicInfo.create_date formatter:@"yyyy-MM-dd"];
+        
         cell.selectionStyle = 0;
+        
         return cell;
 
     }else if (indexPath.section == 1){
@@ -130,7 +469,12 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"ArticleCommentTableViewCell" owner:nil options:nil] firstObject];
         }
-        cell.naemLabel.text = _arrMessage[indexPath.row];
+        CommentInfo *info = _arrMessage[indexPath.row];
+        cell.timeLabel.text = [NSString timeReturnDateString:info.create_date formatter:@"yyyy-MM-dd"] ;
+        cell.contentLbel.text = info.commen;
+        cell.naemLabel.text = info.username;
+        [cell.headImageView sd_imageWithUrlStr:info.touxiang placeholderImage:@"头像"];
+
         cell.selectionStyle = 0;
         return cell;
 
@@ -139,6 +483,12 @@
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeListTableViewCell" owner:nil options:nil] firstObject];
         }
+        FileNoticceInfo *info = _arrAbout[indexPath.row];
+        
+        [cell.titleImageView sd_imageDef11WithUrlStr:[NSString stringWithFormat:@"%@%@",BaseUrl(@"image/appIcon/"),info.article_pictures]];
+        cell.titleLabel.text = info.article_title;
+        cell.detailLabel.text = info.article_details;
+
         cell.selectionStyle = 0;
         return cell;
 
@@ -182,6 +532,17 @@
     }
     return [UIView new];
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 2) {
+        FileNoticceInfo *info = _arrAbout[indexPath.row];
+        
+        ArticleDetailViewController *vc = [[ArticleDetailViewController alloc]initWithArticleID:[info.article_id integerValue] fromType:_fromType];
+        
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
+}
 #pragma mark-
 - (void)webViewDidStartLoad:(UIWebView *)webView{
 }
@@ -196,29 +557,118 @@
     [self showGetDataNullWithReloadBlock:^{
         [self showLoadingView];
 
-        [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://baike.baidu.com/item/iOS/45705?fr=aladdin"]]];
+        [self.headerView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[_publicInfo.announcement_details_url dealToCanLoadUrl]]]];
     }];
     
     
 }
+#pragma mark -- 拦截webview用户触击了一个链接
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //判断是否是单击
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+    return NO; //返回NO，此页面的链接点击不会继续执行，只会执行跳转到你想跳转的页面
+    }
+    return YES;
+}
 
 
 - (IBAction)lookMoreButtonClick:(id)sender {
-    for (NSInteger i = 0; i<4; i++) {
-        _count++;
-        
-        [_arrMessage addObject:[NSString stringWithFormat:@"AAAAAA%@",@(_count)]];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_arrMessage.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-
-    }
-//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1]] withRowAnimation:UITableViewRowAnimationFade];
-
+    _pageIndex++;
+    [_lodingView startAnimating];
+    _lookMoreButton.hidden = YES;
+    
+    [self getCommentList];
+    
 }
 
 - (IBAction)leaveMessageButtonClick:(id)sender {
-    WriteArticleViewController *vc = [[WriteArticleViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([UserInfoEngine isLogin]) {
+        WriteArticleViewController *vc = [[WriteArticleViewController alloc]initWithArticleID:_articleID fromType:_fromType];
+        vc.succeedBlcok = ^{
+            if (_fromType == 1) {
+                [self getCommentList];
+            }else{
+                [self getPublicCommentList];
+            }
+
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+- (void)shareButtonClick{
+    [AppShared shared] ;
+    
+}
+- (void)collectButtonClick:(QMUIButton *)button{
+    button.enabled = NO;
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSString *url = @"";
+    if (_fromType) {
+        [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"user_id"];
+        [dict setObject:@(_articleID) forKey:@"article_notice_id"];
+        if (button.selected) {
+            [dict setObject:@(2) forKey:@"type"];
+            [dict setObject:@(_publicInfo.yonghushoucangid) forKey:@"id"];
+            
+        }else{
+            [dict setObject:@(1) forKey:@"type"];
+        }
+        
+        url= BaseUrl(@"ArticleNotices/insertarticlenoticecollectible.action");
+    }else{
+        [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"user_id"];
+        [dict setObject:@(_articleID) forKey:@"announcement_id"];
+        if (button.selected) {
+            [dict setObject:@(2) forKey:@"type"];
+            [dict setObject:@(_publicInfo.yonghushoucangid) forKey:@"id"];
+            
+        }else{
+            [dict setObject:@(1) forKey:@"type"];
+        }
+        
+        url= BaseUrl(@"Announcement/insertannouncemenecollectible.action");
+
+    }
+    [self showWithStatus:NET_WAIT_TOST];
+    [_netWorkEngine postWithDict:dict url:url succed:^(id responseObject) {
+        button.enabled = YES;
+
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            button.selected = ! button.selected;
+            _publicInfo.yonghushoucangid = [[responseObject objectForKey:@"value"] integerValue];
+
+            if (button.selected) {
+                [self showSuccessWithStatus:@"收藏成功"];
+                _publicInfo.sznum++;
+                
+                
+            }else{
+                [self showSuccessWithStatus:@"取消收藏成功"];
+                _publicInfo.sznum--;
+
+            }
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            
+        }
+        
+    } errorBlock:^(NSError *error) {
+        button.enabled = YES;
+
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
+    
 }
 - (void)dealloc{
     [_headerView.scrollView removeObserver:self forKeyPath:@"contentSize"];

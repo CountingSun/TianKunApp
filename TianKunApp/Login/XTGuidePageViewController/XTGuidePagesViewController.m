@@ -61,6 +61,8 @@
 - (void)clickEnter
 {
     if (self.delegate != nil && [self.delegate respondsToSelector:@selector(clickEnter)]) {
+        [XTGuidePagesViewController saveCurrentVersion];
+
         [self.delegate clickEnter];
     }
 }
@@ -71,7 +73,6 @@
     NSString *localVersion = [user objectForKey:VERSION_INFO_CURRENT];
     NSString *currentVersion =[[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleShortVersionString"];
     if (localVersion == nil || ![currentVersion isEqualToString:localVersion]) {
-        [XTGuidePagesViewController saveCurrentVersion];
         return YES;
     }else
     {

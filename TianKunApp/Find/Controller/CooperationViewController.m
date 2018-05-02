@@ -8,11 +8,16 @@
 
 #import "CooperationViewController.h"
 #import "CooperationTableViewCell.h"
-#import "CompanyDetailViewController.h"
+#import "CooperationDetailViewController.h"
+#import "CooperationInfo.h"
 
 @interface CooperationViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,assign) NSInteger pageIndex;
+@property (nonatomic ,assign) NSInteger pageSize;
+
 
 @end
 
@@ -21,45 +26,122 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"商务合作"];
+    _pageIndex = 1;
+    _pageSize = DEFAULT_PAGE_SIZE;
+
     if (!_arrData) {
         _arrData = [NSMutableArray arrayWithCapacity:0];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        [_arrData addObject:@""];
-        
     }
     
     [self.tableView registerNib:[UINib nibWithNibName:@"CooperationTableViewCell" bundle:nil] forCellReuseIdentifier:@"CooperationTableViewCell"];
+    [self showLoadingView];
+    [self getData];
+}
+- (void)getData{
+    if (_pageIndex<1) {
+        _pageIndex = 1;
+    }
     
-    [self.tableView beginRefreshing];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [self.netWorkEngine postWithDict:@{@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.cooperationRequestList.by.userid") succed:^(id responseObject) {
+        [self hideLoadingView];
         [self.tableView endRefresh];
         
-    });
-    
-    [self.tableView reloadData];
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+            if (arr.count) {
+                if (!_arrData) {
+                    _arrData = [NSMutableArray array];
+                }
+                if (_pageIndex == 1) {
+                    [_arrData removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    CooperationInfo *info = [CooperationInfo mj_objectWithKeyValues:dict];
+                    [_arrData addObject:info];
+                    
+                }
+                [self.tableView reloadData];
+                if(arr.count<_pageSize){
+                    _tableView.canLoadMore = NO;
+                }else{
+                    _tableView.canLoadMore = YES;
+                }
+                
+            }else{
+                if (!_arrData.count) {
+                    [self showGetDataNullWithReloadBlock:^{
+                        [self showLoadingView];
+                        [self getData];
+                    }];
+                    
+                    
+                }else{
+                    _pageIndex--;
+                    
+                    [self showErrorWithStatus:NET_WAIT_NO_DATA];
+                    
+                }
+            }
+            
+        }else{
+            if (!_arrData.count) {
+                [self showGetDataNullWithReloadBlock:^{
+                    [self showLoadingView];
+                    [self getData];
+                }];
+                
+                
+            }else{
+                _pageIndex--;
+                
+                [self showErrorWithStatus:NET_WAIT_NO_DATA];
+                
+            }
+            
+        }
+        
+        
+        
+    } errorBlock:^(NSError *error) {
+        [self hideLoadingView];
+        [_tableView endRefresh];
+        if (_arrData.count) {
+            _pageIndex = 1;
+            
+            [self showErrorWithStatus:NET_ERROR_TOST];
+        }else{
+            _pageIndex = 1;
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self hideEmptyView];
+                [self showLoadingView];
+                [self getData];
+            }];
+            
+        }
+        
+    }];
+
 }
 - (WQTableView *)tableView{
     if (!_tableView) {
-        _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStylePlain];
+        _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 90;
+        _tableView.estimatedRowHeight = 90;
+        
+        _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        __weak typeof(self) weakSelf = self;
+
         [_tableView headerWithRefreshingBlock:^{
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_tableView endRefresh];
-                
-            });
+            weakSelf.pageIndex=1;
+            [weakSelf getData];
+        }];
+        [_tableView footerWithRefreshingBlock:^{
+            weakSelf.pageIndex++;
+            [weakSelf getData];
             
         }];
         [self.view addSubview:_tableView];
@@ -93,20 +175,29 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"CooperationTableViewCell" owner:nil options:nil] firstObject];
     }
-    cell.titleLabel.text = @"《初音速》";
-    cell.detailLabel.text = @"人对于音乐业的认知和整个行业的格";
-    cell.nameLabel.text = @"🇨🇳公司";
+    CooperationInfo *info = _arrData[indexPath.section];
+    
+    cell.titleLabel.text = info.initiator;
+    cell.detailLabel.text = info.content;
 
     cell.selectionStyle = 0;
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CompanyDetailViewController *viewController = [[CompanyDetailViewController alloc]init];
+    CooperationInfo *info = _arrData[indexPath.section];
+
+    CooperationDetailViewController *viewController = [[CooperationDetailViewController alloc]initWithcooperationID:info.cooperationID];
     [self.navigationController pushViewController:viewController animated:YES];
 
 }
 
+- (NetWorkEngine *)netWorkEngine{
+    if(!_netWorkEngine){
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    return _netWorkEngine;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -12,10 +12,8 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     
-    _editButton.layer.masksToBounds = YES;
-    _editButton.layer.cornerRadius = 15;
-    _editButton.qmui_borderWidth = 1;
-    _editButton.qmui_borderColor = COLOR_TEXT_ORANGE;
+    _changeButton.layer.masksToBounds = YES;
+    _changeButton.layer.cornerRadius = 15;
     
     [_changeButton setBackgroundColor:COLOR_TEXT_ORANGE];
     

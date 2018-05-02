@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VIPUploadInfoViewController">
             <connections>
-                <outlet property="label" destination="i7d-aF-fWY" id="qdz-Td-j4N"/>
+                <outlet property="collectionView" destination="S1H-yJ-j4q" id="pQo-Ie-6In"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,21 +20,40 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    上传简历附件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7d-aF-fWY">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZi-S5-fws">
+                    <rect key="frame" x="0.0" y="627" width="375" height="40"/>
+                    <color key="backgroundColor" red="0.36322450639999998" green="0.63158446550000003" blue="0.98442620039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Oam-jg-Bg9"/>
+                        <constraint firstAttribute="height" constant="40" id="TcK-9z-0fb"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <state key="normal" title="点击上传">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="upLoadButtonClick:" destination="-1" eventType="touchUpInside" id="VIh-d4-vc4"/>
+                    </connections>
+                </button>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="S1H-yJ-j4q">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="627"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ezV-My-Ojn">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="i7d-aF-fWY" secondAttribute="trailing" id="8CM-0b-zk7"/>
-                <constraint firstItem="i7d-aF-fWY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="PEG-Xl-8aI"/>
-                <constraint firstItem="i7d-aF-fWY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Tx3-ph-wED"/>
+                <constraint firstItem="S1H-yJ-j4q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5cg-hS-YoD"/>
+                <constraint firstItem="nZi-S5-fws" firstAttribute="top" secondItem="S1H-yJ-j4q" secondAttribute="bottom" id="8Tt-aW-5X1"/>
+                <constraint firstItem="S1H-yJ-j4q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="DIY-8t-0ir"/>
+                <constraint firstAttribute="trailing" secondItem="S1H-yJ-j4q" secondAttribute="trailing" id="Vvg-T2-vRS"/>
+                <constraint firstItem="nZi-S5-fws" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="a66-Q9-74D"/>
+                <constraint firstAttribute="bottom" secondItem="nZi-S5-fws" secondAttribute="bottom" id="dS0-Yf-yaY"/>
+                <constraint firstAttribute="trailing" secondItem="nZi-S5-fws" secondAttribute="trailing" id="zr8-t4-2fG"/>
             </constraints>
         </view>
     </objects>

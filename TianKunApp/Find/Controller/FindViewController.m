@@ -17,6 +17,7 @@
 @interface FindViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrMenu;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
 @end
 
 @implementation FindViewController
@@ -28,8 +29,50 @@
     _tableView.rowHeight = 45;
     [_tableView registerNib:[UINib nibWithNibName:@"FindTableViewCell" bundle:nil] forCellReuseIdentifier:@"FindTableViewCell"];
     _tableView.tableFooterView = [UIView new];
-    [self.tableView reloadData];
+    [self showLoadingView];
+    [self getAppIonList];
     
+    
+}
+- (void)getAppIonList{
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+    [_netWorkEngine postWithDict:@{@"fatherId":@"2"} url:BaseUrl(@"find.typeEdifice.by.father.id") succed:^(id responseObject) {
+        [self hideLoadingView];
+        
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+            for (NSDictionary *dict in arr) {
+                MenuInfo *menuInfo = [[MenuInfo alloc]init];
+                
+                menuInfo.menuName = [dict objectForKey:@"type_name"];
+                menuInfo.menuID = [[dict objectForKey:@"id"] integerValue];
+                menuInfo.menuIcon = [dict objectForKey:@"picture_url"];
+
+                [self.arrMenu addObject:menuInfo];
+                
+            }
+            [self.tableView reloadData];
+            
+        }else{
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self showLoadingView];
+                [self getAppIonList];
+            }];
+
+        }
+    } errorBlock:^(NSError *error) {
+        [self hideLoadingView];
+        [self showGetDataFailViewWithReloadBlock:^{
+            [self showLoadingView];
+
+            [self getAppIonList];
+        }];
+        
+    }];
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -41,7 +84,7 @@
     
     FindTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindTableViewCell" forIndexPath:indexPath];
     MenuInfo *menuInfo = self.arrMenu[indexPath.row];
-    cell.logoImageView.image = [UIImage imageNamed:menuInfo.menuIcon];
+    [cell.logoImageView sd_imageDef11WithUrlStr:BaseUrl(menuInfo.menuIcon)];
     cell.nameLabel.text = menuInfo.menuName;
     return cell;
     
@@ -50,55 +93,26 @@
 - (NSMutableArray *)arrMenu{
     if (!_arrMenu) {
         _arrMenu = [NSMutableArray array];
-        
-        MenuInfo *menuInfo0 = [[MenuInfo alloc]initWithMenuName:@"企业信息" menuIcon:@"企业信息" menuID:0];
-        [_arrMenu addObject:menuInfo0];
-        MenuInfo *menuInfo1 = [[MenuInfo alloc]initWithMenuName:@"勘察设计" menuIcon:@"勘察设计" menuID:1];
-        [_arrMenu addObject:menuInfo1];
-        MenuInfo *menuInfo2 = [[MenuInfo alloc]initWithMenuName:@"工程监理" menuIcon:@"工程监理" menuID:2];
-        [_arrMenu addObject:menuInfo2];
-        MenuInfo *menuInfo3 = [[MenuInfo alloc]initWithMenuName:@"造价咨询" menuIcon:@"造价咨询" menuID:3];
-        [_arrMenu addObject:menuInfo3];
-        MenuInfo *menuInfo4 = [[MenuInfo alloc]initWithMenuName:@"建材设备" menuIcon:@"建材设备" menuID:4];
-        [_arrMenu addObject:menuInfo4];
-        MenuInfo *menuInfo5 = [[MenuInfo alloc]initWithMenuName:@"商务合作" menuIcon:@"商务合作" menuID:5];
-        [_arrMenu addObject:menuInfo5];
-        MenuInfo *menuInfo6 = [[MenuInfo alloc]initWithMenuName:@"招标代理" menuIcon:@"招标代理" menuID:6];
-        [_arrMenu addObject:menuInfo6];
-        MenuInfo *menuInfo7 = [[MenuInfo alloc]initWithMenuName:@"其他" menuIcon:@"其他" menuID:7];
-        [_arrMenu addObject:menuInfo7];
-
     }
     return _arrMenu;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     MenuInfo *menuInfo = self.arrMenu[indexPath.row];
-    switch (menuInfo.menuID) {
-        case 0:
-            {
-                FindeListViewController *vc = [[FindeListViewController alloc]initWithViewTitle:menuInfo.menuName];
-                vc.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-            break;
-        case 5:{
-            CooperationViewController *vc = [[CooperationViewController alloc]init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-
-        }
-            break;
-            
-        default:{
-            FindImageListViewController *vc = [[FindImageListViewController alloc]initWithViewTitle:menuInfo.menuName];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-
-        }
-            break;
-    }
     
+    
+    if (menuInfo.menuID == 28) {
+        CooperationViewController *vc = [[CooperationViewController alloc]init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }else{
+        FindImageListViewController *vc = [[FindImageListViewController alloc]initWithViewTitle:menuInfo.menuName classID:[NSString stringWithFormat:@"%@",@(menuInfo.menuID)]];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+
+    }
 
 }
 - (void)didReceiveMemoryWarning {

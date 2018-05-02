@@ -16,6 +16,7 @@
 #import "AboutUsViewController.h"
 #import "WebLinkViewController.h"
 #import "ChangePasswordViewController.h"
+#import <ShareSDK/ShareSDK.h>
 
 @interface SetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -139,8 +140,22 @@
 - (IBAction)loginoutButtonClickEvent:(id)sender {
     
     [WQAlertController showAlertControllerWithTitle:@"提示" message:@"您确定要退出登录吗？" sureButtonTitle:@"确定" cancelTitle:@"取消" sureBlock:^(QMUIAlertAction *action) {
+        
+        
+        if ([ShareSDK hasAuthorized:SSDKPlatformTypeSinaWeibo]) {
+            [ShareSDK  cancelAuthorize:SSDKPlatformTypeSinaWeibo];
+        }
+        if ([ShareSDK hasAuthorized:SSDKPlatformTypeWechat]) {
+            [ShareSDK  cancelAuthorize:SSDKPlatformTypeWechat];
+        }
+        if ([ShareSDK hasAuthorized:SSDKPlatformTypeQQ]) {
+            [ShareSDK  cancelAuthorize:SSDKPlatformTypeQQ];
+        }
+
         [UserInfoEngine setUserInfo:nil];
         [[AppDelegate sharedAppDelegate] setRootController];
+        
+        
 
     } cancelBlock:^(QMUIAlertAction *action) {
         

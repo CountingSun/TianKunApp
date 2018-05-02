@@ -134,5 +134,50 @@
 
 + (NSString *)timeReturnDate:(NSNumber *)num;
 
+/**
+ 将后台传的秒数转换为日期格式
+ */
+
++ (NSString *)timeReturnDateString:(NSString *)str;
+/**
+ 将后台传的秒数转换为日期格式
+ */
+
++ (NSString *)timeReturnDateString:(NSString *)str formatter:(NSString *)formatter;
+
+/**
+ 服务器时间转XXX前
+
+ @param timeString 服务器时间字符串
+ @return NSString
+ */
++ (NSString *)updateTimeForTimeString:(NSString *)timeString;
+
+/**
+ 服务器时间转XXX前
+
+
+ @param times 服务器时间
+ @return return NSString
+ */
++ (NSString *)updateTimeForTime:(NSInteger)times;
+
+/**
+ 时间字符串转毫秒值
+
+ @param timeString <#timeString description#>
+ @param formatter <#formatter description#>
+ @return <#return value description#>
+ */
++ (NSString *)getMillisecondWithTimeString:(NSString*)timeString formatter:(NSString *)formatter;
+
+
+/**
+ 将URL中的\\替换为/
+
+ @return <#return value description#>
+ */
+-(NSString *)dealToCanLoadUrl;
+
 
 @end

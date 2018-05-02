@@ -12,7 +12,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    _titleLabel.textColor = COLOR_TEXT_BLACK;
+    _contentLabel.textColor = COLOR_TEXT_GENGRAL;
+    _timeLabel.textColor = COLOR_TEXT_LIGHT;
+    _lookLabel.textColor = COLOR_TEXT_LIGHT;
+    _commentLabel.textColor = COLOR_TEXT_LIGHT;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

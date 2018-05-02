@@ -12,10 +12,21 @@
 @property (weak, nonatomic) IBOutlet QMUITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *commitButton;
 
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic, assign) NSInteger articleID;
+@property (nonatomic, assign) NSInteger fromType;
 @end
 
-@implementation WriteArticleViewController
 
+@implementation WriteArticleViewController
+- (instancetype)initWithArticleID:(NSInteger)articleID fromType:(NSInteger)fromType{
+    if (self = [super init]) {
+        _articleID = articleID;
+        _fromType = fromType;
+
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"留言"];
@@ -28,6 +39,63 @@
  
     
 }
+- (IBAction)commentButtonClick:(id)sender {
+    if (!_textView.text.length) {
+        [self showErrorWithStatus:@"请输入留言内容"];
+        return;
+    }
+    [self showWithStatus:NET_WAIT_TOST];
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+    }
+
+    if (_fromType == 1) {
+        [_netWorkEngine postWithDict:@{@"user_id":[UserInfoEngine getUserInfo].userID,@"article_notice_id":@(_articleID),@"content":_textView.text} url:BaseUrl(@"ArticleNotices/insertarticlenoticecomment.action") succed:^(id responseObject) {
+            NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+            if (code == 1) {
+                self.view.userInteractionEnabled = NO;
+
+                [self showSuccessWithStatus:@"评论成功"];
+                if (_succeedBlcok) {
+                    _succeedBlcok();
+                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }else{
+                [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            }
+            
+        } errorBlock:^(NSError *error) {
+            [self showErrorWithStatus:NET_ERROR_TOST];
+            
+        }];
+
+    }else{
+        [_netWorkEngine postWithDict:@{@"user_id":[UserInfoEngine getUserInfo].userID,@"announcement_id":@(_articleID),@"content":_textView.text} url:BaseUrl(@"Announcement/insertannouncemenecomment.action") succed:^(id responseObject) {
+            NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+            if (code == 1) {
+                self.view.userInteractionEnabled = NO;
+                [self showSuccessWithStatus:@"评论成功"];
+                if (_succeedBlcok) {
+                    _succeedBlcok();
+                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }else{
+                [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            }
+            
+        } errorBlock:^(NSError *error) {
+            [self showErrorWithStatus:NET_ERROR_TOST];
+            
+        }];
+
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

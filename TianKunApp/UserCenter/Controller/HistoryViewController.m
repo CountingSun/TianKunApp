@@ -11,6 +11,15 @@
 #import "HistoryTableViewHeaderView.h"
 #import "MenuInfo.h"
 #import "HistoryBottomView.h"
+#import "Historyinfo.h"
+
+@interface HistoryViewModel ()
+@property (nonatomic, copy) NSString *time;
+@property (nonatomic ,strong) NSMutableArray *arrInfo;
+@end
+
+@implementation HistoryViewModel
+@end
 
 @interface HistoryViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -18,14 +27,116 @@
 @property (nonatomic ,strong) HistoryBottomView *historyBottomView;
 
 @property (nonatomic ,strong) QMUIButton *editButton;
+@property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
+@property (nonatomic ,assign) NSInteger pageIndex;
+@property (nonatomic ,assign) NSInteger pageSize;
+
+@property (nonatomic ,strong) NSMutableDictionary *resultDict;
+
+
+
 @end
+
 
 @implementation HistoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"浏览足迹"];
+    _pageIndex = 1;
+    _pageSize = DEFAULT_PAGE_SIZE;
+    
     [self setupView];
+    [self showLoadingView];
+    [self getData];
+    
+}
+- (void)getData{
+    
+    if (!_netWorkEngine) {
+        _netWorkEngine = [[NetWorkEngine alloc]init];
+        
+    }
+    
+    [_netWorkEngine postWithDict:@{@"userId":[UserInfoEngine getUserInfo].userID,@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.watchRecord.by.user.id") succed:^(id responseObject) {
+        [self.tableView endRefresh];
+        [self hideLoadingView];
+
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+            if (arr.count) {
+                [_arrData removeAllObjects];
+                if (_pageIndex == 1) {
+                    [_resultDict removeAllObjects];
+                }
+                for (NSDictionary *dict in arr) {
+                    Historyinfo *info = [Historyinfo mj_objectWithKeyValues:dict];
+                    [self dealHistoryInfo:info];
+                    
+                }
+                [self dealDict];
+                if (arr.count<_pageSize) {
+                    self.tableView.canLoadMore = NO;
+                }else{
+                    self.tableView.canLoadMore = YES;
+                }
+
+            }else{
+                if (!_arrData.count) {
+                    [self showGetDataNullWithReloadBlock:^{
+                        [self showLoadingView];
+                        [self getData];
+                    }];
+                    _editButton.enabled = NO;
+
+                }else{
+                    _pageIndex--;
+                    _editButton.enabled = YES;
+                    [self showErrorWithStatus:NET_WAIT_NO_DATA];
+                    
+                }
+
+            }
+            
+            
+        }else{
+            if (!_arrData.count) {
+                [self showGetDataNullWithReloadBlock:^{
+                    [self showLoadingView];
+                    [self getData];
+                }];
+                _editButton.enabled = NO;
+
+            }else{
+                _pageIndex--;
+                _editButton.enabled = YES;
+                [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+                
+            }
+            
+        }
+        
+    } errorBlock:^(NSError *error) {
+        [self hideLoadingView];
+        [_tableView endRefresh];
+        if (_arrData.count) {
+            _pageIndex = 1;
+            _editButton.enabled = YES;
+            [self showErrorWithStatus:NET_ERROR_TOST];
+        }else{
+            _editButton.enabled = NO;
+
+            _pageIndex = 1;
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self hideEmptyView];
+                [self showLoadingView];
+                [self getData];
+            }];
+            
+        }
+        
+    }];
     
 }
 - (void)setupView{
@@ -37,33 +148,11 @@
     _editButton.titleLabel.font = [UIFont systemFontOfSize:13];
     
     [_editButton addTarget:self action:@selector(editButtonEvent) forControlEvents:UIControlEventTouchUpInside];
-    
+    _editButton.enabled = NO;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_editButton];
-    
-    if (!_arrData) {
-        _arrData = [NSMutableArray arrayWithCapacity:0];
-        
-        
-        for (NSInteger i = 0; i< 30; i++) {
-            NSMutableArray *arrOne = [NSMutableArray array];
-            for (NSInteger j = 0; j<20; j++) {
-                MenuInfo *menuInfo = [[MenuInfo alloc]initWithMenuName:[NSString stringWithFormat:@"section%@  row%@",@(i),@(j)] menuIcon:@"https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=777343979,2436872658&fm=27&gp=0.jpg" menuID:0];
-                
-                [arrOne addObject:menuInfo];
-            }
-            [_arrData addObject:arrOne];
-        }
-    }
     
     [self.tableView registerNib:[UINib nibWithNibName:@"HistoryTableViewCell" bundle:nil] forCellReuseIdentifier:@"HistoryTableViewCell"];
     
-    [self.tableView beginRefreshing];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.tableView endRefresh];
-        
-    });
-    
-    [self.tableView reloadData];
     _historyBottomView = [[[NSBundle mainBundle] loadNibNamed:@"HistoryBottomView" owner:nil options:nil] firstObject];
     [self.view addSubview:_historyBottomView];
     [_historyBottomView.selectButton addTarget:self action:@selector(allSelectButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -84,8 +173,8 @@
     
     _historyBottomView.selectButton.selected =! _historyBottomView.selectButton.selected;
     if (_historyBottomView.selectButton.selected) {
-        [_arrData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger section, BOOL * _Nonnull stop) {
-            NSMutableArray *arr = obj;
+        [_arrData enumerateObjectsUsingBlock:^(HistoryViewModel *info, NSUInteger section, BOOL * _Nonnull stop) {
+            NSMutableArray *arr = info.arrInfo;
             [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger row, BOOL * _Nonnull stop) {
                 [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES scrollPosition:UITableViewScrollPositionNone];
                 
@@ -115,32 +204,73 @@
 - (void)clearnSelectButtonClick{
     NSArray<NSIndexPath *> *arrRows =   [_tableView indexPathsForSelectedRows];
     
-    [arrRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        MenuInfo *menuInfo = _arrData[obj.section][obj.row];
-        menuInfo.menuID = 1;
+    __block NSString *idsString = @"";
+
+    [arrRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
+        HistoryViewModel *model = _arrData[indexPath.section];
+        
+        Historyinfo *info = model.arrInfo[indexPath.row];
+        idsString = [idsString stringByAppendingString:[NSString stringWithFormat:@"%@,",@(info.data_id)]];
     }];
-    TICK
-    [self disposeArr];
-    TOCK
-    [UIView transitionWithView:self.tableView
-                      duration: 0.35f
-                       options: UIViewAnimationOptionTransitionCrossDissolve
-                    animations: ^(void)
-     {
-         [self.tableView reloadData];
-     }
-                    completion: ^(BOOL isFinished)
-     {
-         
-     }];
+    if (idsString.length) {
+        idsString  = [idsString qmui_stringByRemoveLastCharacter];
+        [self deleteCollectWithIDS:idsString succeedBlock:^{
+            [arrRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
+                HistoryViewModel *model = _arrData[indexPath.section];
+                Historyinfo *info = model.arrInfo[indexPath.row];
+                info.isSelect = YES;
+            }];
+            [self disposeArr];
+            [self.tableView reloadData];
+            if (!_arrData.count) {
+                [self getData];
+            }
+
+        }];
+        
+        
+    }else{
+        [self showErrorWithStatus:@"请选择要删除的内容"];
+    }
+
+
     
 
 
 }
+- (void)deleteCollectWithIDS:(NSString *)ids succeedBlock:(dispatch_block_t)block{
+    self.view.userInteractionEnabled = NO;
+    _editButton.enabled = NO;
+    [self showWithStatus:NET_WAIT_TOST];
+    [self.netWorkEngine postWithDict:@{@"id":ids} url:BaseUrl(@"delete.watchRecord.by.id") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        self.view.userInteractionEnabled = YES;
+        _editButton.enabled = YES;
+        
+        if (code == 1) {
+            [self showSuccessWithStatus:@"删除成功"];
+            if (block) {
+                block();
+            }
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            
+        }
+    } errorBlock:^(NSError *error) {
+        self.view.userInteractionEnabled = YES;
+        _editButton.enabled = YES;
+        
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
 
+}
 - (void)editButtonEvent{
     
     if (_tableView.editing) {
+        _tableView.canLoadMore = YES;
+        _tableView.canRefresh = YES;
+
         [_tableView setEditing:NO animated:YES];
         [_editButton setImage:[UIImage imageNamed:@"删除"] forState:0];
         [_editButton setTitle:@"" forState:0];
@@ -154,6 +284,9 @@
 
 
     }else{
+        _tableView.canLoadMore = NO;
+        _tableView.canRefresh = NO;
+
         [UIView animateWithDuration:0.3 animations:^{
             [_tableView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.bottom.equalTo(self.view).offset(-50);
@@ -170,20 +303,22 @@
 }
 - (void)disposeArr{
     [_arrData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMutableArray *arr = _arrData[idx];
+        HistoryViewModel *model = _arrData[idx];
+        
+        NSMutableArray *arr = model.arrInfo;
         
         if (arr.count == 0) {
-            [_arrData removeObject:arr];
+            [_arrData removeObject:model];
             [self disposeArr];
 
             *stop = YES;
 
         }
-        __block BOOL isBreak;
+        __block BOOL isBreak = NO;
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            MenuInfo *menuInfo = obj;
+            Historyinfo *info = obj;
             
-            if (menuInfo.menuID == 1) {
+            if (info.isSelect == YES) {
                 [arr removeObject:obj];
                 [self disposeArr];
                 isBreak = YES;
@@ -207,12 +342,14 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 100;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        __weak typeof(self) weakSelf = self;
         [_tableView headerWithRefreshingBlock:^{
-            
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_tableView endRefresh];
-                
-            });
+            _pageIndex = 1;
+            [weakSelf getData];
+        }];
+        [_tableView footerWithRefreshingBlock:^{
+            _pageIndex ++;
+            [weakSelf getData];
             
         }];
         [self.view addSubview:_tableView];
@@ -233,7 +370,9 @@
     return _arrData.count;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [_arrData[section] count];
+    HistoryViewModel *model = _arrData[section];
+    
+    return model.arrInfo.count;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     HistoryTableViewHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HistoryTableViewHeaderView"];
@@ -241,7 +380,9 @@
         view = [[HistoryTableViewHeaderView alloc]initWithReuseIdentifier:@"HistoryTableViewHeaderView"];
         
     }
-    view.label.text = @"今天";
+    HistoryViewModel *model = _arrData[section];
+
+    view.label.text = model.time;
     return view;
     
     
@@ -255,9 +396,11 @@
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HistoryTableViewCell" owner:nil options:nil] firstObject];
     }
-    MenuInfo *menInfo =self.arrData[indexPath.section][indexPath.row];
-    cell.titleLabel.text = menInfo.menuName;
-    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:menInfo.menuIcon] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_11]];
+    HistoryViewModel *model = _arrData[indexPath.section];
+
+    Historyinfo *info =model.arrInfo[indexPath.row];
+    cell.titleLabel.text = info.data_title;
+    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:info.data_picture_url] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_11]];
 
     return cell;
     
@@ -270,7 +413,45 @@
     return UITableViewCellEditingStyleDelete | UITableViewCellEditingStyleInsert;
 
 }
+- (void)dealHistoryInfo:(Historyinfo *)historyinfo{
+    
+    if (!_resultDict) {
+        _resultDict = [NSMutableDictionary dictionary];
+    }
+    NSString *key = [NSString timeReturnDateString:historyinfo.create_date formatter:@"yyyy-MM-dd"];
+    
+    NSMutableArray *arr = [_resultDict objectForKey:key];
+    if (arr) {
+        [arr addObject:historyinfo];
+        [_resultDict setObject:arr forKeyedSubscript:key];
 
+    }else{
+        NSMutableArray *arr = [NSMutableArray array];
+        [arr addObject:historyinfo];
+        [_resultDict setObject:arr forKeyedSubscript:key];
+
+    }
+    
+    
+    
+}
+- (void)dealDict{
+    if (!_arrData) {
+        _arrData = [NSMutableArray array];
+    }
+    [_resultDict enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        HistoryViewModel *mode = [[HistoryViewModel alloc]init];
+        mode.time = key;
+        mode.arrInfo = obj;
+        
+        [_arrData addObject:mode];
+        
+    }];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+    [_arrData sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    [self.tableView reloadData];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

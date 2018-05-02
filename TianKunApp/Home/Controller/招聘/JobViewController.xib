@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JobViewController">
             <connections>
                 <outlet property="firstButton" destination="38g-TZ-sNo" id="8D8-Np-wfN"/>
-                <outlet property="secondButton" destination="QkV-BV-Se9" id="rqe-dp-G6f"/>
+                <outlet property="secondButton" destination="QkV-BV-Se9" id="9gT-lH-vbC"/>
                 <outlet property="thirdButton" destination="kyj-1p-KhR" id="F4G-Pj-1L5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,7 +36,7 @@
                                 <action selector="firstButtonClick:" destination="-1" eventType="touchUpInside" id="Ja2-Fe-9Qp"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QkV-BV-Se9">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QkV-BV-Se9" customClass="QMUIButton">
                             <rect key="frame" x="126" y="0.0" width="125" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="工作地点">

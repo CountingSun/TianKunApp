@@ -29,7 +29,8 @@
         return YES;
     }else{
         UIViewController *showVC = [self topViewController];
-        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:[LoginViewController new]];
+        QMUINavigationController *nav = [[QMUINavigationController alloc]initWithRootViewController:[LoginViewController new]];
+        nav.navigationBar.tintColor = COLOR_TEXT_GENGRAL;
 
         [showVC presentViewController:nav animated:YES completion:^{
             

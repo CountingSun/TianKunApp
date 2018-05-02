@@ -84,11 +84,15 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentButton" destination="CL6-c6-ZXf" id="Aet-kl-scu"/>
+                <outlet property="contentLabel" destination="E6g-23-J1B" id="lsT-6S-wdC"/>
+                <outlet property="headImage" destination="Zih-n1-8RE" id="WLp-kh-uaz"/>
+                <outlet property="nameLabel" destination="5Sm-vQ-Xbs" id="56m-h4-gV3"/>
+                <outlet property="timeLabel" destination="90B-Ok-77Z" id="qIg-tb-LqT"/>
             </connections>
             <point key="canvasLocation" x="100.5" y="138"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="头像" width="65" height="65"/>
+        <image name="头像" width="112" height="112"/>
     </resources>
 </document>

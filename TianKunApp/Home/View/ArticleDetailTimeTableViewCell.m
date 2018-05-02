@@ -12,7 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
+    [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

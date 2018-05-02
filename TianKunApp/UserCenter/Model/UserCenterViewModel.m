@@ -19,6 +19,9 @@
     
     MenuInfo *menuInof1 = [[MenuInfo alloc]initWithMenuName:@"浏览足迹" menuIcon:@"足迹" menuID:1];
     [arr addObject:menuInof1];
+    MenuInfo *menuInof3 = [[MenuInfo alloc]initWithMenuName:@"购买记录" menuIcon:@"购买记录" menuID:3];
+    [arr addObject:menuInof3];
+
     MenuInfo *menuInof2 = [[MenuInfo alloc]initWithMenuName:@"设置" menuIcon:@"设置" menuID:2];
     [arr addObject:menuInof2];
 

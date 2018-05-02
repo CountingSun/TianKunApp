@@ -10,4 +10,5 @@
 
 @interface ConstructionSearchViewController : WQBaseViewController
 
+@property (nonatomic, copy) void(^sureButtonClickBlock)(NSString *address,NSString *selectID);
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "WQUploadSingleImage.h"
+#import "WQAlertController.h"
 
 @interface WQUploadSingleImage ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -29,9 +30,11 @@ static WQUploadSingleImage *_uploadSingleImage;
 
     _selectSucceedBlock = selectSucceedBlock;
     _compression = compression;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"选择图片" preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *actionPhoto = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    
+    QMUIAlertController *alertController = [[QMUIAlertController alloc]initWithTitle:@"提示" message:@"选择图片" preferredStyle:QMUIAlertControllerStyleActionSheet];
+    
+    QMUIAlertAction *cameraAction = [QMUIAlertAction actionWithTitle:@"相机" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             picker.sourceType=UIImagePickerControllerSourceTypeCamera;
@@ -40,9 +43,9 @@ static WQUploadSingleImage *_uploadSingleImage;
             picker.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
         }
         [vc presentViewController:picker animated:YES completion:nil];
-        
+
     }];
-    UIAlertAction *actionLocation = [UIAlertAction actionWithTitle:@"本地" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    QMUIAlertAction *phothAction = [QMUIAlertAction actionWithTitle:@"本地" style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
         {
@@ -52,18 +55,21 @@ static WQUploadSingleImage *_uploadSingleImage;
             picker.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
         }
         [vc presentViewController:picker animated:YES completion:nil];
+
+    }];
+
+    
+    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:@"取消" style:QMUIAlertActionStyleCancel handler:^(QMUIAlertAction * action) {
         
     }];
-    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [vc dismissViewControllerAnimated:YES completion:nil];
-        
-    }];
-    [alertController addAction:actionPhoto];
-    [alertController addAction:actionLocation];
-    [alertController addAction:actionCancel];
-    [vc presentViewController:alertController animated:YES completion:^{
-        
-    }];
+    
+    [alertController addAction:cameraAction];
+    [alertController addAction:phothAction];
+    [alertController addAction:cancelAction];
+    
+    [alertController showWithAnimated:YES];
+
+    
 
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

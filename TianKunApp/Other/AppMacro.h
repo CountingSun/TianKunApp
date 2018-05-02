@@ -27,21 +27,28 @@
 // 发布状态
 #define WQLog(...)
 #endif
+//#define BaseUrl(string) [@"http://192.168.1.104:8080/" stringByAppendingString:string]
 
 #define BaseUrl(string) [@"http://47.92.72.134/" stringByAppendingString:string]
 //#define BaseUrl(string) [@"http://192.168.1.128/" stringByAppendingString:string]
 
-#define LOGIN_SUCCEED_NOTICE @"netWorkChangeEventNotification"
+
+#define CreateHtmlString(string) [NSString stringWithFormat:@"<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\"></head><body>%@</body></html>",string]
+
+#define LOGIN_SUCCEED_NOTICE @"login_succeed_notice"
 
 #define NET_WORK_STATES_NOTIFICATION_KEY @"netWorkChangeEventNotification"
 #define NET_ERROR_TOST @"网络连接失败"
 #define NET_WAIT_TOST @"请稍候"
 #define NET_WAIT_NO_DATA @"暂无更多数据"
 
+#define ALIPAY_SCHEMES @"TianKunAppAliPay"
 #define GET_CODE_TIME 60
 
-#define DEFAULT_IMAGE_11 @"行业信息"
-#define DEFAULT_IMAGE_21 @"行业信息"
+#define DEFAULT_IMAGE_11 @"default11_fail_image"
+#define DEFAULT_IMAGE_21 @"default21_fail_image"
 
-#define DEFAULT_PAGE_SIZE 15
+#define DEFAULT_PAGE_SIZE 20
+#define PAY_SUCCEED_NOTICE @"PAY_SUCCEED_NOTICE"
+
 #endif /* AppMacro_h */

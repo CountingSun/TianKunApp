@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class DocumentInfo;
+
 @interface EducationTextTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *titleImageView;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lookNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+@property (nonatomic ,strong) DocumentInfo *documentInfo;
 
 @end

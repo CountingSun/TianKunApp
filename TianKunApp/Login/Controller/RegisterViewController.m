@@ -22,6 +22,7 @@
 @property (nonatomic, copy) NSString *codeString;
 @property (nonatomic, copy) NSString *passwordString;
 @property (nonatomic ,strong) UIButton *dynamicButton;
+@property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 @property (nonatomic ,assign) NSInteger countTime;
 
@@ -30,6 +31,12 @@
 @end
 
 @implementation RegisterViewController
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if ([[GCDTimer sharedInstance] existTimer:@"code"]) {
+        [[GCDTimer sharedInstance] cancelTimerWithName:@"code"];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,6 +53,7 @@
     _footView.backgroundColor = COLOR_VIEW_BACK;
     _countTime = GET_CODE_TIME;
 
+    [_registerButton setBackgroundColor:COLOR_THEME];
     [_loginButton setTitleColor:COLOR_TEXT_BLACK forState:0];
 
     [_tableView registerNib:[UINib nibWithNibName:@"LoginTextTableViewCell" bundle:nil] forCellReuseIdentifier:@"LoginTextTableViewCell"];
@@ -117,6 +125,11 @@
         [self showErrorWithStatus:@"请输入账号"];
         return;
     }
+    if (![_nameString isMobileNum]) {
+        [self showErrorWithStatus:@"请输入正确的手机号"];
+        return;
+    }
+
     if (!_codeString.length) {
         [self showErrorWithStatus:@"请输入动态码"];
         return;
@@ -141,13 +154,15 @@
     [self.netWorkEngine postWithDict:@{@"iphone":_nameString,@"state":@"0"} url:BaseUrl(@"lg/getcode.action") succed:^(id responseObject) {
 
         
-        NSString *msg = [responseObject objectForKey:@"value"];
-        
-        if (msg) {
-            [self setCodeButton];
-            [self showSuccessWithStatus:@"获取验证码成功"];
-        }
+        NSInteger code = [[responseObject objectForKey:@"code"]integerValue];
+        if (code == 1) {
+                [self setCodeButton];
+                [self showSuccessWithStatus:@"获取验证码成功"];
+        }else{
+            NSString *msg = [responseObject objectForKey:@"msg"];
+            [self showErrorWithStatus:msg];
 
+        }
 
 
     } errorBlock:^(NSError *error) {
@@ -165,7 +180,7 @@
     [self.netWorkEngine postWithDict:parameter url:BaseUrl(@"lg/registered.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         
-        if (code == 0) {
+        if (code == 1) {
             [self showSuccessWithStatus:@"注册成功,请前去登录"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -214,6 +229,17 @@
             
         }
     }];
+
+}
+- (void)clickSecureButton:(UIButton *)button indexPath:(NSIndexPath *)indexPath{
+    LoginTextTableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    if (cell.actionButton.selected) {
+        cell.texeField.secureTextEntry = NO;
+        
+    }else{
+        cell.texeField.secureTextEntry = YES;
+        
+    }
 
 }
 - (NetWorkEngine *)netWorkEngine{

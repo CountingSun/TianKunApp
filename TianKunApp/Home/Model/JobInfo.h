@@ -84,4 +84,6 @@
  */
 @property (nonatomic, copy) NSString *count;
 
+@property (nonatomic, copy) NSString *enterprisename;
+
 @end

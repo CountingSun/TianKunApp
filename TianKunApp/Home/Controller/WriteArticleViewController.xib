@@ -28,6 +28,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="提交"/>
+                    <connections>
+                        <action selector="commentButtonClick:" destination="-1" eventType="touchUpInside" id="Ith-mw-blC"/>
+                    </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wVg-Z5-voG" customClass="QMUITextView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>

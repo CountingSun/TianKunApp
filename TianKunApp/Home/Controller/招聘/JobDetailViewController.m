@@ -40,15 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@""];
-    _rightBarButtonView.frame = CGRectMake(0, 0, 100, 40);
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightBarButtonView];
-    [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
-    [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
-
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = -20;
-    self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
     
@@ -60,6 +51,19 @@
 - (void)loginSucceed{
     [self getData];
 }
+- (void)setNav{
+    _rightBarButtonView.frame = CGRectMake(0, 0, 100, 40);
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightBarButtonView];
+    [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
+    [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
+    
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -20;
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
+
+}
+
 - (void)getData{
     if (!_netWorkEngine) {
         _netWorkEngine = [[NetWorkEngine alloc]init];
@@ -77,6 +81,8 @@
         
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
+            [self setNav];
+            
             if (!_arrData) {
                 _arrData = [NSMutableArray arrayWithCapacity:0];
             }
@@ -90,7 +96,6 @@
             _companyInfo.companyName = [dict objectForKey:@"enterpriseName"];
 
             
-            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"jobList"];
             
             if (_companyInfo.collectionid.length) {
                 _collectButton.selected = YES;
@@ -98,6 +103,8 @@
             }else{
                 _collectButton.selected = NO;
             }
+            NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"jobList"];
+
             for (NSDictionary *dicts in arr) {
                 JobInfo *jobInfo = [JobInfo mj_objectWithKeyValues:dicts];
                 [_arrData addObject:jobInfo];
@@ -267,9 +274,11 @@
     return view;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    JobInfo *jobInfo = _arrData[indexPath.row];
-    JobDetailViewController *vc = [[JobDetailViewController alloc]initWithJobID:jobInfo.job_id];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.section == 4) {
+        JobInfo *jobInfo = _arrData[indexPath.row];
+        JobDetailViewController *vc = [[JobDetailViewController alloc]initWithJobID:jobInfo.job_id];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 - (IBAction)collectButtonClick:(id)sender {
@@ -277,6 +286,9 @@
         if (!_netWorkEngine) {
             _netWorkEngine = [[NetWorkEngine alloc]init];
         }
+        [self showWithStatus:NET_WAIT_TOST];
+        _collectButton.enabled = NO;
+        
         [_netWorkEngine postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,
                                        @"jobid":_jobID,
                                        @"username":[UserInfoEngine getUserInfo].nickname,
@@ -284,6 +296,8 @@
                                        }
                                  url:BaseUrl(@"home/jobcollection.action") succed:^(id responseObject) {
                                      NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+                                     _collectButton.enabled = YES;
+
                                      if (code == 1) {
                                          _collectButton.selected =!_collectButton.selected;
                                          if (_collectButton.selected) {

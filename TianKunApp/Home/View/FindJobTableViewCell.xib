@@ -29,8 +29,8 @@
                                     <constraint firstAttribute="width" constant="50" id="sFM-Se-zzZ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张晓华" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdZ-OI-uLn">
-                                <rect key="frame" x="70" y="10" width="49" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SdZ-OI-uLn">
+                                <rect key="frame" x="70" y="10" width="0.0" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" id="2IW-qx-9NP"/>
                                     <constraint firstAttribute="height" constant="20" id="qAC-wk-xe3"/>
@@ -39,8 +39,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布时间：1天前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5c-bf-2i1">
-                                <rect key="frame" x="371.5" y="117.5" width="91.5" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5c-bf-2i1">
+                                <rect key="frame" x="463" y="117.5" width="0.0" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" id="Mf8-Hk-Cn3"/>
                                     <constraint firstAttribute="height" constant="40" id="XXG-Ru-V0T"/>
@@ -49,7 +49,7 @@
                                 <color key="textColor" red="0.59993284940000002" green="0.60003870729999997" blue="0.59992617370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8千-1万 男 郑州 全职" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RW6-sL-u5G">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RW6-sL-u5G">
                                 <rect key="frame" x="70" y="40" width="388" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="iw5-hW-oHe"/>
@@ -58,7 +58,7 @@
                                 <color key="textColor" red="0.59993284940000002" green="0.60003870729999997" blue="0.59992617370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在监听的方法中,通过与第(2)步类似的步骤,拿到这个ImageView,添加动画就可以了;当然也可以给label添加动画,也可以给整个tabBarButton添加动画" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGY-rw-c2q">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGY-rw-c2q">
                                 <rect key="frame" x="10" y="70" width="453" height="36.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" id="vwx-6i-iei"/>
@@ -67,8 +67,8 @@
                                 <color key="textColor" red="0.59993284940000002" green="0.60003870729999997" blue="0.59992617370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="120人浏览·10人收藏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4k-YH-gSs">
-                                <rect key="frame" x="10" y="117.5" width="111" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4k-YH-gSs">
+                                <rect key="frame" x="10" y="117.5" width="0.0" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="RSB-Mb-jkb"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" id="f1i-Ud-nzA"/>
@@ -84,8 +84,8 @@
                                     <constraint firstAttribute="height" constant="1" id="Ydu-mv-tdd"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="公路工程师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3LT-hh-qSc">
-                                <rect key="frame" x="129" y="10" width="329" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3LT-hh-qSc">
+                                <rect key="frame" x="80" y="10" width="378" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="uEF-ML-2jJ"/>
                                 </constraints>
@@ -128,6 +128,15 @@
                     <constraint firstItem="f4o-O8-ame" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ow3-d3-NbT"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="contentLabel" destination="pGY-rw-c2q" id="joI-U3-y4O"/>
+                <outlet property="headImageView" destination="fNL-0Y-gK5" id="Cwz-s3-0jV"/>
+                <outlet property="infoLabel" destination="RW6-sL-u5G" id="oln-Ew-8Rz"/>
+                <outlet property="jobTypeLabel" destination="3LT-hh-qSc" id="ReE-2P-Jfh"/>
+                <outlet property="nameLabel" destination="SdZ-OI-uLn" id="KKm-PV-rQN"/>
+                <outlet property="numLabel" destination="n4k-YH-gSs" id="mE3-x8-cWe"/>
+                <outlet property="timeLabel" destination="k5c-bf-2i1" id="wi9-do-Ghe"/>
+            </connections>
             <point key="canvasLocation" x="97.5" y="-68"/>
         </tableViewCell>
     </objects>

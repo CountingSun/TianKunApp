@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddBusinessCooperationViewController">
+            <connections>
+                <outlet property="footView" destination="SoU-e8-bIq" id="c2h-eg-qlW"/>
+                <outlet property="introductTextField" destination="674-Bo-R9k" id="8Up-7J-XuK"/>
+                <outlet property="tableView" destination="OS0-FX-VKC" id="Qeq-NT-j4u"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="OS0-FX-VKC">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="OS0-FX-VKC" secondAttribute="trailing" id="3Kb-Zc-D2n"/>
+                <constraint firstAttribute="bottom" secondItem="OS0-FX-VKC" secondAttribute="bottom" id="Cgg-SQ-fKZ"/>
+                <constraint firstItem="OS0-FX-VKC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NfI-14-0Ja"/>
+                <constraint firstItem="OS0-FX-VKC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wvA-IA-AhX"/>
+            </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="SoU-e8-bIq">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4H-UE-5E2">
+                    <rect key="frame" x="0.0" y="10" width="375" height="190"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="674-Bo-R9k" customClass="QMUITextView">
+                            <rect key="frame" x="10" y="0.0" width="355" height="180"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请介绍一下服务内容"/>
+                            </userDefinedRuntimeAttributes>
+                        </textView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="674-Bo-R9k" secondAttribute="trailing" constant="10" id="39n-qF-Xfd"/>
+                        <constraint firstItem="674-Bo-R9k" firstAttribute="top" secondItem="k4H-UE-5E2" secondAttribute="top" id="XmK-5U-1Mx"/>
+                        <constraint firstAttribute="bottom" secondItem="674-Bo-R9k" secondAttribute="bottom" constant="10" id="kpi-to-Ofd"/>
+                        <constraint firstItem="674-Bo-R9k" firstAttribute="leading" secondItem="k4H-UE-5E2" secondAttribute="leading" constant="10" id="qF7-Xs-hec"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="k4H-UE-5E2" firstAttribute="top" secondItem="SoU-e8-bIq" secondAttribute="top" constant="10" id="Cfx-S7-jkG"/>
+                <constraint firstAttribute="trailing" secondItem="k4H-UE-5E2" secondAttribute="trailing" id="JTR-6C-FRi"/>
+                <constraint firstAttribute="bottom" secondItem="k4H-UE-5E2" secondAttribute="bottom" id="YFm-mw-9qm"/>
+                <constraint firstItem="k4H-UE-5E2" firstAttribute="leading" secondItem="SoU-e8-bIq" secondAttribute="leading" id="uU7-Ru-gcl"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="38.5" y="559.5"/>
+        </view>
+    </objects>
+</document>

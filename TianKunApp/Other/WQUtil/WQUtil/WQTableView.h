@@ -19,6 +19,9 @@
 
 @property (nonatomic, copy) void(^headRefreshBlock)(void);
 @property (nonatomic, copy) void(^footRefreshBlock)(void);
+@property (nonatomic, assign) BOOL canRefresh;
+@property (nonatomic, assign) BOOL canLoadMore;
+
 
 /**
  初始化方法

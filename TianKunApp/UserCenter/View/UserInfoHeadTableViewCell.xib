@@ -19,15 +19,24 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="PHD-Zw-dxz">
-                        <rect key="frame" x="15" y="6" width="85" height="85.5"/>
+                        <rect key="frame" x="215" y="6" width="85" height="85.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="85" id="ev2-Qf-r1w"/>
                             <constraint firstAttribute="height" constant="85" id="gGC-Jb-nft"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="头像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5c-fq-UxG">
+                        <rect key="frame" x="15" y="0.0" width="29" height="97.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="PHD-Zw-dxz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="UAz-Pb-Lxq"/>
+                    <constraint firstAttribute="bottom" secondItem="E5c-fq-UxG" secondAttribute="bottom" id="59Y-ne-YU3"/>
+                    <constraint firstItem="E5c-fq-UxG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fZ3-yC-Tga"/>
+                    <constraint firstAttribute="trailing" secondItem="PHD-Zw-dxz" secondAttribute="trailing" constant="20" id="iZD-b9-SFt"/>
+                    <constraint firstItem="E5c-fq-UxG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="r6B-nx-4Fo"/>
                     <constraint firstItem="PHD-Zw-dxz" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uON-tL-wCu"/>
                 </constraints>
             </tableViewCellContentView>
@@ -38,6 +47,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="头像" width="65" height="65"/>
+        <image name="头像" width="112" height="112"/>
     </resources>
 </document>

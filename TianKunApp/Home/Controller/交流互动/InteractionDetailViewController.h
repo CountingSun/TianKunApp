@@ -8,6 +8,9 @@
 
 #import "WQBaseViewController.h"
 
+@class InteractionInfo;
+
 @interface InteractionDetailViewController : WQBaseViewController
+- (instancetype)initWithInteractionID:(NSString *)interactionID;
 
 @end

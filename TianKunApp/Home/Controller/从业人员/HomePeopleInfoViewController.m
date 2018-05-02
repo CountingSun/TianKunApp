@@ -9,11 +9,31 @@
 #import "HomePeopleInfoViewController.h"
 #import "FSSegmentTitleView.h"
 #import "PeopleInfo.h"
+#import "DetailListTableViewCell.h"
+#import "RegisterInfo.h"
+#import "ProjectInfo.h"
+#import "SpecialBehaviorInfo.h"
+#import "ChangeInfo.h"
+#import "BlackListInfo.h"
 
 @interface HomePeopleInfoViewController ()<UITableViewDataSource,UITableViewDelegate,FSSegmentTitleViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) FSSegmentTitleView *segmentTitleView;
 @property (nonatomic ,strong) PeopleInfo *peopleInfo;
+
+@property (nonatomic ,strong) NSMutableArray *arrInfo;
+@property (nonatomic ,strong) NSMutableArray *arrSelf;
+@property (nonatomic ,strong) NSMutableArray *arrBad;
+@property (nonatomic ,strong) NSMutableArray *arrGood;
+@property (nonatomic ,strong) NSMutableArray *arrBlack;
+@property (nonatomic ,strong) NSMutableArray *arrChange;
+
+/**
+ 当前选中的类型 良好  不良。。。
+ */
+@property (nonatomic ,assign) NSInteger currectIndex;
+
+
 @end
 
 @implementation HomePeopleInfoViewController
@@ -28,22 +48,80 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.titleView setTitle:@"建设信息"];
+    [self.titleView setTitle:@"从业人员"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"DetailListTableViewCell" bundle:nil] forCellReuseIdentifier:@"DetailListTableViewCell"];
+  
     [self showLoadingView];
     [self getData];
+    _currectIndex = 0;
     
-    
+
 }
 - (void)getData{
-    [self showLoadingView];
-    [[[NetWorkEngine alloc]init] postWithDict:@{@"id":_peopleInfo.people_id} url:BaseUrl(@"/PesonListXinXi/selectAppPesonsList.action") succed:^(id responseObject) {
+    [[[NetWorkEngine alloc]init] postWithDict:@{@"id":_peopleInfo.people_id} url:BaseUrl(@"PesonListXinXi/findpesonslist.action") succed:^(id responseObject) {
         
         
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         [self hideLoadingView];
         
         if (code == 1) {
-            NSDictionary *dict = [[[responseObject objectForKey:@"value"] objectForKey:@"CompanyInformation"] objectAtIndex:0];
+            if(!_arrInfo){
+                _arrInfo = [NSMutableArray array];
+            }
+            if(!_arrSelf){
+                _arrSelf = [NSMutableArray array];
+            }
+            if(!_arrBad){
+                _arrBad = [NSMutableArray array];
+            }
+            if(!_arrGood){
+                _arrGood = [NSMutableArray array];
+            }
+            if(!_arrBlack){
+                _arrInfo = [NSMutableArray array];
+            }
+            if(!_arrChange){
+                _arrChange = [NSMutableArray array];
+            }
+
+            NSMutableArray *arrZInfo = [[responseObject objectForKey:@"value"] objectForKey:@"zhixingzhuce"];
+            
+            for (NSDictionary *dict in arrZInfo){
+                RegisterInfo *info =  [RegisterInfo mj_objectWithKeyValues:dict];
+                [_arrInfo addObject:info];
+            }
+            
+            NSMutableArray *arrProject = [[responseObject objectForKey:@"value"] objectForKey:@"gongchengxiangmu"];
+
+            for (NSDictionary *dict in arrProject){
+                ProjectInfo *info =  [ProjectInfo mj_objectWithKeyValues:dict];
+                [_arrSelf addObject:info];
+            }
+
+            NSMutableArray *arrBehavior = [[responseObject objectForKey:@"value"] objectForKey:@"findblacklist"];
+            
+            for (NSDictionary *dict in arrBehavior){
+                SpecialBehaviorInfo *info =  [SpecialBehaviorInfo mj_objectWithKeyValues:dict];
+                if([info.behavior_type isEqualToString:@"1"]){
+                    [_arrGood addObject:info];
+                }else{
+                    [_arrBad addObject:info];
+                }
+            }
+            NSMutableArray *arrChanget = [[responseObject objectForKey:@"value"] objectForKey:@"change"];
+            
+            for (NSDictionary *dict in arrChanget){
+                ChangeInfo *info =  [ChangeInfo mj_objectWithKeyValues:dict];
+                [_arrChange addObject:info];
+            }
+            NSMutableArray *arrblack = [[responseObject objectForKey:@"value"] objectForKey:@"heimingdan"];
+            
+            for (NSDictionary *dict in arrblack){
+                BlackListInfo *info =  [BlackListInfo mj_objectWithKeyValues:dict];
+                [_arrBlack addObject:info];
+            }
+
+            
             [self.tableView reloadData];
             
         }else{
@@ -54,11 +132,6 @@
             }];
             
         }
-        
-        
-        
-        
-        
     } errorBlock:^(NSError *error) {
         [self hideLoadingView];
         [self showGetDataFailViewWithReloadBlock:^{
@@ -88,61 +161,305 @@
     return _tableView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return 10;
+    if (section == 1) {
+        return 50;
     }
-    return 50;
+    if (section == 2) {
+        return CGFLOAT_MIN;
+    }
+
+    return 5;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.section == 1){
+        return CGFLOAT_MIN;
+    }
+    return UITableViewAutomaticDimension;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    switch (_currectIndex) {
+            case 0:
+            return _arrInfo.count+2;
+            break;
+            case 1:
+            return _arrSelf.count+2;
+
+            break;
+            case 2:
+            return _arrBad.count+2;
+
+            break;
+            case 3:
+            return _arrGood.count+2;
+
+            break;
+            case 4:
+            return _arrBlack.count+2;
+
+            break;
+        default:
+            return _arrChange.count+2;
+            break;
+    }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 3;
+    }else if(section == 1){
+        return 1;
+    }else{
+        
+        switch (_currectIndex) {
+                case 0:
+                return 5;
+                break;
+                case 1:
+                return 6;
+                
+                break;
+                case 2:
+                return 5;
+                
+                break;
+                case 3:
+                return 5;
+                
+                break;
+                case 4:
+                return 5;
+                
+                break;
+            default:
+                return 2;
+                
+                break;
+        }
     }
-    return 14;
     
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellID = @"cellID";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.textLabel.textColor = COLOR_TEXT_BLACK;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = 0;
-    }
-    
-    if (indexPath.section == 0) {
-        if (indexPath.row == 0) {
-//            NSString *str = [NSString stringWithFormat:@"公司名称：%@",_companyInfo.companyName];
-            
-//            NSMutableAttributedString * mAttribute = [[NSMutableAttributedString alloc] initWithString:str];
-//            [mAttribute addAttribute:NSForegroundColorAttributeName
-//                               value:COLOR_THEME
-//                               range:NSMakeRange(5, str.length-5)];
-            
-//            cell.textLabel.attributedText = mAttribute;
-        }else if(indexPath.row == 1){
-//            cell.textLabel.text = [NSString stringWithFormat:@"法定代表人：%@",_companyInfo.companyLegalRepresentative];
-            
-        }else{
-//            cell.textLabel.text = [NSString stringWithFormat:@"公司注册属地：%@",_companyInfo.companyAddress];
-            ;
-            
+    DetailListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailListTableViewCell" forIndexPath:indexPath];
+        cell.titleLabel.textColor = COLOR_TEXT_BLACK;
+        cell.detailLabel.textColor = COLOR_TEXT_BLACK;
+
+    if(indexPath.section == 0){
+        switch (indexPath.row) {
+                case 0:
+                {
+                    cell.titleLabel.text = @"姓名：";
+                    cell.detailLabel.text = _peopleInfo.name;
+                    
+                }
+                break;
+                case 1:
+            {
+                cell.titleLabel.text = @"证件类型：";
+                cell.detailLabel.text = _peopleInfo.certificate_type;
+
+            }
+                break;
+                
+                case 2:
+            {
+                cell.titleLabel.text = @"证件号码：";
+                cell.detailLabel.text = _peopleInfo.certificate_number;
+
+            }
+                break;
+                
+
+            default:
+                break;
         }
-    }else{
-        cell.textLabel.text = @"";
+    }else if(indexPath.section == 1){
         
+    }else{
+        switch (_currectIndex) {
+                case 0:
+                {
+                    RegisterInfo *info =  _arrInfo[indexPath.section-2];
+                    switch (indexPath.row) {
+                            case 0:
+                            cell.titleLabel.text = @"证件类型：";
+                            cell.detailLabel.text = info.type_name;
+                            
+                            break;
+                            case 1:
+                            cell.titleLabel.text = @"证件编号：";
+                            cell.detailLabel.text = info.credential_number;
+                            
+                            break;
+                            case 2:
+                            cell.titleLabel.text = @"执业印章号：";
+                            cell.detailLabel.text = info.operation_seal_number;
+                            
+                            break;
+                            case 3:
+                            cell.titleLabel.text = @"有效日期：";
+                            cell.detailLabel.text = info.useful_deadline;
+                            
+                            break;
+                            case 4:
+                            cell.titleLabel.text = @"注册单位：";
+                            cell.detailLabel.text = info.registrant;
+                            
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                break;
+                case 1:
+            {
+                ProjectInfo *info = _arrSelf[indexPath.section-2];
+                switch (indexPath.row) {
+                        case 0:
+                        cell.titleLabel.text = @"序号：";
+                        cell.detailLabel.text = [NSString stringWithFormat:@"%@",@(indexPath.row+1)];
+                        break;
+                        case 1:
+                        cell.titleLabel.text = @"项目编号：";
+                        cell.detailLabel.text = info.project_number;
+                        break;
+                        case 2:
+                        cell.titleLabel.text = @"项目名称：";
+                        cell.detailLabel.text = info.project_name;
+                        break;
+                        case 3:
+                        cell.titleLabel.text = @"项目属地：";
+                        cell.detailLabel.text = info.project_address;
+                        break;
+                        case 4:
+                        cell.titleLabel.text = @"项目类别号：";
+                        cell.detailLabel.text = info.project_number;
+                        break;
+                        case 5:
+                        cell.titleLabel.text = @"建设单位：";
+                        cell.detailLabel.text = info.development_organization;
+                        break;
+
+                    default:
+                        break;
+                }
+                
+            }
+                break;
+                case 2:
+            {
+                SpecialBehaviorInfo *info = _arrBad[indexPath.section-2];
+                switch (indexPath.row) {
+                        case 0:
+                        cell.titleLabel.text = @"诚信记录编号：";
+                        cell.detailLabel.text = info.record_number;
+                        break;
+                        case 1:
+                        cell.titleLabel.text = @"诚信记录主体：";
+                        cell.detailLabel.text = info.record_body;
+                        break;
+                        case 2:
+                        cell.titleLabel.text = @"决定内容：";
+                        cell.detailLabel.text = info.record_details;
+                        break;
+                        case 3:
+                        cell.titleLabel.text = @"实施部门（文号）：";
+                        cell.detailLabel.text = info.department_number;
+                        break;
+                        case 4:
+                        cell.titleLabel.text = @"发布有效期：";
+                        cell.detailLabel.text = info.expiration_date;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+                break;
+                case 3:
+            {
+                SpecialBehaviorInfo *info = _arrGood        [indexPath.section-2];
+                switch (indexPath.row) {
+                        case 0:
+                        cell.titleLabel.text = @"诚信记录编号：";
+                        cell.detailLabel.text = info.record_number;
+                        break;
+                        case 1:
+                        cell.titleLabel.text = @"诚信记录主体：";
+                        cell.detailLabel.text = info.record_body;
+                        break;
+                        case 2:
+                        cell.titleLabel.text = @"决定内容：";
+                        cell.detailLabel.text = info.record_details;
+                        break;
+                        case 3:
+                        cell.titleLabel.text = @"实施部门（文号）：";
+                        cell.detailLabel.text = info.department_number;
+                        break;
+                        case 4:
+                        cell.titleLabel.text = @"发布有效期：";
+                        cell.detailLabel.text = info.expiration_date;
+                        break;
+                        
+                    default:
+                        break;
+                }
+
+            }
+                break;
+                case 4:
+            {
+                BlackListInfo *info = _arrBlack[indexPath.section-2];
+                switch (indexPath.row) {
+                        case 0:
+                        cell.titleLabel.text = @"黑名单记录主体：";
+                        cell.detailLabel.text = info.blacklist_body;
+                        break;
+                        case 1:
+                        cell.titleLabel.text = @"记录原由：";
+                        cell.detailLabel.text = info.cause;
+                        break;
+                        case 2:
+                        cell.titleLabel.text = @"认定部门：";
+                        cell.detailLabel.text = info.from_department;
+                        break;
+                        case 3:
+                        cell.titleLabel.text = @"决定日期：";
+                        cell.detailLabel.text = info.start_time;
+                        break;
+                        case 4:
+                        cell.titleLabel.text = @"有效期截止：";
+                        cell.detailLabel.text = info.end_time;
+                        break;
+
+                    default:
+                        break;
+                }
+                
+            }
+                break;
+
+            default:{
+                ChangeInfo *info = _arrChange[indexPath.section-2];
+                switch (indexPath.row) {
+                    case 0:
+                        cell.titleLabel.text = @"注册类别：";
+                        cell.detailLabel.text = info.change_flag;
+                        break;
+                    case 1:
+                        cell.titleLabel.text = @"变更记录：";
+                        cell.detailLabel.text = info.change_contents;
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+                break;
+        }
     }
-    
-    
     return cell;
-    
-    
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
@@ -151,7 +468,7 @@
             
             backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
             backView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-            _segmentTitleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 40) titles:@[@"企业资质",@"注册人员",@"工程项目",@"不良",@"良好",@"黑名单",@"变更记录"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+            _segmentTitleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 40) titles:@[@"执业注册信息",@"个人工程业绩",@"不良行为",@"良好行为",@"黑名单记录",@"变更记录"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
             _segmentTitleView.titleSelectColor = COLOR_THEME;
             _segmentTitleView.indicatorColor = COLOR_THEME;
             [backView addSubview:_segmentTitleView];
@@ -182,8 +499,9 @@
  @param endIndex 切换后标题索引
  */
 - (void)FSSegmentTitleView:(FSSegmentTitleView *)titleView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex{
+    _currectIndex = endIndex;
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    [self.tableView reloadData];
     
     
 }

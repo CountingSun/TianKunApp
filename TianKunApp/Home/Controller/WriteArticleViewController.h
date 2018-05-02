@@ -10,4 +10,15 @@
 
 @interface WriteArticleViewController : WQBaseViewController
 
+/**
+ <#Description#>
+
+ @param articleID <#articleID description#>
+ @param fromType 1 文件通知 2 公示公告
+ @return <#return value description#>
+ */
+- (instancetype)initWithArticleID:(NSInteger)articleID fromType:(NSInteger)fromType;
+
+@property (nonatomic, copy) dispatch_block_t succeedBlcok;
+
 @end

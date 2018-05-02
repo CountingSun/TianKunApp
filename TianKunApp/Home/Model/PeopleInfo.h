@@ -40,21 +40,7 @@
  */
 
 @property (nonatomic, copy) NSString *practicing_information_id;
-/**
- 个人工程业绩
- */
 
-@property (nonatomic, copy) NSString *project_experience;
-/**
- 特殊行为记录
- */
-
-@property (nonatomic, copy) NSString *behavior_record;
-/**
- 变更记录
- */
-
-@property (nonatomic, copy) NSString *change_record;
 /**
  隶属公司id
  */

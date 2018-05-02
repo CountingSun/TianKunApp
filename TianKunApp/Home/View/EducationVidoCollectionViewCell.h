@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface EducationVidoCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *vidoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *freeType;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 
 @end

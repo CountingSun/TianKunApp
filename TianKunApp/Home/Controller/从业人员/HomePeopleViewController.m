@@ -11,6 +11,7 @@
 #import "UITableView+EmpayData.h"
 #import "ConstructionSearchViewController.h"
 #import "PeopleInfo.h"
+#import "HomePeopleSearchViewController.h"
 
 @interface HomePeopleViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -19,6 +20,10 @@
 @property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
 @property (nonatomic ,assign) NSInteger pageIndex;
 @property (nonatomic ,assign) NSInteger pageSize;
+@property (nonatomic, copy) NSString *firstTypeStr;
+@property (nonatomic, copy) NSString *secondTypeStr;
+@property (nonatomic, copy) NSString *nameStr;
+@property (nonatomic, copy) NSString *numStr;
 
 @end
 
@@ -38,9 +43,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showLoadingView];
-    
+    _firstTypeStr = @"";
+    _secondTypeStr = @"";
+    _numStr = @"";
+    _nameStr = @"";
+
     _pageIndex = 1;
-    _pageSize = 15;
+    _pageSize = DEFAULT_PAGE_SIZE;
     [self setupTitleView];
     [self getData];
     
@@ -53,28 +62,57 @@
     if (_pageIndex<1) {
         _pageIndex = 1;
     }
-    
-    NSLog(@"pageIndex%@",@(_pageIndex));
-    [_netWorkEngine postWithDict:@{@"startnum":@(_pageIndex),@"num":@(_pageSize)} url:BaseUrl(@"PesonListXinXi/selectAppPesonsList.action") succed:^(id responseObject) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:@(_pageIndex) forKey:@"startnum"];
+    [dict setObject:@(_pageSize) forKey:@"num"];
+    [dict setObject:_nameStr forKey:@"name"];
+    [dict setObject:@"" forKey:@"id"];
+    [dict setObject:_numStr forKey:@"number "];
+    [dict setObject:_firstTypeStr forKey:@"type1"];
+    [dict setObject:_secondTypeStr forKey:@"type2"];
+
+    [_netWorkEngine postWithDict:dict url:BaseUrl(@"PesonListXinXi/selectAppPesonsList.action") succed:^(id responseObject) {
         [self hideLoadingView];
         [_tableView endRefresh];
         
-        //        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
-        NSMutableArray *arr = [responseObject objectForKey:@"value"];
-        if (arr.count) {
-            if (!_arrData) {
-                _arrData = [NSMutableArray array];
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            NSMutableArray *arr = [responseObject objectForKey:@"value"];
+            if (arr.count) {
+                if (!_arrData) {
+                    _arrData = [NSMutableArray array];
+                }
+                if (_pageIndex == 1) {
+                    [_arrData removeAllObjects];
+                }
+                
+                for (NSDictionary *dict in arr) {
+                    PeopleInfo *peopleInfo = [PeopleInfo mj_objectWithKeyValues:dict];
+                    [_arrData addObject:peopleInfo];
+                }
+                [self.tableView reloadData];
+                if(arr.count<_pageSize){
+                    _tableView.canLoadMore = NO;
+                }else{
+                    _tableView.canLoadMore = YES;
+                }
+                
+            }else{
+                if (!_arrData.count) {
+                    [self showGetDataNullWithReloadBlock:^{
+                        [self showLoadingView];
+                        [self getData];
+                    }];
+                    
+                    
+                }else{
+                    _pageIndex--;
+                    
+                    [self showErrorWithStatus:NET_WAIT_NO_DATA];
+                    
+                }
             }
-            if (_pageIndex == 1) {
-                [_arrData removeAllObjects];
-            }
-            
-            for (NSDictionary *dict in arr) {
-                PeopleInfo *peopleInfo = [PeopleInfo mj_objectWithKeyValues:dict];
-                [_arrData addObject:peopleInfo];
-            }
-            [self.tableView reloadData];
-            
+
         }else{
             if (!_arrData.count) {
                 [self showGetDataNullWithReloadBlock:^{
@@ -89,6 +127,7 @@
                 [self showErrorWithStatus:NET_WAIT_NO_DATA];
                 
             }
+
         }
         
     } errorBlock:^(NSError *error) {
@@ -118,14 +157,17 @@
         _tableView.dataSource = self;
         _tableView.rowHeight = 45;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        __weak typeof(self) weakSelf = self;
+
         [_tableView headerWithRefreshingBlock:^{
-            _pageIndex = 1;
-            [self getData];
+            weakSelf.pageIndex = 1;
+            [weakSelf getData];
         }];
         [self.view addSubview:_tableView];
+        
         [_tableView footerWithRefreshingBlock:^{
-            _pageIndex++;
-            [self getData];
+            weakSelf.pageIndex++;
+            [weakSelf getData];
             
         }];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -191,15 +233,28 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    HomePeopleInfoViewController *vc = [[HomePeopleInfoViewController alloc]init];
+    PeopleInfo *info = _arrData[indexPath.row];
+
+    HomePeopleInfoViewController *vc = [[HomePeopleInfoViewController alloc]initWithPeopleInfo:info];
     
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)searchBarSearchButton{
     
-    ConstructionSearchViewController *vc= [[ConstructionSearchViewController alloc]init];
+    HomePeopleSearchViewController *vc= [[HomePeopleSearchViewController alloc]init];
+    vc.sureButtonClickBlock = ^(NSString *nameStr, NSString *numStr, NSString *firsetStr, NSString *secondStr) {
+        _nameStr = nameStr;
+        _numStr = numStr;
+        _firstTypeStr = firsetStr;
+        _secondTypeStr = secondStr;
+        _pageIndex = 1;
+        [self showLoadingView];
+        
+        [_arrData removeAllObjects];
+        [self getData];
+    };
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)didReceiveMemoryWarning {

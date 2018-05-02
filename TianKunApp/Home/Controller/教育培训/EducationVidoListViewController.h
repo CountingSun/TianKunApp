@@ -8,6 +8,14 @@
 
 #import "WQBaseViewController.h"
 
+@class DocumentPropertyInfo;
+
+
 @interface EducationVidoListViewController : WQBaseViewController
+
+- (instancetype)initWithClassID:(NSInteger)classID;
+
+- (void)reloadWithDocumentPropertyInfo:(DocumentPropertyInfo *)documentPropertyInfo;
+
 
 @end

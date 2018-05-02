@@ -19,6 +19,12 @@
         self.dataSource = delegateAndDataScource;
         self.tableFooterView = [UIView new];
         
+        if (@available(iOS 11.0, *)) {
+            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+        }
+        
+        
     }
     return self;
 }
@@ -29,7 +35,11 @@
         self.delegate = delegate;
         self.dataSource = dataSource;
         self.tableFooterView = [UIView new];
-        
+        if (@available(iOS 11.0, *)) {
+            self.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+        }
+
     }
     return self;
 }
@@ -102,7 +112,14 @@
     
     
 }
-
+- (void)setCanRefresh:(BOOL)canRefresh{
+    self.header.hidden = !canRefresh;
+    
+}
+- (void)setCanLoadMore:(BOOL)canLoadMore{
+    self.footer.hidden = !canLoadMore;
+    
+}
 - (void)refreshOfheader:(UITableView *)view refreshGifHeader:(MJRefreshGifHeader *)header{
     
     NSMutableArray *pullingImages = [NSMutableArray new];

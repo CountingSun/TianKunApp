@@ -14,13 +14,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _goLabel.textColor = [UIColor redColor];
-
-    
-}
-- (IBAction)photoButtonClick:(id)sender {
-    if (_block) {
-        _block();
-    }
+    _upImageView.userInteractionEnabled = YES;
+    _upImageView.layer.masksToBounds = YES;
+    [_upImageView addTapGestureRecognizerWithActionBlock:^{
+       
+        if (_block) {
+            _block();
+        }
+    }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -10,10 +10,12 @@
 #import "FSSegmentTitleView.h"
 #import "FSPageContentView.h"
 #import "InteractionListViewController.h"
+#import "ClassTypeInfo.h"
 
 @interface InteractionViewController ()<FSSegmentTitleViewDelegate,FSPageContentViewDelegate>
 @property (nonatomic ,strong) FSSegmentTitleView *segmentTitleView;
 @property (nonatomic ,strong) FSPageContentView *pageContentView;
+@property (nonatomic ,strong) NSMutableArray *arrClass;
 
 @end
 
@@ -22,22 +24,70 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.titleView setTitle:@"互动交流"];
-    [self setupUI];
+    [self getClass];
+    [self showLoadingView];
 }
-- (void)setupUI{
-    NSArray *titlesArr = @[@"全部",@"服饰穿搭",@"生活百货",@"美食吃货",@"美容护理",@"母婴儿童",@"数码家电",@"其他"];
+- (void)getClass{
+    [[[NetWorkEngine alloc]init] getWithUrl:BaseUrl(@"find.forum.type.ancestor") succed:^(id responseObject) {
+        [self hideLoadingView];
+        if(!_arrClass){
+            _arrClass = [NSMutableArray array];
+            
+        }
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if(code == 1){
+            
+            NSMutableArray *arrClass = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+            for(NSDictionary *dict in arrClass){
+                ClassTypeInfo *info = [ClassTypeInfo mj_objectWithKeyValues:dict];
+                [_arrClass addObject:info];
+            }
+            [self setupUI];
+            
+        }else{
+            [self showGetDataFailViewWithReloadBlock:^{
+                [self showLoadingView];
+                [self getClass];
+            }];
+            
+        }
+        
+        
+    } errorBlock:^(NSError *error) {
+        [self hideLoadingView];
+        [self showGetDataFailViewWithReloadBlock:^{
+            [self showLoadingView];
+            [self getClass];
+        }];
+        
+    }];
     
+    
+}
+
+- (void)setupUI{
+    NSMutableArray *titlesArr = [NSMutableArray arrayWithCapacity:_arrClass.count];
+    [_arrClass enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        ClassTypeInfo *info = obj;
+        [titlesArr addObject:info.typeName];
+        
+        
+    }];
+
     _segmentTitleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) titles:titlesArr delegate:self indicatorType:FSIndicatorTypeEqualTitle];
     _segmentTitleView.backgroundColor =COLOR_WHITE;
     
     [self.view addSubview:_segmentTitleView];
     
     NSMutableArray *childVCs = [[NSMutableArray alloc]init];
-    for (NSString *title in titlesArr) {
-        InteractionListViewController *vc = [[InteractionListViewController alloc]init];
-        vc.title = title;
+    [_arrClass enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        ClassTypeInfo *info = obj;
+        InteractionListViewController *vc = [[InteractionListViewController alloc]initWithClassID:info.typeID                                       ];
         [childVCs addObject:vc];
-    }
+
+        
+    }];
+
     self.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, CGRectGetHeight(self.view.bounds) - 40) childVCs:childVCs parentVC:self delegate:self];
     [self.view addSubview:_pageContentView];
     

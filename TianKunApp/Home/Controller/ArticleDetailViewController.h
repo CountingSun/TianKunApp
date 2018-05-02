@@ -10,4 +10,14 @@
 
 @interface ArticleDetailViewController : WQBaseViewController
 
+/**
+ <#Description#>
+
+ @param articleID <#articleID description#>
+ @param fromType 1 文件通知  0 公示公告
+ @return <#return value description#>
+ */
+- (instancetype)initWithArticleID:(NSInteger)articleID fromType:(NSInteger)fromType;
+
+
 @end

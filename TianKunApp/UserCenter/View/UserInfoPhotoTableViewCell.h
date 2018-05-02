@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UserInfoPhotoTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *photoButton;
 
+@property (weak, nonatomic) IBOutlet UIImageView *upImageView;
 @property (weak, nonatomic) IBOutlet UILabel *goLabel;
 
 @property (nonatomic, copy) dispatch_block_t block;

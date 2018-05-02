@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -39,35 +39,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8v-bT-68b">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xbj-6j-y3w">
                         <rect key="frame" x="10" y="15" width="70" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="aPw-Ql-K6Z"/>
-                            <constraint firstAttribute="height" constant="70" id="ybg-eZ-KH8"/>
+                            <constraint firstAttribute="height" constant="70" id="Ajg-R5-8I7"/>
+                            <constraint firstAttribute="width" constant="70" id="liC-kK-UJy"/>
                         </constraints>
-                        <state key="normal" image="上传-image"/>
-                        <connections>
-                            <action selector="photoButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7ee-sj-hkW"/>
-                        </connections>
-                    </button>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="M8v-bT-68b" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="CgF-aE-oer"/>
                     <constraint firstItem="ElP-PA-7Yi" firstAttribute="top" secondItem="y3l-ma-gps" secondAttribute="bottom" id="Sob-Ug-NsR"/>
                     <constraint firstItem="ElP-PA-7Yi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="26" id="Tcb-SA-qqY"/>
-                    <constraint firstItem="M8v-bT-68b" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="ger-4b-kBy"/>
+                    <constraint firstItem="xbj-6j-y3w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cic-B0-76N"/>
+                    <constraint firstItem="xbj-6j-y3w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="k1p-4m-PpJ"/>
                     <constraint firstItem="y3l-ma-gps" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qrA-Ah-0zV"/>
-                    <constraint firstItem="y3l-ma-gps" firstAttribute="top" secondItem="M8v-bT-68b" secondAttribute="bottom" constant="10" id="yuT-AT-W4v"/>
+                    <constraint firstItem="y3l-ma-gps" firstAttribute="top" secondItem="xbj-6j-y3w" secondAttribute="bottom" constant="10" id="s3M-qP-LcF"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="goLabel" destination="ElP-PA-7Yi" id="2eC-7b-YXz"/>
-                <outlet property="photoButton" destination="M8v-bT-68b" id="b5j-3r-fa2"/>
+                <outlet property="upImageView" destination="xbj-6j-y3w" id="G2f-SC-nQ0"/>
             </connections>
             <point key="canvasLocation" x="50" y="102"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="上传-image" width="64" height="64"/>
-    </resources>
 </document>

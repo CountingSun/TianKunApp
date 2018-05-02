@@ -31,10 +31,36 @@
 
 }
 - (IBAction)sureButtonClickEvent:(id)sender {
-    [self showSuccessWithStatus:@"修改成功"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.navigationController popViewControllerAnimated:YES];
-    });
+    if (!_oldTextField.text.length) {
+        [self showErrorWithStatus:@"请输入旧密码"];
+        return;
+    }
+    if (!_lastTextField.text.length) {
+        [self showErrorWithStatus:@"请输入新密码"];
+        return;
+    }
+    if ([_oldTextField.text isEqualToString:_lastTextField.text]) {
+        [self showErrorWithStatus:@"新密码不能入旧密码相同"];
+        return;
+
+    }
+    self.view.userInteractionEnabled = NO;
+    [self showWithStatus:NET_WAIT_TOST];
+    [[[NetWorkEngine alloc]init] postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname,@"oldPassword":_oldTextField.text,@"password":_lastTextField.text} url:BaseUrl(@"lg/edit_password.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            [self showSuccessWithStatus:@"修改成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+        }
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

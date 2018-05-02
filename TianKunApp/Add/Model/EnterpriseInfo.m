@@ -9,5 +9,10 @@
 #import "EnterpriseInfo.h"
 
 @implementation EnterpriseInfo
-
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"enterprise_id":@"id"
+             };
+    
+}
 @end

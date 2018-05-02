@@ -7,7 +7,7 @@
 //
 
 #import "LoadingView.h"
-
+#import "UIImage+GIF.h"
 
 @implementation LoadingView
 
@@ -22,21 +22,11 @@
 }
 - (void)setupUI{
     NSMutableArray *imageArr = [NSMutableArray arrayWithCapacity:0];
-
-    NSURL *gifImageUrl = [[NSBundle mainBundle] URLForResource:@"样式" withExtension:@"gif"];
-    //获取Gif图的原数据
-    CGImageSourceRef gifSource = CGImageSourceCreateWithURL((CFURLRef)gifImageUrl, NULL);
-    //获取Gif图有多少帧
-    size_t gifcount = CGImageSourceGetCount(gifSource);
-    for (NSInteger i = 0; i < gifcount; i++) {
-        //由数据源gifSource生成一张CGImageRef类型的图片
-        CGImageRef imageRef = CGImageSourceCreateImageAtIndex(gifSource, i, NULL);
-        UIImage *image = [UIImage imageWithCGImage:imageRef];
+    for (int i = 1; i < 40; i++) {
+        NSString *name = [NSString stringWithFormat:@"login_%d.png",i];
+        UIImage *image = [UIImage imageNamed:name];
         [imageArr addObject:image];
-        CGImageRelease(imageRef);
     }
-    
-
     self.AnimationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 88, 80)];
     
     
