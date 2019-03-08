@@ -15,6 +15,7 @@
                 pageSize:(NSInteger)pageSize
                dataType2:(NSInteger)dataType2
                calssType:(NSInteger)calssType
+                   docID:(NSInteger)docID
              returnBlock:(void(^)(NSInteger code,NSString *msg,NSMutableArray *arrData))returnBlock{
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -22,7 +23,8 @@
     [dict setObject:@(pageSize) forKey:@"num"];
     [dict setObject:@(dataType2) forKey:@"k"];
     [dict setObject:@(calssType) forKey:@"l"];
-    
+    [dict setObject:@(docID) forKey:@"id"];
+
     if (!_netWorkEngine) {
         _netWorkEngine = [[NetWorkEngine alloc]init];
     }
@@ -71,6 +73,9 @@
             documentInfo.collectID = [[[responseObject objectForKey:@"value"] objectForKey:@"shoucangrenid"] integerValue];
             documentInfo.canSee = [[[responseObject objectForKey:@"value"] objectForKey:@"yes"] integerValue];
             returnBlock(code,@"",documentInfo);
+            
+            [[[AddHistoryRecordNetwork alloc] init] addHistoryRecodeWithDataID:documentID dataType:6 dataTypeTwo:documentInfo.type data_title:documentInfo.data_title data_sketch:documentInfo.data_title1 dataPictureUrl:documentInfo.video_image_url];
+
             
         }else{
             returnBlock(code,[responseObject objectForKey:@"msg"],nil);

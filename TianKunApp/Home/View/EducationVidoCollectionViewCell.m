@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    _freeType.layer.cornerRadius = 3;
+    _freeType.layer.masksToBounds = YES;
+    _vidoImageView.layer.masksToBounds = YES;
 }
 
 @end

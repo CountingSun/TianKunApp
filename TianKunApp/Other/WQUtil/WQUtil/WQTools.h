@@ -257,5 +257,33 @@
 - (BOOL)isAllowedNotification;
 
 
+/**
+ app名称
+
+ @return <#return value description#>
+ */
++(NSString *)appName;
+
+/**
+ app版本
+
+ @return <#return value description#>
+ */
++(NSString *)appVersion;
+
+/**
+ app build版本
+
+ @return <#return value description#>
+ */
++(NSString *)appBuild;
+
+/**
+ 根据颜色生成图片
+
+ @param color <#color description#>
+ @return <#return value description#>
+ */
++ (UIImage *)imageWithColor:(UIColor *)color ;
 
 @end

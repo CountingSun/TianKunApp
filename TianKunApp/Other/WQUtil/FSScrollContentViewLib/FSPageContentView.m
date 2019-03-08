@@ -8,7 +8,6 @@
 
 #import "FSPageContentView.h"
 
-#define IOS_VERSION ([[[UIDevice currentDevice] systemVersion] floatValue])
 static NSString *collectionCellIdentifier = @"collectionCellIdentifier";
 
 @interface FSPageContentView ()<UICollectionViewDelegate,UICollectionViewDataSource>

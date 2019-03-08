@@ -34,9 +34,12 @@
     
     [_editButton addTarget:self action:@selector(editButtonEvent) forControlEvents:UIControlEventTouchUpInside];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_editButton];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [view addSubview:_editButton];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:view];
 
-    NSArray *titlesArr = @[@"文件通知",@"公示公告",@"企业招聘",@"人才求职",@"互动交流",@"教育培训",@"企业收藏"];
+    NSArray *titlesArr = @[@"文件通知",@"公示公告",@"企业招聘",@"人才求职",@"互动交流",@"教育培训",@"企业收藏",@"商务合作"];
     
     _segmentTitleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40) titles:titlesArr delegate:self indicatorType:FSIndicatorTypeEqualTitle];
     _segmentTitleView.backgroundColor =COLOR_WHITE;
@@ -52,7 +55,9 @@
     }
     _arrChildController = childVCs;
     
-    self.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_HEIGHT-64-40) childVCs:childVCs parentVC:self delegate:self];
+    CGFloat h = NavBarHeight;
+    
+    self.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, SCREEN_HEIGHT-h-40) childVCs:childVCs parentVC:self delegate:self];
     [self.view addSubview:_pageContentView];
     
     

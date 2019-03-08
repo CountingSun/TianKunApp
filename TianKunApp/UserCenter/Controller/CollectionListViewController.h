@@ -15,11 +15,14 @@ typedef NS_ENUM(NSInteger,ViewType) {
     viewTypePeople,
     viewTypeInteraction,
     viewTypeEducation,
-    viewTypeCompany
+    viewTypeCompany,
+    viewTypeCooperation
+
 
 };
 
 @interface CollectionListViewController : WQBaseViewController
+@property (nonatomic ,assign) BOOL canEdit;
 
 - (instancetype)initWithViewType:(ViewType)viewType;
 - (void)beginEditWithEditButton:(UIButton *)editButton FinishBlock:(dispatch_block_t)block;

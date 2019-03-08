@@ -14,8 +14,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [_lookAllButton addTarget:self action:@selector(lookAllButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    
+    _introctLabel.textColor = COLOR_TEXT_LIGHT;
+    [_lookAllButton setTitleColor:COLOR_THEME forState:0];
 }
 - (void)setDocumentInfo:(DocumentInfo *)documentInfo{
     _documentInfo = documentInfo;
@@ -38,13 +38,15 @@
             _introctLabel.frame = CGRectMake(15, 80, SCREEN_WIDTH-30, textSize.height);
         }else{
             _lookAllButton.hidden = NO;
-
+            _lookAllButton.frame = CGRectMake(SCREEN_WIDTH-60-15, 97, 60, 17);
             _introctLabel.frame = CGRectMake(15, 80, SCREEN_WIDTH-30, 34);
+            [self.contentView bringSubviewToFront:_lookAllButton];
         }
     }else{
         _lookAllButton.hidden = YES;
         _introctLabel.frame = CGRectMake(15, 80, SCREEN_WIDTH-30, textSize.height);
     }
+
     [self layoutIfNeeded];
     
 }

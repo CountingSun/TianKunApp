@@ -16,13 +16,16 @@
 #import "AboutUsViewController.h"
 #import "WebLinkViewController.h"
 #import "ChangePasswordViewController.h"
-#import <ShareSDK/ShareSDK.h>
+#import "SetInfoWebViewController.h"
+#import "ManagerAddressViewController.h"
+#import "AssociationAccountViewController.h"
 
 @interface SetViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *footView;
 @property (nonatomic ,strong) NSMutableArray *arrMenu;
 @property (weak, nonatomic) IBOutlet UIButton *loginoutButton;
+@property (nonatomic, copy) NSString *appUrl;
 
 @end
 
@@ -30,6 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
+
     [self setupUI];
     
 
@@ -41,13 +46,19 @@
     _tableView.dataSource = self;
     _tableView.rowHeight = 45;
     
-    _tableView.tableFooterView = self.footView;
+    if ([UserInfoEngine getUserInfo].userID) {
+        _tableView.tableFooterView = self.footView;
+    }
     [_loginoutButton setBackgroundColor:COLOR_TEXT_ORANGE];
     _loginoutButton.layer.masksToBounds = YES;
     _loginoutButton.layer.cornerRadius = 20;
     
     [self.tableView reloadData];
     
+}
+- (void)loginSucceed{
+    _tableView.tableFooterView = self.footView;
+
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _arrMenu.count;
@@ -116,22 +127,53 @@
 
         }
             break;
+        case 4:{
+            [self showWithStatus:NET_WAIT_TOST];
+            [self updateVersion];
+            
+            
+        }
+            break;
 
         case 5:{
-            WebLinkViewController *viewController = [[WebLinkViewController alloc]initWithTitle:@"使用协议" urlString:@"http://cpc.people.com.cn" goBackBlock:^{
-                
-            }];
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"agreement" ofType:@"html"];
+            NSURL*Url = [NSURL fileURLWithPath:path];
+
+            SetInfoWebViewController *viewController = [[SetInfoWebViewController alloc]initWithUrl:Url title:@"使用协议"];
             [self.navigationController pushViewController:viewController animated:YES];
 
         }
             break;
         case 6:{
-            ChangePasswordViewController *viewController = [[ChangePasswordViewController alloc]init];
-            [self.navigationController pushViewController:viewController animated:YES];
+            if ([UserInfoEngine isLogin]) {
+                ChangePasswordViewController *viewController = [[ChangePasswordViewController alloc]init];
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
 
         }
             
             break;
+        case 7:{
+            if ([UserInfoEngine isLogin]) {
+
+            ManagerAddressViewController *viewController = [[ManagerAddressViewController alloc]init];
+            [self.navigationController pushViewController:viewController animated:YES];
+            }
+
+            
+        }
+            break;
+        case 8:{
+            
+            if ([UserInfoEngine isLogin]) {
+                
+                AssociationAccountViewController *viewController = [[AssociationAccountViewController alloc]init];
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
+
+        }
+            break;
+            
             
         default:
             break;
@@ -140,19 +182,10 @@
 - (IBAction)loginoutButtonClickEvent:(id)sender {
     
     [WQAlertController showAlertControllerWithTitle:@"提示" message:@"您确定要退出登录吗？" sureButtonTitle:@"确定" cancelTitle:@"取消" sureBlock:^(QMUIAlertAction *action) {
+        [UserInfoEngine loginOut];
         
+        [self.navigationController popViewControllerAnimated:YES];
         
-        if ([ShareSDK hasAuthorized:SSDKPlatformTypeSinaWeibo]) {
-            [ShareSDK  cancelAuthorize:SSDKPlatformTypeSinaWeibo];
-        }
-        if ([ShareSDK hasAuthorized:SSDKPlatformTypeWechat]) {
-            [ShareSDK  cancelAuthorize:SSDKPlatformTypeWechat];
-        }
-        if ([ShareSDK hasAuthorized:SSDKPlatformTypeQQ]) {
-            [ShareSDK  cancelAuthorize:SSDKPlatformTypeQQ];
-        }
-
-        [UserInfoEngine setUserInfo:nil];
         [[AppDelegate sharedAppDelegate] setRootController];
         
         
@@ -164,6 +197,43 @@
     
     
 }
+- (void)updateVersion{
+    [[[NetWorkEngine alloc] init] postWithDict:@{@"type":@"1"} url:BaseUrl(@"UpdateVersionsController/selectupdateversionbytype.action") succed:^(id responseObject) {
+        NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        if (code == 1) {
+            [self dismiss];
+            NSString *version = [[responseObject objectForKey:@"value"] objectForKey:@"number"];
+            _appUrl = [[responseObject objectForKey:@"value"] objectForKey:@"url"];
+
+            if (![version isEqualToString:[WQTools appVersion]]) {
+                [WQAlertController showAlertControllerWithTitle:@"提示" message:@"发现新版本，是否前去App Store更新？" sureButtonTitle:@"去更新" cancelTitle:@"取消" sureBlock:^(QMUIAlertAction *action) {
+                    NSURL *url = [NSURL URLWithString:_appUrl];
+                    
+                    [[UIApplication sharedApplication] openURL:url];
+                    
+
+                } cancelBlock:^(QMUIAlertAction *action) {
+                    
+                }];
+                
+            }else{
+                [QMUITips showInfo:@"当前已是最新版本"];
+            }
+            
+            
+            
+            
+            
+        }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            
+        }
+    } errorBlock:^(NSError *error) {
+        [self showErrorWithStatus:NET_ERROR_TOST];
+
+    }];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

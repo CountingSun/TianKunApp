@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WQNavigationViewController : UINavigationController
+@interface WQNavigationViewController : QMUINavigationController
 
 @end

@@ -12,6 +12,7 @@
 #import "MenuInfo.h"
 #import "HistoryBottomView.h"
 #import "Historyinfo.h"
+#import "JumpToAssignVC.h"
 
 @interface HistoryViewModel ()
 @property (nonatomic, copy) NSString *time;
@@ -45,7 +46,8 @@
     [self.titleView setTitle:@"浏览足迹"];
     _pageIndex = 1;
     _pageSize = DEFAULT_PAGE_SIZE;
-    
+    _editButton.enabled = NO;
+
     [self setupView];
     [self showLoadingView];
     [self getData];
@@ -64,6 +66,7 @@
 
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
+
             NSMutableArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
             if (arr.count) {
                 [_arrData removeAllObjects];
@@ -96,6 +99,7 @@
                     [self showErrorWithStatus:NET_WAIT_NO_DATA];
                     
                 }
+                self.tableView.canLoadMore = NO;
 
             }
             
@@ -173,44 +177,84 @@
     
     _historyBottomView.selectButton.selected =! _historyBottomView.selectButton.selected;
     if (_historyBottomView.selectButton.selected) {
-        [_arrData enumerateObjectsUsingBlock:^(HistoryViewModel *info, NSUInteger section, BOOL * _Nonnull stop) {
-            NSMutableArray *arr = info.arrInfo;
-            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger row, BOOL * _Nonnull stop) {
-                [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES scrollPosition:UITableViewScrollPositionNone];
-                
-                
-            }];
-            
-        }];
 
+        [self selectAllData];
+        
     }else{
-        [_arrData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger section, BOOL * _Nonnull stop) {
-            NSMutableArray *arr = obj;
-            [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger row, BOOL * _Nonnull stop) {
-                [_tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES];
-                
-                
-            }];
-            
-        }];
-
+        [self cancelSelectAllData];
     }
     
     
 }
-- (void)unUseButtonClick{
+- (void)selectAllData{
+    [_arrData enumerateObjectsUsingBlock:^(HistoryViewModel *info, NSUInteger section, BOOL * _Nonnull stop) {
+        NSMutableArray *arr = info.arrInfo;
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger row, BOOL * _Nonnull stop) {
+            [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES scrollPosition:UITableViewScrollPositionNone];
+            
+            
+        }];
+        
+    }];
+
+}
+- (void)cancelSelectAllData{
+    [_arrData enumerateObjectsUsingBlock:^(HistoryViewModel *info, NSUInteger section, BOOL * _Nonnull stop) {
+        NSMutableArray *arr = info.arrInfo;
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger row, BOOL * _Nonnull stop) {
+            [_tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES];
+            
+            
+        }];
+        
+    }];
     
+
+}
+- (void)unUseButtonClick{
+
+    [WQAlertController showAlertControllerWithTitle:@"提示" message:@"您确定要清除失效的足迹吗？" sureButtonTitle:@"确定" cancelTitle:@"取消" sureBlock:^(QMUIAlertAction *action) {
+        [self cancelSelectAllData];
+
+        [_arrData enumerateObjectsUsingBlock:^(HistoryViewModel *info, NSUInteger section, BOOL * _Nonnull stop) {
+            NSMutableArray *arr = info.arrInfo;
+            [arr enumerateObjectsUsingBlock:^(Historyinfo  *historyinfo, NSUInteger row, BOOL * _Nonnull stop) {
+                if (historyinfo.delete_flag == 0) {
+                    [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES scrollPosition:UITableViewScrollPositionNone];
+                }else{
+                    [_tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] animated:YES];
+                }
+                NSArray<NSIndexPath *> *arrRows =   [_tableView indexPathsForSelectedRows];
+                if (arrRows.count) {
+                    [self clearnSelectButtonClick];
+                }else{
+                    [self showErrorWithStatus:@"暂无失效数据"];
+                }
+
+                
+            }];
+            
+        }];
+
+    } cancelBlock:^(QMUIAlertAction *action) {
+        
+        
+    }];
+
+    
+
 }
 - (void)clearnSelectButtonClick{
     NSArray<NSIndexPath *> *arrRows =   [_tableView indexPathsForSelectedRows];
     
     __block NSString *idsString = @"";
+    
 
     [arrRows enumerateObjectsUsingBlock:^(NSIndexPath * _Nonnull indexPath, NSUInteger idx, BOOL * _Nonnull stop) {
         HistoryViewModel *model = _arrData[indexPath.section];
         
         Historyinfo *info = model.arrInfo[indexPath.row];
-        idsString = [idsString stringByAppendingString:[NSString stringWithFormat:@"%@,",@(info.data_id)]];
+        idsString = [idsString stringByAppendingString:[NSString stringWithFormat:@"%@,",@(info.history_id)]];
     }];
     if (idsString.length) {
         idsString  = [idsString qmui_stringByRemoveLastCharacter];
@@ -225,6 +269,7 @@
             if (!_arrData.count) {
                 [self getData];
             }
+            self.tableView.canRefresh = YES;
 
         }];
         
@@ -242,13 +287,15 @@
     self.view.userInteractionEnabled = NO;
     _editButton.enabled = NO;
     [self showWithStatus:NET_WAIT_TOST];
-    [self.netWorkEngine postWithDict:@{@"id":ids} url:BaseUrl(@"delete.watchRecord.by.id") succed:^(id responseObject) {
+    [self.netWorkEngine postWithDict:@{@"ids":ids} url:BaseUrl(@"delete.watchRecordList.by.ids") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         self.view.userInteractionEnabled = YES;
         _editButton.enabled = YES;
         
         if (code == 1) {
             [self showSuccessWithStatus:@"删除成功"];
+            _historyBottomView.selectButton.selected = NO;
+            [self editButtonEvent];
             if (block) {
                 block();
             }
@@ -295,7 +342,7 @@
 
         }];
         [_editButton setImage:nil forState:0];
-        [_editButton setTitle:@"取消" forState:0];
+        [_editButton setTitle:@"完成" forState:0];
 
         [_tableView setEditing:YES animated:YES];
         
@@ -401,12 +448,26 @@
     Historyinfo *info =model.arrInfo[indexPath.row];
     cell.titleLabel.text = info.data_title;
     [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:info.data_picture_url] placeholderImage:[UIImage imageNamed:DEFAULT_IMAGE_11]];
-
+    cell.nimLabel.text = info.data_sketch;
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (tableView.isEditing) {
+        return;
+    }
+
+    HistoryViewModel *model = _arrData[indexPath.section];
+    
+    Historyinfo *info =model.arrInfo[indexPath.row];
+    
+    if (info.delete_flag == 1) {
+        [JumpToAssignVC jumpToAssignVCWithDataID:[NSString stringWithFormat:@"%@",@(info.data_id)] dataType:info.data_type documentType:info.data_type_two];
+
+    }
+    
+
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{

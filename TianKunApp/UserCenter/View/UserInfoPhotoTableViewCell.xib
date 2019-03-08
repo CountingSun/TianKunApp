@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营业执照" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3l-ma-gps">
-                        <rect key="frame" x="15" y="95" width="70" height="20"/>
+                        <rect key="frame" x="10" y="95" width="70" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="70" id="QO7-LD-deL"/>
                             <constraint firstAttribute="height" constant="20" id="tIY-KY-K6j"/>
@@ -29,17 +29,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="去认证" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElP-PA-7Yi">
-                        <rect key="frame" x="26" y="115" width="48" height="20"/>
+                        <rect key="frame" x="21" y="115" width="48" height="20"/>
                         <color key="backgroundColor" red="1" green="0.9606824517250061" blue="0.96019476652145386" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="JvC-ek-nZy"/>
-                            <constraint firstAttribute="width" constant="48" id="zyN-gP-NfY"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="48" id="zyN-gP-NfY"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xbj-6j-y3w">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xbj-6j-y3w">
                         <rect key="frame" x="10" y="15" width="70" height="70"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="Ajg-R5-8I7"/>
@@ -49,10 +49,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="ElP-PA-7Yi" firstAttribute="top" secondItem="y3l-ma-gps" secondAttribute="bottom" id="Sob-Ug-NsR"/>
-                    <constraint firstItem="ElP-PA-7Yi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="26" id="Tcb-SA-qqY"/>
                     <constraint firstItem="xbj-6j-y3w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cic-B0-76N"/>
                     <constraint firstItem="xbj-6j-y3w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="k1p-4m-PpJ"/>
-                    <constraint firstItem="y3l-ma-gps" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="qrA-Ah-0zV"/>
+                    <constraint firstItem="y3l-ma-gps" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qrA-Ah-0zV"/>
+                    <constraint firstItem="ElP-PA-7Yi" firstAttribute="centerX" secondItem="y3l-ma-gps" secondAttribute="centerX" id="r0v-JJ-MU9"/>
                     <constraint firstItem="y3l-ma-gps" firstAttribute="top" secondItem="xbj-6j-y3w" secondAttribute="bottom" constant="10" id="s3M-qP-LcF"/>
                 </constraints>
             </tableViewCellContentView>

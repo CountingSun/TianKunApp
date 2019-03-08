@@ -29,10 +29,8 @@
         NSLog(@"点击按钮,弹出菜单");
         AddViewController *addViewController = [[AddViewController alloc] init];
     
-        WQNavigationViewController *navController = [[WQNavigationViewController alloc] initWithRootViewController:addViewController];
-//        [self presentViewController:navController animated:NO completion:^{
-//
-//        }];
+        QMUINavigationController *navController = [[QMUINavigationController alloc] initWithRootViewController:addViewController];
+        navController.navigationBar.tintColor = [UIColor blackColor];
 
         AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
         
@@ -60,6 +58,11 @@
     }
     
 }
+- (void)setTabBarViewControllerSelectIndex:(NSInteger)selectIndex{
+    self.selectedIndex = selectIndex;
+
+}
+
 - (void)addChildViewController {
     [self addChildViewControllerWithClassName:@"HomeViewController" title:@"首页" imageName:@"首页" selectedImage:@"首页-点击"];
     [self addChildViewControllerWithClassName:@"FindViewController" title:@"发现" imageName:@"发现" selectedImage:@"发现-点击"];
@@ -80,7 +83,7 @@
     [vController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : COLOR_THEME } forState:UIControlStateSelected];
 
     QMUINavigationController *navController = [[QMUINavigationController alloc] initWithRootViewController:vController];
-    navController.navigationBar.tintColor = COLOR_TEXT_GENGRAL;
+    navController.navigationBar.tintColor = [UIColor blackColor];
 
     
     
@@ -95,13 +98,13 @@
 
     _index = [tabBarController.viewControllers indexOfObject:viewController];
     
-    if (_index == 3) {
-        if ([UserInfoEngine isLogin]) {
-            return YES;
-        }else{
-            return NO;
-        }
-    }
+//    if (_index == 3) {
+//        if ([UserInfoEngine isLogin]) {
+//            return YES;
+//        }else{
+//            return NO;
+//        }
+//    }
     return YES;
     
 }

@@ -49,6 +49,7 @@ static WQUploadSingleImage *_uploadSingleImage;
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
         {
+            picker.mediaTypes = @[(NSString *)kUTTypeImage];
             picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             picker.delegate = self;
             picker.allowsEditing = YES;

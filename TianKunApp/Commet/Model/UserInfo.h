@@ -14,6 +14,10 @@
  用户id
  */
 @property (nonatomic, copy) NSString *userID;
+/**
+ 1有密码 0 无密码
+ */
+@property (nonatomic, strong) NSString *hadPwd;
 
 /**
  认证，微信认证（1）,芝麻实名认证（2）,银行卡实名认证（3）,    营销执照认证（4） 存储数组[1,2,4] 
@@ -28,6 +32,11 @@
  qq号码或微信的uuid
  */
 @property (nonatomic, copy) NSString *lgtype;
+/**
+  融云token
+ */
+
+@property (nonatomic, copy) NSString *token;
 /**
  token
  */
@@ -91,7 +100,18 @@
 @property (nonatomic ,assign)  NSInteger status;
 
 
+/**
+ vip 客服的targetID
+ */
+@property (nonatomic, copy) NSString *vip_webid;
+/**
+ vip 客服名字
+ */
+@property (nonatomic, copy) NSString *webname;
+ /**
+  0：使用此第三方帐号第一次登录 1：使用此第三方帐号一次以上登录
+  */
 
-
+@property (nonatomic ,assign) NSInteger bol;
 
 @end

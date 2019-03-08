@@ -14,4 +14,10 @@
              @"resume_id":@"id"
              };
 }
+- (NSString *)name{
+    if (!_name.length) {
+        return @"";
+    }
+    return _name;
+}
 @end

@@ -47,4 +47,8 @@
 
 @property (nonatomic, copy) NSString *company_id;
 
+/**
+ 注册类型：',（新增注册类型名称）
+ */
+@property (nonatomic, copy) NSString *category_id;
 @end

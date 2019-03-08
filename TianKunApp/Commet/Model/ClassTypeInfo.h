@@ -12,5 +12,6 @@
 @property (nonatomic ,copy) NSString *typeID;
 @property (nonatomic ,copy) NSString *typeName;
 @property (nonatomic ,assign) BOOL isSelect;
+@property (nonatomic ,assign) NSInteger child;
 
 @end

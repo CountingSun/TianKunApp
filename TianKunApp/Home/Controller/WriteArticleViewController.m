@@ -71,7 +71,7 @@
             
         }];
 
-    }else{
+    }else if(_fromType == 2){
         [_netWorkEngine postWithDict:@{@"user_id":[UserInfoEngine getUserInfo].userID,@"announcement_id":@(_articleID),@"content":_textView.text} url:BaseUrl(@"Announcement/insertannouncemenecomment.action") succed:^(id responseObject) {
             NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
             if (code == 1) {
@@ -92,6 +92,28 @@
             
         }];
 
+    }else{
+        [_netWorkEngine postWithDict:@{@"user_id":[UserInfoEngine getUserInfo].userID,@"article_notice_id":@(_articleID),@"content":_textView.text} url:BaseUrl(@"IndustryInformationController/insertarticlenoticecomment.action") succed:^(id responseObject) {
+            NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+            if (code == 1) {
+                self.view.userInteractionEnabled = NO;
+                
+                [self showSuccessWithStatus:@"评论成功"];
+                if (_succeedBlcok) {
+                    _succeedBlcok();
+                }
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+            }else{
+                [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            }
+            
+        } errorBlock:^(NSError *error) {
+            [self showErrorWithStatus:NET_ERROR_TOST];
+            
+        }];
+        
     }
     
 }

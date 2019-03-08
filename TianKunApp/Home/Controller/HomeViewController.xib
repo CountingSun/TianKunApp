@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="changeView" destination="5oW-pA-QnB" id="aQr-XG-tmb"/>
+                <outlet property="reloadButton" destination="2aE-qu-ipD" id="af6-Np-rGN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,6 +21,45 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </view>
+        <view contentMode="scaleToFill" id="5oW-pA-QnB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9s-sn-WG1">
+                    <rect key="frame" x="9" y="10" width="2" height="20"/>
+                    <color key="backgroundColor" red="0.249205448" green="0.39673940349999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="2" id="jY6-bO-Op9"/>
+                        <constraint firstAttribute="height" constant="20" id="olv-bk-WVq"/>
+                    </constraints>
+                </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2aE-qu-ipD" customClass="QMUIButton">
+                    <rect key="frame" x="285" y="0.0" width="80" height="39.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Kiz-OS-R1T"/>
+                        <constraint firstAttribute="width" constant="80" id="UH5-Ti-dsn"/>
+                    </constraints>
+                    <state key="normal" title="换一批"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="猜你喜欢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgD-mO-ctW">
+                    <rect key="frame" x="21" y="10" width="65.5" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vgD-mO-ctW" firstAttribute="leading" secondItem="u9s-sn-WG1" secondAttribute="trailing" constant="10" id="DJY-gT-TCk"/>
+                <constraint firstItem="u9s-sn-WG1" firstAttribute="top" secondItem="5oW-pA-QnB" secondAttribute="top" constant="10" id="Di3-D3-DWY"/>
+                <constraint firstItem="vgD-mO-ctW" firstAttribute="top" secondItem="5oW-pA-QnB" secondAttribute="top" constant="10" id="EvV-HH-z2V"/>
+                <constraint firstItem="u9s-sn-WG1" firstAttribute="leading" secondItem="5oW-pA-QnB" secondAttribute="leading" constant="9" id="I1V-U5-U5l"/>
+                <constraint firstItem="2aE-qu-ipD" firstAttribute="top" secondItem="5oW-pA-QnB" secondAttribute="top" id="Sr8-06-Cdy"/>
+                <constraint firstAttribute="trailing" secondItem="2aE-qu-ipD" secondAttribute="trailing" constant="10" id="z02-6B-hTZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-489.5" y="-185"/>
         </view>
     </objects>
 </document>

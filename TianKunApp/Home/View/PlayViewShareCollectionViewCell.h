@@ -17,6 +17,7 @@
 @property (nonatomic ,strong) DocumentInfo *documentInfo;
 
 @property (weak, nonatomic) IBOutlet UILabel *publicLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 
 + (CGSize)getCellHeightWithDocumentInfo:(DocumentInfo *)documentInfo ;
 @end

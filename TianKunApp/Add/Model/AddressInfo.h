@@ -13,4 +13,14 @@
 @property (nonatomic ,copy) NSString *addressID;
 @property (nonatomic ,assign) BOOL isSelect;
 
+
+@property (nonatomic, copy) NSString *cityID;
+@property (nonatomic, copy) NSString *cityName;
+
+@property (nonatomic, copy) NSString *provinceID;
+@property (nonatomic, copy) NSString *provinceName;
+
+@property (nonatomic, copy) NSString *countiesID;
+@property (nonatomic, copy) NSString *countiesName;
+
 @end

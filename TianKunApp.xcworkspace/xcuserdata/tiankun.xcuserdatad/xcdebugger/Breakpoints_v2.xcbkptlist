@@ -9,16 +9,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            scope = "1"
+            scope = "0"
             stopOnStyle = "0">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
-                  <ActionContent
-                     consoleCommand = "">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -27,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TianKunApp/Home/Controller/&#x6559;&#x80b2;&#x57f9;&#x8bad;/PlayViewController.m"
-            timestampString = "546608258.837768"
+            filePath = "TianKunApp/Home/Controller/&#x6559;&#x80b2;&#x57f9;&#x8bad;/SBPlayer/SBPlayer.m"
+            timestampString = "548936235.507701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
-            landmarkName = "-collectButtonClick:"
+            startingLineNumber = "818"
+            endingLineNumber = "818"
+            landmarkName = "-controlView:draggedPositionWithSlider:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -43,13 +35,109 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TianKunApp/Login/Controller/RegisterViewController.m"
-            timestampString = "546523857.464051"
+            filePath = "TianKunApp/Home/Controller/&#x6559;&#x80b2;&#x57f9;&#x8bad;/SBPlayer/SBPlayer.m"
+            timestampString = "548936235.507813"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "-userRegister"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "-initWithAsset:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TianKunApp/Home/Controller/&#x6559;&#x80b2;&#x57f9;&#x8bad;/EducationDetailViewController.m"
+            timestampString = "548855933.219223"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TianKunApp/Home/Controller/&#x6559;&#x80b2;&#x57f9;&#x8bad;/ZFPlayer/ZFPlayer/ZFPlayerView.m"
+            timestampString = "548936235.507928"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "893"
+            endingLineNumber = "893"
+            landmarkName = "-lockScreenAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TianKunApp/Home/Controller/&#x6559;&#x80b2;&#x57f9;&#x8bad;/ZFPlayer/ZFPlayer/ZFPlayerView.m"
+            timestampString = "548936235.50799"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "903"
+            endingLineNumber = "903"
+            landmarkName = "-unLockTheScreen"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TianKunApp/Home/Controller/&#x6559;&#x80b2;&#x57f9;&#x8bad;/ZFPlayer/ZFPlayer/ZFPlayerView.m"
+            timestampString = "548936235.508072"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1522"
+            endingLineNumber = "1522"
+            landmarkName = "-setFullScreenPlay:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TianKunApp/Other/JTCalendar/Views/JTHorizontalCalendarView.m"
+            timestampString = "549284592.060519"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-scrollViewDidEndDecelerating:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TianKunApp/UserCenter/Controller/Set/AssociationAccountViewController.m"
+            timestampString = "552475891.699245"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "-wxSwitchClickEvent"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -60,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TianKunApp/UserCenter/Controller/EditPhoneViewController.m"
-            timestampString = "546523857.464143"
+            timestampString = "551959612.24488"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "-userGetVefCode"
             landmarkType = "7">
          </BreakpointContent>
@@ -75,13 +163,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TianKunApp/Add/Controller/&#x627e;&#x4eba;&#x624d;/SelectJobTypeViewController.m"
-            timestampString = "546523857.464529"
+            filePath = "TianKunApp/Other/AppDelegate.m"
+            timestampString = "552478871.600323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-getJobTypeWithID:"
+            startingLineNumber = "593"
+            endingLineNumber = "593"
+            landmarkName = "-application:didReceiveRemoteNotification:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -91,13 +179,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TianKunApp/Add/Controller/&#x627e;&#x5de5;&#x4f5c;/AddFindJobViewController.m"
-            timestampString = "546914496.943349"
+            filePath = "TianKunApp/Other/AppDelegate.m"
+            timestampString = "552478871.600374"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "-getData"
+            startingLineNumber = "615"
+            endingLineNumber = "615"
+            landmarkName = "-application:didReceiveRemoteNotification:fetchCompletionHandler:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TianKunApp/Other/AppDelegate.m"
+            timestampString = "552478871.600409"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "737"
+            endingLineNumber = "737"
+            landmarkName = "-onConnectionStatusChanged:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -19,6 +19,7 @@ typedef void(^SelectAptitudeSucceedBlock)(ClassTypeInfo *classTypeInfo,NSIndexPa
 @property (nonatomic ,strong) NSMutableArray *arrData;
 
 @property (nonatomic ,strong) NSIndexPath *indexPath;
+@property (nonatomic ,assign) CGSize tableViewSize;
 
 
 -(instancetype)initWithSelectSucceedBlock:(SelectAptitudeSucceedBlock)succeedBlock;

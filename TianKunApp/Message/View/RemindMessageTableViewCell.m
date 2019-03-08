@@ -15,6 +15,7 @@
     _nameLabel.textColor = COLOR_TEXT_GENGRAL;
     _starTimeLabel.textColor = COLOR_TEXT_LIGHT;
     _endTimeLabel.textColor = COLOR_THEME;
+    _mainImageView.layer.masksToBounds = YES;
     
 }
 

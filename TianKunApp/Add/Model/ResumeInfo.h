@@ -210,6 +210,6 @@
  */
 @property (nonatomic ,assign) NSInteger isCollect;
 
-
+@property (nonatomic, copy) NSString *update_date;
 
 @end

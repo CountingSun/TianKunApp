@@ -121,4 +121,9 @@
  */
 @property (nonatomic ,assign) NSInteger canSee;
 
+/**
+ 课程简介
+ */
+@property (nonatomic, copy) NSString *data_title1;
+
 @end

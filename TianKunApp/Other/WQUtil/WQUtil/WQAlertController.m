@@ -19,19 +19,25 @@
     
     
     QMUIAlertController *alertController = [[QMUIAlertController alloc]initWithTitle:title message:message preferredStyle:QMUIAlertControllerStyleAlert];
+    alertController.alertButtonAttributes = @{NSForegroundColorAttributeName:COLOR_THEME,NSFontAttributeName:UIFontBoldMake(17),NSKernAttributeName:@(0)};
+    alertController.alertCancelButtonAttributes = @{NSForegroundColorAttributeName:COLOR_THEME,NSFontAttributeName:UIFontBoldMake(17),NSKernAttributeName:@(0)};
     
-    QMUIAlertAction *setAction = [QMUIAlertAction actionWithTitle:sureButtonTitle style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
-        sureBlock(action);
-    }];
+    if (sureButtonTitle.length) {
+        QMUIAlertAction *setAction = [QMUIAlertAction actionWithTitle:sureButtonTitle style:QMUIAlertActionStyleDefault handler:^(QMUIAlertAction *action) {
+            sureBlock(action);
+        }];
+        [alertController addAction:setAction];
+    }
     
-    
-    QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:cancelTitle style:QMUIAlertActionStyleCancel handler:^(QMUIAlertAction * action) {
-        cancelBlock(action);
+    if (cancelTitle.length) {
+        QMUIAlertAction *cancelAction = [QMUIAlertAction actionWithTitle:cancelTitle style:QMUIAlertActionStyleCancel handler:^(QMUIAlertAction * action) {
+            cancelBlock(action);
+            
+        }];
+        
+        [alertController addAction:cancelAction];
 
-    }];
-    
-    [alertController addAction:setAction];
-    [alertController addAction:cancelAction];
+    }
     
     
     [alertController showWithAnimated:YES];

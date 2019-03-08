@@ -10,6 +10,11 @@
 #import "WQPigeonhole.h"
 #import "UserInfo.h"
 #import "LoginViewController.h"
+#import "RongCloudConfigure.h"
+#import "JPUSHService.h"
+#import <ShareSDK/ShareSDK.h>
+#import <AlibabaAuthSDK/ALBBSDK.h>
+#import "IconBadgeManager.h"
 
 @implementation UserInfoEngine
 
@@ -58,6 +63,48 @@
         return vc;
     }
     return nil;
+}
+/**
+ 退出登录
+ */
++(void)loginOut{
+    [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        
+    } seq:2];
+    NSSet *set = [NSSet setWithObjects:@"VIP",@"ID", nil];
+    [JPUSHService deleteTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+        
+    } seq:2];
+    if ([ShareSDK hasAuthorized:SSDKPlatformTypeWechat]) {
+        [ShareSDK  cancelAuthorize:SSDKPlatformTypeWechat];
+    }
+    if ([ShareSDK hasAuthorized:SSDKPlatformTypeQQ]) {
+        [ShareSDK  cancelAuthorize:SSDKPlatformTypeQQ];
+    }
+    ALBBSDK *albbSDK = [ALBBSDK sharedInstance];
+    [albbSDK logout];
+
+    [UserInfoEngine setUserInfo:nil];
+    [RongCloudConfigure logout];
+    [IconBadgeManager deleteAllSystemMessage];
+    [IconBadgeManager deleteAllRecomendMessage];
+    [IconBadgeManager deleteVIPMessage];
+    
+
+}
++(BOOL)getIsHadPwd{
+    NSString *str = [[NSUserDefaults standardUserDefaults] objectForKey:@"IsHadPwd"];
+
+    if ([str isEqualToString:@"1"]) {
+        return YES;
+    }else{
+        return NO;
+    }
+    
+}
++(void)setIsHadPwd:(NSString *)str{
+    [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"IsHadPwd"];
+    
 }
 
 @end

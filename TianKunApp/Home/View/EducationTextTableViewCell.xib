@@ -56,6 +56,7 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wCm-0U-heJ">
                         <rect key="frame" x="0.0" y="50" width="333" height="133"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="wCm-0U-heJ" secondAttribute="height" multiplier="5:2" id="6vB-zR-J8B"/>
                         </constraints>

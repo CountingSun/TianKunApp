@@ -18,6 +18,8 @@
 #import "UserInfoViewController.h"
 #import "UIView+AddTapGestureRecognizer.h"
 #import "BuyRecoredViewController.h"
+#import "PointShopViewController.h"
+#import "MyCollectViewController.h"
 
 @interface UserCenterViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
@@ -33,6 +35,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *vipStateImageView;
 @property (nonatomic ,strong) UserInfo *userInfo;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipButtonLead;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *recordButtonLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *publicButtonLeading;
 @property (nonatomic ,strong) NSMutableArray *arrMenu;
 @end
 
@@ -41,7 +46,12 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
-    [self getUserInfo];
+    if ([UserInfoEngine getUserInfo].userID) {
+        [self getUserInfo];
+    }else{
+        [self setunLoginView];
+        
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -52,10 +62,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-    [self getUserInfo];
-    
-}
+    _vipStateImageView.hidden = YES;
+    if ([UserInfoEngine getUserInfo].userID) {
+        [self getUserInfo];
+    }else{
+        _nameLabel.text = @"登录/注册";
+    }
 
+}
+- (void)setunLoginView{
+    _nameLabel.text = @"登录/注册";
+    [_headImageView sd_imageWithUrlStr:@"" placeholderImage:@"头像"];
+   _vipStateImageView.hidden = YES;
+}
 - (void)getUserInfo{
     [[[NetWorkEngine alloc]init] postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} url:BaseUrl(@"my/userdetail.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
@@ -66,12 +85,21 @@
             
             [_headImageView sd_imageWithUrlStr:[UserInfoEngine getUserInfo].headimg placeholderImage:@"头像"];
             _nameLabel.text = _userInfo.nickname;
+            if ([ISVipManager isOpenVip]) {
+                _vipStateImageView.hidden = NO;
+
+            }else{
+                _vipStateImageView.hidden = YES;
+
+            }
+
             if (_userInfo.vip_status) {
                 [_vipStateImageView setImage:[UIImage imageNamed:@"VIP_open"]];
             }else{
                 [_vipStateImageView setImage:[UIImage imageNamed:@"VIP_close"]];
             }
         }else{
+            [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
             
         }
     } errorBlock:^(NSError *error) {
@@ -84,7 +112,7 @@
 
 - (void)setupUI{
     
-    
+    _headView.layer.masksToBounds = YES;
     _arrMenu = [UserCenterViewModel arrMenu];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -101,9 +129,12 @@
     [self.tableView reloadData];
     _headImageView.userInteractionEnabled = YES;
     [_headImageView addTapGestureRecognizerWithActionBlock:^{
-        UserInfoViewController *infoViewController = [[UserInfoViewController alloc]init];
-        infoViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:infoViewController animated:YES];
+        
+        if ([UserInfoEngine isLogin]) {
+            UserInfoViewController *infoViewController = [[UserInfoViewController alloc]init];
+            infoViewController.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:infoViewController animated:YES];
+        }
     }];
     
     [_vipButton setImagePosition:QMUIButtonImagePositionTop];
@@ -117,6 +148,27 @@
     
     [_publicButton setImagePosition:QMUIButtonImagePositionTop];
     [_publicButton setSpacingBetweenImageAndTitle:5];
+    
+    if ([ISVipManager isOpenVip]) {
+        _vipButton.hidden = NO;
+        _pointButton.hidden = NO;
+        _vipStateImageView.hidden = NO;
+        _recordButton.hidden = NO;
+        _publicButton.hidden = NO;
+        _headView.qmui_height = 318;
+
+        
+        
+    }else{
+        _vipButton.hidden = YES;
+        _pointButton.hidden = YES;
+        _vipStateImageView.hidden = YES;
+        _recordButton.hidden = YES;
+        _publicButton.hidden = YES;
+        _headView.qmui_height = 206;
+        
+        
+    }
 
 
 }
@@ -150,8 +202,14 @@
     switch (menuInfo.menuID) {
         case 0:
             {
-                
-                CollectionViewController *viewController = [[CollectionViewController alloc]init];
+                if (![UserInfoEngine isLogin]) {
+                    return;
+                }
+
+//                CollectionViewController *viewController = [[CollectionViewController alloc]init];
+//                viewController.hidesBottomBarWhenPushed = YES;
+//                [self.navigationController pushViewController:viewController animated:YES];
+                MyCollectViewController *viewController = [[MyCollectViewController alloc]init];
                 viewController.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:viewController animated:YES];
 
@@ -159,7 +217,10 @@
             break;
         case 1:{
             
-            
+            if (![UserInfoEngine isLogin]) {
+                return;
+            }
+
             HistoryViewController *viewController = [[HistoryViewController alloc]init];
             viewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:viewController animated:YES];
@@ -174,6 +235,10 @@
         }
             break;
         case 3:{
+            if (![UserInfoEngine isLogin]) {
+                return;
+            }
+
             BuyRecoredViewController *viewController = [[BuyRecoredViewController alloc]init];
             viewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:viewController animated:YES];
@@ -181,6 +246,18 @@
             
         }
             break;
+        case 4:{
+            if ([UserInfoEngine isLogin]) {
+                
+                MyPublickViewController *viewController = [[MyPublickViewController alloc]init];
+                viewController.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
+            
+
+        }
+            break;
+            
             
         default:
             break;
@@ -190,49 +267,61 @@
     [super didReceiveMemoryWarning];
 }
 - (IBAction)vipButtobClick:(id)sender {
-    MyVIPViewController *viewController = [[MyVIPViewController alloc]init];
-    viewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:viewController animated:YES];
+    
+    if ([UserInfoEngine isLogin]) {
+        MyVIPViewController *viewController = [[MyVIPViewController alloc]init];
+        viewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 
 }
 - (IBAction)recordButtobClick:(id)sender {
+    if ([UserInfoEngine isLogin]) {
+
     DetailRecordViewController *viewController = [[DetailRecordViewController alloc]init];
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
-
+    }
 }
 - (IBAction)pointButtonClick:(id)sender {
-    
+    if ([UserInfoEngine isLogin]) {
+        PointShopViewController *vc = [[PointShopViewController alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
 }
 - (IBAction)publishButtonClick:(id)sender {
     
-    
+    if ([UserInfoEngine isLogin]) {
+        
     MyPublickViewController *viewController = [[MyPublickViewController alloc]init];
     viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
+    }
 
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat y = scrollView.contentOffset.y;
-    
-    NSLog(@"Y:%@",@(y));
-    if (y<0) {
-//        [_headBGimageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.bottom.equalTo(_vipButton.mas_top);
-//            make.centerX.equalTo(_headView);
-//            make.height.offset(206-y);
-//            make.width.offset(SCREEN_WIDTH);
-//        }];
-//        
-//        [_headView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.height.offset(206-y);
-//            make.width.offset(SCREEN_WIDTH);
-//        }];
-        
-    }else{
-        
-    }
+//    CGFloat y = scrollView.contentOffset.y;
+//
+////    NSLog(@"Y:%@",@(y));
+//    if (y<0) {
+////        [_headBGimageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+////            make.bottom.equalTo(_vipButton.mas_top);
+////            make.centerX.equalTo(_headView);
+////            make.height.offset(206-y);
+////            make.width.offset(SCREEN_WIDTH);
+////        }];
+////
+////        [_headView mas_remakeConstraints:^(MASConstraintMaker *make) {
+////            make.height.offset(206-y);
+////            make.width.offset(SCREEN_WIDTH);
+////        }];
+//
+//    }else{
+//
+//    }
     
 }
 /*

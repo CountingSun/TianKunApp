@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PointShopGoodsCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="194" height="289"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="194" height="289"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qLV-9T-TbP">
+                        <rect key="frame" x="32.5" y="10" width="129" height="129.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="qLV-9T-TbP" secondAttribute="height" multiplier="1:1" id="W2d-2c-Id3"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="point_diamond" translatesAutoresizingMaskIntoConstraints="NO" id="m00-zt-Nrj">
+                        <rect key="frame" x="13" y="182.5" width="14" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="SHE-ph-v3d"/>
+                            <constraint firstAttribute="width" constant="14" id="amG-ez-qM4"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4D-dU-yVJ">
+                        <rect key="frame" x="37" y="180" width="43.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="uVK-0Z-zsI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.36419479710000002" blue="0.1619840256" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICN-3x-ZMj">
+                        <rect key="frame" x="10" y="149.5" width="174" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="E0R-GS-CxZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjX-m7-JHx">
+                        <rect key="frame" x="148.5" y="179.5" width="35.5" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="nyY-TN-ThD"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="MjX-m7-JHx" firstAttribute="top" secondItem="ICN-3x-ZMj" secondAttribute="bottom" constant="10" id="0my-6S-1GQ"/>
+                <constraint firstItem="O4D-dU-yVJ" firstAttribute="leading" secondItem="m00-zt-Nrj" secondAttribute="trailing" constant="10" id="15I-fB-neA"/>
+                <constraint firstItem="m00-zt-Nrj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="1DI-YT-WHf"/>
+                <constraint firstAttribute="trailing" secondItem="ICN-3x-ZMj" secondAttribute="trailing" constant="10" id="4Fz-wv-bYY"/>
+                <constraint firstItem="qLV-9T-TbP" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="8Bu-BZ-j19"/>
+                <constraint firstItem="m00-zt-Nrj" firstAttribute="top" secondItem="ICN-3x-ZMj" secondAttribute="bottom" constant="13" id="ERq-tf-BqN"/>
+                <constraint firstItem="qLV-9T-TbP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="PKt-Kq-MkM"/>
+                <constraint firstAttribute="trailing" secondItem="MjX-m7-JHx" secondAttribute="trailing" constant="10" id="V10-as-bse"/>
+                <constraint firstItem="ICN-3x-ZMj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="dDX-bp-iXI"/>
+                <constraint firstItem="qLV-9T-TbP" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="2/3" id="hEc-Mo-ade"/>
+                <constraint firstItem="ICN-3x-ZMj" firstAttribute="top" secondItem="qLV-9T-TbP" secondAttribute="bottom" constant="10" id="pho-1N-SWC"/>
+                <constraint firstItem="O4D-dU-yVJ" firstAttribute="top" secondItem="ICN-3x-ZMj" secondAttribute="bottom" constant="10" id="x9l-Np-8Tf"/>
+            </constraints>
+            <size key="customSize" width="194" height="289"/>
+            <connections>
+                <outlet property="imageView" destination="qLV-9T-TbP" id="L8j-L4-Vlg"/>
+                <outlet property="moneyLabel" destination="O4D-dU-yVJ" id="Hga-ez-gFi"/>
+                <outlet property="numberLabel" destination="MjX-m7-JHx" id="BzT-es-FMb"/>
+                <outlet property="titleLabel" destination="ICN-3x-ZMj" id="puT-hw-q4l"/>
+            </connections>
+            <point key="canvasLocation" x="-265" y="179.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="point_diamond" width="16" height="14"/>
+    </resources>
+</document>

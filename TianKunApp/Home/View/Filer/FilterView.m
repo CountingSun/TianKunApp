@@ -57,11 +57,19 @@
 }
 - (void)showFilterView{
     self.hidden = NO;
+    CGFloat h = 0;
+    
+    if (IS_IPHONE_X) {
+        h = 88;
+    }else{
+        h = 64;
+
+    }
 
     [UIView animateWithDuration:0.3 animations:^{
-        self.height = SCREEN_HEIGHT-40;
-        _firsetTableView.frame = CGRectMake(0, 0, SCREEN_WIDTH/2, SCREEN_HEIGHT-40-64);
-        _secondTableView.frame = CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, SCREEN_HEIGHT-40-64);
+        self.height = SCREEN_HEIGHT-40-h;
+        _firsetTableView.frame = CGRectMake(0, 0, SCREEN_WIDTH/2, self.qmui_height);
+        _secondTableView.frame = CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, self.qmui_height);
 
     } completion:^(BOOL finished) {
     }];

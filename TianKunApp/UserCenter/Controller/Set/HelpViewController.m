@@ -11,6 +11,7 @@
 #import "UserCenterViewModel.h"
 #import "WebLinkViewController.h"
 #import "FadebackViewController.h"
+#import "SetInfoWebViewController.h"
 
 @interface HelpViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -67,12 +68,15 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MenuInfo *menuInfo = _arrMenu[indexPath.row];
-    WebLinkViewController *viewController = [[WebLinkViewController alloc]initWithTitle:menuInfo.menuName urlString:@"http://cpc.people.com.cn/" goBackBlock:^{
-        
-    }];
-    [self.navigationController pushViewController:viewController animated:YES];
     
+    
+    MenuInfo *menuInfo = _arrMenu[indexPath.row];
+    NSString *path = [[NSBundle mainBundle] pathForResource:menuInfo.menuDetail ofType:@"html"];
+    NSURL*Url = [NSURL fileURLWithPath:path];
+    
+    SetInfoWebViewController *viewController = [[SetInfoWebViewController alloc]initWithUrl:Url title:menuInfo.menuName];
+    [self.navigationController pushViewController:viewController animated:YES];
+
 }
 - (IBAction)fadebackButtonClickEvent:(id)sender {
     [self.navigationController pushViewController:[FadebackViewController new] animated:YES];

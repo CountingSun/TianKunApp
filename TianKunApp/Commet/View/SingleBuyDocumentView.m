@@ -119,8 +119,8 @@
 
 - (void)aliPay{
     NSString *appScheme = ALIPAY_SCHEMES;
-    
-    
+    [self hiddenSingleBuyDocumentView];
+
     // NOTE: 调用支付结果开始支付
     
     [[AlipaySDK defaultService] payOrder:_orderStr fromScheme:appScheme callback:^(NSDictionary *resultDic) {
@@ -175,6 +175,8 @@
 
 }
 - (void)wxPay{
+    [self hiddenSingleBuyDocumentView];
+    
     if (![WXApi isWXAppInstalled]){
         [SVProgressHUD showErrorWithStatus:@"请先安装微信"];
         
@@ -201,7 +203,7 @@
             switch (errorCode) {
                 case 0:
                 {
-                    [SVProgressHUD showErrorWithStatus:@"支付结果：成功！"];
+                    [SVProgressHUD showSuccessWithStatus:@"支付结果：成功！"];
                     if (_pauSucceedBlock) {
                         _pauSucceedBlock();
                     }

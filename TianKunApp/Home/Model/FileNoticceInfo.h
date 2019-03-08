@@ -65,5 +65,6 @@
 点击量
  */
 @property (nonatomic, copy) NSString *hits_show;
+@property (nonatomic ,strong) NSString *create_date;
 
 @end

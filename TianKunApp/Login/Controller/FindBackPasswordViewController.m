@@ -94,7 +94,7 @@
         _countTime--;
         NSLog(@"%@",@(_countTime));
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_codeButton setTitle:[NSString stringWithFormat:@"%@秒后从发",@(_countTime)] forState:0];
+            [_codeButton setTitle:[NSString stringWithFormat:@"%@秒后重发",@(_countTime)] forState:0];
             
         });
         
@@ -140,6 +140,24 @@
         return;
         
     }
+    if (_pwdTextField.text.length<6) {
+        [self showErrorWithStatus:@"密码长度需不少于6位"];
+        return;
+        
+        
+    }
+    if (_pwdTextField.text.length>18) {
+        [self showErrorWithStatus:@"密码长度需不大于于18位"];
+        return;
+        
+    }
+    if ([_pwdTextField.text includeChinese]) {
+        [self showErrorWithStatus:@"密码不能包含汉字"];
+        return;
+        
+    }
+    
+
     [self showWithStatus:NET_WAIT_TOST];
     
     [self.netWorkEngine postWithDict:@{@"iphone":_phoneTextField.text,@"pwd":[_pwdTextField.text qmui_md5],@"yzm":_codeTextField.text} url:BaseUrl(@"lg/editpwd.action") succed:^(id responseObject) {

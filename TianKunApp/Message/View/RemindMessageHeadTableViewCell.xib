@@ -27,17 +27,17 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="YpF-OZ-8K0">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YpF-OZ-8K0">
                         <rect key="frame" x="15" y="10" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="E9d-2y-hVG"/>
                             <constraint firstAttribute="width" constant="60" id="PeA-mO-gtw"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机械工程师，二级建造师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNU-8m-gwa">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="机械工程师，二级建造师" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNU-8m-gwa">
                         <rect key="frame" x="80" y="40" width="233" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="fWZ-bZ-wls"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="fWZ-bZ-wls"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
@@ -47,12 +47,12 @@
                 <constraints>
                     <constraint firstItem="KGZ-It-4xX" firstAttribute="leading" secondItem="YpF-OZ-8K0" secondAttribute="trailing" constant="5" id="2of-9y-Exv"/>
                     <constraint firstItem="KGZ-It-4xX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="4cE-Kx-JPO"/>
-                    <constraint firstAttribute="bottom" secondItem="YpF-OZ-8K0" secondAttribute="bottom" constant="10" id="B3l-59-CVS"/>
                     <constraint firstItem="tNU-8m-gwa" firstAttribute="top" secondItem="KGZ-It-4xX" secondAttribute="bottom" id="BLF-dJ-myd"/>
                     <constraint firstAttribute="trailing" secondItem="KGZ-It-4xX" secondAttribute="trailing" constant="15" id="LBk-jg-Pw7"/>
                     <constraint firstItem="YpF-OZ-8K0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="OxH-HS-6ND"/>
                     <constraint firstItem="tNU-8m-gwa" firstAttribute="leading" secondItem="YpF-OZ-8K0" secondAttribute="trailing" constant="5" id="PBR-3L-wZl"/>
                     <constraint firstItem="YpF-OZ-8K0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fzF-CE-Z73"/>
+                    <constraint firstAttribute="bottom" secondItem="tNU-8m-gwa" secondAttribute="bottom" constant="10" id="oHV-0t-OfS"/>
                     <constraint firstAttribute="trailing" secondItem="tNU-8m-gwa" secondAttribute="trailing" constant="15" id="qt5-mk-DlU"/>
                 </constraints>
             </tableViewCellContentView>
@@ -64,7 +64,4 @@
             <point key="canvasLocation" x="38" y="87"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="头像" width="112" height="112"/>
-    </resources>
 </document>

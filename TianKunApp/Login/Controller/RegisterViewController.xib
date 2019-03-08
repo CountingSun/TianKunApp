@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController">
             <connections>
+                <outlet property="agreeButton" destination="64Z-Tz-b1m" id="a33-ts-U6h"/>
+                <outlet property="agreementButton" destination="eto-3Q-k9Q" id="LYc-LE-xe3"/>
                 <outlet property="footView" destination="oDe-Gv-ceA" id="81q-dK-fEc"/>
                 <outlet property="headView" destination="kV0-uh-VNc" id="C2D-9S-8bM"/>
                 <outlet property="loginButton" destination="40H-x5-ALU" id="BqN-8x-5hd"/>
@@ -86,11 +88,11 @@
             <point key="canvasLocation" x="68" y="-894"/>
         </view>
         <view contentMode="scaleToFill" id="oDe-Gv-ceA">
-            <rect key="frame" x="0.0" y="0.0" width="353" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="353" height="171"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akP-B3-gCo">
-                    <rect key="frame" x="10" y="30" width="333" height="40"/>
+                    <rect key="frame" x="10" y="70" width="333" height="40"/>
                     <color key="backgroundColor" red="0.9906974435" green="0.32919713849999999" blue="0.13164272900000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="WvH-JZ-N8u"/>
@@ -102,19 +104,51 @@
                         <action selector="registerButtonClickEvent:" destination="-1" eventType="touchUpInside" id="xzL-y9-Voe"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eto-3Q-k9Q" customClass="QMUIButton">
+                    <rect key="frame" x="50" y="20" width="160" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="0XG-PG-07O"/>
+                        <constraint firstAttribute="width" constant="160" id="lrS-BP-E67"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="《建筑一秘用户服务协议》">
+                        <color key="titleColor" red="0.36322450639999998" green="0.63158446550000003" blue="0.98442620039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="agreementButtonClick:" destination="-1" eventType="touchUpInside" id="0d1-4H-qfd"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="64Z-Tz-b1m">
+                    <rect key="frame" x="10" y="20" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="4XL-Tj-cuh"/>
+                        <constraint firstAttribute="width" constant="30" id="zcU-H7-so6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="agreeButtonClick:" destination="-1" eventType="touchUpInside" id="cAf-jV-QHH"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="akP-B3-gCo" firstAttribute="top" secondItem="eto-3Q-k9Q" secondAttribute="bottom" constant="20" id="Bgi-8y-Zrh"/>
                 <constraint firstAttribute="trailing" secondItem="akP-B3-gCo" secondAttribute="trailing" constant="10" id="GvL-br-ReR"/>
-                <constraint firstItem="akP-B3-gCo" firstAttribute="top" secondItem="oDe-Gv-ceA" secondAttribute="top" constant="30" id="NyL-cj-bae"/>
+                <constraint firstItem="eto-3Q-k9Q" firstAttribute="leading" secondItem="64Z-Tz-b1m" secondAttribute="trailing" constant="10" id="Vnf-xT-5Zn"/>
                 <constraint firstItem="akP-B3-gCo" firstAttribute="leading" secondItem="oDe-Gv-ceA" secondAttribute="leading" constant="10" id="YSM-ie-TJ2"/>
+                <constraint firstItem="eto-3Q-k9Q" firstAttribute="top" secondItem="oDe-Gv-ceA" secondAttribute="top" constant="20" id="dk5-bJ-iOg"/>
+                <constraint firstItem="64Z-Tz-b1m" firstAttribute="leading" secondItem="oDe-Gv-ceA" secondAttribute="leading" constant="10" id="qMN-sP-54N"/>
+                <constraint firstItem="64Z-Tz-b1m" firstAttribute="top" secondItem="oDe-Gv-ceA" secondAttribute="top" constant="20" id="wn7-YH-SEa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="58" y="394"/>
+            <point key="canvasLocation" x="57.5" y="429.5"/>
         </view>
     </objects>
     <resources>
-        <image name="LOGO" width="99" height="99"/>
+        <image name="LOGO" width="60" height="60"/>
         <image name="close" width="11" height="11"/>
     </resources>
 </document>

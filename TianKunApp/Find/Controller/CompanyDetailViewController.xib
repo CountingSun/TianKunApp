@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompanyDetailViewController">
             <connections>
-                <outlet property="collectButton" destination="e1D-pZ-jzR" id="bxj-6A-uRc"/>
                 <outlet property="companyNameLabel" destination="j07-QP-IQH" id="nmF-pU-ftD"/>
                 <outlet property="hadSeeLabel" destination="GXV-bt-awf" id="OEU-X7-Bqr"/>
                 <outlet property="headView" destination="VLH-YW-uYe" id="YVz-Cu-cPd"/>
                 <outlet property="publicTimeIaLbel" destination="Ub9-dg-V1u" id="5X4-w4-YjB"/>
-                <outlet property="rightBarButtonView" destination="P3r-8j-OS7" id="dYA-cz-PP8"/>
-                <outlet property="shareButton" destination="R1u-WO-pQ3" id="PH8-Lt-kXd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -85,41 +81,5 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="36" y="-968"/>
         </view>
-        <view contentMode="scaleToFill" id="P3r-8j-OS7">
-            <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1D-pZ-jzR" customClass="QMUIButton">
-                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                    <state key="normal" image="收藏-1"/>
-                    <connections>
-                        <action selector="collectButtonClick:" destination="-1" eventType="touchUpInside" id="UGg-eM-1RT"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1u-WO-pQ3" customClass="QMUIButton">
-                    <rect key="frame" x="40" y="0.0" width="40" height="40"/>
-                    <state key="normal" image="分享"/>
-                    <connections>
-                        <action selector="shareButtonClick:" destination="-1" eventType="touchUpInside" id="CcY-XH-aOh"/>
-                    </connections>
-                </button>
-            </subviews>
-            <constraints>
-                <constraint firstItem="R1u-WO-pQ3" firstAttribute="leading" secondItem="e1D-pZ-jzR" secondAttribute="trailing" id="70v-wu-0PB"/>
-                <constraint firstAttribute="bottom" secondItem="R1u-WO-pQ3" secondAttribute="bottom" id="DvG-fj-8r8"/>
-                <constraint firstAttribute="trailing" secondItem="R1u-WO-pQ3" secondAttribute="trailing" id="M6e-Ev-yo1"/>
-                <constraint firstItem="R1u-WO-pQ3" firstAttribute="top" secondItem="P3r-8j-OS7" secondAttribute="top" id="Nfb-GG-QeE"/>
-                <constraint firstItem="R1u-WO-pQ3" firstAttribute="width" secondItem="P3r-8j-OS7" secondAttribute="width" multiplier="1/2" id="SIG-O3-2BW"/>
-                <constraint firstItem="e1D-pZ-jzR" firstAttribute="leading" secondItem="P3r-8j-OS7" secondAttribute="leading" id="fWB-6f-zGe"/>
-                <constraint firstItem="e1D-pZ-jzR" firstAttribute="top" secondItem="P3r-8j-OS7" secondAttribute="top" id="qNX-ZA-3t7"/>
-                <constraint firstAttribute="bottom" secondItem="e1D-pZ-jzR" secondAttribute="bottom" id="qo9-5R-I5m"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="599" y="-1248"/>
-        </view>
     </objects>
-    <resources>
-        <image name="分享" width="20" height="20"/>
-        <image name="收藏-1" width="20" height="20"/>
-    </resources>
 </document>

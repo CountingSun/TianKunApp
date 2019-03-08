@@ -97,7 +97,6 @@
 }
 -(void)reloData{
     [self hideEmptyView];
-    
     if (_selfEmptyView) {
         [_selfEmptyView removeFromSuperview];
     }
@@ -125,6 +124,8 @@
         _selfEmptyView = [[QMUIEmptyView alloc]init];
         _selfEmptyView.backgroundColor = COLOR_VIEW_BACK;
         [_selfEmptyView setLoadingViewHidden:YES];
+        _selfEmptyView.imageViewInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        
 
     }
     return _selfEmptyView;
@@ -166,7 +167,6 @@
     
     
 }
-
 - (void)hideSelfEmptyView{
     [self.selfEmptyView removeFromSuperview];
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,10 +18,13 @@
                 <outlet property="nameLabel" destination="MXU-yA-opa" id="5db-Q7-bs9"/>
                 <outlet property="pointButton" destination="NbG-eC-sKR" id="f3y-xk-ElG"/>
                 <outlet property="publicButton" destination="Nr1-0N-f8I" id="9fA-YT-eWy"/>
+                <outlet property="publicButtonLeading" destination="ihV-5A-RWV" id="dJp-GN-q8N"/>
                 <outlet property="recordButton" destination="PGx-Qs-B2s" id="AcX-qy-6hN"/>
+                <outlet property="recordButtonLeading" destination="GxI-qH-ij5" id="wAl-rQ-h5x"/>
                 <outlet property="tableView" destination="s6O-C9-Ku8" id="c99-mV-kQi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="vipButton" destination="JbI-fe-ejp" id="QBs-hh-ao2"/>
+                <outlet property="vipButtonLead" destination="sVW-FL-bA1" id="f0v-Ij-na1"/>
                 <outlet property="vipStateImageView" destination="3hH-eP-MLj" id="Fcb-UB-eTW"/>
             </connections>
         </placeholder>
@@ -44,7 +47,7 @@
             </constraints>
         </view>
         <view contentMode="scaleToFill" id="lqO-dd-qbH">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="328"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="206"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_center_back" translatesAutoresizingMaskIntoConstraints="NO" id="Yaf-Bu-7mG">
@@ -132,6 +135,7 @@
                         <constraint firstItem="Nr1-0N-f8I" firstAttribute="leading" secondItem="NbG-eC-sKR" secondAttribute="trailing" id="ihV-5A-RWV"/>
                         <constraint firstItem="PGx-Qs-B2s" firstAttribute="top" secondItem="Yc8-ax-KOo" secondAttribute="top" id="q6i-QI-kKY"/>
                         <constraint firstItem="JbI-fe-ejp" firstAttribute="leading" secondItem="Yc8-ax-KOo" secondAttribute="leading" id="sVW-FL-bA1"/>
+                        <constraint firstItem="JbI-fe-ejp" firstAttribute="leading" secondItem="Yc8-ax-KOo" secondAttribute="leading" id="uBO-np-LRx"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNW-GK-yvx">
@@ -169,13 +173,13 @@
                 <constraint firstItem="MXU-yA-opa" firstAttribute="leading" secondItem="lqO-dd-qbH" secondAttribute="leading" constant="15" id="zUK-UY-eCY"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="37.5" y="-846"/>
+            <point key="canvasLocation" x="37.5" y="-907"/>
         </view>
     </objects>
     <resources>
         <image name="VIP_close" width="22" height="20"/>
         <image name="user_center_back" width="375" height="205"/>
-        <image name="头像" width="112" height="112"/>
+        <image name="头像" width="90" height="90"/>
         <image name="我的VIP" width="39" height="39"/>
         <image name="我的发布" width="39" height="39"/>
         <image name="明细记录" width="39" height="40"/>

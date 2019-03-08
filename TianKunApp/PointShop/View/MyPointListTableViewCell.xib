@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="58" id="KGk-i7-Jjw" customClass="MyPointListTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="344" height="58"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="344" height="57.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ups-Wl-5aN">
+                        <rect key="frame" x="9" y="0.0" width="102.5" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="iF1-ny-kwu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nGH-0Q-xPs">
+                        <rect key="frame" x="120.5" y="0.0" width="102.5" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="QsI-tv-NTJ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bg6-Gl-nae">
+                        <rect key="frame" x="223" y="0.0" width="102.5" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="3rq-WF-ae4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.36322450639999998" green="0.63158446550000003" blue="0.98442620039999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ups-Wl-5aN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5Vt-Fl-yLr"/>
+                    <constraint firstItem="bg6-Gl-nae" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7gl-hv-dqI"/>
+                    <constraint firstItem="ups-Wl-5aN" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1/3" constant="-12" id="Giq-4R-W9d"/>
+                    <constraint firstItem="ups-Wl-5aN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="OgX-be-Sya"/>
+                    <constraint firstItem="nGH-0Q-xPs" firstAttribute="leading" secondItem="ups-Wl-5aN" secondAttribute="trailing" constant="9" id="UHQ-dk-aDx"/>
+                    <constraint firstItem="nGH-0Q-xPs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="cqK-C9-myl"/>
+                    <constraint firstItem="bg6-Gl-nae" firstAttribute="leading" secondItem="nGH-0Q-xPs" secondAttribute="trailing" id="joT-GD-WnQ"/>
+                    <constraint firstItem="bg6-Gl-nae" firstAttribute="width" secondItem="nGH-0Q-xPs" secondAttribute="width" id="lzB-WC-aLD"/>
+                    <constraint firstItem="nGH-0Q-xPs" firstAttribute="width" secondItem="ups-Wl-5aN" secondAttribute="width" id="tED-bF-xnl"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="moneyLabel" destination="bg6-Gl-nae" id="qEY-4s-pj4"/>
+                <outlet property="timeLabel" destination="nGH-0Q-xPs" id="WIi-Fo-smK"/>
+                <outlet property="titleLabel" destination="ups-Wl-5aN" id="yJN-LD-ego"/>
+            </connections>
+            <point key="canvasLocation" x="46" y="61"/>
+        </tableViewCell>
+    </objects>
+</document>

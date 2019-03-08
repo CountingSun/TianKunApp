@@ -72,12 +72,14 @@
 
  */
 @property (nonatomic, copy) NSString *secondTypeName;
+@property (nonatomic, copy) NSString *second_typeid;
 
 /**
  职位类别一级目录名字
 
  */
 @property (nonatomic, copy) NSString *firstTypeName;
+@property (nonatomic, copy) NSString *first_typeid;
 
 /**
  此招聘信息对应的企业的招聘信息的总条数
@@ -85,5 +87,13 @@
 @property (nonatomic, copy) NSString *count;
 
 @property (nonatomic, copy) NSString *enterprisename;
+
+@property (nonatomic, copy) NSString *city_name;
+@property (nonatomic, copy) NSString *cityid;
+@property (nonatomic, copy) NSString *province_name;
+@property (nonatomic, copy) NSString *provinceid;
+
+@property (nonatomic, copy) NSString *enterpriseid;
+@property (nonatomic, copy) NSString *refreshtime;
 
 @end

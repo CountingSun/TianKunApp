@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WQTabBarViewController : UITabBarController
+- (void)setTabBarViewControllerSelectIndex:(NSInteger)selectIndex;
+
 
 @end

@@ -161,7 +161,7 @@
     ReocrdDetailInfo *info = _arrData[indexPath.row];
     cell.titleLabel.text = info.subject;
     cell.timeLabel.text = [NSString timeReturnDateString:info.create_time formatter:@"yyyy-MM-dd"];
-    cell.changeLabel.text = [NSString stringWithFormat:@"-%@",info.money];
+    cell.changeLabel.text = [NSString stringWithFormat:@"%@",info.money];
     
     return cell;
     

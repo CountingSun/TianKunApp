@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="379" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D4O-2K-fB7">
-                        <rect key="frame" x="9" y="11" width="2" height="20"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4O-2K-fB7">
+                        <rect key="frame" x="9" y="10" width="2" height="20"/>
                         <color key="backgroundColor" red="0.24920544795008037" green="0.39673940346856718" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="G3Z-XE-L6x"/>
@@ -53,7 +53,6 @@
                     <constraint firstAttribute="trailing" secondItem="iUj-Iy-mhi" secondAttribute="trailing" id="51l-g7-Lw5"/>
                     <constraint firstItem="D4O-2K-fB7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="GBV-fA-RfZ"/>
                     <constraint firstItem="nHY-XM-7lD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Gcl-aH-4IL"/>
-                    <constraint firstAttribute="bottom" secondItem="iUj-Iy-mhi" secondAttribute="bottom" id="I7I-lW-uSd"/>
                     <constraint firstItem="nHY-XM-7lD" firstAttribute="leading" secondItem="D4O-2K-fB7" secondAttribute="trailing" constant="10" id="NBt-73-D0T"/>
                     <constraint firstItem="iUj-Iy-mhi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="VDy-vo-I3d"/>
                     <constraint firstAttribute="trailing" secondItem="nHY-XM-7lD" secondAttribute="trailing" constant="15" id="csd-pp-eFb"/>

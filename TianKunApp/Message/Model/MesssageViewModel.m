@@ -24,9 +24,12 @@
 
     TKMessageListInfo *info3 = [[TKMessageListInfo alloc]initWithListTitle:@"专家消息" listDetail:@"系统消息里面的简介" listImage:@"专家消息" listUnReadNum:4 listID:3];
     [arr addObject:info3];
+    if ([ISVipManager isOpenVip]) {
+        TKMessageListInfo *info4 = [[TKMessageListInfo alloc]initWithListTitle:@"VIP客服" listDetail:@"系统消息里面的简介" listImage:@"vip客服" listUnReadNum:0 listID:4];
+        [arr addObject:info4];
 
-    TKMessageListInfo *info4 = [[TKMessageListInfo alloc]initWithListTitle:@"VIP客服" listDetail:@"系统消息里面的简介" listImage:@"vip客服" listUnReadNum:0 listID:4];
-    [arr addObject:info4];
+    }
+
 
 
     return arr;

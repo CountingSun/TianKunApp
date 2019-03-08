@@ -9,6 +9,8 @@
 #import "RecommendMessageViewController.h"
 #import "RecommendMessageTableViewCell.h"
 #import "TKMessageInfo.h"
+#import "MessageDetailViewController.h"
+#import "IconBadgeManager.h"
 
 @interface RecommendMessageViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -38,7 +40,15 @@
     if (_pageIndex<1) {
         _pageIndex = 1;
     }
-    [_netWorkEngine postWithDict:@{@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize),@"recommend_message":@"1"} url:BaseUrl(@"find.recommendMessage.by") succed:^(id responseObject) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    if ([UserInfoEngine getUserInfo].userID) {
+        [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userId"];
+    }
+    [dict setObject:@(_pageIndex) forKey:@"pageNo"];
+    [dict setObject:@(_pageSize) forKey:@"pageSize"];
+    [dict setObject:@"1" forKey:@"recommend_message"];
+
+    [_netWorkEngine postWithDict:dict url:BaseUrl(@"find.recommendMessage.by") succed:^(id responseObject) {
         [self hideLoadingView];
         [self.tableView endRefresh];
         
@@ -126,12 +136,18 @@
         _tableView.estimatedRowHeight = 264;
         _tableView.separatorColor = COLOR_VIEW_BACK;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
+        
+        __weak typeof(self) weakSelf = self;
+        
         [_tableView headerWithRefreshingBlock:^{
+            _pageIndex = 1;
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [_tableView endRefresh];
-                
-            });
+            [weakSelf getData];
+        }];
+        [_tableView footerWithRefreshingBlock:^{
+            _pageIndex ++;
+            
+            [weakSelf getData];
             
         }];
         [self.view addSubview:_tableView];
@@ -162,15 +178,32 @@
 
     TKMessageInfo *messageInfo =_arrData[indexPath.row];
     cell.titleLabel.text = messageInfo.title;
-    [cell.mainImageView sd_imageDef21WithUrlStr:BaseUrl(messageInfo.picture_url)];
+    [cell.mainImageView sd_imageDef21WithUrlStr:messageInfo.picture_url];
     cell.timeLabel.text = [NSString timeReturnDateString:messageInfo.create_date formatter:@"yyyy-MM-dd HH:mm"];
     cell.detailLabel.text = messageInfo.content;
+    if ([IconBadgeManager isContainsRecomendMessageID:[NSString stringWithFormat:@"%@",@(messageInfo.message_id)]]) {
+        cell.isReadLabel.hidden = NO;
+    }else{
+        cell.isReadLabel.hidden = YES;
+    }
 
     return cell;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    TKMessageInfo *messageInfo =_arrData[indexPath.row];
+    MessageDetailViewController *webLinkViewController = [[MessageDetailViewController alloc] initWithMessageID:messageInfo.message_id isRead:messageInfo.is_read];
+    __weak typeof(self) weakSelf = self;
     
+    webLinkViewController.readBlock = ^{
+        messageInfo.is_read = 1;
+        [weakSelf.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        
+    };
+    
+    webLinkViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webLinkViewController animated:YES];
+
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

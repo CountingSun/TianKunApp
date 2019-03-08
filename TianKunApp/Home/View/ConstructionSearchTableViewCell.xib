@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,10 +25,10 @@
                             <constraint firstAttribute="width" constant="25" id="dua-ZI-bq7"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYx-we-Zgq">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYx-we-Zgq">
                         <rect key="frame" x="45" y="10" width="260" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="In9-Yf-dYk"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="In9-Yf-dYk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
@@ -41,7 +41,7 @@
                     <constraint firstItem="FYx-we-Zgq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Qou-Ap-0MU"/>
                     <constraint firstAttribute="trailing" secondItem="FYx-we-Zgq" secondAttribute="trailing" constant="15" id="Vwd-xJ-nky"/>
                     <constraint firstItem="FYx-we-Zgq" firstAttribute="leading" secondItem="oCP-8J-VEs" secondAttribute="trailing" constant="5" id="ZEA-WM-Lol"/>
-                    <constraint firstItem="oCP-8J-VEs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="c7D-az-X1Q"/>
+                    <constraint firstItem="oCP-8J-VEs" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rOY-Ti-JS6"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

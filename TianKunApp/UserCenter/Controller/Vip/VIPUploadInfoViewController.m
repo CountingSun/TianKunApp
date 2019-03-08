@@ -12,13 +12,14 @@
 #import "VipFileUpLoadCollectionViewCell.h"
 #import "VipTimeCollectionReusableView.h"
 #import "QDMultipleImagePickerPreviewViewController.h"
+#import "XLPhotoBrowser.h"
 
 #define MaxSelectedImageCount 9
 #define NormalImagePickingTag 1045
 #define ModifiedImagePickingTag 1046
 #define MultipleImagePickingTag 1047
 #define SingleImagePickingTag 1048
-static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
+static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeOnlyPhoto;
 
 @interface VipViewModel ()
 @property (nonatomic, copy) NSString *time;
@@ -28,7 +29,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
 @implementation VipViewModel
 @end
 
-@interface VIPUploadInfoViewController ()<QDMultipleImagePickerPreviewViewControllerDelegate,QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface VIPUploadInfoViewController ()<QDMultipleImagePickerPreviewViewControllerDelegate,QMUIAlbumViewControllerDelegate,QMUIImagePickerViewControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,QMUIImagePreviewViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (nonatomic, strong) NSMutableArray *selectImages;
 @property (nonatomic, strong) NSMutableArray *arrImageFilePath;
@@ -40,6 +41,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
 @property (nonatomic ,strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic ,strong) NSMutableDictionary *resultDict;
 @property (nonatomic ,strong) QMUIImagePickerViewController *imagePickerViewController;
+@property (weak, nonatomic) IBOutlet UIButton *uploadButton;
+@property (nonatomic ,strong) NSMutableArray *arrImage;
 
 @end
 
@@ -67,10 +70,11 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
         _pageIndex = 1;
     }
 
-    [[[NetWorkEngine alloc]init] postWithDict:@{@"user_id":[UserInfoEngine getUserInfo].userID,@"status":@"0",@"pageSize":@(_pageSize),@"pageNo":@(_pageIndex)} url:BaseUrl(@"find.vipUpDataList.by.vipUpData") succed:^(id responseObject) {
+    [[[NetWorkEngine alloc]init] postWithDict:@{@"user_id":[UserInfoEngine getUserInfo].userID,@"status":@"0",@"pageSize":@(_pageSize),@"pageNo":@(_pageIndex)} url:BaseUrl(@"find.vipUpDataList.by.userId") succed:^(id responseObject) {
         [self hideLoadingView];
         [self endRefesh];
-        
+        [self hideEmptyView];
+
 
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
@@ -80,9 +84,17 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
                 if (_pageIndex == 1) {
                     [_resultDict removeAllObjects];
                 }
-                
+                if (!_arrImage) {
+                    _arrImage = [NSMutableArray arrayWithCapacity:0];
+                }
+                if (_pageIndex == 1) {
+                    [_arrImage removeAllObjects];
+                }
+
                 for (NSDictionary *dict in arr) {
                     FileInfo *info = [FileInfo mj_objectWithKeyValues:dict];
+                    [_arrImage addObject: [dict objectForKey:@"certificate_url"]];
+                    
                     [self dealDataWithFileInfo:info];
                 }
                 [self dealDict];
@@ -92,10 +104,17 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
                 }else{
                     self.collectionView.footer.hidden = NO;
                 }
+                
             }else{
                 if (!_arrData.count) {
+                    self.collectionView.footer.hidden = YES;
+                    [self showGetDataNullWithReloadBlock:^{
+                        [self showLoadingView];
+                        [self getData];
+                        
+                    }];
                     
-                    
+
                 }else{
                     _pageIndex--;
                     
@@ -106,7 +125,13 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
             
         }else{
             if (!_arrData.count) {
+                self.collectionView.footer.hidden = YES;
+                [self showGetDataFailViewWithReloadBlock:^{
+                    [self showLoadingView];
+                    [self getData];
+                }];
                 
+
                 
             }else{
                 _pageIndex--;
@@ -116,8 +141,10 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
             }
             
         }
-        
+        [self.view bringSubviewToFront:_uploadButton];
+
     } errorBlock:^(NSError *error) {
+        
         [self hideLoadingView];
         [self endRefesh];
 
@@ -134,7 +161,8 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
             }];
             
         }
-        
+        [self.view sendSubviewToBack:_uploadButton];
+
     }];
     
 }
@@ -145,13 +173,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"user_id"];
-    [[[NetWorkEngine alloc] init] uploadImagesWithArrImageData:_arrImageFilePath url:BaseUrl(@"web/CompanyController/create.vipMaterial") dict:@{@"user_id":[UserInfoEngine getUserInfo].userID} name:@"pictureFile" fileName:@"" succed:^(id responseObject) {
+    [[[NetWorkEngine alloc] init] uploadImagesWithArrImageData:_arrImageFilePath url:BaseUrl(@"create.vipMaterial") dict:@{@"user_id":[UserInfoEngine getUserInfo].userID} name:@"pictureFile" fileName:@"" succed:^(id responseObject) {
         
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
+            [self hideEmptyView];
             [self showSuccessWithStatus:@"上传成功"];
             [_selectImages removeAllObjects];
             [_arrImageFilePath removeAllObjects];
+            [_collectionView.header beginRefreshing];
+            
         }else{
             [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
             
@@ -251,6 +282,16 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
         return nil;
     }
 }
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    VipViewModel *model = _arrData[indexPath.section];
+    FileInfo *info = model.arrInfo[indexPath.row];
+    NSInteger index =  [_arrImage indexOfObject:info.certificate_url];
+    
+    
+    [XLPhotoBrowser showPhotoBrowserWithImages:_arrImage currentImageIndex:index];
+
+
+}
 
 #pragma mark- QMUIImagePicker
 - (QMUIImagePickerViewController *)imagePickerViewControllerForAlbumViewController:(QMUIAlbumViewController *)albumViewController {
@@ -338,7 +379,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
     // 创建一个 QMUIAlbumViewController 实例用于呈现相簿列表
     QMUIAlbumViewController *albumViewController = [[QMUIAlbumViewController alloc] init];
     albumViewController.albumViewControllerDelegate = self;
-    albumViewController.contentType = QMUIAlbumContentTypeAll;
+    albumViewController.contentType = QMUIAlbumContentTypeOnlyPhoto;
     albumViewController.title = title;
     albumViewController.view.tag = MultipleImagePickingTag;
     
@@ -388,7 +429,7 @@ static QMUIAlbumContentType const kAlbumContentType = QMUIAlbumContentTypeAll;
         
     }];
     
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO];
     [_arrData sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
     

@@ -8,10 +8,11 @@
 
 #import "CooperationDetailViewController.h"
 #import "CooperationInfo.h"
-#import "HomeListTableViewCell.h"
 #import "CompanyIntroduceTableViewCell.h"
 #import "AppShared.h"
 #import "CooperationTableViewCell.h"
+#import "CooperationDetailTableViewCell.h"
+#import "CollectShareView.h"
 
 @interface CooperationDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -20,14 +21,12 @@
 @property (nonatomic ,strong) NetWorkEngine *netWorkEngine;
 @property (nonatomic ,strong) CooperationInfo *cooperationInfo;
 @property (strong, nonatomic) IBOutlet UIView *headView;
-@property (strong, nonatomic) IBOutlet UIView *rightBarButtonView;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *publicTimeIaLbel;
 @property (weak, nonatomic) IBOutlet UILabel *hadSeeLabel;
-@property (weak, nonatomic) IBOutlet QMUIButton *collectButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *shareButton;
 @property (nonatomic ,assign) NSInteger pageIndex;
 @property (nonatomic ,assign) NSInteger pageSize;
+@property (nonatomic ,strong) CollectShareView *collectShareView;
 
 @end
 
@@ -50,20 +49,31 @@
 }
 - (void)setupUI{
     [self.titleView setTitle:@"详情"];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightBarButtonView];
-    
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = -20;
-    self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
-    
-    [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
-    [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
     _pageIndex = 1;
     _pageSize = DEFAULT_PAGE_SIZE;
-
-    _rightBarButtonView.userInteractionEnabled = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
 
 }
+- (void)loginSucceed{
+    [self showLoadingView];
+    [self getData];
+    
+}
+
+- (void)setupNav{
+    if (!_collectShareView) {
+        _collectShareView = [[CollectShareView alloc] initWithFrame:CGRectMake(0, 0, 80, 40) collectButtonBlock:^{
+            [self collectButtonClick];
+        } shareButtonBlock:^{
+            [self shareButtonClick];
+            
+        }];
+        
+    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_collectShareView];
+    
+}
+
 - (void)getData{
     NSString *urlStr = BaseUrl(@"find.cooperationRequestExt.by.id?");
    urlStr =  [urlStr stringByAppendingString:[NSString stringWithFormat:@"id=%@",@(_cooperationID)]];
@@ -76,7 +86,6 @@
         
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
-            _rightBarButtonView.userInteractionEnabled = YES;
 
             NSDictionary *dict = [responseObject objectForKey:@"value"];
             _cooperationInfo = [CooperationInfo mj_objectWithKeyValues:dict];
@@ -91,10 +100,11 @@
 
             _cooperationInfo.arrAddressName = [dict objectForKey:@""];
             
+            [self setupNav];
             if (_cooperationInfo.isCollect) {
-                _collectButton.selected = YES;
+                _collectShareView.collectButton.selected = YES;
             }else{
-                _collectButton.selected = NO;
+                _collectShareView.collectButton.selected = NO;
 
             }
             [self.tableView reloadData];
@@ -108,7 +118,6 @@
             }];
         }
     } errorBlock:^(NSError *error) {
-        _rightBarButtonView.userInteractionEnabled = YES;
 
         [self hideLoadingView];
         [self showGetDataFailViewWithReloadBlock:^{
@@ -153,12 +162,6 @@
                 
             }else{
                 if (!_arrData.count) {
-                    [self showGetDataNullWithReloadBlock:^{
-                        [self showLoadingView];
-                        [self getData];
-                    }];
-                    
-                    
                 }else{
                     _pageIndex--;
                     
@@ -169,11 +172,6 @@
             
         }else{
             if (!_arrData.count) {
-                [self showGetDataNullWithReloadBlock:^{
-                    [self showLoadingView];
-                    [self getData];
-                }];
-                
                 
             }else{
                 _pageIndex--;
@@ -195,11 +193,6 @@
             [self showErrorWithStatus:NET_ERROR_TOST];
         }else{
             _pageIndex = 1;
-            [self showGetDataFailViewWithReloadBlock:^{
-                [self hideEmptyView];
-                [self showLoadingView];
-                [self getData];
-            }];
             
         }
         
@@ -210,14 +203,21 @@
 
 - (WQTableView *)tableView{
     if (!_tableView) {
-        _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStyleGrouped];
+        _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = _headView;
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 45;
         [self.view addSubview:self.tableView];
+        __weak typeof(self) weakSelf = self;
         
+        [_tableView footerWithRefreshingBlock:^{
+            weakSelf.pageIndex++;
+            [weakSelf getData];
+            
+        }];
+
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.equalTo(self.view);
         }];
@@ -230,7 +230,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 3;
+        return 4;
     }else if (section == 1){
         return 1;
     }else{
@@ -271,69 +271,64 @@
     return [UIView new];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (indexPath.section == 0) {
-        static NSString *cellID = @"defCellID";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-        if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
-            cell.selectionStyle = 0;
-        }
-        switch (indexPath.row) {
-            case 0:
-            {
-                NSAttributedString *titleAttributedString = [self dealStringWithString:@"服务区域    " color:COLOR_TEXT_LIGHT fontSize:14];
-                NSAttributedString *detailAttributedString = [self dealStringWithString:_cooperationInfo.action_scope_name color:COLOR_TEXT_BLACK fontSize:14];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                [attStr appendAttributedString:titleAttributedString];
-                [attStr appendAttributedString:detailAttributedString];
-                
-                cell.textLabel.attributedText = attStr;
-                
+            CooperationDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CooperationDetailTableViewCell"];
+            if (!cell) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"CooperationDetailTableViewCell" owner:nil options:nil] firstObject];
             }
-                break;
-            case 1:
-            {
-                NSAttributedString *titleAttributedString = [self dealStringWithString:@"联系人    " color:COLOR_TEXT_LIGHT fontSize:14];
-                NSAttributedString *detailAttributedString = [self dealStringWithString:_cooperationInfo.linkman color:COLOR_TEXT_BLACK fontSize:14];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                [attStr appendAttributedString:titleAttributedString];
-                [attStr appendAttributedString:detailAttributedString];
-                
-                cell.textLabel.attributedText = attStr;
-                
+        cell.detailLabel.textColor = COLOR_TEXT_BLACK;
+        cell.seeButton.hidden = YES;
+        [cell.seeButton addTarget:self action:@selector(seeButtonClickEvent) forControlEvents:UIControlEventTouchUpInside];
+
+            switch (indexPath.row) {
+//                case 0:
+//                {
+//                    cell.titleLabel.text = @"服务区域";
+//                    cell.detailLabel.text = _cooperationInfo.action_scope_name;
+//                }
+//                    break;
+                case 0:{
+                    cell.titleLabel.text = @"联系人";
+                    cell.detailLabel.text = _cooperationInfo.linkman;
+                }
+                    break;
+                case 1:{
+                    cell.titleLabel.text = @"联系电话";
+                    cell.detailLabel.text = _cooperationInfo.phone;
+                    cell.detailLabel.textColor = COLOR_THEME;
+                    if (_cooperationInfo.phone.length >= 4) {
+                        
+                        NSString *lastString = [_cooperationInfo.phone substringFromIndex:_cooperationInfo.phone.length-4];
+                        
+                        if ([lastString isEqualToString:@"****"]) {
+                            cell.seeButton.hidden = NO;
+                            
+                        }else{
+                            cell.seeButton.hidden = YES;
+                            
+                        }
+                    }
+
+
+                }
+                    break;
+                case 2:{
+                    cell.titleLabel.text = @"企业属地";
+                    cell.detailLabel.text = [NSString stringWithFormat:@"%@%@",_cooperationInfo.provinces_name,_cooperationInfo.cities_name];
+                }
+                    break;
+                case 3:{
+                    cell.titleLabel.text = @"商家地址";
+                    cell.detailLabel.text = _cooperationInfo.address;
+                }
+                    break;
+
+                default:
+                    break;
             }
-                break;
-            case 2:
-            {
-                NSAttributedString *titleAttributedString = [self dealStringWithString:@"联系电话    " color:COLOR_TEXT_LIGHT fontSize:14];
-                NSAttributedString *detailAttributedString = [self dealStringWithString:_cooperationInfo.phone color:COLOR_THEME fontSize:14];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                [attStr appendAttributedString:titleAttributedString];
-                [attStr appendAttributedString:detailAttributedString];
-                
-                cell.textLabel.attributedText = attStr;
-                
-            }
-                break;
-            case 3:
-            {
-                NSAttributedString *titleAttributedString = [self dealStringWithString:@"商家地址    " color:COLOR_TEXT_LIGHT fontSize:14];
-                NSAttributedString *detailAttributedString = [self dealStringWithString:_cooperationInfo.address color:COLOR_TEXT_BLACK fontSize:14];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                [attStr appendAttributedString:titleAttributedString];
-                [attStr appendAttributedString:detailAttributedString];
-                
-                cell.textLabel.attributedText = attStr;
-                
-            }
-                break;
-                
-            default:
-                break;
-        }
-        return cell;
-        
+            return cell;
+
     }else if (indexPath.section == 1){
         CompanyIntroduceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompanyIntroduceTableViewCell"];
         if (!cell) {
@@ -362,6 +357,14 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        if (indexPath.row == 2) {
+            if(_cooperationInfo.phone.length){
+                [WQTools callWithTel:_cooperationInfo.phone];
+            }
+
+        }
+    }
     if (indexPath.section == 2) {
         CooperationInfo *info = _arrData[indexPath.row];
         
@@ -381,15 +384,15 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }
-- (IBAction)collectButtonClick:(id)sender {
+- (void)collectButtonClick{
     
     if ([UserInfoEngine isLogin]) {
         [self showWithStatus:NET_WAIT_TOST];
-        [self.netWorkEngine postWithDict:@{@"id":@(_cooperationID),@"user_id":[UserInfoEngine getUserInfo].userID,@"status":@(!_collectButton.selected)} url:BaseUrl(@"create.or.update.cooperationCollectible") succed:^(id responseObject) {
+        [self.netWorkEngine postWithDict:@{@"id":@(_cooperationID),@"userId":[UserInfoEngine getUserInfo].userID,@"status":@(!_collectShareView.collectButton.selected)} url:BaseUrl(@"create.or.update.cooperationCollectible") succed:^(id responseObject) {
             NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
             if (code == 1) {
-                _collectButton.selected =! _collectButton.selected;
-                if (_collectButton.selected) {
+                _collectShareView.collectButton.selected =! _collectShareView.collectButton.selected;
+                if (_collectShareView.collectButton.selected) {
                     [self showSuccessWithStatus:@"收藏成功"];
                 }else{
                     [self showSuccessWithStatus:@"取消收藏成功"];
@@ -409,9 +412,15 @@
     }
     
 }
+- (void)seeButtonClickEvent{
+    
+    if ([UserInfoEngine isLogin]) {
+    }
+    
+}
 
-- (IBAction)shareButtonClick:(id)sender {
-    [AppShared shared];
+- (void)shareButtonClick{
+    [AppShared shareParamsByText:_cooperationInfo.content images:@[[UIImage imageNamed:@"AppIcon"]] url:DEFAULT_SHARE_URL title:_cooperationInfo.initiator];
 }
 - (NetWorkEngine *)netWorkEngine{
     if (!_netWorkEngine) {

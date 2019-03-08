@@ -17,9 +17,11 @@
                 pageSize:(NSInteger)pageSize
                dataType2:(NSInteger)dataType2
                calssType:(NSInteger)calssType
+               docID:(NSInteger)docID
 returnBlock:(void(^)(NSInteger code,NSString *msg,NSMutableArray *arrData))returnBlock;
 
 -(void)getEductationInfoWithDocumentID:(NSInteger)documentID
                            returnBlock:(void(^)(NSInteger code,NSString *msg,DocumentInfo *documentInfo))returnBlock;
+
 
 @end

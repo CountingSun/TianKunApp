@@ -12,6 +12,8 @@
 typedef void(^goBackBlock)(void);
 @interface WebLinkViewController : WQBaseViewController
 @property (nonatomic, copy) NSString    *urlString;             // url地址
+@property (nonatomic, copy) NSString    *imageName;             // 图片名
+
 @property (nonatomic, copy) NSString    *navTitle;              // 标题栏
 @property (nonatomic, strong) WKWebView         *webView;               //wkwebview
 
@@ -20,5 +22,8 @@ typedef void(^goBackBlock)(void);
 -(instancetype)initWithTitle:(NSString *)title urlString:(NSString *)urlString;
 
 -(instancetype)initWithTitle:(NSString *)title urlString:(NSString *)urlString goBackBlock:(goBackBlock)goBackBlock;
+
+
+
 
 @end

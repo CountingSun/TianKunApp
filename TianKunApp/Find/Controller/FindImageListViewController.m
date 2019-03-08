@@ -53,7 +53,7 @@
         _pageIndex = 1;
     }
 
-    [self.netWorkEngine postWithDict:@{@"categoryid":_classID,@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.by.enterpriseList") succed:^(id responseObject) {
+    [self.netWorkEngine postWithDict:@{@"enterprise_type":_classID,@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.by.enterpriseList") succed:^(id responseObject) {
         [self hideLoadingView];
         [_tableView endRefresh];
 
@@ -140,7 +140,7 @@
         _tableView = [[WQTableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) delegate:self dataScource:self style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 60;
+        _tableView.rowHeight = 100;
         _tableView.backgroundColor = COLOR_VIEW_BACK;
         __weak typeof(self) weakSelf = self;
 
@@ -176,19 +176,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     EnterpriseInfo *enterpriseInfo = _arrData[indexPath.row];
 
-//    if ([_classID isEqualToString:@"23"]) {
-//        FindListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindListTableViewCell"];
-//        if (!cell) {
-//            cell = [[[NSBundle mainBundle] loadNibNamed:@"FindImageListTableViewCell" owner:nil options:nil] firstObject];
-//
-//        }
-//        cell.titleLabel.text = enterpriseInfo.enterprise_name;
-//        cell.detailLabel.text = enterpriseInfo.enterprise_introduce;
-//
-//        cell.selectionStyle = 0;
-//        return cell;
-//
-//    }else{
         FindImageListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FindImageListTableViewCell"];
         if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"FindImageListTableViewCell" owner:nil options:nil] firstObject];
@@ -197,7 +184,7 @@
             
         }
     
-        [cell.iconImageView sd_imageDef11WithUrlStr:BaseUrl(enterpriseInfo.picture_url)];;
+        [cell.iconImageView sd_imageDef11WithUrlStr:enterpriseInfo.picture_url];;
         cell.titleLabel.text = enterpriseInfo.enterprise_name;
         cell.detailLabel.text = enterpriseInfo.enterprise_introduce;
         

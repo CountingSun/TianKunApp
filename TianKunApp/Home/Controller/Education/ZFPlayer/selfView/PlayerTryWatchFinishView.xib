@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PlayerTryWatchFinishView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="234"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="试看结束，VIP会员可免费观看" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79D-tK-5wf">
+                    <rect key="frame" x="0.0" y="47" width="375" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="S4b-yn-R5i"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWj-Wo-R92" customClass="QMUIButton">
+                    <rect key="frame" x="77.5" y="97" width="100" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="3YB-fI-b9k"/>
+                        <constraint firstAttribute="height" constant="40" id="bOj-ID-PTF"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="重新观看"/>
+                    <connections>
+                        <action selector="replayButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="3ac-Eh-tMz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="co7-sa-ct4" customClass="QMUIButton">
+                    <rect key="frame" x="97" y="157" width="180" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="3QY-0X-Chb"/>
+                        <constraint firstAttribute="height" constant="40" id="ggY-z2-T3N"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="购买此视频（终身有效）"/>
+                    <connections>
+                        <action selector="buyButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="3rB-ve-dAc"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wK-Ij-fyL" customClass="QMUIButton">
+                    <rect key="frame" x="197.5" y="97" width="100" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="74Y-Ps-0SP"/>
+                        <constraint firstAttribute="height" constant="40" id="DdG-2y-2Mp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="开通VIP"/>
+                    <connections>
+                        <action selector="buyVipButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="tj1-UZ-4nE"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0B-dL-dCm" customClass="QMUIButton">
+                    <rect key="frame" x="5" y="-2" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="0UL-2b-yE5"/>
+                        <constraint firstAttribute="width" constant="50" id="5c3-6V-KSU"/>
+                    </constraints>
+                    <connections>
+                        <action selector="backButtonClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="IBS-Aa-XnS"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="B0B-dL-dCm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="03J-th-8Qc"/>
+                <constraint firstItem="FWj-Wo-R92" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-60" id="6cm-g7-rYP"/>
+                <constraint firstItem="FWj-Wo-R92" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7OJ-Yl-jn2"/>
+                <constraint firstItem="co7-sa-ct4" firstAttribute="top" secondItem="FWj-Wo-R92" secondAttribute="bottom" constant="20" id="Ha2-Cb-d54"/>
+                <constraint firstItem="8wK-Ij-fyL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="60" id="NTf-Fh-XVo"/>
+                <constraint firstItem="co7-sa-ct4" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NsD-gp-2Z4"/>
+                <constraint firstAttribute="trailing" secondItem="79D-tK-5wf" secondAttribute="trailing" id="aBO-hv-1wB"/>
+                <constraint firstItem="79D-tK-5wf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="brq-Gs-Pe9"/>
+                <constraint firstItem="FWj-Wo-R92" firstAttribute="top" secondItem="79D-tK-5wf" secondAttribute="bottom" constant="30" id="jLC-T3-6mC"/>
+                <constraint firstItem="B0B-dL-dCm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-2" id="pog-d0-tUR"/>
+                <constraint firstItem="8wK-Ij-fyL" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="saB-i5-9KJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backButton" destination="B0B-dL-dCm" id="SfY-Q4-5N6"/>
+                <outlet property="buyButton" destination="co7-sa-ct4" id="dbh-Bu-LTU"/>
+                <outlet property="buyVipButton" destination="8wK-Ij-fyL" id="WYA-eu-pfU"/>
+                <outlet property="introctLabel" destination="79D-tK-5wf" id="TBV-qq-UWU"/>
+                <outlet property="replayButton" destination="FWj-Wo-R92" id="NEF-gj-5fB"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="271"/>
+        </view>
+    </objects>
+</document>

@@ -14,6 +14,8 @@
 #import "VipInfo.h"
 #import "WXApi.h"
 #import "AppDelegate.h"
+#import "JPUSHService.h"
+#import "IconBadgeManager.h"
 
 @interface DredgeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UIView *headView;
@@ -44,7 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.titleView setTitle:@"开通VIP"];
+    [self.titleView setTitle:@"充值VIP"];
     _payType = 1;
     [self getIsVip];
     [self setupUI];
@@ -65,8 +67,11 @@
             [[NSNotificationCenter defaultCenter]postNotification:notice];
 
             [self showSuccessWithStatus:@"支付成功"];
-            [self getIsVip];
-            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            });
+
             
             
         }else{
@@ -84,7 +89,9 @@
     [[[NetWorkEngine alloc]init] postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname,@"total_amount":@(_vipInfo.total_amount),@"body":@"购买会员",@"subject":@"VIP会员"} url:BaseUrl(@"payment/initalipayclient.action") succed:^(id responseObject) {
         
         NSInteger code = [[responseObject objectForKey:@"code"]integerValue];
+        
         if (code == 1) {
+            [self dismiss];
             _orderStr = [[responseObject objectForKey:@"value"] objectForKey:@"orderinfo"];
             [self aliPay];
 
@@ -102,6 +109,8 @@
     [[[NetWorkEngine alloc]init] postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} url:BaseUrl(@"wx/wxpay.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
+            [self dismiss];
+
             _dict = [[responseObject objectForKey:@"value"] objectForKey:@"ordermessage"];
             [self wxPay];
         }
@@ -125,7 +134,21 @@
             _vipInfo.vip_endtime = [[[responseObject objectForKey:@"value"] objectForKey:@"usermessage"] objectForKey:@"vip_endtime"];
             _vipInfo.vip_status = [[[[responseObject objectForKey:@"value"] objectForKey:@"usermessage"] objectForKey:@"vip_status"] integerValue];
             [self setView];
+            NSSet *set;
             
+            if (_vipInfo.vip_status == 1) {
+                set = [NSSet setWithObjects:@"VIP", nil];
+            }else{
+                set = [NSSet setWithObjects:@"ID", nil];
+            }
+            [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                
+            } seq:1];
+            [JPUSHService setAlias:[UserInfoEngine getUserInfo].userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                
+            } seq:1];
+            
+
             
             
         }else{
@@ -239,7 +262,13 @@
             
             
             [self showSuccessWithStatus:@"支付成功"];
-            [self getIsVip];
+            self.view.userInteractionEnabled = NO;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+
+            });
+            
+//            [self getIsVip];
 
             
         }else{
@@ -283,14 +312,17 @@
             switch (errorCode) {
                 case 0:
                 {
-                    [self showErrorWithStatus:@"支付结果：成功！"];
+                    [self showSuccessWithStatus:@"支付结果：成功！"];
                     
                     //创建一个消息对象
                     NSNotification * notice = [NSNotification notificationWithName:PAY_SUCCEED_NOTICE object:nil userInfo:@{@"key":@"微信支付开通vip"}];
                     //发送消息
                     [[NSNotificationCenter defaultCenter]postNotification:notice];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self.navigationController popViewControllerAnimated:YES];
 
-                    [self getIsVip];
+                    });
+
 
                 }
                     break;
@@ -316,6 +348,18 @@
 
     }
 
+
+}
+- (void)setMessageID:(NSInteger)messageID{
+    if ([IconBadgeManager isContainsSystemMessageID:[NSString stringWithFormat:@"%@",@(messageID)]]) {
+        [IconBadgeManager deleteSystemMessageWithMessageID:[NSString stringWithFormat:@"%@",@(messageID)]];
+        
+    }else{
+        [IconBadgeManager deleteRecomendMessageWithMessageID:[NSString stringWithFormat:@"%@",@(messageID)]];
+    }
+    if (_succeedBlock) {
+        _succeedBlock();
+    }
 
 }
 

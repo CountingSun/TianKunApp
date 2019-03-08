@@ -14,4 +14,10 @@
              @"data_id":@"id"
              };
 }
+-(NSString *)previous_format{
+    if (!_previous_format.length) {
+        return @"";
+    }
+    return _previous_format;
+}
 @end

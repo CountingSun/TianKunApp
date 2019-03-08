@@ -114,12 +114,15 @@
 
 @property (nonatomic ,strong) NSString *collectionid;
 
-
+@property (nonatomic ,assign) BOOL isCollect;
 /**
  点击量
  */
 @property (nonatomic, copy) NSString *hits_show;
 
+@property (nonatomic, copy) NSString *certifications_type_id;
+
+@property (nonatomic, copy) NSString *enterprise_type;
 
 
 

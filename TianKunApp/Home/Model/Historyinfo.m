@@ -9,5 +9,9 @@
 #import "Historyinfo.h"
 
 @implementation Historyinfo
-
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{
+             @"history_id":@"id"
+             };
+}
 @end

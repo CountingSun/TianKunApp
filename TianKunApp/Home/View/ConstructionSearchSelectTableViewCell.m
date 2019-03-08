@@ -10,6 +10,7 @@
 #import "ConstructionSearchCollectionViewCell.h"
 #import "AptitudeSelectViewController.h"
 #import "ClassTypeInfo.h"
+#import "ConstructionSearchModel.h"
 
 #define itemHeight 40
 #define MinLineSpacing 10
@@ -37,6 +38,10 @@
     _collectionView.indexDisplayMode = UIScrollViewIndexDisplayModeAutomatic;
     [_collectionView registerNib:[UINib nibWithNibName:@"ConstructionSearchCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ConstructionSearchCollectionViewCell"];
 
+}
+- (void)setLastTitle:(NSString *)lastTitle{
+    _lastTitle = lastTitle;
+    
 }
 - (void)setArrData:(NSMutableArray *)arrData{
     
@@ -79,24 +84,13 @@
 }
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     ConstructionSearchCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ConstructionSearchCollectionViewCell" forIndexPath:indexPath];
-    NSMutableArray *arr = self.arrData[indexPath.row];
-    [arr enumerateObjectsUsingBlock:^(ClassTypeInfo *classTypeInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (classTypeInfo.isSelect) {
-            cell.titleLabel.text = classTypeInfo.typeName;
-
-            *stop = YES;
-        }else{
-            cell.titleLabel.text = @"请选择";
-        }
-
-    }];
-    cell.layer.masksToBounds = YES;
-    cell.layer.cornerRadius = 3;
-    cell.layer.borderWidth = 1;
-    cell.layer.borderColor = COLOR_VIEW_SEGMENTATION.CGColor;
-    
+    ConstructionSearchModel *model = self.arrData[indexPath.row];
+    if (model.name.length ) {
+        cell.titleLabel.text = model.name;
+    }else{
+        cell.titleLabel.text = @"请选择";
+    }
     cell.statueImageView.image = [UIImage imageNamed:@"三角上"];
-    
     return cell;
     
 }
@@ -106,20 +100,19 @@
     ConstructionSearchCollectionViewCell *cell = (ConstructionSearchCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     cell.statueImageView.image = [UIImage imageNamed:@"三角下"];
 
-    if (!_aptitudeSelectViewController) {
-        _aptitudeSelectViewController = [[AptitudeSelectViewController alloc]initWithSelectSucceedBlock:^(ClassTypeInfo *classTypeInfo,NSIndexPath *indexPaths) {
-            
-            ConstructionSearchCollectionViewCell *cell = (ConstructionSearchCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPaths];
-            cell.titleLabel.text = classTypeInfo.typeName;
-            cell.statueImageView.image = [UIImage imageNamed:@"三角上"];
-            classTypeInfo.isSelect = YES;
+    _aptitudeSelectViewController = [[AptitudeSelectViewController alloc]initWithSelectSucceedBlock:^(ClassTypeInfo *classTypeInfo,NSIndexPath *indexPaths) {
 
-            if (_delegate) {
-                [_delegate selectWithClassTypeInfo:classTypeInfo index:indexPaths.row];
-            }
-        }];
+        ConstructionSearchCollectionViewCell *cell = (ConstructionSearchCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPaths];
+        cell.titleLabel.text = classTypeInfo.typeName;
+        cell.statueImageView.image = [UIImage imageNamed:@"三角上"];
+        classTypeInfo.isSelect = YES;
+        ConstructionSearchModel *model = self.arrData[indexPaths.row];
+        model.name = classTypeInfo.typeName;
+        if (_delegate) {
+            [_delegate selectWithClassTypeInfo:classTypeInfo index:indexPaths.row];
+        }
+    }];
 
-    }
     _aptitudeSelectViewController.modalPresentationStyle = UIModalPresentationPopover;
 
     _aptitudeSelectViewController.preferredContentSize = CGSizeMake(cell.frame.size.width, 200);
@@ -128,16 +121,19 @@
     // 指定箭头所指区域的矩形框范围（位置和尺寸）,以sourceView的左上角为坐标原点
     // 这个可以 通过 Point 或  Size 调试位置
     _aptitudeSelectViewController.popoverPresentationController.sourceRect = cell.bounds;
+    _aptitudeSelectViewController.tableViewSize = CGSizeMake(cell.frame.size.width, 200);
+    
     // 箭头方向
     _aptitudeSelectViewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionUp;
     // 设置代理
     _aptitudeSelectViewController.popoverPresentationController.delegate = self;
-    NSMutableArray *arr = self.arrData[indexPath.row];
-    [arr enumerateObjectsUsingBlock:^(ClassTypeInfo *classTypeInfo, NSUInteger idx, BOOL * _Nonnull stop) {
-        classTypeInfo.isSelect = NO;
-    }];
+    ConstructionSearchModel *model = self.arrData[indexPath.row];
+
+//    [arr enumerateObjectsUsingBlock:^(ClassTypeInfo *classTypeInfo, NSUInteger idx, BOOL * _Nonnull stop) {
+//        classTypeInfo.isSelect = NO;
+//    }];
     
-    _aptitudeSelectViewController.arrData = self.arrData[indexPath.row];
+    _aptitudeSelectViewController.arrData = model.arrData;
     _aptitudeSelectViewController.indexPath = indexPath; 
     [[ConstructionSearchSelectTableViewCell topViewController] presentViewController:_aptitudeSelectViewController animated:YES completion:nil];
 

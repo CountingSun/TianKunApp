@@ -12,6 +12,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.layer.masksToBounds = YES;
+    self.layer.cornerRadius = 3;
+    self.layer.borderWidth = 1;
+    self.layer.borderColor = COLOR_VIEW_SEGMENTATION.CGColor;
+
 }
 
 @end

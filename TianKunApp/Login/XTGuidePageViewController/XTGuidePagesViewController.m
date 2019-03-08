@@ -14,13 +14,17 @@
 @interface XTGuidePagesViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIPageControl *pageControl;
+@property (nonatomic ,strong) UIButton *inButton;
+@property (nonatomic ,strong) NSArray *arrImage;
+;
 @end
 
 @implementation XTGuidePagesViewController
 
 - (void)guidePageControllerWithImages:(NSArray *)images
 {
-    UIScrollView *gui = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, s_w, s_h)];
+    _arrImage = images;
+    UIScrollView *gui = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     gui.delegate = self;
     gui.pagingEnabled = YES;
     // 隐藏滑动条
@@ -33,14 +37,16 @@
         imageView.image = [UIImage imageNamed:images[i]];
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.userInteractionEnabled = YES;
+        imageView.layer.masksToBounds = YES;
         [gui addSubview:imageView];
         
         
         
         
     }
-    gui.contentSize = CGSizeMake(s_w * images.count, 0);
+    gui.contentSize = CGSizeMake(SCREEN_WIDTH * images.count, 0);
     [self.view addSubview:gui];
+    
     UIButton *inButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [inButton addTarget:self action:@selector(clickEnter) forControlEvents:UIControlEventTouchUpInside];
     [inButton setTitle:@"点击进入" forState:0];
@@ -55,7 +61,9 @@
         make.centerX.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-100);
     }];
-    
+    _inButton = inButton;
+    _inButton.alpha = 0;
+
 
 }
 - (void)clickEnter
@@ -90,7 +98,23 @@
 #pragma mark - ScrollerView Delegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    self.pageControl.currentPage = scrollView.contentOffset.x / s_w;
+    NSInteger index = scrollView.contentOffset.x / SCREEN_WIDTH;
+    
+    if (index == _arrImage.count-1) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            _inButton.alpha = 1;
+        }];
+
+    }else{
+        [UIView animateWithDuration:0.3 animations:^{
+            _inButton.alpha = 0;
+        }];
+        
+
+        
+    }
+    
 }
 
 @end

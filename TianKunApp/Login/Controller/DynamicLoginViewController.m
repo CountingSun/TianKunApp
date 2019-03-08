@@ -9,6 +9,8 @@
 #import "DynamicLoginViewController.h"
 #import "RegisterGetCodeTableViewCell.h"
 #import "TextFieldTableViewCell.h"
+#import "RongCloudConfigure.h"
+#import "JPUSHService.h"
 
 @interface DynamicLoginViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -132,7 +134,7 @@
         _countTime--;
         NSLog(@"%@",@(_countTime));
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_dynamicButton setTitle:[NSString stringWithFormat:@"%@秒后从发",@(_countTime)] forState:0];
+            [_dynamicButton setTitle:[NSString stringWithFormat:@"%@秒后重发",@(_countTime)] forState:0];
             
         });
         
@@ -190,25 +192,85 @@
 }
 - (void)userLogin{
     [self showWithStatus:NET_WAIT_TOST];
+    self.view.userInteractionEnabled = NO;
+    
     
     [self.netWorkEngine postWithDict:@{@"iphone":_nameString,@"yzm":_codeString} url:BaseUrl(@"lg/dynamic_login.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
-            [self.view endEditing:YES];
-            [self showSuccessWithStatus:@"登录成功"];
+            
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[responseObject objectForKey:@"value"]];
+            [UserInfoEngine setIsHadPwd:@"1"];
             [UserInfoEngine setUserInfo:userInfo];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+            
+            if (IS_OPEN_RongCloud) {
+                [RongCloudConfigure loginRongCloudWithresultBlock:^(NSString *errMessage) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (!errMessage.length) {
+                            [self dismissViewControllerAnimated:YES completion:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+                            if (userInfo.vip_status == 1) {
+                                NSSet *set;
+                                set = [NSSet setWithObjects:@"VIP", nil];
+                                [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                                    WQLog(@"%@",iTags);
+                                    
+                                } seq:1];
+                                [JPUSHService setAlias:userInfo.userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                                    WQLog(@"%@",iAlias);
+                                    
+                                } seq:1];
+                                
+                            }else{
+                                NSSet *set;
+                                
+                                set = [NSSet setWithObjects:@"ID", nil];
+                                [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                                    WQLog(@"%@",iTags);
+                                    
+                                } seq:1];
+                                [JPUSHService setAlias:userInfo.userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                                    WQLog(@"%@",iAlias);
+                                    
+                                } seq:1];
+                                
+                            }
+                            
+                            [self.view endEditing:YES];
+                            [self showSuccessWithStatus:@"登录成功"];
+                            self.view.userInteractionEnabled = YES;
+
+                            
+                        }else{
+                            self.view.userInteractionEnabled = YES;
+                            [UserInfoEngine setUserInfo:nil];
+                            [self showErrorWithStatus:errMessage];
+                        }
+                        
+                    });
+                    
+                }];
+
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self showSuccessWithStatus:@"登录成功"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+
+            }
+            
+            
             
             
         }else{
             [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+            self.view.userInteractionEnabled = YES;
+
         }
         
     } errorBlock:^(NSError *error) {
         [self showErrorWithStatus:NET_ERROR_TOST];
-        
+        self.view.userInteractionEnabled = YES;
+
         
     }];
     

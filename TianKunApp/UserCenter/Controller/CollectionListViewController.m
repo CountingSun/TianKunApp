@@ -19,6 +19,7 @@
 #import "CompanyDetailViewController.h"
 #import "EducationDetailViewController.h"
 #import "PlayViewController.h"
+#import "CooperationDetailViewController.h"
 
 @interface CollectionListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)  WQTableView *tableView;
@@ -91,8 +92,8 @@
 
             break;
         case viewTypePeople:
-            urlStr = BaseUrl(@"find.by.resumeCollectibleList");
-            [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userid"];
+            urlStr = BaseUrl(@"find.watchRecord.by.resumeCollectible");
+            [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"user_id"];
             [dict setObject:@(_pageIndex) forKey:@"pageNo"];
             [dict setObject:@(_pageSize) forKey:@"pageSize"];
             
@@ -112,7 +113,14 @@
 
             break;
         case viewTypeCompany:
-            urlStr = BaseUrl(@"find.by.enterpriseCollectibleList");
+            urlStr = BaseUrl(@"find.enterpriseWatchRecordExt.by.enterpriseCollectibleList");
+            [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"user_id"];
+            [dict setObject:@(_pageIndex) forKey:@"pageNo"];
+            [dict setObject:@(_pageSize) forKey:@"pageSize"];
+            
+            break;
+        case viewTypeCooperation:
+            urlStr = BaseUrl(@"find.cooperationCollectibleList.by.userId");
             [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"user_id"];
             [dict setObject:@(_pageIndex) forKey:@"pageNo"];
             [dict setObject:@(_pageSize) forKey:@"pageSize"];
@@ -129,7 +137,7 @@
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         [self hideLoadingView];
         [_tableView endRefresh];
-        
+        _canEdit = YES;
         if (code == 1) {
             if (!_arrData) {
                 _arrData = [NSMutableArray array];
@@ -192,13 +200,13 @@
                     NSArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
                     for (NSDictionary *dict in arr) {
                         UsercollectionInfo *info = [[UsercollectionInfo alloc]init];
-                        info.collectDataID = [[dict objectForKey:@"id"] integerValue];
+                        info.collectDataID = [[dict objectForKey:@"data_id"] integerValue];
                         info.collectTime = [dict objectForKey:@"create_date"];
-                        info.collectTitle = [dict objectForKey:@"name"];
-                        info.collectImage = [dict objectForKey:@"imageurl"];
-                        info.collectReadNum = [[dict objectForKey:@"clicknumber"] integerValue];
+                        info.collectTitle = [dict objectForKey:@"data_title"];
+                        info.collectImage = [dict objectForKey:@"data_picture_url"];
+                        info.collectReadNum = [[dict objectForKey:@"hits_show"] integerValue];
                         info.collectIsEffective = [[dict objectForKey:@"delete_flag"] integerValue];
-                        info.collectID = [[dict objectForKey:@"collectionid"] integerValue];
+                        info.collectID = [[dict objectForKey:@"id"] integerValue];
                         [_arrData addObject:info];
                     }
                     [self.tableView reloadData];
@@ -248,13 +256,32 @@
                     NSArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
                     for (NSDictionary *dict in arr) {
                         UsercollectionInfo *info = [[UsercollectionInfo alloc]init];
-                        info.collectDataID = [[dict objectForKey:@"id"] integerValue];
+                        info.collectDataID = [[dict objectForKey:@"data_id"] integerValue];
                         info.collectTime = [dict objectForKey:@"create_date"];
-                        info.collectTitle = [dict objectForKey:@"title"];
-                        info.collectImage = [dict objectForKey:@"video_image_url"];
+                        info.collectTitle = [dict objectForKey:@"data_title"];
+                        info.collectImage = [dict objectForKey:@"data_picture_url"];
                         info.collectReadNum = [[dict objectForKey:@"hits_show"] integerValue];
                         info.collectIsEffective = [[dict objectForKey:@"delete_flag"] integerValue];
-                        info.collectID = [[dict objectForKey:@"ids"] integerValue];
+                        info.collectID = [[dict objectForKey:@"id"] integerValue];
+                        info.collectType = [[dict objectForKey:@"type"] integerValue];
+                        [_arrData addObject:info];
+                    }
+                    [self.tableView reloadData];
+                    
+                }
+                    
+                    break;
+                case viewTypeCooperation:{
+                    NSArray *arr = [[responseObject objectForKey:@"value"] objectForKey:@"content"];
+                    for (NSDictionary *dict in arr) {
+                        UsercollectionInfo *info = [[UsercollectionInfo alloc]init];
+                        info.collectDataID = [[dict objectForKey:@"data_id"] integerValue];
+                        info.collectTime = [dict objectForKey:@"create_date"];
+                        info.collectTitle = [dict objectForKey:@"data_title"];
+                        info.collectImage = [dict objectForKey:@"data_picture_url"];
+                        info.collectReadNum = [[dict objectForKey:@"hits_show"] integerValue];
+                        info.collectIsEffective = [[dict objectForKey:@"delete_flag"] integerValue];
+                        info.collectID = [[dict objectForKey:@"id"] integerValue];
                         info.collectType = [[dict objectForKey:@"type"] integerValue];
                         [_arrData addObject:info];
                     }
@@ -276,6 +303,8 @@
                 _canLoadMore = YES;
             }
             if (!_arrData.count) {
+                _canEdit = NO;
+
                 [self showGetDataNullWithReloadBlock:^{
                     [self showLoadingView];
                     [self getData];
@@ -284,6 +313,8 @@
             }
         }else{
             if (!_arrData.count) {
+                _canEdit = NO;
+
                 [self showGetDataNullWithReloadBlock:^{
                     [self showLoadingView];
                     [self getData];
@@ -296,8 +327,11 @@
         }
     } errorBlock:^(NSError *error) {
         [self hideLoadingView];
+        _canEdit = YES;
         [_tableView endRefresh];
         if (!_arrData.count) {
+            _canEdit = NO;
+
             [self showGetDataFailViewWithReloadBlock:^{
                 [self showLoadingView];
                 [self getData];
@@ -335,13 +369,15 @@
             break;
             
         case viewTypeWork:{
-            [dict setObject:ids forKey:@"ids"];
+            [dict setObject:ids forKey:@"collectionids"];
             [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userid"];
             urlStr = BaseUrl(@"my/delete_collectionlist.action");
         }
             break;
         case viewTypePeople:{
-            
+            [dict setObject:ids forKey:@"ids"];
+            urlStr = BaseUrl(@"delete.resumeCollectible.list.by.ids");
+
         }
             break;
         case viewTypeInteraction:{
@@ -357,6 +393,20 @@
             urlStr = BaseUrl(@"Learning/deletelearningcollectiblebyids.action");
         }
             break;
+        case viewTypeCompany:{
+            [dict setObject:ids forKey:@"ids"];
+            urlStr = BaseUrl(@"delete.enterpriseCollectible.list.by.ids");
+
+            
+        }
+            break;
+        case viewTypeCooperation:{
+            [dict setObject:ids forKey:@"ids"];
+            urlStr = BaseUrl(@"delete.cooperationCollectibleList.by.ids");
+            
+            
+        }
+            break;
 
         default:
             break;
@@ -368,12 +418,15 @@
         _editButton.enabled = YES;
         
         if (code == 1) {
+            [self editButtonEvent];
             [self showSuccessWithStatus:@"删除成功"];
             [self.arrData removeObjectsAtIndexes:_tableIndexSet];
             [self.tableView deleteRowsAtIndexPaths:_arrIndexPath withRowAnimation:UITableViewRowAnimationFade];
             if (!_arrData.count) {
                 [self getData];
             }
+            _tableView.canRefresh = YES;
+            
             
             
         }else{
@@ -483,7 +536,8 @@
         }];
         if (idsString.length) {
             idsString  = [idsString qmui_stringByRemoveLastCharacter];
-            
+            [self deleteNoticeCollectWithIDS:idsString];
+
             
         }else{
             [self showErrorWithStatus:@"暂无失效收藏"];
@@ -671,7 +725,17 @@
         }
             break;
         case viewTypeCompany:{
+            CompanyDetailViewController *vc = [[CompanyDetailViewController alloc] initWithCompanyID:info.collectDataID];
+            [self.navigationController pushViewController:vc animated:YES];
+
             
+            
+        }
+            break;
+        case viewTypeCooperation:{
+            CooperationDetailViewController *vc = [[CooperationDetailViewController alloc] initWithcooperationID:info.collectDataID];
+            [self.navigationController pushViewController:vc animated:YES];
+
         }
             break;
 

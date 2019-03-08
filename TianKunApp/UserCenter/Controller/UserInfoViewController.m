@@ -42,7 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
-    
+    _canEdit = YES;
+    _editButton.selected = YES;
+
     [self showLoadingView];
     
     [self getUserInfo];
@@ -51,10 +53,15 @@
 
 }
 - (void)getUserInfo{
+    _editButton.enabled = NO;
+    
     [self.netWorkEngine postWithDict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} url:BaseUrl(@"my/userdetail.action") succed:^(id responseObject) {
         [self hideLoadingView];
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        NSLog(@"responseObject:%@",responseObject);
         if(code == 1 ){
+            _editButton.enabled = YES;
+
             _userInfo = [UserInfo mj_objectWithKeyValues:[[responseObject objectForKey:@"value"] objectForKey:@"usermessage"]];
             [UserInfoEngine setUserInfo:_userInfo];
             [self.tableView reloadData];
@@ -73,16 +80,16 @@
     [self.view endEditing:YES];
 }
 - (void)editButtobClick:(UIButton *)button{
-    if ([button isSelected]) {
-        
+//    if ([button isSelected]) {
+
         [self editUserInfo];
-    }else{
-        _canEdit = YES;
-        button.selected = YES;
-        [self.tableView reloadData];
-        
-        
-    }
+//    }else{
+//        _canEdit = YES;
+//        button.selected = YES;
+//        [self.tableView reloadData];
+//
+//
+//    }
     
     
     
@@ -103,8 +110,7 @@
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
             [self showSuccessWithStatus:@"修改成功"];
-            _canEdit = NO;
-            _editButton.selected = NO;
+            [UserInfoEngine setUserInfo:_userInfo];
             [self.tableView reloadData];
 
         }else{
@@ -127,8 +133,7 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"UserInfoPhotoTableViewCell" bundle:nil] forCellReuseIdentifier:@"UserInfoPhotoTableViewCell"];
     
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
-    [button setTitle:@"编辑" forState:UIControlStateNormal];
-    [button setTitle:@"保存" forState:UIControlStateSelected];
+    [button setTitle:@"保存" forState:UIControlStateNormal];
     [button setTintColor:COLOR_TEXT_BLACK];
     button.titleLabel.font = [UIFont systemFontOfSize:13];
     [button setTitleColor:COLOR_TEXT_BLACK forState:0];
@@ -142,6 +147,9 @@
     [self.view addGestureRecognizer:tap];
     tap.delegate = self;
 
+}
+- (void)setupNav{
+    
 }
 - (SexSelectView *)sexSelectView{
     if (!_sexSelectView) {
@@ -262,20 +270,29 @@
         }else{
             UserInfoPhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserInfoPhotoTableViewCell" forIndexPath:indexPath];
             [cell.upImageView sd_imageWithUrlStr:_userInfo.picture_url placeholderImage:@"上传-image"];
-            switch (_userInfo.stastu) {
+            
+            BOOL canChange = YES;
+            
+            switch (_userInfo.status) {
                 case 1:
                     {
-                        cell.goLabel.text = @"待审核";
+                    cell.goLabel.text = @"待审核";
+                        canChange = NO;
+                        
                     }
                     break;
                 case 2:
                 {
                     cell.goLabel.text = @"审核中";
+                    canChange = NO;
+
                 }
                     break;
                 case 3:
                 {
                     cell.goLabel.text = @"审核通过";
+                    canChange = NO;
+
                 }
                     break;
                 case 4:
@@ -290,9 +307,12 @@
                     break;
             }
             cell.block = ^{
-                if (_canEdit) {
-                    [self.navigationController pushViewController:[BusinessLicenseViewController new] animated:YES];
-                }
+                    BusinessLicenseViewController *vc = [[BusinessLicenseViewController alloc]initWithUserInfo:_userInfo succeedBlock:^(NSString *urlStr) {
+                        [self getUserInfo];
+                    }];
+                    vc.canEdit = canChange;
+                    [self.navigationController pushViewController:vc animated:YES];
+
             };
             
 
@@ -309,7 +329,7 @@
         return 1;
     }
     if (section == 1) {
-        return 5;
+        return 4;
     }
     return 2;
 }
@@ -359,20 +379,36 @@
 
         }
         if (indexPath.row == 3) {
-            EditPhoneViewController *vc = [[EditPhoneViewController alloc]initWithType:1 userTel:_userInfo.phone];
-            vc.succeedBlock = ^{
-                _userInfo.phone = [UserInfoEngine getUserInfo].phone;
-                [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            };
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            if (_userInfo.phone.length) {
+                EditPhoneViewController *vc = [[EditPhoneViewController alloc]initWithType:1 userTel:_userInfo.phone];
+                vc.succeedBlock = ^{
+                    _userInfo.phone = [UserInfoEngine getUserInfo].phone;
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                };
+                [self.navigationController pushViewController:vc animated:YES];
+
+            }else{
+                EditPhoneViewController *vc = [[EditPhoneViewController alloc]initWithType:2 userTel:@""];
+                vc.succeedBlock = ^{
+                    _userInfo.phone = [UserInfoEngine getUserInfo].phone;
+                    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                };
+                [self.navigationController pushViewController:vc animated:YES];
+
+            }
         }
 
     }
 }
 - (void)upLoadImageWithImage:(UIImage *)image{
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    self.view.userInteractionEnabled = NO;
+    [self showWithStatus:NET_WAIT_TOST];
     
     [self.netWorkEngine upLoadmageData:imageData imageName:@"file" Url:BaseUrl(@"my/edituserimage.action") dict:@{@"userid":[UserInfoEngine getUserInfo].userID,@"username":[UserInfoEngine getUserInfo].nickname} succed:^(id responseObject) {
+        self.view.userInteractionEnabled = YES;
+
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
             [self showSuccessWithStatus:@"修改成功"];
@@ -393,7 +429,7 @@
         
     } errorBlock:^(NSError *error) {
         [self showErrorWithStatus:NET_ERROR_TOST];
-        
+        self.view.userInteractionEnabled = YES;
     }];
     
     

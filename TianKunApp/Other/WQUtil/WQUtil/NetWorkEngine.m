@@ -10,7 +10,6 @@
 #import "AFNetworking.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
-#import "AFAppDotNetAPIClient.h"
 
 @implementation NetWorkEngine
 

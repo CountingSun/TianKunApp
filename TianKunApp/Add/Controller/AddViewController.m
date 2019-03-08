@@ -20,6 +20,10 @@
 @property (nonatomic,strong) NSArray *arrMenu;
 @property (nonatomic,strong) NSMutableArray *buttonsArray;
 @property (nonatomic ,strong) UIVisualEffectView *effectView;
+
+@property (nonatomic ,assign) CGFloat buttonY;
+@property (nonatomic ,assign) CGFloat hiddenDistance;
+
 @end
 
 @implementation AddViewController
@@ -27,28 +31,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+    _buttonY = SCREEN_HEIGHT - SCREEN_WIDTH/5 -60;
+    _hiddenDistance = 350;
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:animated];
-    [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self showAnimationWithButton:obj index:idx];
-    }];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+
+
+    [self showButton];
 
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self hiddenAnimationWithButton:obj index:idx];
-    }];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
 
+    [self hiddenButton];
+}
+- (void)showButton{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    [self showAnimationWithButton:obj index:idx];
+        }];
+    });
+}
+- (void)hiddenButton{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_buttonsArray enumerateObjectsUsingBlock:^(UIButton *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self hiddenAnimationWithButton:obj index:idx];
+                });
+        }];
+    });
 }
 
 - (void)showAnimationWithButton:(UIButton *)button index:(NSInteger)index{
     POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(button.center.x, button.center.y  -350)];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(button.center.x, _buttonY)];
     animation.springBounciness = 10;
     animation.springSpeed = 12;
     animation.beginTime = CACurrentMediaTime() + (CGFloat)index * 0.025;
@@ -56,7 +77,7 @@
 }
 - (void)hiddenAnimationWithButton:(UIButton *)button index:(NSInteger)index{
     POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
-    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(button.center.x, button.center.y  +350)];
+    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(button.center.x, _buttonY  +_hiddenDistance)];
     animation.springBounciness = 10;
     animation.springSpeed = 12;
     animation.beginTime = CACurrentMediaTime() + (CGFloat)index * 0.025;
@@ -67,7 +88,7 @@
     MenuInfo *menu0 = [[MenuInfo alloc]initWithMenuName:@"信息发布" menuIcon:@"信息发布" menuID:0];
     MenuInfo *menu1 = [[MenuInfo alloc]initWithMenuName:@"找人才" menuIcon:@"找人才" menuID:1];
     MenuInfo *menu2 = [[MenuInfo alloc]initWithMenuName:@"找工作" menuIcon:@"找工作" menuID:2];
-    MenuInfo *menu3 = [[MenuInfo alloc]initWithMenuName:@"活动交流" menuIcon:@"活动交流" menuID:3];
+    MenuInfo *menu3 = [[MenuInfo alloc]initWithMenuName:@"互动交流" menuIcon:@"活动交流" menuID:3];
     MenuInfo *menu4 = [[MenuInfo alloc]initWithMenuName:@"商务合作" menuIcon:@"商务合作1" menuID:4];
 
     _arrMenu = [NSArray arrayWithObjects:menu0,menu1,menu2,menu3,menu4, nil];
@@ -100,7 +121,7 @@
         [button setSpacingBetweenImageAndTitle:10];
         button.titleLabel.font = [UIFont systemFontOfSize:13];
         [button setTitleColor:COLOR_TEXT_GENGRAL forState:0];
-        button.frame = CGRectMake(i*itemW, SCREEN_HEIGHT - itemH -60 +350, itemW, itemH);
+        button.frame = CGRectMake(i*itemW, _buttonY +_hiddenDistance, itemW, itemH);
         [_buttonsArray addObject:button];
         [_effectView.contentView addSubview:button];
         button.tag = menuInfo.menuID;

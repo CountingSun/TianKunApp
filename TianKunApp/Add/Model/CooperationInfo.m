@@ -22,4 +22,16 @@
     }
     return _arrAddressName;
 }
+- (NSString *)address{
+    if (!_address) {
+        _address = @"";
+    }
+    return _address;
+}
+- (NSString *)addressDetail{
+    if (!_addressDetail) {
+        _addressDetail = @"";
+    }
+    return _addressDetail;
+}
 @end

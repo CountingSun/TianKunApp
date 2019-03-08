@@ -13,6 +13,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _detailLabel.textColor = COLOR_TEXT_LIGHT;
+    _headImageView.layer.masksToBounds = YES;
+    _headImageView.layer.cornerRadius = _headImageView.qmui_width/2;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

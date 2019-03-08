@@ -9,5 +9,6 @@
 #import "WQBaseViewController.h"
 
 @interface DredgeViewController : WQBaseViewController
-
+@property (nonatomic ,assign) NSInteger messageID;
+@property (nonatomic, copy) dispatch_block_t succeedBlock;
 @end

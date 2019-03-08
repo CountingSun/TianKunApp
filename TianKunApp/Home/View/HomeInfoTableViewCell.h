@@ -7,15 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CCPScrollView.h"
+#import "FSLoopScrollView.h"
 
 @interface HomeInfoTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *baseView;
-@property (nonatomic ,strong) CCPScrollView *ccpView;
-@property (nonatomic ,strong) CCPScrollView *ccpView2;
+@property (nonatomic ,strong) FSLoopScrollView *loopScrollView1;
+@property (nonatomic ,strong) FSLoopScrollView *loopScrollView2;
+@property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
+
 @property (nonatomic ,strong) NSMutableArray *arrData;
 
 @property (nonatomic, copy) void(^clickWithIndexBlock)(NSInteger index);
+
+@property (nonatomic, copy) dispatch_block_t clickMainImageBlock;
 
 
 @end

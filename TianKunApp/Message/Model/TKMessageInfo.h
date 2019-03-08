@@ -54,6 +54,8 @@
  */
 @property (nonatomic ,assign) NSInteger is_read;
 
-
+@property (nonatomic, copy) NSString *content_url;
+@property (nonatomic ,assign) NSInteger is_vip;
+@property (nonatomic ,assign) NSInteger recommend_message;
 
 @end

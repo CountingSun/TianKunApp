@@ -8,16 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^collectButtonBlock)(void);
+typedef void(^shareButtonBlock)(void);
+
 @interface CollectShareView : UIView
-@property (weak, nonatomic) IBOutlet QMUIButton *collectButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *shareButton;
+@property (strong, nonatomic)  QMUIButton *collectButton;
+@property (strong, nonatomic)  QMUIButton *shareButton;
 
-@property (nonatomic, copy) dispatch_block_t collectButtonBlock;
-@property (nonatomic, copy) dispatch_block_t shareButtonBlock;
+@property (nonatomic, copy) collectButtonBlock collectButtonBlock;
+@property (nonatomic, copy) shareButtonBlock shareButtonBlock;
 
 
-+(instancetype)collectShareView;
-
+- (instancetype)initWithFrame:(CGRect)frame collectButtonBlock:(collectButtonBlock)collectButtonBlock shareButtonBlock:(shareButtonBlock)shareButtonBlock;
 
 
 @end

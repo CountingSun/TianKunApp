@@ -103,6 +103,24 @@
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:self];
 }
+- (BOOL)isChinese
+{
+    NSString *match = @"(^[\u4e00-\u9fa5]+$)";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF matches %@", match];
+    return [predicate evaluateWithObject:self];
+}
+
+- (BOOL)includeChinese
+{
+    for(int i=0; i< [self length];i++)
+    {
+        int a =[self characterAtIndex:i];
+        if( a >0x4e00&& a <0x9fff){
+            return YES;
+        }
+    }
+    return NO;
+}
 
 /**
  *  计算富文本字体高度
@@ -232,6 +250,11 @@
  */
 
 + (NSString *)timeReturnDateString:(NSString *)str formatter:(NSString *)formatter{
+    
+    NSString *string = [NSString stringWithFormat:@"%@",str];
+    if (!string.length) {
+        return @"";
+    }
     // iOS 生成的时间戳是10位
     NSTimeInterval interval    =[str doubleValue] / 1000.0;
     NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
@@ -254,33 +277,33 @@
     // 秒转秒
     NSInteger second = time;
     if (second<60) {
-        return [NSString stringWithFormat:@"%ld秒前",second];
+        return [NSString stringWithFormat:@"刚刚"];
     }
 
     
     // 秒转分钟
     NSInteger minute = time/60;
     if (minute<60) {
-        return [NSString stringWithFormat:@"%ld分钟前",minute];
+        return [NSString stringWithFormat:@"%@分钟前",@(minute)];
     }
     // 秒转小时
     NSInteger hours = time/3600;
     if (hours<24) {
-        return [NSString stringWithFormat:@"%ld小时前",hours];
+        return [NSString stringWithFormat:@"%@小时前",@(hours)];
     }
     //秒转天数
     NSInteger days = time/3600/24;
     if (days < 30) {
-        return [NSString stringWithFormat:@"%ld天前",days];
+        return [NSString stringWithFormat:@"%@天前",@(days)];
     }
     //秒转月
     NSInteger months = time/3600/24/30;
     if (months < 12) {
-        return [NSString stringWithFormat:@"%ld月前",months];
+        return [NSString stringWithFormat:@"%@月前",@(months)];
     }
     //秒转年
     NSInteger years = time/3600/24/30/12;
-    return [NSString stringWithFormat:@"%ld年前",years];
+    return [NSString stringWithFormat:@"%@年前",@(years)];
 }
 + (NSString *)updateTimeForTime:(NSInteger)times{
     // 获取当前时时间戳 1466386762.345715 十位整数 6位小数
@@ -293,33 +316,33 @@
     // 秒转秒
     NSInteger second = time;
     if (second<60) {
-        return [NSString stringWithFormat:@"%ld秒前",second];
+        return [NSString stringWithFormat:@"%@秒前",@(second)];
     }
     
     
     // 秒转分钟
     NSInteger minute = time/60;
     if (minute<60) {
-        return [NSString stringWithFormat:@"%ld分钟前",minute];
+        return [NSString stringWithFormat:@"%@分钟前",@(minute)];
     }
     // 秒转小时
     NSInteger hours = time/3600;
     if (hours<24) {
-        return [NSString stringWithFormat:@"%ld小时前",hours];
+        return [NSString stringWithFormat:@"%@小时前",@(hours)];
     }
     //秒转天数
     NSInteger days = time/3600/24;
     if (days < 30) {
-        return [NSString stringWithFormat:@"%ld天前",days];
+        return [NSString stringWithFormat:@"%@天前",@(days)];
     }
     //秒转月
     NSInteger months = time/3600/24/30;
     if (months < 12) {
-        return [NSString stringWithFormat:@"%ld月前",months];
+        return [NSString stringWithFormat:@"%@月前",@(months)];
     }
     //秒转年
     NSInteger years = time/3600/24/30/12;
-    return [NSString stringWithFormat:@"%ld年前",years];
+    return [NSString stringWithFormat:@"%@年前",@(years)];
 
 }
 + (NSString *)getMillisecondWithTimeString:(NSString*)timeString formatter:(NSString *)formatter

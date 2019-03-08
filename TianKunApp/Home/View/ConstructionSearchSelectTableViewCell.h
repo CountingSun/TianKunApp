@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
 @property (nonatomic, copy) dispatch_block_t reloadHeightBlock;
+@property (nonatomic, copy) NSString *lastTitle;
 
 @property (nonatomic ,weak) id<ConstructionSearchSelectDelegate> delegate;
 + (CGFloat)getCellHeightWithArr:(NSMutableArray *)arr;

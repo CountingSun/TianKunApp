@@ -29,4 +29,12 @@
  */
 +(BOOL)isLogin;
 
+/**
+ 退出登录
+ */
++(void)loginOut;
+
++(BOOL)getIsHadPwd;
++(void)setIsHadPwd:(NSString *)str;
+
 @end

@@ -14,7 +14,7 @@
     [super awakeFromNib];
     self.contentView.backgroundColor = COLOR_VIEW_BACK;
     _headImageView.layer.masksToBounds = YES;
-    _headImageView.layer.cornerRadius = 10;
+    _headImageView.layer.cornerRadius = _headImageView.qmui_width/2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

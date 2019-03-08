@@ -25,6 +25,10 @@
     }else{
         _moneyLabel.text = @"免费";
     }
+    if (![ISVipManager isOpenVip]) {
+        _moneyLabel.hidden = YES;
+    }
+
     NSString *urlStr = [documentInfo.video_image_url stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
     
     [_titleImageView sd_imageDef21WithUrlStr:urlStr];

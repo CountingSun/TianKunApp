@@ -12,7 +12,10 @@
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{
-             @"job_id":@"id"
+             @"job_id":@"id",
+             @"firstTypeName":@"first_typename",
+             @"secondTypeName":@"second_typename"
+
              };
 }
 @end

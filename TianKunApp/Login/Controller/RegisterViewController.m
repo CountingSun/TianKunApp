@@ -10,6 +10,8 @@
 #import "LoginTextTableViewCell.h"
 #import "RegisterGetCodeTableViewCell.h"
 #import "TextFieldTableViewCell.h"
+#import "LoginAgreementViewController.h"
+#import "AgreementPreviewController.h"
 
 @interface RegisterViewController ()<UITableViewDelegate,UITableViewDataSource,ClickSecureButtonDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
@@ -27,6 +29,9 @@
 @property (nonatomic ,assign) NSInteger countTime;
 
 
+@property (weak, nonatomic) IBOutlet UIButton *agreeButton;
+
+@property (weak, nonatomic) IBOutlet QMUIButton *agreementButton;
 
 @end
 
@@ -61,6 +66,11 @@
     [_tableView registerNib:[UINib nibWithNibName:@"TextFieldTableViewCell" bundle:nil] forCellReuseIdentifier:@"TextFieldTableViewCell"];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(closeEditing)];
     [self.view addGestureRecognizer:tap];
+    _agreeButton.selected = YES;
+    
+    [_agreeButton setImage:[UIImage imageNamed:@"未选中"] forState:UIControlStateNormal];
+    [_agreeButton setImage:[UIImage imageNamed:@"选中"] forState:UIControlStateSelected];
+
 
     
 }
@@ -140,6 +150,26 @@
 
         return;
     }
+    if (_passwordString.length<6) {
+        [self showErrorWithStatus:@"密码长度需不少于6位"];
+        return;
+
+        
+    }
+    if (_passwordString.length>18) {
+        [self showErrorWithStatus:@"密码长度需不大于于18位"];
+        return;
+        
+    }
+    if ([_passwordString includeChinese]) {
+        [self showErrorWithStatus:@"密码不能包含汉字"];
+        return;
+
+    }
+    if (!_agreeButton.selected) {
+        [self showErrorWithStatus:@"请同意用户协议"];
+        return;
+    }
     [self userRegister];
     
 }
@@ -150,7 +180,7 @@
         [self showErrorWithStatus:@"请输入手机号"];
         return;
     }
-
+    [self showWithStatus:NET_WAIT_TOST];
     [self.netWorkEngine postWithDict:@{@"iphone":_nameString,@"state":@"0"} url:BaseUrl(@"lg/getcode.action") succed:^(id responseObject) {
 
         
@@ -176,11 +206,15 @@
     [parameter setValue:_nameString forKey:@"iphone"];
     [parameter setValue:_codeString forKey:@"yzm"];
     [parameter setValue:[_passwordString qmui_md5] forKey:@"pwd"];
-
+    [self showWithStatus:NET_WAIT_TOST];
+    self.view.userInteractionEnabled = NO;
+    
     [self.netWorkEngine postWithDict:parameter url:BaseUrl(@"lg/registered.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
-        
+        self.view.userInteractionEnabled = YES;
+
         if (code == 1) {
+            [self.view endEditing: YES];
             [self showSuccessWithStatus:@"注册成功,请前去登录"];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
@@ -195,6 +229,7 @@
 
     } errorBlock:^(NSError *error) {
         [self showErrorWithStatus:NET_ERROR_TOST];
+        self.view.userInteractionEnabled = YES;
 
     }];
     
@@ -206,7 +241,7 @@
         _countTime--;
         NSLog(@"%@",@(_countTime));
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_dynamicButton setTitle:[NSString stringWithFormat:@"%@秒后从发",@(_countTime)] forState:0];
+            [_dynamicButton setTitle:[NSString stringWithFormat:@"%@秒后重发",@(_countTime)] forState:0];
             
         });
         
@@ -241,6 +276,18 @@
         
     }
 
+}
+- (IBAction)agreementButtonClick:(id)sender {
+    AgreementPreviewController *vc = [[AgreementPreviewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+//    [self.navigationController presentViewController:[AgreementPreviewController new] animated:YES completion:^{
+    
+//    }];
+    
+}
+- (IBAction)agreeButtonClick:(id)sender {
+    _agreeButton.selected =! _agreeButton.selected;
 }
 - (NetWorkEngine *)netWorkEngine{
     if (!_netWorkEngine) {

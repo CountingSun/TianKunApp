@@ -14,5 +14,7 @@
 @property (nonatomic, copy) NSString *operation_seal_number;
 @property (nonatomic, copy) NSString *useful_deadline;
 @property (nonatomic, copy) NSString *registrant;
+@property (nonatomic, copy) NSString *category_type;
+
 
 @end

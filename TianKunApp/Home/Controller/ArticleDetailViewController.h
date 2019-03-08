@@ -14,7 +14,7 @@
  <#Description#>
 
  @param articleID <#articleID description#>
- @param fromType 1 文件通知  0 公示公告
+ @param fromType 1 文件通知  2 公示公告 3行业信息
  @return <#return value description#>
  */
 - (instancetype)initWithArticleID:(NSInteger)articleID fromType:(NSInteger)fromType;

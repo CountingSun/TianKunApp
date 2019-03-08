@@ -19,5 +19,9 @@
 #import "UserInfo.h"
 #import "UserInfoEngine.h"
 #import "MJExtension.h"
+#import "LocationManager.h"
+#import "AddHistoryRecordNetwork.h"
+#import "ISVipManager.h"
+
 
 #endif /* PrefixHeader_pch */

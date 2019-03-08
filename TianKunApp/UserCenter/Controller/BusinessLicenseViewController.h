@@ -8,6 +8,12 @@
 
 #import "WQBaseViewController.h"
 
-@interface BusinessLicenseViewController : WQBaseViewController
+typedef void(^succeedBlock)(NSString *urlStr);
 
+@interface BusinessLicenseViewController : WQBaseViewController
+@property (nonatomic, copy) succeedBlock succeedBlock;
+- (instancetype)initWithImageUrl:(NSString *)imageUrl succeedBlock:(succeedBlock)succeedBlock;
+- (instancetype)initWithUserInfo:(UserInfo *)userInfo succeedBlock:(succeedBlock)succeedBlock;
+
+@property (nonatomic ,assign) BOOL canEdit;
 @end

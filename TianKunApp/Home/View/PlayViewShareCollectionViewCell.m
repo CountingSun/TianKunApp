@@ -21,19 +21,51 @@
     [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
     [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
 
+    
 }
 - (void)setDocumentInfo:(DocumentInfo *)documentInfo{
-    CGSize textSize = [documentInfo.data_title boundingRectWithFont:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(SCREEN_WIDTH-30, CGFLOAT_MAX)];
-    
-    _titleLabel.frame = CGRectMake(15, 10, SCREEN_WIDTH-30, textSize.height);
+    _documentInfo = documentInfo;
 
+    _moneyLabel.text = [NSString stringWithFormat:@"￥%@",@(_documentInfo.money)];
+    CGSize moneySize = [_moneyLabel.text boundingRectWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(200, CGFLOAT_MAX)];
+    
+    CGSize textSize = [_documentInfo.data_title boundingRectWithFont:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(SCREEN_WIDTH-20-moneySize.width-10, CGFLOAT_MAX)];
+    _titleLabel.frame = CGRectMake(10, 10, textSize.width, textSize.height);
+    _moneyLabel.frame = CGRectMake(CGRectGetMaxX(_titleLabel.frame)+10, 10, moneySize.width, 20);
+
+    _titleLabel.text = _documentInfo.data_title;
+   _timeLabel.text = [NSString timeReturnDateString:_documentInfo.create_date formatter:@"MM月dd日"];
+    if (_documentInfo.previous_format.length) {
+        _publicLabel.text = [NSString stringWithFormat:@"发布者：%@",_documentInfo.previous_format];
+        
+    }
+    if (_documentInfo.collectID) {
+       _collectButton.selected = YES;
+        
+    }else{
+       _collectButton.selected = NO;
+    }
+
+    
 }
 + (CGSize)getCellHeightWithDocumentInfo:(DocumentInfo *)documentInfo {
-    CGSize textSize = [documentInfo.data_title boundingRectWithFont:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(SCREEN_WIDTH-30, CGFLOAT_MAX)];
+    NSString *str = [NSString stringWithFormat:@"￥%@",@(documentInfo.money)];
+    CGSize moneySize = [str boundingRectWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(200, CGFLOAT_MAX)];
+    
+    CGSize textSize = [documentInfo.data_title boundingRectWithFont:[UIFont systemFontOfSize:15] maxSize:CGSizeMake(SCREEN_WIDTH-20-moneySize.width-10,CGFLOAT_MAX)];
 
     return CGSizeMake(SCREEN_WIDTH, textSize.height+60);
 }
 - (IBAction)shareButtonClock:(id)sender {
-    [AppShared shared];
+    NSString * imageUrlStr = [_documentInfo.video_image_url stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
+    id images;
+    if (imageUrlStr.length) {
+        images = @[imageUrlStr];
+        
+    } else {
+        images = [UIImage imageNamed:@"AppIcon"];
+    }
+
+    [AppShared shareParamsByText:_documentInfo.synopsis images:images url:DEFAULT_SHARE_URL title:_documentInfo.data_title];
 }
 @end

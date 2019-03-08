@@ -8,6 +8,7 @@
 
 #import "AptitudeSelectViewController.h"
 #import "ClassTypeInfo.h"
+#import "AptitudeSelectTableViewCell.h"
 
 @interface AptitudeSelectViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *tableView;
@@ -20,8 +21,6 @@
     self = [super init];
     if (self) {
         _succeedBlock = succeedBlock;
-        
-        
     }
     return self;
 }
@@ -30,6 +29,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
     });
+
     
 }
 - (void)setIndexPath:(NSIndexPath *)indexPath{
@@ -38,40 +38,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
-    
+    [self.tableView registerNib:[UINib nibWithNibName:@"AptitudeSelectTableViewCell" bundle:nil] forCellReuseIdentifier:@"AptitudeSelectTableViewCell"];
+
 
 }
 -(UITableView *)tableView{
     
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.qmui_width, 200) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 200) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 45;
+        
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
+- (void)setTableViewSize:(CGSize)tableViewSize{
+    self.tableView.frame = CGRectMake(0, 0, tableViewSize.width, tableViewSize.height);
+    [self.tableView reloadData];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     
-    return self.arrData.count;
+    return _arrData.count;
     
     
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *cellID = @"cellid";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    AptitudeSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AptitudeSelectTableViewCell"];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-        cell.textLabel.font = [UIFont systemFontOfSize:14];
-        cell.textLabel.textColor = COLOR_TEXT_BLACK;
-        cell.backgroundColor = COLOR_WHITE;
+        
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"AptitudeSelectTableViewCell" owner:nil options:nil] firstObject];
     }
-    ClassTypeInfo *info = self.arrData[indexPath.row];
-    cell.textLabel.text = info.typeName;
+    ClassTypeInfo *info = _arrData[indexPath.row];
+    cell.titleLabel.text = info.typeName;
     return cell;
 }
 

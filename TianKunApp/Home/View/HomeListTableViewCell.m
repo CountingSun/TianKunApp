@@ -12,9 +12,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _titleImageView.layer.masksToBounds = YES;
     _titleLabel.textColor = COLOR_TEXT_BLACK;
     _detailLabel.textColor = COLOR_TEXT_LIGHT;
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+
     
 }
 

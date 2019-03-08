@@ -14,6 +14,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.contentView.backgroundColor = COLOR_VIEW_BACK;
+    _jonImageView.layer.masksToBounds = YES;
     
 }
 - (void)setJobInfo:(JobInfo *)jobInfo{

@@ -59,9 +59,16 @@
 @property (nonatomic, assign) NSInteger isCollect;
 @property (nonatomic, copy) NSString *create_date;
 @property (nonatomic, assign) NSInteger hits_show;
+@property (nonatomic, assign) NSInteger hits_record;
+@property (nonatomic, assign) NSInteger delete_flag;
 
 @property (nonatomic ,strong) NSMutableArray *arrAddressName;
 
 
 @property (nonatomic, copy) NSString *action_scope_name;
+@property (nonatomic, copy) NSString *cities_id;
+@property (nonatomic, copy) NSString *cities_name;
+@property (nonatomic, copy) NSString *provinces_id;
+@property (nonatomic, copy) NSString *provinces_name;
+
 @end

@@ -24,5 +24,6 @@
 #import "GCDTimer.h"
 #import "WQTableView.h"
 #import "UIImageView+WQSDWebImageView.h"
+#import "WQSlider.h"
 
 #endif /* WQUtil_h */

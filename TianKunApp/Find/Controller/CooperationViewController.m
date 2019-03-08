@@ -42,7 +42,18 @@
         _pageIndex = 1;
     }
     
-    [self.netWorkEngine postWithDict:@{@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.cooperationRequestList.by.userid") succed:^(id responseObject) {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:@(_pageIndex) forKey:@"pageNo"];
+    [dict setObject:@(_pageSize) forKey:@"pageSize"];
+    
+    if ([UserInfoEngine getUserInfo].userID) {
+        [dict setObject:[UserInfoEngine getUserInfo].userID forKey:@"userId"];
+    }else{
+        [dict setObject:@"" forKey:@"userId"];
+
+    }
+
+    [self.netWorkEngine postWithDict:dict url:BaseUrl(@"find.cooperationRequestList.by.userid") succed:^(id responseObject) {
         [self hideLoadingView];
         [self.tableView endRefresh];
         
@@ -169,7 +180,13 @@
     return 1;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return [UIView new];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [UIView new];
 
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CooperationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CooperationTableViewCell"];
     if (!cell) {

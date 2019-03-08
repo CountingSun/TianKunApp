@@ -15,6 +15,8 @@
     self.contentView.backgroundColor = COLOR_VIEW_BACK;
     _mainImageView.layer.masksToBounds = YES;
     _detailLabel.textColor = COLOR_TEXT_LIGHT;
+    _isReadLabel.layer.masksToBounds = YES;
+    _isReadLabel.layer.cornerRadius =  _isReadLabel.qmui_width/2;
 
 }
 

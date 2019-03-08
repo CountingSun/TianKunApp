@@ -10,7 +10,7 @@
 #import "UIBarButtonItem+Extension.h"
 #import "NSString+WQString.h"
 
-@interface WebLinkViewController ()<WKNavigationDelegate>
+@interface WebLinkViewController ()<WKNavigationDelegate,WKUIDelegate>
 @property (nonatomic, strong) UIProgressView *progressView;//设置加载进度条
 
 @end
@@ -38,19 +38,31 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self.titleView setTitle:self.navTitle];
+    NSString *jScript =@"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta); var imgs = document.getElementsByTagName('img');for (var i in imgs){imgs[i].style.maxWidth='100%';imgs[i].style.height='auto';}"
+    ;
     self.navigationItem.leftBarButtonItem=[UIBarButtonItem itemWithTarget:self action:@selector(comeBack) image:@"返回" highImage:@"返回"];
-    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc]init];
-                                             
 
-    self.webView=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) configuration:configuration];
-   self.webView.scrollView.showsHorizontalScrollIndicator=NO;
-   self.webView.scrollView.showsVerticalScrollIndicator=NO;
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
+    WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+    wkWebConfig.userContentController = wkUController;
+
+
+    self.webView=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT-64) configuration:wkWebConfig];
    self.webView.navigationDelegate=self;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+    self.webView.UIDelegate = self;
+    
    [self.view addSubview:self.webView];
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    
+    [self.webView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 
-    [self showLoadingView];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+
+//    [self showLoadingView];
     
 
 }
@@ -63,7 +75,7 @@
                                                          green:240.0/255
                                                           blue:240.0/255
                                                          alpha:1.0]];
-        _progressView.progressTintColor = [UIColor orangeColor];
+        _progressView.progressTintColor = COLOR_THEME;
         
         [self.view addSubview:_progressView];
         
@@ -93,7 +105,7 @@
                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                       context:(void *)context{
     
-    if ([keyPath isEqualToString:NSStringFromSelector(@selector(estimatedProgress))]
+    if ([keyPath isEqualToString:@"estimatedProgress"]
         && object == self.webView) {
         [self.progressView setAlpha:1.0f];
         BOOL animated = self.webView.estimatedProgress > self.progressView.progress;
@@ -111,10 +123,10 @@
                                  [self.progressView setProgress:0.0f animated:NO];
                              }];
         }
-    }else if([keyPath isEqualToString:@"title"]){
+    }else if([keyPath isEqualToString:@"title"]&& object == self.webView){
         
-        if ([self.webView.title isChinese]) {
-            self.navigationItem.title = self.webView.title;
+        if (!_navTitle.length) {
+            self.title = self.webView.title;
 
         }
     }else{
@@ -126,7 +138,9 @@
     }
 }
 -(void)dealloc{
-//    [self.webView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+    [self.webView removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+    [self.webView removeObserver:self forKeyPath:NSStringFromSelector(@selector(title))];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
@@ -134,7 +148,7 @@
 #pragma mark --- webkit delegate
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
     [self hideLoadingView];
-    [self showGetDataNullWithReloadBlock:^{
+    [self showGetDataFailViewWithReloadBlock:^{
         [self showLoadingView];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
         
@@ -145,19 +159,53 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     [self hideLoadingView];
 
-    
+    // 禁止放大缩小
+    NSString *injectionJSString = @"var script = document.createElement('meta');"
+    "script.name = 'viewport';"
+    "script.content=\"width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no\";"
+    "document.getElementsByTagName('head')[0].appendChild(script);";
+    [webView evaluateJavaScript:injectionJSString completionHandler:nil];
+
 }
 
 - (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error{
+    if([error code] == NSURLErrorCancelled)  {
+        return;
+    }
+
     [self hideLoadingView];
-    [self showGetDataNullWithReloadBlock:^{
+    [self showGetDataFailViewWithReloadBlock:^{
         [self showLoadingView];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
         
     }];
 
 }
+#pragma mark - WKNavigationDelegate
+-(WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures
 
+{
+    
+    
+    if (!navigationAction.targetFrame.isMainFrame) {
+        NSURL *url = navigationAction.request.URL;
+        WebLinkViewController *webLinkViewController = [[WebLinkViewController alloc]initWithTitle:@"" urlString:[url absoluteString]];
+        
+        webLinkViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webLinkViewController animated:YES];
+
+    }
+    
+    return nil;
+    
+}
+
+
+
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler
+{
+    decisionHandler(WKNavigationActionPolicyAllow);
+}
 
 
 - (void)didReceiveMemoryWarning {

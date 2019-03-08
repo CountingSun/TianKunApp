@@ -9,7 +9,6 @@
 
 #import "CompanyDetailViewController.h"
 #import "CompanyIntroduceTableViewCell.h"
-#import "HomeListTableViewCell.h"
 #import "AppShared.h"
 #import "CompanyInfo.h"
 #import "CompanyClassInfo.h"
@@ -17,14 +16,13 @@
 #import "EnterpriseInfo.h"
 #import "FindListTableViewCell.h"
 #import "FindImageListTableViewCell.h"
+#import "CollectShareView.h"
+#import "CooperationDetailTableViewCell.h"
 
 @interface CompanyDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)  WQTableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *arrData;
 @property (strong, nonatomic) IBOutlet UIView *headView;
-@property (strong, nonatomic) IBOutlet UIView *rightBarButtonView;
-@property (weak, nonatomic) IBOutlet QMUIButton *collectButton;
-@property (weak, nonatomic) IBOutlet QMUIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *publicTimeIaLbel;
 @property (weak, nonatomic) IBOutlet UILabel *hadSeeLabel;
@@ -35,7 +33,7 @@
 @property (nonatomic ,assign) NSInteger pageIndex;
 @property (nonatomic ,assign) NSInteger pageSize;
 @property (nonatomic ,assign) NSInteger type;
-
+@property (nonatomic ,strong) CollectShareView *collectShareView;
 
 
 @end
@@ -49,6 +47,13 @@
     }
     return self;
 }
+- (instancetype)initWithCompanyID:(NSInteger)companyID{
+    if (self = [super init]) {
+        _companyID = companyID;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -62,15 +67,27 @@
     [self.titleView setTitle:@"详情"];
     _pageIndex = 1;
     _pageSize = DEFAULT_PAGE_SIZE;
-    [_collectButton setImage:[UIImage imageNamed:@"收藏-1"] forState:UIControlStateNormal];
-    [_collectButton setImage:[UIImage imageNamed:@"收藏"] forState:UIControlStateSelected];
-    _rightBarButtonView.userInteractionEnabled = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceed) name:LOGIN_SUCCEED_NOTICE object:nil];
+
+
+}
+- (void)loginSucceed{
+    [self showLoadingView];
+    [self getCompanyInfo];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightBarButtonView];
-    
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    negativeSpacer.width = -20;
-    self.navigationItem.rightBarButtonItems = @[negativeSpacer,self.navigationItem.rightBarButtonItem];
+}
+
+- (void)setupNav{
+    if (!_collectShareView) {
+        _collectShareView = [[CollectShareView alloc] initWithFrame:CGRectMake(0, 0, 80, 40) collectButtonBlock:^{
+            [self collectButtonClick];
+        } shareButtonBlock:^{
+            [self shareButtonClick];
+            
+        }];
+
+    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_collectShareView];
 
 }
 - (void)getCompanyInfo{
@@ -84,12 +101,11 @@
     }
     [dict setObject:@(_companyID) forKey:@"id"];
 
-    [self.netWorkEngine postWithDict:dict url:BaseUrl(@"find.enterprise.by.id") succed:^(id responseObject) {
+    [self.netWorkEngine postWithDict:dict url:BaseUrl(@"find.enterpriseExt.by.id") succed:^(id responseObject) {
         [self hideLoadingView];
 
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
-            _rightBarButtonView.userInteractionEnabled = YES;
 
             NSDictionary *dict = [responseObject objectForKey:@"value"];
             
@@ -107,8 +123,14 @@
                 _showCompanyInfo.hits_show = @"0";
             }
             _hadSeeLabel.text = [NSString stringWithFormat:@"已有%@人浏览",_showCompanyInfo.hits_show];
-            
-            
+            [self setupNav];
+
+            if (_showCompanyInfo.isCollect) {
+                _collectShareView.collectButton.selected = YES;
+            }else{
+                _collectShareView.collectButton.selected = NO;
+
+            }
             [self getRecommend];
             
             [self.tableView reloadData];
@@ -122,7 +144,6 @@
             
         }
     } errorBlock:^(NSError *error) {
-        _rightBarButtonView.userInteractionEnabled = YES;
 
         [self hideLoadingView];
         [self showGetDataFailViewWithReloadBlock:^{
@@ -140,8 +161,7 @@
         _pageIndex = 1;
     }
     
-    [self.netWorkEngine postWithDict:@{@"certifications_type_id":_showCompanyInfo.firstTypeName,@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.by.enterpriseList") succed:^(id responseObject) {
-        [self hideLoadingView];
+    [self.netWorkEngine postWithDict:@{@"enterprise_type":@"23",@"pageNo":@(_pageIndex),@"pageSize":@(_pageSize)} url:BaseUrl(@"find.by.enterpriseList") succed:^(id responseObject) {
         [_tableView endRefresh];
         
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
@@ -160,11 +180,6 @@
                     [_arrData addObject:enterpriseInfo];
                 }
                 [self.tableView reloadData];
-                if(arr.count<_pageSize){
-                    _tableView.canLoadMore = NO;
-                }else{
-                    _tableView.canLoadMore = YES;
-                }
                 
             }else{
                 if (!_arrData.count) {
@@ -176,7 +191,12 @@
                     
                 }
             }
-            
+            if(arr.count<_pageSize){
+                _tableView.canLoadMore = NO;
+            }else{
+                _tableView.canLoadMore = YES;
+            }
+
         }else{
             if (!_arrData.count) {
                 
@@ -214,15 +234,17 @@
         _tableView.dataSource = self;
         _tableView.tableHeaderView = _headView;
         _tableView.rowHeight = UITableViewAutomaticDimension;
-        _tableView.estimatedRowHeight = 45;
+        _tableView.estimatedRowHeight = 100;
         __weak typeof(self ) weakSelf = self;
         
         [self.view addSubview:self.tableView];
-        _tableView.footRefreshBlock = ^{
+        
+        [_tableView footerWithRefreshingBlock:^{
             weakSelf.pageIndex++;
             [weakSelf getRecommend];
-        };
-        
+            
+        }];
+
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.equalTo(self.view);
         }];
@@ -235,7 +257,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 3;
+        return 4;
     }else if (section == 1){
         return 1;
     }else{
@@ -277,59 +299,56 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        static NSString *cellID = @"defCellID";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        CooperationDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CooperationDetailTableViewCell"];
         if (!cell) {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
-            cell.selectionStyle = 0;
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"CooperationDetailTableViewCell" owner:nil options:nil] firstObject];
         }
+        cell.detailLabel.textColor = COLOR_TEXT_BLACK;
+        cell.titleLabel.textColor = COLOR_TEXT_LIGHT;
+        cell.seeButton.hidden = YES;
+        [cell.seeButton addTarget:self action:@selector(seeButtonClickEvent) forControlEvents:UIControlEventTouchUpInside];
+
         switch (indexPath.row) {
             case 0:
                 {
-                    NSAttributedString *titleAttributedString = [self dealStringWithString:@"联系人：" color:COLOR_TEXT_LIGHT fontSize:14];
-                    NSAttributedString *detailAttributedString = [self dealStringWithString:_showCompanyInfo.contacts color:COLOR_TEXT_BLACK fontSize:14];
-                    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                    [attStr appendAttributedString:titleAttributedString];
-                    [attStr appendAttributedString:detailAttributedString];
-
-                    cell.textLabel.attributedText = attStr;
+                    cell.titleLabel.text = @"联系人：";
+                    cell.detailLabel.text = _showCompanyInfo.contacts;
                     
                 }
                 break;
             case 1:
             {
-                NSAttributedString *titleAttributedString = [self dealStringWithString:@"联系电话：" color:COLOR_TEXT_LIGHT fontSize:14];
-                NSAttributedString *detailAttributedString = [self dealStringWithString:_showCompanyInfo.phone color:COLOR_THEME fontSize:14];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                [attStr appendAttributedString:titleAttributedString];
-                [attStr appendAttributedString:detailAttributedString];
-                
-                cell.textLabel.attributedText = attStr;
+                cell.titleLabel.text = @"联系电话：";
+                cell.detailLabel.text = _showCompanyInfo.phone;
+                cell.detailLabel.textColor = COLOR_THEME;
+                if (_showCompanyInfo.phone.length >= 4) {
+                    
+                    NSString *lastString = [_showCompanyInfo.phone substringFromIndex:_showCompanyInfo.phone.length-4];
+                    
+                    if ([lastString isEqualToString:@"****"]) {
+                        cell.seeButton.hidden = NO;
+                        
+                    }else{
+                        cell.seeButton.hidden = YES;
+                        
+                    }
+                }
+
                 
             }
                 break;
             case 2:
             {
-                NSAttributedString *titleAttributedString = [self dealStringWithString:@"资质类型：" color:COLOR_TEXT_LIGHT fontSize:14];
-                NSAttributedString *detailAttributedString = [self dealStringWithString:_showCompanyInfo.firstTypeName color:COLOR_TEXT_BLACK fontSize:14];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                [attStr appendAttributedString:titleAttributedString];
-                [attStr appendAttributedString:detailAttributedString];
-                
-                cell.textLabel.attributedText = attStr;
+                cell.titleLabel.text = @"资质类型：";
+                cell.detailLabel.text = _showCompanyInfo.firstTypeName;
                 
             }
                 break;
             case 3:
             {
-                NSAttributedString *titleAttributedString = [self dealStringWithString:@"商家地址：" color:COLOR_TEXT_LIGHT fontSize:14];
-                NSAttributedString *detailAttributedString = [self dealStringWithString:_showCompanyInfo.companyAddress color:COLOR_TEXT_BLACK fontSize:14];
-                NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]init];
-                [attStr appendAttributedString:titleAttributedString];
-                [attStr appendAttributedString:detailAttributedString];
-                
-                cell.textLabel.attributedText = attStr;
+                cell.titleLabel.text = @"商家地址：";
+                cell.detailLabel.text = _showCompanyInfo.companyAddress;
+
                 
             }
                 break;
@@ -360,7 +379,7 @@
                 
             }
             
-            [cell.iconImageView sd_imageDef11WithUrlStr:BaseUrl(enterpriseInfo.picture_url)];;
+            [cell.iconImageView sd_imageDef11WithUrlStr:enterpriseInfo.picture_url];;
             cell.titleLabel.text = enterpriseInfo.enterprise_name;
             cell.detailLabel.text = enterpriseInfo.enterprise_introduce;
             
@@ -398,16 +417,16 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
 }             
-- (IBAction)collectButtonClick:(id)sender {
+- (void)collectButtonClick {
     
     if ([UserInfoEngine isLogin]) {
         [self showWithStatus:NET_WAIT_TOST];
         
-        [self.netWorkEngine postWithDict:@{@"id":@(_companyID),@"user_id":[UserInfoEngine getUserInfo].userID,@"status":@(!_collectButton.selected)} url:BaseUrl(@"create.or.update.enterpriseCollectible") succed:^(id responseObject) {
+        [self.netWorkEngine postWithDict:@{@"id":@(_companyID),@"userId":[UserInfoEngine getUserInfo].userID,@"status":@(!_collectShareView.collectButton.selected)} url:BaseUrl(@"create.or.update.enterpriseCollectible") succed:^(id responseObject) {
             NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
             if (code == 1) {
-                _collectButton.selected =! _collectButton.selected;
-                if (_collectButton.selected) {
+                _collectShareView.collectButton.selected =! _collectShareView.collectButton.selected;
+                if (_collectShareView.collectButton.selected) {
                     [self showSuccessWithStatus:@"收藏成功"];
                 }else{
                     [self showSuccessWithStatus:@"取消收藏成功"];
@@ -427,9 +446,23 @@
     }
 
 }
+- (void)seeButtonClickEvent{
+    
+    if ([UserInfoEngine isLogin]) {
+    }
+    
+}
 
-- (IBAction)shareButtonClick:(id)sender {
-    [AppShared shared];
+- (void)shareButtonClick{
+    id images;
+    if (_showCompanyInfo.picture_url.length) {
+        images = @[_showCompanyInfo.picture_url];
+        
+    } else {
+        images = [UIImage imageNamed:@"AppIcon"];
+    }
+
+    [AppShared shareParamsByText:_showCompanyInfo.companyIntroduce images:images url:DEFAULT_SHARE_URL title:_showCompanyInfo.companyName];
 }
 - (NetWorkEngine *)netWorkEngine{
     if (!_netWorkEngine) {

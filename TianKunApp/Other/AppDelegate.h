@@ -7,8 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+//融云
+#import <RongIMLib/RongIMLib.h>
+#import <RongIMKit/RCIM.h>
+#import "RongCloudConfigure.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+static NSString *appKey = @"972597a347f2efcb79c9cd9c";
+static NSString *channel = @"App Store";
+static BOOL isProduction = FALSE;
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate,RCIMConnectionStatusDelegate, RCIMReceiveMessageDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

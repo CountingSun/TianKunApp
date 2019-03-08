@@ -19,6 +19,7 @@
  @return <#return value description#>
  */
 - (instancetype)initWithCompanyID:(NSInteger)companyID type:(NSInteger)type;
+- (instancetype)initWithCompanyID:(NSInteger)companyID;
 
 
 @end

@@ -12,11 +12,14 @@
 
 
 @interface ExpertTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
-@property (weak, nonatomic) IBOutlet UIButton *lookAllButton;
+@property (strong, nonatomic)  UILabel *titleLabel;
+@property (strong, nonatomic)  UILabel *timeLabel;
+@property (strong, nonatomic)  UILabel *detailLabel;
+@property (strong, nonatomic)  UIButton *lookAllButton;
 @property (nonatomic ,strong) NSIndexPath *cellIndexPath;
 @property (nonatomic ,strong) ExpertMessageInfo *messageInfo;
 @property (nonatomic, copy) void(^clickLookAllButtonBlock)(NSIndexPath *cellIndexPath);
+
++(CGFloat)getCellHeightWithExpertMessageInfo:(ExpertMessageInfo *)expertMessageInfo;
+
 @end

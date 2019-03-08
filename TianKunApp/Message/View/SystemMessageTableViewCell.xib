@@ -33,6 +33,7 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eaC-KI-Q3v">
                                 <rect key="frame" x="5" y="30" width="300" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="eaC-KI-Q3v" secondAttribute="height" multiplier="2:1" id="loA-Jn-C6K"/>
                                 </constraints>
@@ -69,6 +70,17 @@
                                     <constraint firstAttribute="height" constant="20" id="wkT-B8-weH"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApC-Ee-qVg">
+                                <rect key="frame" x="0.0" y="0.0" width="5" height="5"/>
+                                <color key="backgroundColor" red="1" green="0.1217575558" blue="0.1110670832" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="5" id="993-zX-QwJ"/>
+                                    <constraint firstAttribute="height" constant="5" id="CiQ-4o-hnL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -79,6 +91,7 @@
                             <constraint firstAttribute="trailing" secondItem="N86-UN-L6a" secondAttribute="trailing" id="JOb-ZY-CV0"/>
                             <constraint firstItem="eaC-KI-Q3v" firstAttribute="width" secondItem="WMI-T2-Re0" secondAttribute="width" constant="-10" id="KBY-mL-nrc"/>
                             <constraint firstItem="eaC-KI-Q3v" firstAttribute="top" secondItem="9Qv-Bp-tV8" secondAttribute="bottom" constant="5" id="Ogn-Qu-xF6"/>
+                            <constraint firstItem="ApC-Ee-qVg" firstAttribute="leading" secondItem="WMI-T2-Re0" secondAttribute="leading" id="Sfp-G3-xmB"/>
                             <constraint firstItem="Prk-5K-xjQ" firstAttribute="leading" secondItem="WMI-T2-Re0" secondAttribute="leading" constant="5" id="SmI-d4-10l"/>
                             <constraint firstItem="N86-UN-L6a" firstAttribute="top" secondItem="Prk-5K-xjQ" secondAttribute="bottom" id="TvM-Fp-jgo"/>
                             <constraint firstAttribute="bottom" secondItem="fNx-je-UZX" secondAttribute="bottom" constant="10" id="Uwj-Rq-NFn"/>
@@ -87,6 +100,7 @@
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" id="b2W-ni-Pdp"/>
                             <constraint firstItem="Prk-5K-xjQ" firstAttribute="top" secondItem="eaC-KI-Q3v" secondAttribute="bottom" id="e6u-SN-C4A"/>
                             <constraint firstItem="9Qv-Bp-tV8" firstAttribute="top" secondItem="WMI-T2-Re0" secondAttribute="top" constant="5" id="f8j-ER-lBG"/>
+                            <constraint firstItem="ApC-Ee-qVg" firstAttribute="top" secondItem="WMI-T2-Re0" secondAttribute="top" id="mIO-0C-9An"/>
                             <constraint firstItem="fNx-je-UZX" firstAttribute="top" secondItem="N86-UN-L6a" secondAttribute="bottom" constant="10" id="mnn-FO-fQs"/>
                             <constraint firstAttribute="trailing" secondItem="9Qv-Bp-tV8" secondAttribute="trailing" constant="5" id="pcn-jz-n1X"/>
                             <constraint firstItem="peq-VC-fsP" firstAttribute="leading" secondItem="WMI-T2-Re0" secondAttribute="leading" constant="5" id="rlh-y9-Uyx"/>
@@ -116,6 +130,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="detailLabel" destination="Prk-5K-xjQ" id="TwM-BL-DjX"/>
+                <outlet property="isReadLabel" destination="ApC-Ee-qVg" id="fzd-59-ZY9"/>
                 <outlet property="lookAllLabel" destination="peq-VC-fsP" id="Q2h-M6-uni"/>
                 <outlet property="mainImageView" destination="eaC-KI-Q3v" id="CQs-NH-0sn"/>
                 <outlet property="timeLabel" destination="Qd7-O3-DiK" id="YCJ-3D-Zol"/>

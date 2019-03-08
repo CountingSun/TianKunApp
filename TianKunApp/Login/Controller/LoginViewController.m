@@ -12,6 +12,11 @@
 #import "DynamicLoginViewController.h"
 #import <ShareSDK/ShareSDK.h>
 #import "FindBackPasswordViewController.h"
+#import "JPUSHService.h"
+#import <AlibabaAuthSDK/ALBBSDK.h>
+#import "RongCloudConfigure.h"
+#import <ShareSDKExtension/SSEThirdPartyLoginHelper.h>
+#import "EditPhoneViewController.h"
 
 @interface LoginViewController ()<UITableViewDelegate,UITableViewDataSource,ClickSecureButtonDelegate>
 
@@ -162,132 +167,292 @@
 #pragma mark 第三方登录
 - (IBAction)wxButtonClickEvent:(id)sender {
     [self showWithStatus:NET_WAIT_TOST];
+    self.view.userInteractionEnabled = NO;
+    [ShareSDK  cancelAuthorize:SSDKPlatformTypeWechat];
+    [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeWechat
+                                   onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+                                       
+                                       //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
+                                       //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
+                                       associateHandler (user.uid, user, user);
+                                       NSLog(@"dd%@",user.rawData);
+                                       NSLog(@"dd%@",user.credential);
+                                       [self thirdPartyLoginWithUID:user.uid name:user.nickname type:1 headImage:user.icon];
 
-    [ShareSDK getUserInfo:SSDKPlatformTypeWechat
-           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
-     {
-         if (state == SSDKResponseStateSuccess)
-         {
-             
-             WQLog(@"uid=%@",user.uid);
-             WQLog(@"%@",user.credential);
-             WQLog(@"token=%@",user.credential.token);
-             WQLog(@"nickname=%@",user.nickname);
-             [self thirdPartyLoginWithUID:user.uid name:user.nickname];
-             
-         }
-         else if(state == SSDKResponseStateCancel){
-             [self showErrorWithStatus:@"登录取消"];
-         }
+                                   }
+                                onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+                                    self.view.userInteractionEnabled = YES;
 
-         else
-         {
-             [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
-         }
-         
-     }];
+                                    if (state == SSDKResponseStateSuccess)
+                                    {
+                                        
+                                        
+                                    }
+                                    else if(state == SSDKResponseStateCancel){
+                                        [self showErrorWithStatus:@"登录取消"];
+                                        
+                                    }
+                                    
+                                    else
+                                    {
+                                        
+                                        [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
+                                    }
+                                    
+                                }];
 }
 - (IBAction)qqButtonClickEvent:(id)sender {
     [self showWithStatus:NET_WAIT_TOST];
+    self.view.userInteractionEnabled = NO;
+    [ShareSDK  cancelAuthorize:SSDKPlatformTypeQQ];
+    [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeQQ
+                                   onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+                                       
+                                       //在此回调中可以将社交平台用户信息与自身用户系统进行绑定，最后使用一个唯一用户标识来关联此用户信息。
+                                       //在此示例中没有跟用户系统关联，则使用一个社交用户对应一个系统用户的方式。将社交用户的uid作为关联ID传入associateHandler。
+                                       associateHandler (user.uid, user, user);
+                                       NSLog(@"dd%@",user.rawData);
+                                       NSLog(@"dd%@",user.credential);
+                                       [self thirdPartyLoginWithUID:user.uid name:user.nickname type:0 headImage:user.icon];
+                                       
+                                   }
+                                onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+                                    self.view.userInteractionEnabled = YES;
 
-    [ShareSDK getUserInfo:SSDKPlatformTypeQQ
-           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
-     {
-         if (state == SSDKResponseStateSuccess)
-         {
-             
-             NSLog(@"uid=%@",user.uid);
-             NSLog(@"%@",user.credential);
-             NSLog(@"token=%@",user.credential.token);
-             NSLog(@"nickname=%@",user.nickname);
-             [self thirdPartyLoginWithUID:user.uid name:user.nickname];
+                                    if (state == SSDKResponseStateSuccess)
+                                    {
 
-         }
-         else if(state == SSDKResponseStateCancel){
-             [self showErrorWithStatus:@"登录取消"];
-         }
-         
-         else
-         {
-             [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
-         }
-         
-     }];
-}
-- (IBAction)weiBoButtonClickEvent:(id)sender {
-    [ShareSDK getUserInfo:SSDKPlatformTypeSinaWeibo
-           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
-     {
-         if (state == SSDKResponseStateSuccess)
-         {
-             
-             NSLog(@"uid=%@",user.uid);
-             NSLog(@"%@",user.credential);
-             NSLog(@"token=%@",user.credential.token);
-             NSLog(@"nickname=%@",user.nickname);
-         }
-         else if(state == SSDKResponseStateCancel){
-             [self showErrorWithStatus:@"登录取消"];
-         }
+                                    }
+                                    else if(state == SSDKResponseStateCancel){
+                                        [self showErrorWithStatus:@"登录取消"];
+                                        
+                                    }
+                                    
+                                    else
+                                    {
 
-         else
-         {
-             [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
-         }
-         
-     }];
-
+                                        [self showErrorWithStatus:[NSString stringWithFormat:@"%@",error]] ;
+                                    }
+                                    
+                                }];
 }
 - (IBAction)taobao:(id)sender {
+    self.view.userInteractionEnabled = NO;
+    ALBBSDK *albbSDK = [ALBBSDK sharedInstance];
+    [albbSDK setAppkey:@"24876724"];
+    [albbSDK setAuthOption:NormalAuth];
+    [albbSDK auth:self successCallback:^(ALBBSession *session){
+        
+        ALBBUser *user = [session getUser];
+        WQLog(@"session == %@, user.nick == %@,user.avatarUrl == %@,user.openId == %@,user.openSid == %@,user.topAccessToken == %@",session,user.nick,user.avatarUrl,user.openId,user.openSid,user.topAccessToken);
+        [self thirdPartyLoginWithUID:user.openId name:user.nick type:2 headImage:user.avatarUrl];
+
+    } failureCallback:^(ALBBSession *session,NSError *error){
+        self.view.userInteractionEnabled = YES;
+        [self showErrorWithStatus:@"拉取授权失败，请通过其他方式登录"];
+        NSLog(@"session == %@,error == %@",session,error);
+    }];
+
 }
 
 
 - (void)userLogin{
     [self showWithStatus:NET_WAIT_TOST];
+    self.view.userInteractionEnabled = NO;
     
     [self.netWorkEngine postWithDict:@{@"iphone":_nameStr,@"pwd":[_passwordStr qmui_md5]} url:BaseUrl(@"lg/login.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
+        
         if (code == 1) {
-            [self.view endEditing:YES];
-            [self showSuccessWithStatus:@"登录成功"];
+            
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[responseObject objectForKey:@"value"]];
+            [UserInfoEngine setIsHadPwd:@"1"];
+            
             [UserInfoEngine setUserInfo:userInfo];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
             
+            if (IS_OPEN_RongCloud) {
+                [RongCloudConfigure loginRongCloudWithresultBlock:^(NSString *errMessage) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (!errMessage.length) {
+                            [self dismissViewControllerAnimated:YES completion:nil];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+                            if (userInfo.vip_status == 1) {
+                                NSSet *set;
+                                set = [NSSet setWithObjects:@"VIP", nil];
+                                [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                                    WQLog(@"%@",iTags);
+                                    
+                                } seq:1];
+                                [JPUSHService setAlias:userInfo.userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                                    WQLog(@"%@",iAlias);
+                                    
+                                } seq:1];
+                                
+                            }else{
+                                NSSet *set;
+                                
+                                set = [NSSet setWithObjects:@"ID", nil];
+                                [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                                    WQLog(@"%@",iTags);
+                                    
+                                } seq:1];
+                                [JPUSHService setAlias:userInfo.userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                                    WQLog(@"%@",iAlias);
+                                    
+                                } seq:1];
+                                
+                            }
+                            
+                            [self.view endEditing:YES];
+                            [self showSuccessWithStatus:@"登录成功"];
+                            
+                        }else{
+                            self.view.userInteractionEnabled = YES;
+                            [UserInfoEngine setUserInfo:nil];
+                            [self showErrorWithStatus:errMessage];
+                        }
+                        
+                    });
+                    
+                }];
+                
+                
+
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+                [self showSuccessWithStatus:@"登录成功"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+
+            }
             
+
         }else{
+            self.view.userInteractionEnabled = YES;
             [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
         }
         
     } errorBlock:^(NSError *error) {
         [self showErrorWithStatus:NET_ERROR_TOST];
-        
-        
+        self.view.userInteractionEnabled = YES;
+
     }];
     
 }
-- (void)thirdPartyLoginWithUID:(NSString *)uid name:(NSString *)name{
+
+/**
+ 第三方登录
+
+ @param uid openID
+ @param name 用户名
+ @param type type 0：qq登录 1：微信登录 2：淘宝登录
+ */
+- (void)thirdPartyLoginWithUID:(NSString *)uid name:(NSString *)name type:(NSInteger)type headImage:(NSString *)headImage{
     [self showWithStatus:NET_WAIT_TOST];
-    [self.netWorkEngine postWithDict:@{@"uid":uid,@"name":name} url:BaseUrl(@"lg/otherlogin.action") succed:^(id responseObject) {
+    
+    self.view.userInteractionEnabled = NO;
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    
+    [dict setObject:uid forKey:@"uid"];
+    [dict setObject:name forKey:@"othername"];
+    [dict setObject:@(type) forKey:@"type"];
+    [dict setObject:headImage forKey:@"headimg"];
+
+    [self.netWorkEngine postWithDict:dict url:BaseUrl(@"lg/otherlogin.action") succed:^(id responseObject) {
         NSInteger code = [[responseObject objectForKey:@"code"] integerValue];
         if (code == 1) {
-            [self.view endEditing:YES];
-            [self showSuccessWithStatus:@"登录成功"];
+            
+            
             UserInfo *userInfo = [UserInfo mj_objectWithKeyValues:[responseObject objectForKey:@"value"]];
+            [UserInfoEngine setIsHadPwd:userInfo.hadPwd];
+
             [UserInfoEngine setUserInfo:userInfo];
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+            
+            if (IS_OPEN_RongCloud) {
+                [RongCloudConfigure loginRongCloudWithresultBlock:^(NSString *errMessage) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (!errMessage.length) {
+                            [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+                            if (userInfo.vip_status == 1) {
+                                NSSet *set;
+                                set = [NSSet setWithObjects:@"VIP", nil];
+                                [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                                    WQLog(@"%@",iTags);
+                                    
+                                } seq:1];
+                                [JPUSHService setAlias:userInfo.userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                                    WQLog(@"%@",iAlias);
+                                    
+                                } seq:1];
+                                
+                            }else{
+                                NSSet *set;
+                                
+                                set = [NSSet setWithObjects:@"ID", nil];
+                                [JPUSHService setTags:set completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+                                    WQLog(@"%@",iTags);
+                                    
+                                } seq:1];
+                                [JPUSHService setAlias:userInfo.userID completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                                    WQLog(@"%@",iAlias);
+                                    
+                                } seq:1];
+                                
+                            }
+                            
+                            if (userInfo.bol) {
+                                [self dismissViewControllerAnimated:YES completion:nil];
+                                [self showSuccessWithStatus:@"登录成功"];
+                                [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+                                [self.view endEditing:YES];
+
+                            }else{
+                                EditPhoneViewController *vc = [[EditPhoneViewController alloc] initWithType:2 userTel:@"第三方"];
+                                vc.hidesBottomBarWhenPushed = YES;
+                                [self.navigationController pushViewController:vc animated:YES];
+                                
+                            }
+
+                        }else{
+                            self.view.userInteractionEnabled = YES;
+                            [UserInfoEngine setUserInfo:nil];
+                            [self showErrorWithStatus:errMessage];
+                        }
+                        
+                    });
+                    
+                }];
+                
+
+            }else{
+                if (userInfo.bol) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self showSuccessWithStatus:@"登录成功"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEED_NOTICE object:nil];
+
+                }else{
+                    EditPhoneViewController *vc = [[EditPhoneViewController alloc] initWithType:2 userTel:@"第三方"];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                }
+
+            }
+
+            
+            
             
             
         }else{
+            self.view.userInteractionEnabled = YES;
             [self showErrorWithStatus:[responseObject objectForKey:@"msg"]];
+
         }
         
     } errorBlock:^(NSError *error) {
         [self showErrorWithStatus:NET_ERROR_TOST];
-        
-        
+        self.view.userInteractionEnabled = YES;
+
     }];
 
 }

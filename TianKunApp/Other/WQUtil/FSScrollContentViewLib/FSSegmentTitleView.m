@@ -43,9 +43,11 @@
     self.itemMargin = 20;
     self.selectIndex = 0;
     self.titleNormalColor = [UIColor blackColor];
-    self.titleSelectColor = [UIColor redColor];
+    self.titleSelectColor = COLOR_THEME;
     self.titleFont = [UIFont systemFontOfSize:15];
-    self.indicatorColor = self.titleSelectColor;
+//    self.indicatorColor = self.titleSelectColor;
+    self.indicatorColor = COLOR_THEME;
+
     self.indicatorExtension = 5.f;
     self.titleSelectFont = self.titleFont;
 }

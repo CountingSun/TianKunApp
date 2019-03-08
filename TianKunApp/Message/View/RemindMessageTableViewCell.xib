@@ -82,6 +82,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="endTimeLabel" destination="E1Z-v2-G0y" id="N1T-uw-JnN"/>
+                <outlet property="mainImageView" destination="3Dm-bc-7cX" id="0nt-ry-NKg"/>
                 <outlet property="nameLabel" destination="cSE-QN-ZWg" id="xtw-qQ-3eh"/>
                 <outlet property="starTimeLabel" destination="7Ls-xQ-mZP" id="jez-lo-JKm"/>
                 <outlet property="titleLabel" destination="hXc-OP-jkk" id="EGs-1p-dXs"/>

@@ -14,6 +14,7 @@
     [super awakeFromNib];
     _headImageView.layer.masksToBounds = YES;
     _headImageView.layer.cornerRadius = 10;
+    _nameLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

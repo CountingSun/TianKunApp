@@ -11,6 +11,8 @@
 
 @interface AboutUsViewController ()
 @property (weak, nonatomic) IBOutlet UIView *callView;
+@property (weak, nonatomic) IBOutlet UILabel *appNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *appVersionLabel;
 
 @end
 
@@ -22,23 +24,19 @@
     [_callView addTapGestureRecognizerWithActionBlock:^{
         [self callWithTel:@"4008601333"];
     }];
+    _appNameLabel.text = [WQTools appName];
+    _appVersionLabel.text = [WQTools appVersion];
     
 }
 - (void)callWithTel:(NSString *)tel{
     NSString *callPhone = [NSString stringWithFormat:@"telprompt://%@", tel];
     
-    NSComparisonResult compare = [[UIDevice currentDevice].systemVersion compare:@"10.0"];
-    
-    if (compare == NSOrderedDescending || compare == NSOrderedSame) {
-        /// 大于等于10.0系统使用此openURL方法
+    if (@available(iOS 10.0, *)) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone] options:@{} completionHandler:nil];
-        
     } else {
-        
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:callPhone]];
-        
-    }}
-
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
